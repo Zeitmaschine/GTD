@@ -1,0 +1,27 @@
+To do list:
+Hauptmenü :
+	- Backround : X
+	- Buttons : X
+Türme:
+
+	Mathematiker:
+		- Grafik : O
+		- Function : X
+Enemy:
+	Triangle:
+		- Grafik : O
+		- Function : X
+
+Maps:
+	Grasland:
+		- Tileset : O
+		- Path : O
+	Desert:
+		- Tileset : X
+		- Path : X
+
+Sound:
+	- Music : X
+	- SFX:
+		-Impact Sound : X
+		-Buy Sound : X
