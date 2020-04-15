@@ -9,21 +9,21 @@ script/source = "extends KinematicBody2D
 var attackrange = 3
 var attackpower = 1
 var projectilespeed = 1000
-var firerate = 0.5
+var firerate = 0.2
 var can_fire = true
 var projectile = preload (\"res://Scenes/Projectile.tscn\")
 var enemyinrange = -1
+var target = null
 
 func _ready():
 	pass
 
 
 func _process(delta):
-	if get_parent().has_node(\"root/Node2D/Path2D/PathFollow2D/Dreieck\"):
-		print (\"Detected!\")
-		look_at(get_parent().get_node(\"res://Scenes/Dreieck.tscn\").position)
-	
+	find_closest_target()
+	print (target)
 	if can_fire == true && enemyinrange > 0:
+		rotation = (target.global_position - position).angle() - PI/2
 		var projectile_instance = projectile.instance()
 		projectile_instance.position = $Firepoint.get_global_position()
 		projectile_instance.rotation_degrees = rotation_degrees
@@ -32,17 +32,30 @@ func _process(delta):
 		can_fire = false
 		yield(get_tree().create_timer(firerate), \"timeout\")
 		can_fire = true
+		
 	
 	
 
 
 func _on_Range_body_entered(body):
-	enemyinrange += 1
-	print (\"Enemy entered the Range!\")
+		enemyinrange += 1
 
 func _on_Range_body_exited(body):
-	enemyinrange -= 1
-	print (\"Enemy left the Range!\")
+		enemyinrange -= 1
+
+func find_closest_target():
+	var units = $Range.get_overlapping_bodies()
+	if units.size() > 0:
+		var closest = units[0].get_parent()
+		for unit in units:
+			if position.distance_to(unit.global_position) < position.distance_to(closest.global_position):
+				closest = unit.get_parent()
+			target = closest
+	else:
+			target = null
+			
+func hit():
+	pass
 "
 
 [sub_resource type="CircleShape2D" id=2]
@@ -68,13 +81,13 @@ func _ready():
 "
 
 [sub_resource type="CircleShape2D" id=4]
-radius = 229.844
+radius = 303.96
 
 [node name="Mathematiker" type="KinematicBody2D"]
 script = SubResource( 1 )
 
 [node name="Firepoint" type="Node2D" parent="."]
-position = Vector2( -19.7526, 66.7173 )
+position = Vector2( -0.570404, 73.4315 )
 
 [node name="Mathematiker" type="Sprite" parent="."]
 texture = ExtResource( 1 )
