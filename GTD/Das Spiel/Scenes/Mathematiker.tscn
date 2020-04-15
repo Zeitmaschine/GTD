@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Mathematiker/Mathematiker.png" type="Texture" id=1]
 
@@ -8,22 +8,37 @@ script/source = "extends KinematicBody2D
 
 var attackrange = 3
 var attackpower = 1
-var attackspeed = 1
+var projectilespeed = 1000
+var firerate = 0.9
+var can_fire = true
+var projectile = preload (\"res://Scenes/Projectile.tscn\")
 
 func _ready():
 	pass 
 
 
-func _process(delta):
-	pass
-"
+func _process(_delta):
+	
+	look_at(get_global_mouse_position())
+	
+	if can_fire == true:
+		var projectile_instance = projectile.instance()
+		projectile_instance.position = $Firepoint.get_global_position()
+		projectile_instance.rotation_degrees = rotation_degrees
+		projectile_instance.apply_impulse(Vector2(), Vector2(0, projectilespeed).rotated(rotation))
+		get_tree().get_root().add_child(projectile_instance)
+		can_fire = false
+		yield(get_tree().create_timer(firerate), \"timeout\")
+		can_fire = true
+	
+		
 
-[sub_resource type="CircleShape2D" id=4]
+"
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 53.1815
 
-[sub_resource type="GDScript" id=5]
+[sub_resource type="GDScript" id=3]
 script/source = "extends Area2D
 
 
@@ -42,17 +57,14 @@ func _ready():
 #	pass
 "
 
-[sub_resource type="CircleShape2D" id=3]
+[sub_resource type="CircleShape2D" id=4]
 radius = 229.844
 
 [node name="Mathematiker" type="KinematicBody2D"]
 script = SubResource( 1 )
 
-[node name="Firepoint" type="Area2D" parent="."]
-position = Vector2( -0.237793, 64.9269 )
-
-[node name="Firepoint_Collsionshape" type="CollisionShape2D" parent="Firepoint"]
-shape = SubResource( 4 )
+[node name="Firepoint" type="Node2D" parent="."]
+position = Vector2( -19.7526, 66.7173 )
 
 [node name="Mathematiker" type="Sprite" parent="."]
 texture = ExtResource( 1 )
@@ -63,7 +75,7 @@ shape = SubResource( 2 )
 [node name="Range" type="Area2D" parent="."]
 position = Vector2( -0.394424, 0.0813217 )
 gravity_vec = Vector2( 0, 0 )
-script = SubResource( 5 )
+script = SubResource( 3 )
 
 [node name="CollisionRange" type="CollisionShape2D" parent="Range"]
-shape = SubResource( 3 )
+shape = SubResource( 4 )
