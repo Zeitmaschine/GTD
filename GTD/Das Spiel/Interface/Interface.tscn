@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
+[ext_resource path="res://Scenes/Moneybar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Healthbar.tscn" type="PackedScene" id=2]
 
 [node name="Interface" type="Control"]
@@ -29,5 +30,10 @@ custom_constants/margin_bottom = 10
 margin_right = 1920.0
 margin_bottom = 120.0
 
-[node name="Healthbar" parent="." instance=ExtResource( 2 )]
-position = Vector2( 1.05698, -4.19022 )
+[node name="Healthbar" parent="StatsMenu/HBoxContainer" instance=ExtResource( 2 )]
+margin_bottom = 120.0
+
+[node name="Moneybar" parent="StatsMenu/HBoxContainer" instance=ExtResource( 1 )]
+margin_left = 4.0
+margin_top = 0.0
+margin_right = 4.0
