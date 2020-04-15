@@ -14,8 +14,10 @@ margin_bottom = 112.0
 [node name="Backround" parent="MarginContainer" index="0"]
 margin_bottom = 103.0
 
-[node name="TextureRect" parent="MarginContainer/Backround" index="1"]
-margin_left = 82.5224
-margin_top = 12.8237
-margin_right = 219.522
-margin_bottom = 90.8237
+[node name="Label" parent="MarginContainer/Backround" index="0"]
+margin_left = 102.537
+margin_right = 196.537
+
+[node name="Münze" parent="MarginContainer/Backround" index="1"]
+margin_left = -10.2745
+margin_right = 126.725

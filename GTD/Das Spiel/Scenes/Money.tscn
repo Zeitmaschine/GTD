@@ -44,7 +44,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/Backround"]
+[node name="Münze" type="TextureRect" parent="MarginContainer/Backround"]
 margin_left = 80.8685
 margin_top = 12.0
 margin_right = 217.868
