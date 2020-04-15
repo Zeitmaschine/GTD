@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/Dreieck.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/PathFollow2D.gd" type="Script" id=2]
+
+[node name="PathFollow2D" type="PathFollow2D"]
+position = Vector2( 718.038, -69.45 )
+rotation = 1.60006
+rotate = false
+loop = false
+script = ExtResource( 2 )
+
+[node name="Triangle_enemy" parent="." instance=ExtResource( 1 )]

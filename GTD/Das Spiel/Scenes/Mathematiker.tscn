@@ -9,19 +9,21 @@ script/source = "extends KinematicBody2D
 var attackrange = 3
 var attackpower = 1
 var projectilespeed = 1000
-var firerate = 0.9
+var firerate = 0.5
 var can_fire = true
 var projectile = preload (\"res://Scenes/Projectile.tscn\")
+var enemyinrange = -1
 
 func _ready():
-	pass 
+	pass
 
 
-func _process(_delta):
+func _process(delta):
+	if get_parent().has_node(\"root/Node2D/Path2D/PathFollow2D/Dreieck\"):
+		print (\"Detected!\")
+		look_at(get_parent().get_node(\"res://Scenes/Dreieck.tscn\").position)
 	
-	look_at(get_global_mouse_position())
-	
-	if can_fire == true:
+	if can_fire == true && enemyinrange > 0:
 		var projectile_instance = projectile.instance()
 		projectile_instance.position = $Firepoint.get_global_position()
 		projectile_instance.rotation_degrees = rotation_degrees
@@ -31,8 +33,16 @@ func _process(_delta):
 		yield(get_tree().create_timer(firerate), \"timeout\")
 		can_fire = true
 	
-		
+	
 
+
+func _on_Range_body_entered(body):
+	enemyinrange += 1
+	print (\"Enemy entered the Range!\")
+
+func _on_Range_body_exited(body):
+	enemyinrange -= 1
+	print (\"Enemy left the Range!\")
 "
 
 [sub_resource type="CircleShape2D" id=2]
@@ -75,7 +85,10 @@ shape = SubResource( 2 )
 [node name="Range" type="Area2D" parent="."]
 position = Vector2( -0.394424, 0.0813217 )
 gravity_vec = Vector2( 0, 0 )
+priority = 1.0
 script = SubResource( 3 )
 
 [node name="CollisionRange" type="CollisionShape2D" parent="Range"]
 shape = SubResource( 4 )
+[connection signal="body_entered" from="Range" to="." method="_on_Range_body_entered"]
+[connection signal="body_exited" from="Range" to="." method="_on_Range_body_exited"]

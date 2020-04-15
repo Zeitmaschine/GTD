@@ -7,3 +7,6 @@ func _physics_process(delta):
 	
 	if unit_offset >= 1:
 		queue_free()
+
+func hit():
+	queue_free()

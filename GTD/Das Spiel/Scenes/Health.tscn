@@ -11,7 +11,7 @@ __meta__ = {
 [node name="MarginContainer" type="MarginContainer" parent="."]
 margin_left = 6.0
 margin_top = 6.0
-margin_right = 228.0
+margin_right = 603.0
 margin_bottom = 120.0
 custom_constants/margin_right = 8
 custom_constants/margin_top = 8
@@ -24,7 +24,7 @@ __meta__ = {
 [node name="Backround" type="NinePatchRect" parent="MarginContainer"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 214.0
+margin_right = 589.0
 margin_bottom = 106.0
 texture = ExtResource( 1 )
 patch_margin_left = 8
@@ -35,7 +35,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HP" type="Label" parent="MarginContainer/Backround"]
+[node name="Health" type="ColorRect" parent="MarginContainer/Backround"]
+margin_left = 128.0
+margin_top = 6.0
+margin_right = 575.0
+margin_bottom = 92.0
+color = Color( 0, 0, 0, 0.470588 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar" type="ColorRect" parent="MarginContainer/Backround/Health"]
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 441.0
+margin_bottom = 80.0
+color = Color( 1, 0.196078, 0.196078, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="MarginContainer/Backround"]
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_left = 0.106506
@@ -44,21 +64,6 @@ margin_right = 120.107
 margin_bottom = 76.2588
 theme = ExtResource( 2 )
 text = "HP"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HP_Zahl" type="Label" parent="MarginContainer/Backround"]
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_left = 107.268
-margin_top = -25.3967
-margin_right = 187.268
-margin_bottom = 42.6033
-theme = ExtResource( 2 )
-text = "100"
 align = 1
 valign = 1
 __meta__ = {
