@@ -1,0 +1,79 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Interface/Theme/Buttons.tres" type="Theme" id=1]
+[ext_resource path="res://Interface/Theme/ButtonPressed.tres" type="StyleBox" id=2]
+[ext_resource path="res://Interface/Theme/ButtonClick.tres" type="StyleBox" id=3]
+[ext_resource path="res://Interface/Theme/ButtonNormal.tres" type="StyleBox" id=4]
+[ext_resource path="res://Interface/Theme/Title.tres" type="Theme" id=5]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Button
+
+
+func _ready():
+	pass 
+
+
+func _on_Zurueck_pressed():
+	get_tree().change_scene(\"res://Scenes/Options.tscn\")
+	pass 
+"
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Backround" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.196078, 0.196078, 0.196078, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Credits" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -95.5
+margin_right = 95.5
+margin_bottom = 107.0
+theme = ExtResource( 5 )
+text = "Credits"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+
+[node name="Label3" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+
+[node name="Button" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -440.0
+margin_top = 440.0
+margin_right = 440.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Zurueck" type="Button" parent="Button"]
+margin_top = 241.0
+margin_right = 880.0
+margin_bottom = 398.0
+theme = ExtResource( 1 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 2 )
+custom_styles/normal = ExtResource( 4 )
+text = "Zurück"
+script = SubResource( 1 )
+[connection signal="pressed" from="Button/Zurueck" to="Button/Zurueck" method="_on_Zurueck_pressed"]
