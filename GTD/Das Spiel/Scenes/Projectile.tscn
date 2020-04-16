@@ -19,6 +19,7 @@ func _on_Projectile_body_entered(body):
 extents = Vector2( 7.23351, 13.3715 )
 
 [node name="Projectile" type="RigidBody2D"]
+collision_layer = 4
 contacts_reported = 1
 contact_monitor = true
 script = SubResource( 1 )

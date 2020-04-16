@@ -6,10 +6,6 @@
 script/source = "extends KinematicBody2D
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = \"text\"
-
 
 func _ready():
 	pass 
@@ -28,6 +24,7 @@ radius = 32.6373
 [node name="Triangle_enemy" type="KinematicBody2D"]
 position = Vector2( 1.05518, -0.404236 )
 rotation = -1.60006
+collision_mask = 0
 script = SubResource( 1 )
 
 [node name="Dreieck" type="Sprite" parent="."]
