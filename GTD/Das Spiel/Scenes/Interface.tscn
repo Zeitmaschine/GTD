@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/Moneybar.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Healthbar.tscn" type="PackedScene" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Control
+
+signal money_changed(money)
+signal health_changed(health)
+
+func _on_Money_money_changed(money):
+	emit_signal(\"money_changed\", money)
+	
+func _on_Health_health_changed(health):
+	emit_signal(\"health_changed\", health)
+
+func _ready():
+	pass "
+
+[node name="Interface" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -963.0
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StatsMenu" type="MarginContainer" parent="."]
+margin_right = 1920.0
+margin_bottom = 120.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="StatsMenu"]
+margin_right = 1920.0
+margin_bottom = 120.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="StatsMenu"]
+margin_right = 1920.0
+margin_bottom = 120.0
+
+[node name="Healthbar" parent="StatsMenu/HBoxContainer" instance=ExtResource( 2 )]
+margin_bottom = 120.0
+
+[node name="Moneybar" parent="StatsMenu/HBoxContainer" instance=ExtResource( 1 )]
+margin_left = 4.0
+margin_top = 0.0
+margin_right = 4.0
