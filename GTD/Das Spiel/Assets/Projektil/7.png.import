@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Dreieck.png-773f01b5f95fe98cc0ab7ec8f6334a94.stex"
+path="res://.import/7.png-8cce9c42ebbc90980717eb428c53ecd7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Enemy/Dreieck.png"
-dest_files=[ "res://.import/Dreieck.png-773f01b5f95fe98cc0ab7ec8f6334a94.stex" ]
+source_file="res://Assets/Projektil/7.png"
+dest_files=[ "res://.import/7.png-8cce9c42ebbc90980717eb428c53ecd7.stex" ]
 
 [params]
 

@@ -4,26 +4,20 @@
 
 [node name="Moneybar" instance=ExtResource( 1 )]
 margin_top = 6.0
-script = null
 
 [node name="MarginContainer" parent="." index="0"]
 margin_left = 246.0
 margin_top = 9.0
-margin_right = 500.0
+margin_right = 446.0
 margin_bottom = 112.0
 
 [node name="Backround" parent="MarginContainer" index="0"]
-margin_right = 254.0
 margin_bottom = 103.0
 
-[node name="Money" parent="MarginContainer/Backround" index="0"]
-margin_left = 101.401
-margin_top = -42.65
-margin_right = 195.401
-margin_bottom = 47.35
+[node name="Label" parent="MarginContainer/Backround" index="0"]
+margin_left = 102.537
+margin_right = 196.537
 
-[node name="Coin" parent="MarginContainer/Backround" index="1"]
-margin_left = -10.9125
-margin_top = 10.0768
-margin_right = 126.087
-margin_bottom = 88.5769
+[node name="Münze" parent="MarginContainer/Backround" index="1"]
+margin_left = -10.2745
+margin_right = 126.725

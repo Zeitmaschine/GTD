@@ -1,18 +1,66 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Assets/Projektil/1.png" type="Texture" id=1]
+
+[sub_resource type="PhysicsMaterial" id=3]
+friction = 0.0
+bounce = -1.0
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends RigidBody2D
 
+var sprite1 = preload(\"res://Assets/Projektil/1.png\")
+var sprite2 = preload(\"res://Assets/Projektil/2.png\")
+var sprite3 = preload(\"res://Assets/Projektil/3.png\")
+var sprite4 = preload(\"res://Assets/Projektil/4.png\")
+var sprite5 = preload(\"res://Assets/Projektil/5.png\")
+var sprite6 = preload(\"res://Assets/Projektil/6.png\")
+var sprite7 = preload(\"res://Assets/Projektil/7.png\")
+var sprite8 = preload(\"res://Assets/Projektil/8.png\")
+var sprite9 = preload(\"res://Assets/Projektil/9.png\")
+var sprite10 = preload(\"res://Assets/Projektil/10.png\")
+
+
+onready var sprite = get_node(\"Sprite_1\")
+
+var damage = 1;
+
+func _ready():
+	switch_sprite()
+
 func _process(delta):
-	pass
+	switch_sprite()
+	if damage <= 0:
+		queue_free() 
 	
-
-
 func _on_Projectile_body_entered(body):
-	body.hit()
-	queue_free() 
+	var overdamage = body.hit(damage)
+	damage = overdamage
+
+func setDamage(newdamage):
+	damage = newdamage
+	
+func switch_sprite():
+	if damage == 1:
+		sprite.set_texture(sprite1)
+	if damage == 2:
+		sprite.set_texture(sprite2)
+	if damage == 3:
+		sprite.set_texture(sprite3)
+	if damage == 4:
+		sprite.set_texture(sprite4)
+	if damage == 5:
+		sprite.set_texture(sprite5)
+	if damage == 6:
+		sprite.set_texture(sprite6)
+	if damage == 7:
+		sprite.set_texture(sprite7)
+	if damage == 8:
+		sprite.set_texture(sprite8)
+	if damage == 9:
+		sprite.set_texture(sprite9)
+	if damage == 10:
+		sprite.set_texture(sprite10)
 "
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -20,6 +68,8 @@ extents = Vector2( 7.23351, 13.3715 )
 
 [node name="Projectile" type="RigidBody2D"]
 collision_layer = 4
+physics_material_override = SubResource( 3 )
+custom_integrator = true
 contacts_reported = 1
 contact_monitor = true
 script = SubResource( 1 )

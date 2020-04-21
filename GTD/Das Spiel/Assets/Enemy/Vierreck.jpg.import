@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Dreieck.png-773f01b5f95fe98cc0ab7ec8f6334a94.stex"
+path="res://.import/Vierreck.jpg-b103f1744e5982033206acbbe88bf7b9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Enemy/Dreieck.png"
-dest_files=[ "res://.import/Dreieck.png-773f01b5f95fe98cc0ab7ec8f6334a94.stex" ]
+source_file="res://Assets/Enemy/Vierreck.jpg"
+dest_files=[ "res://.import/Vierreck.jpg-b103f1744e5982033206acbbe88bf7b9.stex" ]
 
 [params]
 

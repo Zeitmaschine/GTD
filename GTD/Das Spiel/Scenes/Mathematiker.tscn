@@ -8,9 +8,9 @@ script/source = "extends KinematicBody2D
 
 
 var attackrange = 3
-var attackpower = 1
+export var attackpower = 1
 var projectilespeed = 1000
-export var firerate = 0.2
+export var firerate = 1.0
 var can_fire = true
 var projectile = preload (\"res://Scenes/Projectile.tscn\")
 var enemyinrange = 0
@@ -28,6 +28,7 @@ func _process(delta):
 		projectile_instance.position = $Firepoint.get_global_position()
 		projectile_instance.rotation_degrees = rotation_degrees
 		projectile_instance.apply_impulse(Vector2(), Vector2(0, projectilespeed).rotated(rotation))
+		projectile_instance.setDamage(attackpower)
 		get_tree().get_root().add_child(projectile_instance)
 		can_fire = false
 		yield(get_tree().create_timer(firerate), \"timeout\")
@@ -97,7 +98,6 @@ radius = 199.586
 collision_layer = 2
 collision_mask = 2
 script = SubResource( 1 )
-firerate = 1.0
 
 [node name="CollisionMathematiker(Direkt)" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
