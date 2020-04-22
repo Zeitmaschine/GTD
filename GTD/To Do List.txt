@@ -1,16 +1,15 @@
 To do list:
 Hauptmenü :
-	- Backround : X
-	- Buttons : X
+	- Backround : O
+	- Buttons : O
 Türme:
 
 	Mathematiker:
 		- Grafik : O
-		- Function : X
+		- Function : O
 Enemy:
-	Triangle:
 		- Grafik : O
-		- Function : X
+		- Function : O
 
 Maps:
 	Grasland:
@@ -25,3 +24,5 @@ Sound:
 	- SFX:
 		-Impact Sound : X
 		-Buy Sound : X
+
+Upgrades

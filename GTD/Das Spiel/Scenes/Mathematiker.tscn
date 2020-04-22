@@ -8,35 +8,38 @@ script/source = "extends KinematicBody2D
 
 
 var attackrange = 3
-export var attackpower = 1
-var projectilespeed = 1000
-export var firerate = 1.0
+var projectilespeed = 1000 
+var firerate = 2.0
 var can_fire = true
 var projectile = preload (\"res://Scenes/Projectile.tscn\")
 var enemyinrange = 0
 var target = null
 
+
+export var upgrade1 = false
+export var upgrade2 = false
+export var attackpowerlvl = 1
+export var fireratelvl = 1
+export var attackrangelvl = 1
+
 func _ready():
-	pass
+	set_range()
 
 
 func _process(delta):
 	find_closest_target()
-	if can_fire == true && enemyinrange > 0:
-		rotation = (target.global_position - position).angle() - PI/2
-		var projectile_instance = projectile.instance()
-		projectile_instance.position = $Firepoint.get_global_position()
-		projectile_instance.rotation_degrees = rotation_degrees
-		projectile_instance.apply_impulse(Vector2(), Vector2(0, projectilespeed).rotated(rotation))
-		projectile_instance.setDamage(attackpower)
-		get_tree().get_root().add_child(projectile_instance)
-		can_fire = false
-		yield(get_tree().create_timer(firerate), \"timeout\")
-		can_fire = true
+	
+	if can_fire == true && enemyinrange > 0 && upgrade1 == true && upgrade2 == true:
+		aim_and_shoot_upgrade_1_2()
+	
+	if can_fire == true && enemyinrange > 0 && upgrade1 == true:
+		aim_and_shoot_upgrade_1()
 		
+	if can_fire == true && enemyinrange > 0 && upgrade2 == true:
+		aim_and_shoot_upgrade_2()
 	
-	
-
+	if can_fire == true && enemyinrange > 0:
+		aim_and_shoot()
 
 func _on_Range_body_entered(body):
 		enemyinrange += 1
@@ -67,6 +70,107 @@ func _on_Mathematiker_Area_mouse_entered():
 func _on_Mathematiker_Area_mouse_exited():
 	scale = Vector2(1,1)
 	$Range_Sprite.visible = false
+
+func aim_and_shoot():
+	rotation = (target.global_position - position).angle() - PI/2
+	var projectile_instance = projectile.instance()
+	projectile_instance.position = $Firepoint.get_global_position()
+	projectile_instance.rotation_degrees = rotation_degrees
+	projectile_instance.apply_impulse(Vector2(), Vector2(0, projectilespeed).rotated(rotation))
+	projectile_instance.setDamage(attackpowerlvl)
+	get_tree().get_root().add_child(projectile_instance)
+	can_fire = false
+	yield(get_tree().create_timer(firerate - (fireratelvl * 0.15)), \"timeout\")
+	can_fire = true
+	
+func aim_and_shoot_upgrade_1():
+	var i = 0
+	rotation = (target.global_position - position).angle() - PI/2
+	while(i < 3):
+		var projectile_instance = projectile.instance()
+		projectile_instance.position = $Firepoint.get_global_position()
+		projectile_instance.rotation_degrees = rotation_degrees
+		projectile_instance.apply_impulse(Vector2(), Vector2(0, projectilespeed).rotated(rotation))
+		projectile_instance.setDamage(attackpowerlvl)
+		get_tree().get_root().add_child(projectile_instance)
+		can_fire = false
+		yield(get_tree().create_timer(0.1), \"timeout\")
+		i += 1
+		find_closest_target()
+		can_fire = true
+		
+	can_fire = false
+	yield(get_tree().create_timer(firerate - (fireratelvl * 0.15)), \"timeout\")
+	can_fire = true
+		
+func aim_and_shoot_upgrade_2():
+	rotation = (target.global_position - position).angle() - PI/2
+	var projectile_instance1 = projectile.instance()
+	var projectile_instance2 = projectile.instance()
+	var projectile_instance3 = projectile.instance()
+	
+	projectile_instance1.position = $Firepoint.get_global_position()
+	projectile_instance1.rotation_degrees = rotation_degrees
+	projectile_instance1.apply_impulse(Vector2(), Vector2(0, projectilespeed).rotated(rotation))
+	projectile_instance1.setDamage(attackpowerlvl)
+	get_tree().get_root().add_child(projectile_instance1)
+	
+	projectile_instance2.position = $Firepoint.get_global_position()
+	projectile_instance2.rotation_degrees = rotation_degrees
+	projectile_instance2.apply_impulse(Vector2(), Vector2(0, projectilespeed).rotated(rotation + PI/8))
+	projectile_instance2.setDamage(attackpowerlvl)
+	get_tree().get_root().add_child(projectile_instance2)
+	
+	projectile_instance3.position = $Firepoint.get_global_position()
+	projectile_instance3.rotation_degrees = rotation_degrees
+	projectile_instance3.apply_impulse(Vector2(), Vector2(0, projectilespeed).rotated(rotation - PI/8))
+	projectile_instance3.setDamage(attackpowerlvl)
+	get_tree().get_root().add_child(projectile_instance3)
+	
+func aim_and_shoot_upgrade_1_2():
+	var i = 0
+	rotation = (target.global_position - position).angle() - PI/2
+	while(i < 3):
+		var projectile_instance1 = projectile.instance()
+		var projectile_instance2 = projectile.instance()
+		var projectile_instance3 = projectile.instance()
+		
+		projectile_instance1.position = $Firepoint.get_global_position()
+		projectile_instance1.rotation_degrees = rotation_degrees
+		projectile_instance1.apply_impulse(Vector2(), Vector2(0, projectilespeed).rotated(rotation))
+		projectile_instance1.setDamage(attackpowerlvl)
+		get_tree().get_root().add_child(projectile_instance1)
+		
+		projectile_instance2.position = $Firepoint.get_global_position()
+		projectile_instance2.rotation_degrees = rotation_degrees
+		projectile_instance2.apply_impulse(Vector2(), Vector2(0, projectilespeed).rotated(rotation + PI/8))
+		projectile_instance2.setDamage(attackpowerlvl)
+		get_tree().get_root().add_child(projectile_instance2)
+	
+		projectile_instance3.position = $Firepoint.get_global_position()
+		projectile_instance3.rotation_degrees = rotation_degrees
+		projectile_instance3.apply_impulse(Vector2(), Vector2(0, projectilespeed).rotated(rotation - PI/8))
+		projectile_instance3.setDamage(attackpowerlvl)
+		get_tree().get_root().add_child(projectile_instance3)
+		
+		
+		
+		
+		
+		can_fire = false
+		yield(get_tree().create_timer(0.1), \"timeout\")
+		i += 1
+		find_closest_target()
+		can_fire = true
+	
+	can_fire = false
+	yield(get_tree().create_timer(firerate - (fireratelvl * 0.15)), \"timeout\")
+	can_fire = true
+	
+	
+func set_range():
+	$Range/CollisionRange.scale = Vector2(0.9 + (0.1 * attackrangelvl) , 0.9 + (0.1 * attackrangelvl ))
+	$Range_Sprite.scale = Vector2(0.9 + (0.1 * attackrangelvl), 0.9 + (0.1 * attackrangelvl ))
 "
 
 [sub_resource type="CircleShape2D" id=2]

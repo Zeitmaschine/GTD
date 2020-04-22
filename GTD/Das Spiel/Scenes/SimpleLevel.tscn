@@ -195,15 +195,9 @@ autostart = true
 [node name="Interface" parent="InterfaceLayer" instance=ExtResource( 2 )]
 
 [node name="Mathematiker2" parent="." instance=ExtResource( 1 )]
-position = Vector2( 773.357, 435.809 )
-attackpower = 3
+position = Vector2( 845.32, 463.665 )
+upgrade1 = true
 
-[node name="Mathematiker4" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1066.87, 598.477 )
-
-[node name="Mathematiker5" parent="." instance=ExtResource( 1 )]
-position = Vector2( 269.956, 680.605 )
-
-[node name="Mathematiker6" parent="." instance=ExtResource( 1 )]
-position = Vector2( 208.585, 425.195 )
+[node name="Mathematiker3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 318.07, 450.007 )
 [connection signal="timeout" from="Path2D/Timer" to="Path2D" method="_on_Timer_timeout"]
