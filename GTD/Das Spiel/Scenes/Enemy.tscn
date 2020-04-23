@@ -9,6 +9,10 @@ export var speed = 200
 export var hp = 2
 var enemy_sprite1 = preload(\"res://Assets/Enemy/Dreieck.png\")
 var enemy_sprite2 = preload(\"res://Assets/Enemy/Vierreck.jpg\")
+var enemy_sprite3 = preload(\"res://Assets/Enemy/Fünfeck.png\")
+var enemy_sprite4 = preload(\"res://Assets/Enemy/Sechseck.png\")
+var enemy_sprite5 = preload(\"res://Assets/Enemy/Siebeneck.png\")
+
 onready var enemy_sprite = get_node(\"Dreieck\")
 
 func _ready():
@@ -29,6 +33,12 @@ func switch_sprite():
 		enemy_sprite.set_texture(enemy_sprite1)
 	if hp == 2:
 		enemy_sprite.set_texture(enemy_sprite2)
+	if hp == 3:
+		enemy_sprite.set_texture(enemy_sprite3)
+	if hp == 4:
+		enemy_sprite.set_texture(enemy_sprite4)
+	if hp == 5:
+		enemy_sprite.set_texture(enemy_sprite5)
 		
 func getSpeed():
 	return speed;
@@ -42,6 +52,7 @@ position = Vector2( 1.05518, -0.404236 )
 rotation = -1.60006
 collision_mask = 0
 script = SubResource( 1 )
+hp = 5
 
 [node name="Dreieck" type="Sprite" parent="."]
 texture = ExtResource( 1 )

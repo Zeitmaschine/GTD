@@ -197,6 +197,7 @@ autostart = true
 [node name="Mathematiker2" parent="." instance=ExtResource( 1 )]
 position = Vector2( 845.32, 463.665 )
 upgrade1 = true
+upgrade2 = true
 
 [node name="Mathematiker3" parent="." instance=ExtResource( 1 )]
 position = Vector2( 318.07, 450.007 )
