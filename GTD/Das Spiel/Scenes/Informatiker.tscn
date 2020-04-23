@@ -1,0 +1,115 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/Informatiker/Informatiker.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Mathematiker/Range.png" type="Texture" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends KinematicBody2D 
+
+var projectilespeed = 1000
+var firerate = 5.0
+var can_fire = true
+var projectile = preload (\"res://Scenes/Projectile.tscn\")
+var enemyinrange = 0
+var target = null
+
+
+export var upgrade1 = false
+export var upgrade2 = false
+export var attackpowerlvl = 5
+export var fireratelvl = 1
+export var attackspeedlvl = 1
+
+func _ready():
+	pass
+
+func _process(delta):
+	find_closest_target()
+	
+	if can_fire == true && enemyinrange > 0 && target.position != Vector2(0,0):
+		aim_and_shoot()
+
+func _on_Range_body_entered(body):
+		enemyinrange += 1
+
+func _on_Range_body_exited(body):
+		enemyinrange -= 1
+
+func find_closest_target():
+	var units = $Range.get_overlapping_bodies()
+	if units.size() > 0:
+		var closest = units[0].get_parent()
+		for unit in units:
+			if position.distance_to(unit.global_position) < position.distance_to(closest.global_position):
+				closest = unit.get_parent()
+				target = closest
+			
+	else:
+			target = null
+			
+func hit(damage):
+	pass
+
+func aim_and_shoot():
+	rotation = (target.global_position - position).angle() - PI/2
+	var projectile_instance = projectile.instance()
+	projectile_instance.position = $Firepoint.get_global_position()
+	projectile_instance.rotation_degrees = rotation_degrees
+	projectile_instance.apply_impulse(Vector2(), Vector2(0, projectilespeed +(200 * attackspeedlvl)).rotated(rotation))
+	projectile_instance.setDamage(attackpowerlvl)
+	get_tree().get_root().add_child(projectile_instance)
+	can_fire = false
+	yield(get_tree().create_timer(firerate - (fireratelvl * 0.7)), \"timeout\")
+	can_fire = true
+
+
+func _on_Informatiker_Area_mouse_entered():
+	scale = Vector2(1.2,1.2)
+	$Range_Sprite.visible = true
+
+
+
+func _on_Informatiker_Area_mouse_exited():
+	scale = Vector2(1,1)
+	$Range_Sprite.visible = false
+"
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 51.5617
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 2420.64
+
+[node name="Informatiker" type="KinematicBody2D"]
+script = SubResource( 1 )
+
+[node name="Range_Sprite" type="Sprite" parent="."]
+visible = false
+scale = Vector2( 18.515, 16.054 )
+texture = ExtResource( 2 )
+
+[node name="CollisionInformatiker2" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="Sprite_Informatiker" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+
+[node name="Firepoint" type="Node2D" parent="."]
+position = Vector2( 0, 67.998 )
+
+[node name="Informatiker_Area" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionInformatiker" type="CollisionShape2D" parent="Informatiker_Area"]
+shape = SubResource( 2 )
+
+[node name="Range" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionRange" type="CollisionShape2D" parent="Range"]
+visible = false
+shape = SubResource( 3 )
+[connection signal="mouse_entered" from="Informatiker_Area" to="." method="_on_Informatiker_Area_mouse_entered"]
+[connection signal="mouse_exited" from="Informatiker_Area" to="." method="_on_Informatiker_Area_mouse_exited"]
+[connection signal="body_entered" from="Range" to="." method="_on_Range_body_entered"]
+[connection signal="body_exited" from="Range" to="." method="_on_Range_body_exited"]
