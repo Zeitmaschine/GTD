@@ -11,6 +11,15 @@ export var coins = 250
 
 func _ready():
 	text = str(coins)
+	
+func _process(delta):
+	text = str(coins)
+	
+func getCoins():
+	return coins
+	
+func setCoins(money):
+	coins = money
 "
 
 [node name="Money" type="Control"]

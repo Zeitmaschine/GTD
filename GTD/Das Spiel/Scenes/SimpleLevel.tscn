@@ -10,6 +10,17 @@
 script/source = "extends Node2D
 
 export var money = 250
+var moneyinterface
+
+func add_money(ammount):
+	money += ammount
+	print (money)
+	
+func _ready():
+	moneyinterface = get_node(\"InterfaceLayer/Interface/StatsMenu/HBoxContainer/Moneybar/MarginContainer/Backround/Count\")
+	
+func _process(delta):
+	moneyinterface.setCoins(money)
 "
 
 [sub_resource type="ConvexPolygonShape2D" id=2]

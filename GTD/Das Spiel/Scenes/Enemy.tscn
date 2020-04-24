@@ -25,6 +25,7 @@ func _process(delta):
 	
 func hit(damage):
 	emit_signal(\"kill\")
+	get_parent().get_parent().get_parent().add_money(damage) 
 	hp = hp - damage;
 	$Hitsound.play()
 	if hp <= 0:
@@ -45,10 +46,6 @@ func switch_sprite():
 		
 func getSpeed():
 	return speed;
-
-func _on_Triangle_enemy_kill(coins):
-	coins = coins + 1
-	return $\"res://Scenes/Money.tscn\".coins
 "
 
 [sub_resource type="CircleShape2D" id=2]
@@ -71,4 +68,3 @@ shape = SubResource( 2 )
 [node name="Hitsound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
 volume_db = -22.023
-[connection signal="kill" from="." to="." method="_on_Triangle_enemy_kill"]
