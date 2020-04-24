@@ -1,8 +1,17 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Assets/Icons/Coin.png" type="Texture" id=1]
 [ext_resource path="res://Interface/counter/label_bg.png" type="Texture" id=2]
 [ext_resource path="res://Interface/Theme/Healthbar.tres" type="Theme" id=3]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Label
+
+export var coins = 250
+
+func _ready():
+	text = str(coins)
+"
 
 [node name="Money" type="Control"]
 margin_right = 200.0
@@ -30,7 +39,7 @@ patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
 
-[node name="Label" type="Label" parent="MarginContainer/Backround"]
+[node name="Count" type="Label" parent="MarginContainer/Backround"]
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_left = 6.0
@@ -38,8 +47,9 @@ margin_top = -30.0
 margin_right = 100.0
 margin_bottom = 50.0
 theme = ExtResource( 3 )
-text = "250"
+text = "150"
 valign = 1
+script = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

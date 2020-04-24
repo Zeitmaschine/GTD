@@ -14,10 +14,8 @@ margin_bottom = 112.0
 [node name="Backround" parent="MarginContainer" index="0"]
 margin_bottom = 103.0
 
-[node name="Label" parent="MarginContainer/Backround" index="0"]
-margin_left = 102.537
-margin_right = 196.537
-
 [node name="Münze" parent="MarginContainer/Backround" index="1"]
-margin_left = -10.2745
-margin_right = 126.725
+margin_left = 85.7889
+margin_top = 12.6625
+margin_right = 222.788
+margin_bottom = 91.1626
