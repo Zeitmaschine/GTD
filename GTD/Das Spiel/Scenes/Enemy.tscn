@@ -15,7 +15,6 @@ var enemy_sprite4 = preload(\"res://Assets/Enemy/Sechseck.png\")
 var enemy_sprite5 = preload(\"res://Assets/Enemy/Siebeneck.png\")
 
 onready var enemy_sprite = get_node(\"Dreieck\")
-signal kill
 
 func _ready():
 	pass 
@@ -24,11 +23,14 @@ func _process(delta):
 	switch_sprite();
 	
 func hit(damage):
-	emit_signal(\"kill\")
-	get_parent().get_parent().get_parent().add_money(damage) 
 	hp = hp - damage;
+	if hp < 0:
+		get_parent().get_parent().get_parent().add_money(damage + hp) 
+	else:
+		get_parent().get_parent().get_parent().add_money(damage) 
 	$Hitsound.play()
 	if hp <= 0:
+		get_parent().damage()
 		queue_free();
 	return (hp * -1)
 	
@@ -46,6 +48,9 @@ func switch_sprite():
 		
 func getSpeed():
 	return speed;
+
+func getHP():
+	return hp;
 "
 
 [sub_resource type="CircleShape2D" id=2]
