@@ -1,7 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes/Moneybar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Healthbar.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Interface/Theme/PauseButtons.tres" type="Theme" id=3]
+[ext_resource path="res://Interface/Theme/ButtonPressedNormal.tres" type="StyleBox" id=4]
+[ext_resource path="res://Interface/Theme/ButtonNormal.tres" type="StyleBox" id=5]
+[ext_resource path="res://Interface/Theme/ButtonHoverNormal.tres" type="StyleBox" id=6]
+[ext_resource path="res://Interface/Theme/ButtonClick.tres" type="StyleBox" id=7]
+[ext_resource path="res://Interface/Theme/ButtonPressed.tres" type="StyleBox" id=8]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Control
@@ -16,7 +22,37 @@ func _on_Health_health_changed(health):
 	emit_signal(\"health_changed\", health)
 
 func _ready():
-	pass "
+	pass 
+
+
+"
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends Control
+
+
+func _input(event):
+	if event.is_action_pressed(\"pause\"):
+		get_tree().paused = not get_tree().paused
+		visible = not visible
+
+
+func _on_PauseFortsetzen_pressed():
+	get_tree().paused = not get_tree().paused
+	visible = not visible
+
+
+func _on_PauseNeustart_pressed():
+	get_tree().paused = not get_tree().paused
+	visible = not visible
+	get_tree().change_scene(\"res://Scenes/SimpleLevel.tscn\")
+
+
+func _on_PauseBeenden_pressed():
+	get_tree().paused = not get_tree().paused
+	visible = not visible
+	get_tree().change_scene(\"res://Scenes/MainMenu.tscn\")
+"
 
 [node name="Interface" type="Control"]
 anchor_right = 1.0
@@ -53,3 +89,82 @@ margin_bottom = 120.0
 margin_left = 4.0
 margin_top = 0.0
 margin_right = 4.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Pause" type="Control" parent="CanvasLayer"]
+pause_mode = 2
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -540.0
+margin_top = -310.0
+margin_right = 540.0
+margin_bottom = 310.5
+script = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Backround" type="ColorRect" parent="CanvasLayer/Pause"]
+margin_right = 1080.0
+margin_bottom = 620.0
+color = Color( 0, 0, 0, 0.352941 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Space" type="MarginContainer" parent="CanvasLayer/Pause"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -480.0
+margin_top = -320.0
+margin_right = 480.0
+margin_bottom = 309.75
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonContainer" type="VBoxContainer" parent="CanvasLayer/Pause/Space"]
+margin_right = 960.0
+margin_bottom = 629.0
+custom_constants/separation = 50
+alignment = 1
+
+[node name="PauseFortsetzen" type="Button" parent="CanvasLayer/Pause/Space/ButtonContainer"]
+margin_top = 119.0
+margin_right = 960.0
+margin_bottom = 216.0
+theme = ExtResource( 3 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/normal = ExtResource( 5 )
+text = "Spiel fortsetzen"
+
+[node name="PauseNeustart" type="Button" parent="CanvasLayer/Pause/Space/ButtonContainer"]
+margin_top = 266.0
+margin_right = 960.0
+margin_bottom = 363.0
+theme = ExtResource( 3 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/normal = ExtResource( 5 )
+text = "Spiel neustarten"
+
+[node name="PauseBeenden" type="Button" parent="CanvasLayer/Pause/Space/ButtonContainer"]
+margin_top = 413.0
+margin_right = 960.0
+margin_bottom = 510.0
+theme = ExtResource( 3 )
+custom_styles/hover = ExtResource( 7 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/normal = ExtResource( 5 )
+text = "Zurück zum Hauptmenu"
+[connection signal="pressed" from="CanvasLayer/Pause/Space/ButtonContainer/PauseFortsetzen" to="CanvasLayer/Pause" method="_on_PauseFortsetzen_pressed"]
+[connection signal="pressed" from="CanvasLayer/Pause/Space/ButtonContainer/PauseNeustart" to="CanvasLayer/Pause" method="_on_PauseNeustart_pressed"]
+[connection signal="pressed" from="CanvasLayer/Pause/Space/ButtonContainer/PauseBeenden" to="CanvasLayer/Pause" method="_on_PauseBeenden_pressed"]
