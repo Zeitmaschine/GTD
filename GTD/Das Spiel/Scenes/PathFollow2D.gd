@@ -7,7 +7,7 @@ func _physics_process(delta):
 	offset += speed * delta
 
 	if unit_offset >= 1:
-		get_parent().get_parent().remove_health(get_child(1).getHP())
+		get_parent().get_parent().remove_health(get_child(0).getHP())
 		queue_free()
 
 func hit():

@@ -25,9 +25,9 @@ func _process(delta):
 func hit(damage):
 	hp = hp - damage;
 	if hp < 0:
-		get_parent().get_parent().get_parent().add_money(damage + hp) 
+		get_parent().get_parent().get_parent().add_money(damage + hp, true) 
 	else:
-		get_parent().get_parent().get_parent().add_money(damage) 
+		get_parent().get_parent().get_parent().add_money(damage, false) 
 	$Hitsound.play()
 	if hp <= 0:
 		get_parent().damage()
