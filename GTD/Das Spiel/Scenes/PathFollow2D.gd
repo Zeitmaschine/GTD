@@ -1,9 +1,10 @@
 extends PathFollow2D
 
-export (float) var speed = 300
+export (float) var speed
 
 func _physics_process(delta):
-	var damage = 1
+	checkSpeed()
+	
 	offset += speed * delta
 
 	if unit_offset >= 1:
@@ -16,3 +17,5 @@ func hit():
 func damage():
 	queue_free()
 	
+func checkSpeed():
+	speed = 100 + (get_child(0).getHP() * 50)

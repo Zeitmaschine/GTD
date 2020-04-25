@@ -19,6 +19,7 @@ var sprite7 = preload(\"res://Assets/Projektil/7.png\")
 var sprite8 = preload(\"res://Assets/Projektil/8.png\")
 var sprite9 = preload(\"res://Assets/Projektil/9.png\")
 var sprite10 = preload(\"res://Assets/Projektil/10.png\")
+var hit_par = preload(\"res://Scenes/Hit_particle.tscn\")
 
 
 onready var sprite = get_node(\"Sprite_1\")
@@ -32,6 +33,11 @@ func _process(delta):
 	switch_sprite()
 	
 func _on_Projectile_body_entered(body):
+	if damage > 1:
+		var particle = hit_par.instance() 
+		particle.position = global_position
+		particle.amount = damage - 1
+		get_tree().get_root().add_child(particle)
 	body.hit(damage)
 	queue_free()
 

@@ -9,12 +9,12 @@ script/source = "extends KinematicBody2D
 export var speed = 200
 export var hp = 2
 var enemy_sprite1 = preload(\"res://Assets/Enemy/Dreieck.png\")
-var enemy_sprite2 = preload(\"res://Assets/Enemy/Vierreck.jpg\")
+var enemy_sprite2 = preload(\"res://Assets/Enemy/Vierreck.png\")
 var enemy_sprite3 = preload(\"res://Assets/Enemy/Fünfeck.png\")
 var enemy_sprite4 = preload(\"res://Assets/Enemy/Sechseck.png\")
 var enemy_sprite5 = preload(\"res://Assets/Enemy/Siebeneck.png\")
-
 onready var enemy_sprite = get_node(\"Dreieck\")
+var origin_modulate = modulate
 
 func _ready():
 	pass 
@@ -24,7 +24,8 @@ func _process(delta):
 	
 func hit(damage):
 	hp = hp - damage;
-	if hp < 0:
+	colorchange_hit()
+	if hp <= 0:
 		get_parent().get_parent().get_parent().add_money(damage + hp, true) 
 	else:
 		get_parent().get_parent().get_parent().add_money(damage, false) 
@@ -51,6 +52,12 @@ func getSpeed():
 
 func getHP():
 	return hp;
+	
+func colorchange_hit():
+	enemy_sprite.modulate = Color(255, 0, 0, 255)
+	yield(get_tree().create_timer(0.1), \"timeout\")
+	enemy_sprite.modulate = origin_modulate
+	
 "
 
 [sub_resource type="CircleShape2D" id=2]
