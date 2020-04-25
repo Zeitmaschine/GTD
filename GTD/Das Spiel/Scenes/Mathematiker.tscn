@@ -9,7 +9,7 @@ script/source = "extends KinematicBody2D
 var projectilespeed = 1000 
 var firerate = 2.0
 var can_fire = true
-var projectile = preload (\"res://Scenes/Bomb.tscn\")
+var projectile = preload (\"res://Scenes/Projectile.tscn\")
 var enemyinrange = 0
 var target = null
 
@@ -175,7 +175,7 @@ func set_range():
 radius = 53.1815
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 199.586
+radius = 537.804
 
 [node name="Mathematiker" type="KinematicBody2D"]
 collision_layer = 2

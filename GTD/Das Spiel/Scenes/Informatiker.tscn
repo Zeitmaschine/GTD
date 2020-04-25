@@ -81,6 +81,7 @@ radius = 51.5617
 radius = 2420.64
 
 [node name="Informatiker" type="KinematicBody2D"]
+collision_layer = 2
 script = SubResource( 1 )
 
 [node name="Range_Sprite" type="Sprite" parent="."]

@@ -7,7 +7,7 @@
 [ext_resource path="res://Audio/Die.wav" type="AudioStream" id=5]
 [ext_resource path="res://Scenes/Informatiker.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Universität/Universität.png" type="Texture" id=7]
-[ext_resource path="res://Assets/MatheBombenTurm/MatheBombenTurm.png" type="Texture" id=8]
+[ext_resource path="res://Scenes/MatheBombenTurm.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Assets/Winkelninja/Winkelninja.png" type="Texture" id=9]
 [ext_resource path="res://Audio/Life_lost.wav" type="AudioStream" id=10]
 
@@ -218,6 +218,7 @@ tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 13, 0,
 
 [node name="Informatiker" parent="." instance=ExtResource( 6 )]
 position = Vector2( 359.516, 865.164 )
+scale = Vector2( 0.963236, 0.807566 )
 
 [node name="Winkelninja" type="Sprite" parent="."]
 position = Vector2( 1846.34, 1005.7 )
@@ -226,10 +227,6 @@ texture = ExtResource( 9 )
 [node name="Universität" type="Sprite" parent="."]
 position = Vector2( 1778.73, 846.869 )
 texture = ExtResource( 7 )
-
-[node name="MatheBombenTurm" type="Sprite" parent="."]
-position = Vector2( 1702.17, 991.853 )
-texture = ExtResource( 8 )
 
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2( -12.8878, 0 )
@@ -253,5 +250,9 @@ stream = ExtResource( 10 )
 volume_db = -18.384
 
 [node name="Mathematiker" parent="." instance=ExtResource( 1 )]
-position = Vector2( 810.151, 412.492 )
+position = Vector2( 759.068, 446.326 )
+attackrangelvl = 100
+
+[node name="MatheBombenTurm" parent="." instance=ExtResource( 8 )]
+position = Vector2( 696.466, 801.722 )
 [connection signal="timeout" from="Path2D/Timer" to="Path2D" method="_on_Timer_timeout"]
