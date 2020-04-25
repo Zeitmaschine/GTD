@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scenes/Moneybar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Healthbar.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Interface/Theme/ButtonClick.tres" type="StyleBox" id=7]
 [ext_resource path="res://Interface/Theme/ButtonPressed.tres" type="StyleBox" id=8]
 [ext_resource path="res://Assets/Icons/Pause_Icon.png" type="Texture" id=9]
+[ext_resource path="res://Interface/Font/GameOver_font.tres" type="Theme" id=10]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Control
@@ -24,6 +25,7 @@ func _on_Health_health_changed(health):
 
 func _ready():
 	pass 
+
 "
 
 [sub_resource type="GDScript" id=2]
@@ -56,6 +58,32 @@ func _on_PauseBeenden_pressed():
 func _on_PauseIcon_pressed():
 	get_tree().paused = not get_tree().paused
 	visible = not visible
+"
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends Control
+
+export var health = 250
+
+func getHealth():
+	return health
+
+func setHealth(healthy):
+	health = healthy
+	if (health <= 0):
+		get_tree().paused = not get_tree().paused
+		visible = not visible
+
+func _on_GameOverMen_pressed():
+	get_tree().paused = not get_tree().paused
+	visible = not visible
+	get_tree().change_scene(\"res://Scenes/MainMenu.tscn\")
+
+
+func _on_GameOverNeutstart_pressed():
+	get_tree().paused = not get_tree().paused
+	visible = not visible
+	get_tree().change_scene(\"res://Scenes/SimpleLevel.tscn\")
 "
 
 [node name="Interface" type="Control"]
@@ -94,10 +122,10 @@ margin_left = 4.0
 margin_top = 0.0
 margin_right = 4.0
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="PauseLayer" type="CanvasLayer" parent="."]
 layer = 2
 
-[node name="Pause" type="Control" parent="CanvasLayer"]
+[node name="Pause" type="Control" parent="PauseLayer"]
 pause_mode = 2
 visible = false
 anchor_left = 0.5
@@ -113,7 +141,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Backround" type="ColorRect" parent="CanvasLayer/Pause"]
+[node name="Backround" type="ColorRect" parent="PauseLayer/Pause"]
 margin_right = 1080.0
 margin_bottom = 620.0
 color = Color( 0, 0, 0, 0.352941 )
@@ -121,7 +149,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Space" type="MarginContainer" parent="CanvasLayer/Pause"]
+[node name="Space" type="MarginContainer" parent="PauseLayer/Pause"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -134,13 +162,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ButtonContainer" type="VBoxContainer" parent="CanvasLayer/Pause/Space"]
+[node name="ButtonContainer" type="VBoxContainer" parent="PauseLayer/Pause/Space"]
 margin_right = 960.0
 margin_bottom = 629.0
 custom_constants/separation = 50
 alignment = 1
 
-[node name="PauseFortsetzen" type="Button" parent="CanvasLayer/Pause/Space/ButtonContainer"]
+[node name="PauseFortsetzen" type="Button" parent="PauseLayer/Pause/Space/ButtonContainer"]
 margin_top = 119.0
 margin_right = 960.0
 margin_bottom = 216.0
@@ -150,7 +178,7 @@ custom_styles/pressed = ExtResource( 4 )
 custom_styles/normal = ExtResource( 5 )
 text = "Spiel fortsetzen"
 
-[node name="PauseNeustart" type="Button" parent="CanvasLayer/Pause/Space/ButtonContainer"]
+[node name="PauseNeustart" type="Button" parent="PauseLayer/Pause/Space/ButtonContainer"]
 margin_top = 266.0
 margin_right = 960.0
 margin_bottom = 363.0
@@ -160,7 +188,7 @@ custom_styles/pressed = ExtResource( 4 )
 custom_styles/normal = ExtResource( 5 )
 text = "Spiel neustarten"
 
-[node name="PauseBeenden" type="Button" parent="CanvasLayer/Pause/Space/ButtonContainer"]
+[node name="PauseBeenden" type="Button" parent="PauseLayer/Pause/Space/ButtonContainer"]
 margin_top = 413.0
 margin_right = 960.0
 margin_bottom = 510.0
@@ -186,7 +214,86 @@ margin_right = 150.0
 margin_bottom = 134.0
 texture_normal = ExtResource( 9 )
 expand = true
-[connection signal="pressed" from="CanvasLayer/Pause/Space/ButtonContainer/PauseFortsetzen" to="CanvasLayer/Pause" method="_on_PauseFortsetzen_pressed"]
-[connection signal="pressed" from="CanvasLayer/Pause/Space/ButtonContainer/PauseNeustart" to="CanvasLayer/Pause" method="_on_PauseNeustart_pressed"]
-[connection signal="pressed" from="CanvasLayer/Pause/Space/ButtonContainer/PauseBeenden" to="CanvasLayer/Pause" method="_on_PauseBeenden_pressed"]
-[connection signal="pressed" from="MarginContainer/PauseIcon" to="CanvasLayer/Pause" method="_on_PauseIcon_pressed"]
+
+[node name="GameOverLayer" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="GameOver" type="Control" parent="GameOverLayer"]
+pause_mode = 2
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 420.0
+margin_top = 230.0
+margin_right = -420.0
+margin_bottom = -230.0
+script = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackroundGameOver" type="ColorRect" parent="GameOverLayer/GameOver"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.352941 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SpaceGameOver" type="MarginContainer" parent="GameOverLayer/GameOver/BackroundGameOver"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 100.0
+margin_top = -100.0
+margin_right = -100.0
+margin_bottom = 10.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonContainerGameOver" type="VBoxContainer" parent="GameOverLayer/GameOver/BackroundGameOver/SpaceGameOver"]
+margin_right = 880.0
+margin_bottom = 244.0
+theme = ExtResource( 3 )
+custom_constants/separation = 50
+alignment = 1
+
+[node name="GameOverNeutstart" type="Button" parent="GameOverLayer/GameOver/BackroundGameOver/SpaceGameOver/ButtonContainerGameOver"]
+margin_right = 880.0
+margin_bottom = 97.0
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/normal = ExtResource( 5 )
+custom_constants/hseparation = 50
+text = "Spiel Neustarten"
+
+[node name="GameOverMenü" type="Button" parent="GameOverLayer/GameOver/BackroundGameOver/SpaceGameOver/ButtonContainerGameOver"]
+margin_top = 147.0
+margin_right = 880.0
+margin_bottom = 244.0
+custom_styles/hover = ExtResource( 7 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/normal = ExtResource( 5 )
+text = "Zurück ins Haputmenü"
+
+[node name="GameOverText" type="Label" parent="GameOverLayer/GameOver/BackroundGameOver"]
+anchor_right = 1.0
+margin_top = 20.0
+margin_bottom = 117.0
+theme = ExtResource( 10 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 5
+text = "Game Over"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="PauseLayer/Pause/Space/ButtonContainer/PauseFortsetzen" to="PauseLayer/Pause" method="_on_PauseFortsetzen_pressed"]
+[connection signal="pressed" from="PauseLayer/Pause/Space/ButtonContainer/PauseNeustart" to="PauseLayer/Pause" method="_on_PauseNeustart_pressed"]
+[connection signal="pressed" from="PauseLayer/Pause/Space/ButtonContainer/PauseBeenden" to="PauseLayer/Pause" method="_on_PauseBeenden_pressed"]
+[connection signal="pressed" from="MarginContainer/PauseIcon" to="PauseLayer/Pause" method="_on_PauseIcon_pressed"]
+[connection signal="pressed" from="GameOverLayer/GameOver/BackroundGameOver/SpaceGameOver/ButtonContainerGameOver/GameOverNeutstart" to="GameOverLayer/GameOver" method="_on_GameOverNeutstart_pressed"]
+[connection signal="pressed" from="GameOverLayer/GameOver/BackroundGameOver/SpaceGameOver/ButtonContainerGameOver/GameOverMenü" to="GameOverLayer/GameOver" method="_on_GameOverMen_pressed"]
