@@ -7,7 +7,9 @@ func _ready():
 	
 func _process(delta):
 	text = str(health)
-	
+	if (health < 0):
+		text = str(0)
+
 func getHealth():
 	return health
 	

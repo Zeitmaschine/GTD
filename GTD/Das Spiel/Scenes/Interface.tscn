@@ -126,6 +126,7 @@ margin_right = 1920.0
 margin_bottom = 120.0
 
 [node name="Healthbar" parent="StatsMenu/HBoxContainer" instance=ExtResource( 2 )]
+pause_mode = 2
 margin_bottom = 120.0
 
 [node name="Moneybar" parent="StatsMenu/HBoxContainer" instance=ExtResource( 1 )]
