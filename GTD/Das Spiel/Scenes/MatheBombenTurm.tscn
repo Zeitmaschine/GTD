@@ -117,6 +117,7 @@ position = Vector2( 0.784258, 103.015 )
 shape = SubResource( 3 )
 
 [node name="Range" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 
 [node name="CollisionRange" type="CollisionShape2D" parent="Range"]
