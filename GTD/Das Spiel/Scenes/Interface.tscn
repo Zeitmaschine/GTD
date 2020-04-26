@@ -31,9 +31,13 @@ func _ready():
 [sub_resource type="GDScript" id=2]
 script/source = "extends Control
 
+var gameover = false
+
+func _process(delta):
+	gameover = get_parent().get_parent().get_node(\"GameOverLayer/GameOver\").getGameOver()
 
 func _input(event):
-	if event.is_action_pressed(\"ui_cancel\"):
+	if event.is_action_pressed(\"ui_cancel\") and (gameover == false):
 		get_tree().paused = not get_tree().paused
 		visible = not visible
 
@@ -63,7 +67,8 @@ func _on_PauseIcon_pressed():
 [sub_resource type="GDScript" id=3]
 script/source = "extends Control
 
-export var health = 250
+var health = 250
+var gameover = false
 
 func getHealth():
 	return health
@@ -71,16 +76,22 @@ func getHealth():
 func setHealth(healthy):
 	health = healthy
 	if (health <= 0):
+		gameover = true
 		get_tree().paused = not get_tree().paused
 		visible = not visible
 
+func getGameOver():
+	return gameover
+
 func _on_GameOverMen_pressed():
+	gameover = false
 	get_tree().paused = not get_tree().paused
 	visible = not visible
 	get_tree().change_scene(\"res://Scenes/MainMenu.tscn\")
 
 
 func _on_GameOverNeutstart_pressed():
+	gameover = false
 	get_tree().paused = not get_tree().paused
 	visible = not visible
 	get_tree().change_scene(\"res://Scenes/SimpleLevel.tscn\")
