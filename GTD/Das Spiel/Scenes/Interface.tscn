@@ -287,7 +287,7 @@ margin_bottom = 244.0
 custom_styles/hover = ExtResource( 7 )
 custom_styles/pressed = ExtResource( 8 )
 custom_styles/normal = ExtResource( 5 )
-text = "Zurück ins Haputmenü"
+text = "Zurück ins Hauptmenü"
 
 [node name="GameOverText" type="Label" parent="GameOverLayer/GameOver/BackroundGameOver"]
 anchor_right = 1.0
