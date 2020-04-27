@@ -12,11 +12,12 @@ var can_fire = true
 var projectile = preload (\"res://Scenes/Projectile.tscn\")
 var enemyinrange = 0
 var target = null
+var can_make_money = true
 
 
 export var upgrade1 = false
 export var upgrade2 = false
-export var attackpowerlvl = 5
+export var attackpowerlvl = 1
 export var fireratelvl = 1
 export var attackspeedlvl = 1
 
@@ -25,8 +26,10 @@ func _ready():
 
 func _process(delta):
 	find_closest_target()
-	if can_fire == true && enemyinrange > 0 && target != Vector2(0,0):
+	if can_fire == true && enemyinrange > 1 && target != Vector2(0,0):
 		aim_and_shoot()
+	if upgrade1 == true:
+		earn_money_upgrade_1()
 
 func _on_Range_body_entered(body):
 		enemyinrange += 1
@@ -55,11 +58,22 @@ func aim_and_shoot():
 	projectile_instance.position = $Firepoint.get_global_position()
 	projectile_instance.rotation_degrees = rotation_degrees
 	projectile_instance.apply_impulse(Vector2(), Vector2(0, projectilespeed +(200 * attackspeedlvl)).rotated(rotation))
-	projectile_instance.setDamage(attackpowerlvl)
+	projectile_instance.setDamage(attackpowerlvl + 4)
 	get_tree().get_root().add_child(projectile_instance)
 	can_fire = false
 	yield(get_tree().create_timer(firerate - (fireratelvl * 0.7)), \"timeout\")
 	can_fire = true
+	
+func earn_money_upgrade_1():
+	yield(get_tree().create_timer(5.0), \"timeout\")
+	if can_make_money == true:
+		get_parent().add_money(50,false)
+		can_make_money = false
+		yield(get_tree().create_timer(5.0), \"timeout\")
+		can_make_money = true
+		
+	
+	
 
 
 func _on_Informatiker_Area_mouse_entered():
@@ -77,10 +91,11 @@ func _on_Informatiker_Area_mouse_exited():
 radius = 51.5617
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 2420.64
+radius = 3689.82
 
 [node name="Informatiker" type="KinematicBody2D"]
 collision_layer = 2
+collision_mask = 2
 script = SubResource( 1 )
 
 [node name="Range_Sprite" type="Sprite" parent="."]
@@ -98,16 +113,17 @@ texture = ExtResource( 1 )
 position = Vector2( 0, 67.998 )
 
 [node name="Informatiker_Area" type="Area2D" parent="."]
-collision_layer = 4
+collision_layer = 2
+collision_mask = 0
 
 [node name="CollisionInformatiker" type="CollisionShape2D" parent="Informatiker_Area"]
 shape = SubResource( 2 )
 
 [node name="Range" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 
 [node name="CollisionRange" type="CollisionShape2D" parent="Range"]
-visible = false
 shape = SubResource( 3 )
 [connection signal="mouse_entered" from="Informatiker_Area" to="." method="_on_Informatiker_Area_mouse_entered"]
 [connection signal="mouse_exited" from="Informatiker_Area" to="." method="_on_Informatiker_Area_mouse_exited"]

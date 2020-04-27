@@ -175,7 +175,7 @@ func set_range():
 radius = 53.1815
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 202.007
+radius = 127.263
 
 [node name="Mathematiker" type="KinematicBody2D"]
 collision_layer = 2

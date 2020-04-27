@@ -35,7 +35,6 @@ func explode():
 	$Explosion_Sound.play()
 	var i = 0
 	var units = $Range.get_overlapping_bodies()
-	print (units)
 	while i < units.size():
 		units[i].hit(damage)
 		i += 1
