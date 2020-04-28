@@ -16,15 +16,12 @@ script/source = "extends Control
 
 func _ready():
 	set_as_toplevel(true)
-	pass
-
 
 func _on_TextureButton_pressed():
-	visible = not visible
-	pass 
+	visible = false
 "
 
-[node name="Mathematiker" type="Control"]
+[node name="MathematikerUpgrade" type="Control"]
 margin_right = 40.0
 margin_bottom = 40.0
 script = SubResource( 1 )
@@ -32,9 +29,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="UpgradeInterface" type="Control" parent="."]
-
-[node name="UpgradeBackround" type="ColorRect" parent="UpgradeInterface"]
+[node name="UpgradeBackround" type="ColorRect" parent="."]
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 890.0
@@ -44,7 +39,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Turmname" type="Label" parent="UpgradeInterface/UpgradeBackround"]
+[node name="Turmname" type="Label" parent="UpgradeBackround"]
 margin_right = 880.0
 margin_bottom = 80.0
 theme = ExtResource( 4 )
@@ -58,7 +53,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="StatContainer" type="VBoxContainer" parent="UpgradeInterface/UpgradeBackround"]
+[node name="StatContainer" type="VBoxContainer" parent="UpgradeBackround"]
 margin_left = 20.0
 margin_right = 192.0
 margin_bottom = 1040.0
@@ -67,7 +62,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Damage" type="Label" parent="UpgradeInterface/UpgradeBackround/StatContainer"]
+[node name="Damage" type="Label" parent="UpgradeBackround/StatContainer"]
 margin_right = 172.0
 margin_bottom = 149.0
 theme = ExtResource( 4 )
@@ -83,7 +78,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Firerate" type="Label" parent="UpgradeInterface/UpgradeBackround/StatContainer"]
+[node name="Firerate" type="Label" parent="UpgradeBackround/StatContainer"]
 margin_top = 414.0
 margin_right = 172.0
 margin_bottom = 449.0
@@ -96,7 +91,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Range" type="Label" parent="UpgradeInterface/UpgradeBackround/StatContainer"]
+[node name="Range" type="Label" parent="UpgradeBackround/StatContainer"]
 margin_top = 714.0
 margin_right = 172.0
 margin_bottom = 749.0
@@ -109,7 +104,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CurrentStatsContainer" type="VBoxContainer" parent="UpgradeInterface/UpgradeBackround"]
+[node name="CurrentStatsContainer" type="VBoxContainer" parent="UpgradeBackround"]
 margin_left = 200.0
 margin_right = 380.0
 margin_bottom = 1014.0
@@ -118,7 +113,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CurrentDamage" type="Label" parent="UpgradeInterface/UpgradeBackround/CurrentStatsContainer"]
+[node name="CurrentDamage" type="Label" parent="UpgradeBackround/CurrentStatsContainer"]
 margin_right = 180.0
 margin_bottom = 149.0
 theme = ExtResource( 4 )
@@ -130,7 +125,7 @@ text = "
 
 1"
 
-[node name="CurrentFirerate" type="Label" parent="UpgradeInterface/UpgradeBackround/CurrentStatsContainer"]
+[node name="CurrentFirerate" type="Label" parent="UpgradeBackround/CurrentStatsContainer"]
 margin_top = 414.0
 margin_right = 180.0
 margin_bottom = 449.0
@@ -140,7 +135,7 @@ custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
 text = "5"
 
-[node name="CurrentRange" type="Label" parent="UpgradeInterface/UpgradeBackround/CurrentStatsContainer"]
+[node name="CurrentRange" type="Label" parent="UpgradeBackround/CurrentStatsContainer"]
 margin_top = 714.0
 margin_right = 180.0
 margin_bottom = 749.0
@@ -150,7 +145,7 @@ custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
 text = "6"
 
-[node name="StatUpgradeContainer" type="VBoxContainer" parent="UpgradeInterface/UpgradeBackround"]
+[node name="StatUpgradeContainer" type="VBoxContainer" parent="UpgradeBackround"]
 margin_left = 20.0
 margin_right = 130.0
 margin_bottom = 1040.0
@@ -160,28 +155,28 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DamageButton" type="Button" parent="UpgradeInterface/UpgradeBackround/StatUpgradeContainer"]
+[node name="DamageButton" type="Button" parent="UpgradeBackround/StatUpgradeContainer"]
 margin_top = 173.0
 margin_right = 110.0
 margin_bottom = 271.0
 theme = ExtResource( 6 )
 text = "+"
 
-[node name="FirerateButton" type="Button" parent="UpgradeInterface/UpgradeBackround/StatUpgradeContainer"]
+[node name="FirerateButton" type="Button" parent="UpgradeBackround/StatUpgradeContainer"]
 margin_top = 471.0
 margin_right = 110.0
 margin_bottom = 569.0
 theme = ExtResource( 6 )
 text = "+"
 
-[node name="RangeButton" type="Button" parent="UpgradeInterface/UpgradeBackround/StatUpgradeContainer"]
+[node name="RangeButton" type="Button" parent="UpgradeBackround/StatUpgradeContainer"]
 margin_top = 769.0
 margin_right = 110.0
 margin_bottom = 867.0
 theme = ExtResource( 6 )
 text = "+"
 
-[node name="StatUpgradeText" type="VBoxContainer" parent="UpgradeInterface/UpgradeBackround"]
+[node name="StatUpgradeText" type="VBoxContainer" parent="UpgradeBackround"]
 margin_left = 150.0
 margin_right = 552.0
 margin_bottom = 1040.0
@@ -191,7 +186,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DamageText" type="Label" parent="UpgradeInterface/UpgradeBackround/StatUpgradeText"]
+[node name="DamageText" type="Label" parent="UpgradeBackround/StatUpgradeText"]
 margin_top = 202.0
 margin_right = 402.0
 margin_bottom = 237.0
@@ -201,7 +196,7 @@ custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
 text = "Schaden erhöhen: 250€"
 
-[node name="FirerateText" type="Label" parent="UpgradeInterface/UpgradeBackround/StatUpgradeText"]
+[node name="FirerateText" type="Label" parent="UpgradeBackround/StatUpgradeText"]
 margin_top = 502.0
 margin_right = 402.0
 margin_bottom = 537.0
@@ -214,7 +209,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RangeText" type="Label" parent="UpgradeInterface/UpgradeBackround/StatUpgradeText"]
+[node name="RangeText" type="Label" parent="UpgradeBackround/StatUpgradeText"]
 margin_top = 802.0
 margin_right = 402.0
 margin_bottom = 837.0
@@ -224,7 +219,7 @@ custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
 text = "Reichweite erhöhen: 250€"
 
-[node name="SpecialUpgradeOutline" type="ColorRect" parent="UpgradeInterface/UpgradeBackround"]
+[node name="SpecialUpgradeOutline" type="ColorRect" parent="UpgradeBackround"]
 margin_left = 575.0
 margin_top = 75.0
 margin_right = 835.0
@@ -234,7 +229,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SpecialUpgradeBackround" type="ColorRect" parent="UpgradeInterface/UpgradeBackround"]
+[node name="SpecialUpgradeBackround" type="ColorRect" parent="UpgradeBackround"]
 margin_left = 580.0
 margin_top = 80.0
 margin_right = 830.0
@@ -244,7 +239,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SpecialUpgradeButton" type="Button" parent="UpgradeInterface/UpgradeBackround/SpecialUpgradeBackround"]
+[node name="SpecialUpgradeButton" type="Button" parent="UpgradeBackround/SpecialUpgradeBackround"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_styles/hover = ExtResource( 9 )
@@ -254,7 +249,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="UpgradeDescription" type="Label" parent="UpgradeInterface/UpgradeBackround/SpecialUpgradeBackround/SpecialUpgradeButton"]
+[node name="UpgradeDescription" type="Label" parent="UpgradeBackround/SpecialUpgradeBackround/SpecialUpgradeButton"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 5.0
@@ -265,7 +260,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureUpgrade" type="TextureRect" parent="UpgradeInterface/UpgradeBackround/SpecialUpgradeBackround/SpecialUpgradeButton"]
+[node name="TextureUpgrade" type="TextureRect" parent="UpgradeBackround/SpecialUpgradeBackround/SpecialUpgradeButton"]
 margin_top = 40.0
 margin_right = 250.0
 margin_bottom = 340.0
@@ -273,7 +268,7 @@ texture = ExtResource( 2 )
 expand = true
 stretch_mode = 1
 
-[node name="Cost" type="Label" parent="UpgradeInterface/UpgradeBackround/SpecialUpgradeBackround/SpecialUpgradeButton"]
+[node name="Cost" type="Label" parent="UpgradeBackround/SpecialUpgradeBackround/SpecialUpgradeButton"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = -5.0
@@ -282,7 +277,7 @@ text = "350€"
 align = 1
 valign = 2
 
-[node name="SpecialUpgradeOutline2" type="ColorRect" parent="UpgradeInterface/UpgradeBackround/SpecialUpgradeBackround/SpecialUpgradeButton"]
+[node name="SpecialUpgradeOutline2" type="ColorRect" parent="UpgradeBackround/SpecialUpgradeBackround/SpecialUpgradeButton"]
 margin_left = -5.0
 margin_top = 485.0
 margin_right = 255.0
@@ -292,7 +287,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SpecialUpgradeBackroundLeft2" type="ColorRect" parent="UpgradeInterface/UpgradeBackround/SpecialUpgradeBackround/SpecialUpgradeButton"]
+[node name="SpecialUpgradeBackroundLeft2" type="ColorRect" parent="UpgradeBackround/SpecialUpgradeBackround/SpecialUpgradeButton"]
 margin_top = 490.0
 margin_right = 250.0
 margin_bottom = 890.0
@@ -301,7 +296,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SpecialUpgradeButtonsLeft2" type="Button" parent="UpgradeInterface/UpgradeBackround/SpecialUpgradeBackround/SpecialUpgradeButton/SpecialUpgradeBackroundLeft2"]
+[node name="SpecialUpgradeButtonsLeft2" type="Button" parent="UpgradeBackround/SpecialUpgradeBackround/SpecialUpgradeButton/SpecialUpgradeBackroundLeft2"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_styles/hover = ExtResource( 9 )
@@ -311,7 +306,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="UpgradeDescription2" type="Label" parent="UpgradeInterface/UpgradeBackround/SpecialUpgradeBackround/SpecialUpgradeButton/SpecialUpgradeBackroundLeft2/SpecialUpgradeButtonsLeft2"]
+[node name="UpgradeDescription2" type="Label" parent="UpgradeBackround/SpecialUpgradeBackround/SpecialUpgradeButton/SpecialUpgradeBackroundLeft2/SpecialUpgradeButtonsLeft2"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 5.0
@@ -322,7 +317,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureUpgrade2" type="TextureRect" parent="UpgradeInterface/UpgradeBackround/SpecialUpgradeBackround/SpecialUpgradeButton/SpecialUpgradeBackroundLeft2/SpecialUpgradeButtonsLeft2"]
+[node name="TextureUpgrade2" type="TextureRect" parent="UpgradeBackround/SpecialUpgradeBackround/SpecialUpgradeButton/SpecialUpgradeBackroundLeft2/SpecialUpgradeButtonsLeft2"]
 margin_top = 40.0
 margin_right = 250.0
 margin_bottom = 360.0
@@ -332,7 +327,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Cost2" type="Label" parent="UpgradeInterface/UpgradeBackround/SpecialUpgradeBackround/SpecialUpgradeButton/SpecialUpgradeBackroundLeft2/SpecialUpgradeButtonsLeft2"]
+[node name="Cost2" type="Label" parent="UpgradeBackround/SpecialUpgradeBackround/SpecialUpgradeButton/SpecialUpgradeBackroundLeft2/SpecialUpgradeButtonsLeft2"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = -5.0
@@ -341,7 +336,7 @@ text = "500€"
 align = 1
 valign = 2
 
-[node name="TextureButton" type="TextureButton" parent="UpgradeInterface/UpgradeBackround"]
+[node name="TextureButton" type="TextureButton" parent="UpgradeBackround"]
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 60.0
@@ -352,4 +347,4 @@ expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="pressed" from="UpgradeInterface/UpgradeBackround/TextureButton" to="." method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="UpgradeBackround/TextureButton" to="." method="_on_TextureButton_pressed"]

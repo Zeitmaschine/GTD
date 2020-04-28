@@ -232,9 +232,11 @@ wait_time = 0.009
 autostart = true
 
 [node name="InterfaceLayer" type="CanvasLayer" parent="."]
+layer = 0
 
 [node name="Interface" parent="InterfaceLayer" instance=ExtResource( 2 )]
-margin_bottom = 0.0
+margin_right = -1861.0
+margin_bottom = -1030.0
 
 [node name="Die" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
@@ -243,9 +245,6 @@ volume_db = -26.288
 [node name="Life_Lost" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 8 )
 volume_db = -10.089
-
-[node name="Mathematiker" parent="." instance=ExtResource( 10 )]
-position = Vector2( 1434.21, 569.332 )
 
 [node name="Informatiker" parent="." instance=ExtResource( 6 )]
 position = Vector2( 596.458, 201.706 )
@@ -277,4 +276,7 @@ upgrade2 = true
 attackpowerlvl = 10
 fireratelvl = 10
 attackrangelvl = 10
+
+[node name="Mathematiker" parent="." instance=ExtResource( 10 )]
+position = Vector2( 465.851, 457.482 )
 [connection signal="timeout" from="Path2D/Timer" to="Path2D" method="_on_Timer_timeout"]
