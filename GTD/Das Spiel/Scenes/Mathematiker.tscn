@@ -172,7 +172,6 @@ func set_range():
 	$Range_Sprite.scale = Vector2(0.9 + (0.1 * attackrangelvl), 0.9 + (0.1 * attackrangelvl ))
 	
 func _on_Mathematiker_Area_input_event(viewport, event, shape_idx):
-	print(\"yeet\")
 	if(event.is_action_pressed(\"left_click\")):
 		 $UpgradeWindow/MathematikerUpgrade.visible =  true
 
@@ -181,7 +180,7 @@ func _on_Mathematiker_Area_input_event(viewport, event, shape_idx):
 [sub_resource type="CircleShape2D" id=2]
 radius = 53.1815
 
-[sub_resource type="CircleShape2D" id=4]
+[sub_resource type="CircleShape2D" id=3]
 radius = 127.263
 
 [node name="Mathematiker" type="KinematicBody2D"]
@@ -214,7 +213,7 @@ collision_layer = 0
 
 [node name="CollisionRange" type="CollisionShape2D" parent="Range"]
 visible = false
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="UpgradeWindow" type="CanvasLayer" parent="."]
 

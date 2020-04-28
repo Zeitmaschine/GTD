@@ -1,6 +1,10 @@
 extends PathFollow2D
 
 export (float) var speed
+export var hp = 1
+
+func _ready():
+	get_child(0).hp = hp
 
 func _physics_process(delta):
 	checkSpeed()
@@ -19,3 +23,6 @@ func damage():
 	
 func checkSpeed():
 	speed = 100 + (get_child(0).getHP() * 50)
+
+func setHP(newHp):
+	hp = newHp

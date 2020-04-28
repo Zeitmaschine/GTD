@@ -51,7 +51,7 @@ __meta__ = {
 }
 
 [node name="Backround" type="ColorRect" parent="."]
-margin_left = -1.75806
+margin_left = -2.0
 margin_right = 1920.0
 margin_bottom = 1080.0
 color = Color( 0.196078, 0.196078, 0.196078, 1 )
@@ -60,8 +60,8 @@ __meta__ = {
 }
 
 [node name="Title" type="Label" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
+margin_right = 880.0
+margin_bottom = 5.0
 theme = ExtResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0

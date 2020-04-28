@@ -67,7 +67,7 @@ func aim_and_shoot():
 func earn_money_upgrade_1():
 	yield(get_tree().create_timer(5.0), \"timeout\")
 	if can_make_money == true:
-		get_parent().add_money(50,false)
+		get_parent().add_extramoney(50,false)
 		can_make_money = false
 		yield(get_tree().create_timer(5.0), \"timeout\")
 		can_make_money = true
