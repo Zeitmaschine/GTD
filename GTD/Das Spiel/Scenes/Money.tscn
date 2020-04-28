@@ -33,30 +33,35 @@ __meta__ = {
 [node name="MarginContainer" type="MarginContainer" parent="."]
 margin_left = 606.0
 margin_top = 10.0
-margin_right = 806.0
+margin_right = 876.0
 margin_bottom = 140.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Backround" type="NinePatchRect" parent="MarginContainer"]
-margin_right = 200.0
+margin_right = 270.0
 margin_bottom = 130.0
 texture = ExtResource( 2 )
 patch_margin_left = 8
 patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Count" type="Label" parent="MarginContainer/Backround"]
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_left = 6.0
-margin_top = -30.0
-margin_right = 100.0
-margin_bottom = 50.0
+margin_left = 10.0
+margin_top = 26.0
+margin_right = 181.0
+margin_bottom = 100.0
 theme = ExtResource( 3 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 5
 text = "150"
+align = 2
 valign = 1
 script = SubResource( 1 )
 __meta__ = {
@@ -64,10 +69,10 @@ __meta__ = {
 }
 
 [node name="Münze" type="TextureRect" parent="MarginContainer/Backround"]
-margin_left = 80.8685
-margin_top = 12.0
-margin_right = 217.868
-margin_bottom = 90.5001
+margin_left = 160.558
+margin_top = 21.4869
+margin_right = 297.558
+margin_bottom = 99.987
 texture = ExtResource( 1 )
 expand = true
 stretch_mode = 5
