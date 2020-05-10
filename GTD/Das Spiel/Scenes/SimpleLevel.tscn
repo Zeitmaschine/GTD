@@ -1,9 +1,12 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
+[ext_resource path="res://Scenes/Informatiker.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Interface.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Tilesets/Grassland/Tileset_grassland.png" type="Texture" id=3]
 [ext_resource path="res://Scenes/Path2D.gd" type="Script" id=4]
 [ext_resource path="res://Audio/Die.wav" type="AudioStream" id=5]
+[ext_resource path="res://Scenes/MatheBombenTurm.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Universität.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Audio/Life_lost.wav" type="AudioStream" id=8]
 [ext_resource path="res://Scenes/Mathematiker.tscn" type="PackedScene" id=10]
 
@@ -341,7 +344,7 @@ curve = SubResource( 4 )
 script = ExtResource( 4 )
 
 [node name="Timer" type="Timer" parent="Path2D"]
-wait_time = 0.123
+wait_time = 12.024
 autostart = true
 
 [node name="InterfaceLayer" type="CanvasLayer" parent="."]
@@ -359,9 +362,19 @@ volume_db = -26.288
 stream = ExtResource( 8 )
 volume_db = -10.089
 
+[node name="MatheBombenTurm" parent="." instance=ExtResource( 6 )]
+position = Vector2( 713.365, 448.069 )
+upgrade1 = true
+upgrade2 = true
+
+[node name="Informatiker" parent="." instance=ExtResource( 1 )]
+position = Vector2( 663.379, 837.669 )
+upgrade1 = true
+upgrade2 = true
+
+[node name="Universität" parent="." instance=ExtResource( 7 )]
+position = Vector2( 1789.54, 942.052 )
+
 [node name="Mathematiker" parent="." instance=ExtResource( 10 )]
-position = Vector2( 747.346, 459.427 )
-attackpowerlvl = 4
-fireratelvl = 3
-attackrangelvl = 5
+position = Vector2( 492.102, 448.804 )
 [connection signal="timeout" from="Path2D/Timer" to="Path2D" method="_on_Timer_timeout"]

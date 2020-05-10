@@ -1,7 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Assets/Informatiker/Informatiker.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Mathematiker/Range.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Hack_particle.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Audio/Hack.wav" type="AudioStream" id=4]
+[ext_resource path="res://Audio/Money_gain_extra.wav" type="AudioStream" id=5]
+[ext_resource path="res://Scenes/Money_hack.tscn" type="PackedScene" id=6]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends KinematicBody2D 
@@ -9,10 +13,13 @@ script/source = "extends KinematicBody2D
 var projectilespeed = 1000
 var firerate = 5.0
 var can_fire = true
+var can_fire2 = true
 var projectile = preload (\"res://Scenes/Projectile.tscn\")
+var hack_particle = preload (\"res://Scenes/Hack_particle.tscn\")
 var enemyinrange = 0
 var target = null
 var can_make_money = true
+var target_enemy = null
 
 
 export var upgrade1 = false
@@ -26,8 +33,12 @@ func _ready():
 
 func _process(delta):
 	find_closest_target()
-	if can_fire == true && enemyinrange > 1 && target != Vector2(0,0):
+	if can_fire2 == true && enemyinrange > 0 && target != Vector2(0,0) && upgrade2 == true:
+		aim_and_shoot_upgrade2()
+	
+	if can_fire == true && enemyinrange > 0 && target != Vector2(0,0):
 		aim_and_shoot()
+	
 	if upgrade1 == true:
 		earn_money_upgrade_1()
 
@@ -45,10 +56,9 @@ func find_closest_target():
 			if position.distance_to(unit.global_position) < position.distance_to(closest.global_position):
 				closest = unit.get_parent()
 				target = closest.position
-			
+				target_enemy = closest
 	else:
 			target = null
-			
 func hit(damage):
 	pass
 
@@ -64,17 +74,29 @@ func aim_and_shoot():
 	yield(get_tree().create_timer(firerate - (fireratelvl * 0.7)), \"timeout\")
 	can_fire = true
 	
+func aim_and_shoot_upgrade2():
+	$Hack_sound.playing = true
+	$Hack_particle.emitting = true
+	var hack_particle_instance = hack_particle.instance()
+	hack_particle_instance.position = target
+	hack_particle_instance.emitting = true
+	get_tree().get_root().add_child(hack_particle_instance)
+	target_enemy.hit(attackpowerlvl + 2)
+	can_fire2 = false
+	yield(get_tree().create_timer(( 2 + firerate) - (fireratelvl * 0.9)), \"timeout\")
+	can_fire2 = true
+
+	
 func earn_money_upgrade_1():
 	yield(get_tree().create_timer(5.0), \"timeout\")
-	if can_make_money == true:
+	if can_make_money == true && get_parent().waverunning == true:
+		$Money_hack.emitting = true
+		$Money_gain_sound.playing = true
 		get_parent().add_extramoney(50,false)
 		can_make_money = false
 		yield(get_tree().create_timer(5.0), \"timeout\")
 		can_make_money = true
 		
-	
-	
-
 
 func _on_Informatiker_Area_mouse_entered():
 	scale = Vector2(1.2,1.2)
@@ -111,6 +133,18 @@ texture = ExtResource( 1 )
 
 [node name="Firepoint" type="Node2D" parent="."]
 position = Vector2( 0, 67.998 )
+
+[node name="Hack_particle" parent="." instance=ExtResource( 3 )]
+
+[node name="Money_hack" parent="." instance=ExtResource( 6 )]
+
+[node name="Hack_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -26.34
+
+[node name="Money_gain_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -30.291
 
 [node name="Informatiker_Area" type="Area2D" parent="."]
 collision_layer = 2

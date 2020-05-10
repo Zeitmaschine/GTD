@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=2]
 
-[sub_resource type="GDScript" id=9]
+[sub_resource type="GDScript" id=1]
 script/source = "extends Area2D
 
 var damage = 2
@@ -26,28 +26,28 @@ func explode():
 	
 "
 
-[sub_resource type="Gradient" id=1]
+[sub_resource type="Gradient" id=2]
 colors = PoolColorArray( 0.984375, 1, 0.5, 1, 1, 0, 0, 1 )
 
-[sub_resource type="GradientTexture" id=2]
-gradient = SubResource( 1 )
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
 
-[sub_resource type="Curve" id=3]
+[sub_resource type="Curve" id=4]
 min_value = -200.0
 max_value = 400.0
 _data = [ Vector2( 0, 400 ), 0.0, -874.876, 0, 0, Vector2( 0.35443, 18.1818 ), 0.0, 0.0, 0, 0, Vector2( 1, -101.818 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=4]
-curve = SubResource( 3 )
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
 
-[sub_resource type="Curve" id=5]
+[sub_resource type="Curve" id=6]
 max_value = 2.5
 _data = [ Vector2( 0, 2.5 ), 0.0, 0.0, 0, 0, Vector2( 0.626582, 1.02273 ), 0.0, 0.0, 0, 0, Vector2( 0.993671, 1.29545 ), 1.84398, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=6]
-curve = SubResource( 5 )
+[sub_resource type="CurveTexture" id=7]
+curve = SubResource( 6 )
 
-[sub_resource type="ParticlesMaterial" id=7]
+[sub_resource type="ParticlesMaterial" id=8]
 emission_shape = 1
 emission_sphere_radius = 2.0
 flag_disable_z = true
@@ -57,12 +57,12 @@ initial_velocity = 100.0
 initial_velocity_random = 0.49
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-linear_accel_curve = SubResource( 4 )
+linear_accel_curve = SubResource( 5 )
 scale = 67.52
-scale_curve = SubResource( 6 )
-color_ramp = SubResource( 2 )
+scale_curve = SubResource( 7 )
+color_ramp = SubResource( 3 )
 
-[sub_resource type="GDScript" id=8]
+[sub_resource type="GDScript" id=9]
 script/source = "extends Particles2D
 
 func _ready():
@@ -76,7 +76,8 @@ func _ready():
 radius = 105.329
 
 [node name="Area2D" type="Area2D"]
-script = SubResource( 9 )
+collision_layer = 0
+script = SubResource( 1 )
 
 [node name="Explosion" type="Particles2D" parent="."]
 emitting = false
@@ -84,8 +85,8 @@ amount = 200
 lifetime = 0.5
 one_shot = true
 explosiveness = 0.5
-process_material = SubResource( 7 )
-script = SubResource( 8 )
+process_material = SubResource( 8 )
+script = SubResource( 9 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 10 )

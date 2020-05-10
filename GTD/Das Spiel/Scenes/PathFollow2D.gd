@@ -15,8 +15,8 @@ func _physics_process(delta):
 		get_parent().get_parent().remove_health(get_child(0).getHP())
 		queue_free()
 
-func hit():
-	queue_free()
+func hit(amount):
+	get_child(0).hit(amount)
 
 func damage():
 	queue_free()

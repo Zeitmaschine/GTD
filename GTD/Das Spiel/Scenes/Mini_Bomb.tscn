@@ -4,20 +4,22 @@
 [ext_resource path="res://Audio/Explosion.wav" type="AudioStream" id=2]
 [ext_resource path="res://Assets/Mathematiker/Range.png" type="Texture" id=3]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id=12]
 script/source = "extends RigidBody2D
 
 export var damage = 2
 export var radius = 1
 var already_exploded = false
-export var upgrade1 = false
-export var upgrade2 = false
-var projectile = preload(\"res://Scenes/Mini_Bomb.tscn\")
 
 func _ready():
 	$Explosion_particle.emitting = false
+	scale = Vector2(0.5,0.5)
+	
 func _process(delta):
-	pass
+	yield(get_tree().create_timer(0.4), \"timeout\")
+	if already_exploded == false:
+		explode()
+		already_exploded = true
 
 func _on_Bomb_body_entered(body):
 	if already_exploded == false:
@@ -32,34 +34,6 @@ func setRadius():
 	radius = radius * 2
 
 func explode():
-	if upgrade1 == true:
-		setRadius()
-		$Explosion_particle.scale = Vector2(1.5,1.5)
-	if upgrade2 == true:
-		var projectile_instance1 = projectile.instance()
-		projectile_instance1.position = position
-		projectile_instance1.apply_impulse(Vector2(), Vector2(0, 500).rotated(0.25 * PI))
-		projectile_instance1.setDamage(damage)
-		get_tree().get_root().add_child(projectile_instance1)
-		
-		var projectile_instance2 = projectile.instance()
-		projectile_instance2.position = position
-		projectile_instance2.apply_impulse(Vector2(), Vector2(0, 500).rotated(0.75 * PI))
-		projectile_instance2.setDamage(damage)
-		get_tree().get_root().add_child(projectile_instance2)
-		
-		var projectile_instance3 = projectile.instance()
-		projectile_instance3.position = position
-		projectile_instance3.apply_impulse(Vector2(), Vector2(0, 500).rotated(1.25 * PI))
-		projectile_instance3.setDamage(damage)
-		get_tree().get_root().add_child(projectile_instance3)
-		
-		var projectile_instance4 = projectile.instance()
-		projectile_instance4.position = position
-		projectile_instance4.apply_impulse(Vector2(), Vector2(0, 500).rotated(1.75 * PI))
-		projectile_instance4.setDamage(damage)
-		get_tree().get_root().add_child(projectile_instance4)
-		
 	mode = 3
 	$Bomb_sprite.visible = false
 	$Explosion_particle.emitting = true
@@ -126,11 +100,11 @@ func _ready():
 
 "
 
-[node name="Bomb" type="RigidBody2D"]
+[node name="Mini_Bomb" type="RigidBody2D"]
 collision_layer = 4
 contacts_reported = 1
 contact_monitor = true
-script = SubResource( 1 )
+script = SubResource( 12 )
 
 [node name="Bomb_sprite" type="Sprite" parent="."]
 scale = Vector2( 2, 2 )
@@ -158,7 +132,7 @@ script = SubResource( 11 )
 
 [node name="Explosion_Sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
-volume_db = -22.213
+volume_db = -32.31
 
 [node name="Range_Sprite" type="Sprite" parent="."]
 visible = false

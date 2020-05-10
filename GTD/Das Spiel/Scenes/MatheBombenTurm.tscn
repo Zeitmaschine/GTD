@@ -10,7 +10,7 @@ var projectilespeed = 600
 var firerate = 3.0
 var can_fire = true
 var projectile = preload (\"res://Scenes/Bomb.tscn\")
-var enemyinrange = -1
+var enemyinrange = 0
 var target = null
 
 
@@ -50,26 +50,26 @@ func aim_and_shoot():
 	projectile_instance.rotation_degrees = rotation_degrees
 	projectile_instance.apply_impulse(Vector2(), Vector2(0, projectilespeed).rotated(rotation))
 	projectile_instance.setDamage(attackpowerlvl * 2)
+	projectile_instance.upgrade1 = upgrade1
+	projectile_instance.upgrade2 = upgrade2
 	get_tree().get_root().add_child(projectile_instance)
 	can_fire = false
-	yield(get_tree().create_timer(firerate - (fireratelvl * 0.15)), \"timeout\")
+	yield(get_tree().create_timer(firerate - (fireratelvl * 0.3)), \"timeout\")
 	can_fire = true
 	
 func set_range():
-	$Range/CollisionRange.scale = Vector2(0.9 + (0.1 * attackrangelvl) , 0.9 + (0.1 * attackrangelvl ))
-	$Range_Sprite.scale = Vector2(0.9 + (0.1 * attackrangelvl), 0.9 + (0.1 * attackrangelvl ))
+	$Range/CollisionRange.scale = Vector2(0.9 + (0.2 * attackrangelvl) , 0.9 + (0.2 * attackrangelvl ))
+	$Range_Sprite.scale = Vector2(0.9 + (0.2 * attackrangelvl), 0.9 + (0.2 * attackrangelvl ))
 
 
 func _on_MatheBombenTurm_Area_mouse_entered():
 	$Sprite_MathebombenTurm.scale = Vector2(1.2,1.2)
 	$Range_Sprite.visible = true
-	$Range_Sprite_MIN.visible = true
 
 
 func _on_MatheBombenTurm_Area_mouse_exited():
 	$Sprite_MathebombenTurm.scale = Vector2(1,1)
 	$Range_Sprite.visible = false
-	$Range_Sprite_MIN.visible = false
 
 func _on_Range_body_entered(body):
 	enemyinrange += 1
@@ -85,7 +85,7 @@ radius = 50.4414
 radius = 53.1815
 
 [sub_resource type="CircleShape2D" id=4]
-radius = 232.432
+radius = 197.703
 
 [node name="MatheBombenTurm" type="KinematicBody2D"]
 collision_layer = 2
@@ -94,12 +94,6 @@ script = SubResource( 1 )
 [node name="Range_Sprite" type="Sprite" parent="."]
 visible = false
 scale = Vector2( 1.16621, 1.14221 )
-texture = ExtResource( 2 )
-
-[node name="Range_Sprite_MIN" type="Sprite" parent="."]
-visible = false
-modulate = Color( 1, 0, 0, 1 )
-scale = Vector2( 0.66482, 0.644737 )
 texture = ExtResource( 2 )
 
 [node name="Sprite_MathebombenTurm" type="Sprite" parent="."]
@@ -112,15 +106,16 @@ shape = SubResource( 2 )
 position = Vector2( 0.784258, 103.015 )
 
 [node name="MatheBombenTurm_Area" type="Area2D" parent="."]
+collision_layer = 2
 
 [node name="Collision_MatheBombenTurm" type="CollisionShape2D" parent="MatheBombenTurm_Area"]
 shape = SubResource( 3 )
 
 [node name="Range" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 
 [node name="CollisionRange" type="CollisionShape2D" parent="Range"]
+visible = false
 shape = SubResource( 4 )
 [connection signal="mouse_entered" from="MatheBombenTurm_Area" to="." method="_on_MatheBombenTurm_Area_mouse_entered"]
 [connection signal="mouse_exited" from="MatheBombenTurm_Area" to="." method="_on_MatheBombenTurm_Area_mouse_exited"]
