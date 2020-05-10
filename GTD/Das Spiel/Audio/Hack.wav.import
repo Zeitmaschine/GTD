@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Hack.wav-87947c3858147de848b62fd9a5e3682c.sample"
+
+[deps]
+
+source_file="res://Audio/Hack.wav"
+dest_files=[ "res://.import/Hack.wav-87947c3858147de848b62fd9a5e3682c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

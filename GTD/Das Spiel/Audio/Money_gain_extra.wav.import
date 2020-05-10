@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Money_gain_extra.wav-ef034ea3b4439cf8ce1b604085957e0c.sample"
+
+[deps]
+
+source_file="res://Audio/Money_gain_extra.wav"
+dest_files=[ "res://.import/Money_gain_extra.wav-ef034ea3b4439cf8ce1b604085957e0c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
