@@ -13,6 +13,7 @@ var can_fire = true
 var projectile = preload (\"res://Scenes/Projectile.tscn\")
 var enemyinrange = 0
 var target = null
+var placed = false
 
 
 export var upgrade1 = false
@@ -25,18 +26,18 @@ func _ready():
 	set_range()
 
 func _process(delta):
-	
-	if can_fire == true && enemyinrange > 0 && upgrade1 == true && upgrade2 == true:
-		shoot_upgrade_1_2()
-	
-	if can_fire == true && enemyinrange > 0 && upgrade1 == true:
-		shoot_upgrade_1()
-	
-	if can_fire == true && enemyinrange > 0 && upgrade2 == true:
-		shoot_upgrade_2()
+	if placed == true:
+		if can_fire == true && enemyinrange > 0 && upgrade1 == true && upgrade2 == true:
+			shoot_upgrade_1_2()
 		
-	if can_fire == true && enemyinrange > 0:
-		shoot()
+		if can_fire == true && enemyinrange > 0 && upgrade1 == true:
+			shoot_upgrade_1()
+		
+		if can_fire == true && enemyinrange > 0 && upgrade2 == true:
+			shoot_upgrade_2()
+		
+		if can_fire == true && enemyinrange > 0:
+			shoot()
 
 func _on_Range_body_entered(body):
 		enemyinrange += 1
@@ -131,13 +132,13 @@ func _on_WinkelNinja_Area_input_event(viewport, event, shape_idx):
 "
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 53.1815
+radius = 40.0125
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 126.156
 
 [sub_resource type="CircleShape2D" id=4]
-radius = 54.8979
+radius = 38.8632
 
 [node name="Winkelninja" type="KinematicBody2D"]
 collision_layer = 2
@@ -166,12 +167,12 @@ collision_layer = 0
 [node name="CollisionRange" type="CollisionShape2D" parent="Range"]
 shape = SubResource( 3 )
 
-[node name="WinkelNinja_Area" type="Area2D" parent="."]
+[node name="Winkelninja_Area" type="Area2D" parent="."]
 position = Vector2( -0.513336, 0 )
 collision_layer = 2
-collision_mask = 0
+collision_mask = 10
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WinkelNinja_Area"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Winkelninja_Area"]
 shape = SubResource( 4 )
 
 [node name="UpgradeWindow" type="CanvasLayer" parent="."]
@@ -184,6 +185,6 @@ margin_right = -0.513306
 [connection signal="mouse_exited" from="." to="." method="_on_Winkelninja_mouse_exited"]
 [connection signal="body_entered" from="Range" to="." method="_on_Range_body_entered"]
 [connection signal="body_exited" from="Range" to="." method="_on_Range_body_exited"]
-[connection signal="input_event" from="WinkelNinja_Area" to="." method="_on_WinkelNinja_Area_input_event"]
-[connection signal="mouse_entered" from="WinkelNinja_Area" to="." method="_on_WinkelNinja_Area_mouse_entered"]
-[connection signal="mouse_exited" from="WinkelNinja_Area" to="." method="_on_WinkelNinja_Area_mouse_exited"]
+[connection signal="input_event" from="Winkelninja_Area" to="." method="_on_WinkelNinja_Area_input_event"]
+[connection signal="mouse_entered" from="Winkelninja_Area" to="." method="_on_WinkelNinja_Area_mouse_entered"]
+[connection signal="mouse_exited" from="Winkelninja_Area" to="." method="_on_WinkelNinja_Area_mouse_exited"]

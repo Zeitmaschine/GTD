@@ -13,6 +13,7 @@ var can_fire = true
 var projectile = preload (\"res://Scenes/Bomb.tscn\")
 var enemyinrange = 0
 var target = null
+var placed = false
 
 
 export var upgrade1 = false
@@ -26,9 +27,10 @@ func _ready():
 
 
 func _process(delta):
-	find_closest_target()
-	if can_fire == true && enemyinrange > 0 && target.position != Vector2(0,0):
-		aim_and_shoot()
+	if placed == true:
+		find_closest_target()
+		if can_fire == true && enemyinrange > 0 && target.position != Vector2(0,0):
+			aim_and_shoot()
 
 func find_closest_target():
 	var units = $Range.get_overlapping_bodies()
@@ -64,12 +66,12 @@ func set_range():
 
 
 func _on_MatheBombenTurm_Area_mouse_entered():
-	$Sprite_MathebombenTurm.scale = Vector2(1.2,1.2)
+	$Sprite_MatheBombenTurm.scale = Vector2(1.2,1.2)
 	$Range_Sprite.visible = true
 
 
 func _on_MatheBombenTurm_Area_mouse_exited():
-	$Sprite_MathebombenTurm.scale = Vector2(1,1)
+	$Sprite_MatheBombenTurm.scale = Vector2(1,1)
 	$Range_Sprite.visible = false
 
 func _on_Range_body_entered(body):
@@ -102,7 +104,7 @@ visible = false
 scale = Vector2( 1.16621, 1.14221 )
 texture = ExtResource( 2 )
 
-[node name="Sprite_MathebombenTurm" type="Sprite" parent="."]
+[node name="Sprite_MatheBombenTurm" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 
 [node name="Collision_MatheBombenTurm" type="CollisionShape2D" parent="."]
@@ -113,6 +115,7 @@ position = Vector2( 0.784258, 103.015 )
 
 [node name="MatheBombenTurm_Area" type="Area2D" parent="."]
 collision_layer = 2
+collision_mask = 10
 
 [node name="Collision_MatheBombenTurm" type="CollisionShape2D" parent="MatheBombenTurm_Area"]
 shape = SubResource( 3 )

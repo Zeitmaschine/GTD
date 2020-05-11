@@ -13,6 +13,7 @@ var can_fire = true
 var projectile = preload (\"res://Scenes/Projectile.tscn\")
 var enemyinrange = 0
 var target = null
+var placed = false
 
 
 export var upgrade1 = false
@@ -26,19 +27,20 @@ func _ready():
 
 
 func _process(delta):
-	find_closest_target()
+	if placed == true:
+		find_closest_target()
 	
-	if can_fire == true && enemyinrange > 0 && upgrade1 == true && upgrade2 == true && target.position != Vector2(0,0):
-		aim_and_shoot_upgrade_1_2()
+		if can_fire == true && enemyinrange > 0 && upgrade1 == true && upgrade2 == true && target.position != Vector2(0,0):
+			aim_and_shoot_upgrade_1_2()
 	
-	if can_fire == true && enemyinrange > 0 && upgrade1 == true && target.position != Vector2(0,0):
-		aim_and_shoot_upgrade_1()
+		if can_fire == true && enemyinrange > 0 && upgrade1 == true && target.position != Vector2(0,0):
+			aim_and_shoot_upgrade_1()
 		
-	if can_fire == true && enemyinrange > 0 && upgrade2 == true && target.position != Vector2(0,0):
-		aim_and_shoot_upgrade_2()
+		if can_fire == true && enemyinrange > 0 && upgrade2 == true && target.position != Vector2(0,0):
+			aim_and_shoot_upgrade_2()
 	
-	if can_fire == true && enemyinrange > 0 && target.position != Vector2(0,0):
-		aim_and_shoot()
+		if can_fire == true && enemyinrange > 0 && target.position != Vector2(0,0):
+			aim_and_shoot()
 
 func _on_Range_body_entered(body):
 		enemyinrange += 1
@@ -203,6 +205,7 @@ texture = ExtResource( 1 )
 
 [node name="Mathematiker_Area" type="Area2D" parent="."]
 collision_layer = 4
+collision_mask = 10
 
 [node name="CollisionMathematiker" type="CollisionShape2D" parent="Mathematiker_Area"]
 shape = SubResource( 2 )

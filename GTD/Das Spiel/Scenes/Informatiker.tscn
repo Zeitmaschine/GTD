@@ -21,6 +21,7 @@ var enemyinrange = 0
 var target = null
 var can_make_money = true
 var target_enemy = null
+var placed = false
 
 
 export var upgrade1 = false
@@ -33,15 +34,16 @@ func _ready():
 	pass
 
 func _process(delta):
-	find_closest_target()
-	if can_fire2 == true && enemyinrange > 0 && target != Vector2(0,0) && upgrade2 == true:
-		aim_and_shoot_upgrade2()
+	if placed == true:
+		find_closest_target()
+		if can_fire2 == true && enemyinrange > 0 && target != Vector2(0,0) && upgrade2 == true:
+			aim_and_shoot_upgrade2()
 	
-	if can_fire == true && enemyinrange > 0 && target != Vector2(0,0):
-		aim_and_shoot()
+		if can_fire == true && enemyinrange > 0 && target != Vector2(0,0):
+			aim_and_shoot()
 	
-	if upgrade1 == true:
-		earn_money_upgrade_1()
+		if upgrade1 == true:
+			earn_money_upgrade_1()
 
 func _on_Range_body_entered(body):
 		enemyinrange += 1
@@ -154,7 +156,7 @@ volume_db = -30.291
 
 [node name="Informatiker_Area" type="Area2D" parent="."]
 collision_layer = 2
-collision_mask = 0
+collision_mask = 10
 
 [node name="CollisionInformatiker" type="CollisionShape2D" parent="Informatiker_Area"]
 shape = SubResource( 2 )

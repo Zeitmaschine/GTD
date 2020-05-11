@@ -1,14 +1,12 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=21 format=2]
 
-[ext_resource path="res://Scenes/Informatiker.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Interface.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Tilesets/Grassland/Tileset_grassland.png" type="Texture" id=3]
 [ext_resource path="res://Scenes/Path2D.gd" type="Script" id=4]
 [ext_resource path="res://Audio/Die.wav" type="AudioStream" id=5]
-[ext_resource path="res://Scenes/MatheBombenTurm.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/Universität.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Audio/Life_lost.wav" type="AudioStream" id=8]
-[ext_resource path="res://Scenes/Mathematiker.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Audio/Buy_failed.wav" type="AudioStream" id=9]
+[ext_resource path="res://Audio/Buy.wav" type="AudioStream" id=11]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
@@ -25,6 +23,15 @@ var moneyinterface
 var healthinterface
 var healthdeath
 var waveinterface
+var max_universitaet = false
+
+var mathematiker = preload(\"res://Scenes/Mathematiker.tscn\")
+var informatiker = preload(\"res://Scenes/Informatiker.tscn\")
+var mathebombenturm = preload(\"res://Scenes/MatheBombenTurm.tscn\")
+var winkelninja = preload(\"res://Scenes/Winkelninja.tscn\")
+var universitaet = preload(\"res://Scenes/Universität.tscn\")
+
+var placemode = false
 
 var triggeronce = false
 var triggeronce2 = false
@@ -54,6 +61,10 @@ func _process(delta):
 	healthinterface.setHealth(healthy)
 	healthdeath.setHealth(healthy)
 	waveinterface.setWave(wave)
+	
+	if Input.is_action_just_pressed(\"Hotkey0\"):
+		money += 100
+	
 	if Input.is_action_just_pressed(\"spacebar\") && waverunning == false:
 		waverunning = true
 		
@@ -61,7 +72,208 @@ func _process(delta):
 		checkWave()
 	else:
 		$Path2D/Timer.stop()
+		
+	if Input.is_action_just_pressed(\"Hotkey1\"):
+		if money >= 100:
+			add_mathematiker()
+		else:
+			$Buy_failed.play()
 	
+	if Input.is_action_just_pressed(\"Hotkey2\"):
+		if money >= 300:
+			add_informatiker()
+		else:
+			$Buy_failed.play()
+			
+	
+	if Input.is_action_just_pressed(\"Hotkey3\"):
+		if money >= 500:
+			add_mathebombenturm()
+		else:
+			$Buy_failed.play()
+	
+	if Input.is_action_just_pressed(\"Hotkey4\"):
+		if money >= 450:
+			add_winkelninja()
+		else:
+			$Buy_failed.play()
+			
+	if Input.is_action_just_pressed(\"Hotkey5\"):
+		if money >= 800  && max_universitaet == false:
+			add_universitaet()
+		else:
+			$Buy_failed.play()
+			
+			
+	#debug-Knopf
+	
+
+
+func add_mathematiker():
+	if placemode == false:
+		placemode = true
+		var mathematiker_instance = mathematiker.instance()
+		add_child(mathematiker_instance)
+		var originalcolor = mathematiker_instance.get_node(\"Sprite_Mathematiker\").modulate
+		while (true):
+			yield(get_tree().create_timer(0.001), \"timeout\")
+			mathematiker_instance.position = get_global_mouse_position()
+			if mathematiker_instance.get_node(\"Mathematiker_Area\").get_overlapping_bodies().size() > 1:
+				mathematiker_instance.get_node(\"Sprite_Mathematiker\").modulate = Color(255,0,0,255)
+				mathematiker_instance.get_node(\"Range_Sprite\").modulate = Color(50,0,0,0)
+			
+			if mathematiker_instance.get_node(\"Mathematiker_Area\").get_overlapping_bodies().size() == 1:
+				mathematiker_instance.get_node(\"Sprite_Mathematiker\").modulate = originalcolor
+				mathematiker_instance.get_node(\"Range_Sprite\").modulate = originalcolor
+			
+			if Input.is_action_just_pressed(\"left_click\") && mathematiker_instance.get_node(\"Mathematiker_Area\").get_overlapping_bodies().size() == 1:
+				money = money - 100
+				$Buy.play()
+				break
+			
+			if Input.is_action_just_pressed(\"left_click\") && mathematiker_instance.get_node(\"Mathematiker_Area\").get_overlapping_bodies().size() > 1:
+				$Buy_failed.play()
+			
+			if Input.is_action_just_pressed(\"right_click\"):
+				$Buy_failed.play()
+				mathematiker_instance.queue_free()
+				break
+		mathematiker_instance.placed = true
+		placemode = false
+
+func add_informatiker():
+	if placemode == false:
+		placemode = true
+		var informatiker_instance = informatiker.instance()
+		add_child(informatiker_instance)
+		var originalcolor = informatiker_instance.get_node(\"Sprite_Informatiker\").modulate
+		while (true):
+			yield(get_tree().create_timer(0.001), \"timeout\")
+			informatiker_instance.position = get_global_mouse_position()
+			if informatiker_instance.get_node(\"Informatiker_Area\").get_overlapping_bodies().size() > 1:
+				informatiker_instance.get_node(\"Sprite_Informatiker\").modulate = Color(255,0,0,255)
+				informatiker_instance.get_node(\"Range_Sprite\").modulate = Color(50,0,0,0)
+			
+			if informatiker_instance.get_node(\"Informatiker_Area\").get_overlapping_bodies().size() == 1:
+				informatiker_instance.get_node(\"Sprite_Informatiker\").modulate = originalcolor
+				informatiker_instance.get_node(\"Range_Sprite\").modulate = originalcolor
+			
+			if Input.is_action_just_pressed(\"left_click\") && informatiker_instance.get_node(\"Informatiker_Area\").get_overlapping_bodies().size() == 1:
+				money = money - 300
+				$Buy.play()
+				break
+			
+			if Input.is_action_just_pressed(\"left_click\") && informatiker_instance.get_node(\"Informatiker_Area\").get_overlapping_bodies().size() > 1:
+				$Buy_failed.play()
+			
+			if Input.is_action_just_pressed(\"right_click\"):
+				$Buy_failed.play()
+				informatiker_instance.queue_free()
+				break
+		informatiker_instance.placed = true
+		placemode = false
+		
+
+func add_mathebombenturm():
+	if placemode == false:
+		placemode = true
+		var mathebombenturm_instance = mathebombenturm.instance()
+		add_child(mathebombenturm_instance)
+		var originalcolor = mathebombenturm_instance.get_node(\"Sprite_MatheBombenTurm\").modulate
+		while (true):
+			yield(get_tree().create_timer(0.001), \"timeout\")
+			mathebombenturm_instance.position = get_global_mouse_position()
+			if mathebombenturm_instance.get_node(\"MatheBombenTurm_Area\").get_overlapping_bodies().size() > 1:
+				mathebombenturm_instance.get_node(\"Sprite_MatheBombenTurm\").modulate = Color(255,0,0,255)
+				mathebombenturm_instance.get_node(\"Range_Sprite\").modulate = Color(50,0,0,0)
+			
+			if mathebombenturm_instance.get_node(\"MatheBombenTurm_Area\").get_overlapping_bodies().size() == 1:
+				mathebombenturm_instance.get_node(\"Sprite_MatheBombenTurm\").modulate = originalcolor
+				mathebombenturm_instance.get_node(\"Range_Sprite\").modulate = originalcolor
+			
+			if Input.is_action_just_pressed(\"left_click\") && mathebombenturm_instance.get_node(\"MatheBombenTurm_Area\").get_overlapping_bodies().size() == 1:
+				money = money - 500
+				$Buy.play()
+				break
+			
+			if Input.is_action_just_pressed(\"left_click\") && mathebombenturm_instance.get_node(\"MatheBombenTurm_Area\").get_overlapping_bodies().size() > 1:
+				$Buy_failed.play()
+			
+			if Input.is_action_just_pressed(\"right_click\"):
+				$Buy_failed.play()
+				mathebombenturm_instance.queue_free()
+				break
+		mathebombenturm_instance.placed = true
+		placemode = false
+		
+func add_winkelninja():
+	if placemode == false:
+		placemode = true
+		var winkelninja_instance = winkelninja.instance()
+		var this_instance = add_child(winkelninja_instance)
+		var originalcolor = winkelninja_instance.get_node(\"Sprite_Winkelninja\").modulate
+		while (true):
+			yield(get_tree().create_timer(0.001), \"timeout\")
+			winkelninja_instance.position = get_global_mouse_position()
+			if winkelninja_instance.get_node(\"Winkelninja_Area\").get_overlapping_bodies().size() > 1:
+				winkelninja_instance.get_node(\"Sprite_Winkelninja\").modulate = Color(255,0,0,255)
+				winkelninja_instance.get_node(\"Range_Sprite\").modulate = Color(50,0,0,0)
+			
+			if winkelninja_instance.get_node(\"Winkelninja_Area\").get_overlapping_bodies().size() == 1:
+				winkelninja_instance.get_node(\"Sprite_Winkelninja\").modulate = originalcolor
+				winkelninja_instance.get_node(\"Range_Sprite\").modulate = originalcolor
+			
+			if Input.is_action_just_pressed(\"left_click\") && winkelninja_instance.get_node(\"Winkelninja_Area\").get_overlapping_bodies().size() == 1:
+				money = money - 450
+				$Buy.play()
+				break
+			
+			if Input.is_action_just_pressed(\"left_click\") && winkelninja_instance.get_node(\"Winkelninja_Area\").get_overlapping_bodies().size() > 1:
+				$Buy_failed.play()
+			
+			if Input.is_action_just_pressed(\"right_click\"):
+				$Buy_failed.play()
+				winkelninja_instance.queue_free()
+				break
+		winkelninja_instance.placed = true
+		placemode = false
+		
+func add_universitaet():
+	if placemode == false:
+		placemode = true
+		var universitaet_instance = universitaet.instance()
+		var this_instance = add_child(universitaet_instance)
+		var originalcolor = universitaet_instance.get_node(\"Universitäts-Sprite\").modulate
+		while (true):
+			yield(get_tree().create_timer(0.001), \"timeout\")
+			universitaet_instance.position = get_global_mouse_position()
+			if universitaet_instance.get_node(\"Universität_Area\").get_overlapping_bodies().size() > 1:
+				universitaet_instance.get_node(\"Universitäts-Sprite\").modulate = Color(255,0,0,255)
+			
+			if universitaet_instance.get_node(\"Universität_Area\").get_overlapping_bodies().size() == 1:
+				universitaet_instance.get_node(\"Universitäts-Sprite\").modulate = originalcolor
+			
+			if Input.is_action_just_pressed(\"left_click\") && universitaet_instance.get_node(\"Universität_Area\").get_overlapping_bodies().size() == 1:
+				money = money - 800
+				$Buy.play()
+				max_universitaet = true
+				break
+			
+			if Input.is_action_just_pressed(\"left_click\") && universitaet_instance.get_node(\"Universität_Area\").get_overlapping_bodies().size() > 1:
+				$Buy_failed.play()
+			
+			if Input.is_action_just_pressed(\"right_click\"):
+				$Buy_failed.play()
+				universitaet_instance.queue_free()
+				break
+		universitaet_instance.placed = true
+		placemode = false
+
+
+
+
+
+
 
 #Wellen-Festlegung
 
@@ -161,9 +373,36 @@ func wave5():
 "
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
-points = PoolVector2Array( -512, 0, 128, 0, 128, 256, -512, 256 )
+points = PoolVector2Array( 128, 128, 0, 128, 0, 0, 128, 0 )
 
-[sub_resource type="TileSet" id=3]
+[sub_resource type="ConvexPolygonShape2D" id=3]
+points = PoolVector2Array( 128, 128, 0, 128, 0, 0, 128, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+points = PoolVector2Array( 128, 128, 0, 128, 0, 0, 128, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
+points = PoolVector2Array( 128, 128, 0, 128, 0, 0, 128, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=6]
+points = PoolVector2Array( 128, 128, 0, 128, 0, 0, 128, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=7]
+points = PoolVector2Array( 128, 128, 0, 128, 0, 0, 128, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=8]
+points = PoolVector2Array( 128, 128, 0, 128, 0, 0, 128, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=9]
+points = PoolVector2Array( 128, 128, 0, 128, 0, 0, 128, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=10]
+points = PoolVector2Array( 128, 128, 0, 128, 0, 0, 128, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=11]
+points = PoolVector2Array( 128, 128, 0, 128, 0, 0, 128, 0 )
+
+[sub_resource type="TileSet" id=12]
 0/name = "Tileset_grassland.png 0"
 0/texture = ExtResource( 3 )
 0/tex_offset = Vector2( 0, 0 )
@@ -222,7 +461,13 @@ points = PoolVector2Array( -512, 0, 128, 0, 128, 256, -512, 256 )
 5/tile_mode = 0
 5/occluder_offset = Vector2( 0, 0 )
 5/navigation_offset = Vector2( 0, 0 )
-5/shapes = [  ]
+5/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 7 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 5/z_index = 0
 6/name = "Tileset_grassland.png 6"
 6/texture = ExtResource( 3 )
@@ -232,7 +477,13 @@ points = PoolVector2Array( -512, 0, 128, 0, 128, 256, -512, 256 )
 6/tile_mode = 0
 6/occluder_offset = Vector2( 0, 0 )
 6/navigation_offset = Vector2( 0, 0 )
-6/shapes = [  ]
+6/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 8 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 6/z_index = 0
 7/name = "Tileset_grassland.png 7"
 7/texture = ExtResource( 3 )
@@ -242,7 +493,13 @@ points = PoolVector2Array( -512, 0, 128, 0, 128, 256, -512, 256 )
 7/tile_mode = 0
 7/occluder_offset = Vector2( 0, 0 )
 7/navigation_offset = Vector2( 0, 0 )
-7/shapes = [  ]
+7/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 9 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 7/z_index = 0
 8/name = "Tileset_grassland.png 8"
 8/texture = ExtResource( 3 )
@@ -252,7 +509,13 @@ points = PoolVector2Array( -512, 0, 128, 0, 128, 256, -512, 256 )
 8/tile_mode = 0
 8/occluder_offset = Vector2( 0, 0 )
 8/navigation_offset = Vector2( 0, 0 )
-8/shapes = [  ]
+8/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 10 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 8/z_index = 0
 9/name = "Tileset_grassland.png 9"
 9/texture = ExtResource( 3 )
@@ -262,7 +525,13 @@ points = PoolVector2Array( -512, 0, 128, 0, 128, 256, -512, 256 )
 9/tile_mode = 0
 9/occluder_offset = Vector2( 0, 0 )
 9/navigation_offset = Vector2( 0, 0 )
-9/shapes = [  ]
+9/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 11 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 9/z_index = 0
 10/name = "Tileset_grassland.png 10"
 10/texture = ExtResource( 3 )
@@ -272,7 +541,13 @@ points = PoolVector2Array( -512, 0, 128, 0, 128, 256, -512, 256 )
 10/tile_mode = 0
 10/occluder_offset = Vector2( 0, 0 )
 10/navigation_offset = Vector2( 0, 0 )
-10/shapes = [  ]
+10/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 2 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 10/z_index = 0
 11/name = "Tileset_grassland.png 11"
 11/texture = ExtResource( 3 )
@@ -282,7 +557,13 @@ points = PoolVector2Array( -512, 0, 128, 0, 128, 256, -512, 256 )
 11/tile_mode = 0
 11/occluder_offset = Vector2( 0, 0 )
 11/navigation_offset = Vector2( 0, 0 )
-11/shapes = [  ]
+11/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 3 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 11/z_index = 0
 12/name = "Tileset_grassland.png 12"
 12/texture = ExtResource( 3 )
@@ -292,7 +573,13 @@ points = PoolVector2Array( -512, 0, 128, 0, 128, 256, -512, 256 )
 12/tile_mode = 0
 12/occluder_offset = Vector2( 0, 0 )
 12/navigation_offset = Vector2( 0, 0 )
-12/shapes = [  ]
+12/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 4 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 12/z_index = 0
 13/name = "Tileset_grassland.png 13"
 13/texture = ExtResource( 3 )
@@ -306,7 +593,7 @@ points = PoolVector2Array( -512, 0, 128, 0, 128, 256, -512, 256 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 2 ),
+"shape": SubResource( 5 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 13/z_index = 0
@@ -318,10 +605,16 @@ points = PoolVector2Array( -512, 0, 128, 0, 128, 256, -512, 256 )
 14/tile_mode = 0
 14/occluder_offset = Vector2( 0, 0 )
 14/navigation_offset = Vector2( 0, 0 )
-14/shapes = [  ]
+14/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 6 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 14/z_index = 0
 
-[sub_resource type="Curve2D" id=4]
+[sub_resource type="Curve2D" id=13]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 718.038, -69.45, 0, 0, 0, 0, 716.138, 318.15, 0, 0, 0, 0, 66.0068, 320.78, 0, 0, 0, 0, 66.3378, 577.5, 0, 0, 0, 0, 970.738, 573.7, 0, 0, 0, 0, 963.446, 197.32, 0, 0, 0, 0, 1350.28, 190.331, 0, 0, 0, 0, 1351.79, 709.498, 0, 0, 0, 0, 970.605, 712.83, 0, 0, 0, 0, 968.923, 967.253, 0, 0, 0, 0, 1600.67, 964.857, 0, 0, 0, 0, 1600.67, 711.398, 0, 0, 0, 0, 1849.84, 712.83, 0, 0, 0, 0, 1848.4, 314.741, 0, 0, 0, 0, 1741.01, 313.31, 0, 0, 0, 0, 1741.19, -64.7 )
 }
@@ -331,7 +624,7 @@ light_mask = 0
 script = SubResource( 1 )
 
 [node name="TileMap" type="TileMap" parent="."]
-tile_set = SubResource( 3 )
+tile_set = SubResource( 12 )
 cell_size = Vector2( 128, 128 )
 collision_layer = 8
 collision_mask = 0
@@ -340,7 +633,7 @@ tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 13, 0,
 
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2( -12.8878, 0 )
-curve = SubResource( 4 )
+curve = SubResource( 13 )
 script = ExtResource( 4 )
 
 [node name="Timer" type="Timer" parent="Path2D"]
@@ -362,19 +655,11 @@ volume_db = -26.288
 stream = ExtResource( 8 )
 volume_db = -10.089
 
-[node name="MatheBombenTurm" parent="." instance=ExtResource( 6 )]
-position = Vector2( 713.365, 448.069 )
-upgrade1 = true
-upgrade2 = true
+[node name="Buy" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+volume_db = -23.223
 
-[node name="Informatiker" parent="." instance=ExtResource( 1 )]
-position = Vector2( 663.379, 837.669 )
-upgrade1 = true
-upgrade2 = true
-
-[node name="Universität" parent="." instance=ExtResource( 7 )]
-position = Vector2( 1789.54, 942.052 )
-
-[node name="Mathematiker" parent="." instance=ExtResource( 10 )]
-position = Vector2( 492.102, 448.804 )
+[node name="Buy_failed" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = -23.223
 [connection signal="timeout" from="Path2D/Timer" to="Path2D" method="_on_Timer_timeout"]
