@@ -41,7 +41,7 @@ func setUpgrade2(newstatus):
 
 
 func _on_Universitt_Area_input_event(viewport, event, shape_idx):
-	if(event.is_action_pressed(\"left_click\")):
+	if(event.is_action_pressed(\"left_click\") and placed == true):
 		 $UpgradeWindow/UniversitaetUpgrade.visible =  true
 "
 

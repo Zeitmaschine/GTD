@@ -113,7 +113,7 @@ func _on_Informatiker_Area_mouse_exited():
 
 
 func _on_Informatiker_Area_input_event(viewport, event, shape_idx):
-	if(event.is_action_pressed(\"left_click\")):
+	if(event.is_action_pressed(\"left_click\") and placed == true):
 		 $UpgradeWindow/InformatikerUpgrade.visible =  true
 "
 

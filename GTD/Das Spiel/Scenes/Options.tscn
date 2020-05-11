@@ -78,6 +78,7 @@ anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -440.0
+margin_top = 52.0
 margin_right = 440.0
 custom_constants/separation = 50
 alignment = 1
@@ -86,9 +87,9 @@ __meta__ = {
 }
 
 [node name="Sound" type="Button" parent="VBoxContainer"]
-margin_top = 254.0
+margin_top = 228.0
 margin_right = 880.0
-margin_bottom = 411.0
+margin_bottom = 385.0
 theme = ExtResource( 2 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 3 )
@@ -96,9 +97,9 @@ custom_styles/normal = ExtResource( 5 )
 text = "Soundeinstellungen"
 
 [node name="Credits" type="Button" parent="VBoxContainer"]
-margin_top = 461.0
+margin_top = 435.0
 margin_right = 880.0
-margin_bottom = 618.0
+margin_bottom = 592.0
 theme = ExtResource( 2 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 3 )
@@ -107,9 +108,9 @@ text = "Credits"
 script = SubResource( 1 )
 
 [node name="Zurueck" type="Button" parent="VBoxContainer"]
-margin_top = 668.0
+margin_top = 642.0
 margin_right = 880.0
-margin_bottom = 825.0
+margin_bottom = 799.0
 theme = ExtResource( 2 )
 custom_styles/hover = SubResource( 2 )
 custom_styles/pressed = SubResource( 3 )

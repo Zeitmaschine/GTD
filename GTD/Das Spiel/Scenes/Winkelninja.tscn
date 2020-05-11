@@ -127,7 +127,7 @@ func _on_WinkelNinja_Area_mouse_exited():
 	$Range_Sprite.visible = false
 
 func _on_WinkelNinja_Area_input_event(viewport, event, shape_idx):
-	if(event.is_action_pressed(\"left_click\")):
+	if(event.is_action_pressed(\"left_click\") and placed == true):
 		 $UpgradeWindow/WinkelninjaUpgrade.visible =  true
 "
 

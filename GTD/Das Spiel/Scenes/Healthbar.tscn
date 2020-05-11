@@ -10,8 +10,10 @@ margin_top = 0.0
 
 [node name="Backround" parent="MarginContainer" index="0"]
 margin_right = 237.0
-margin_bottom = 112.0
+margin_bottom = 92.0
 
-[node name="Health" parent="MarginContainer/Backround" index="0"]
-margin_top = -50.0
-margin_right = 198.0
+[node name="Heart" parent="MarginContainer/Backround" index="1"]
+margin_left = 11.6159
+margin_top = 5.72769
+margin_right = 126.616
+margin_bottom = 71.7276

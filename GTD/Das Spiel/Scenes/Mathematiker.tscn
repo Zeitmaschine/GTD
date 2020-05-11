@@ -174,8 +174,8 @@ func set_range():
 	$Range_Sprite.scale = Vector2(0.9 + (0.1 * attackrangelvl), 0.9 + (0.1 * attackrangelvl ))
 	
 func _on_Mathematiker_Area_input_event(viewport, event, shape_idx):
-	if(event.is_action_pressed(\"left_click\")):
-		 $UpgradeWindow/MathematikerUpgrade.visible =  true
+	if(event.is_action_pressed(\"left_click\") and placed == true):
+		$UpgradeWindow/MathematikerUpgrade.visible =  true
 
 "
 

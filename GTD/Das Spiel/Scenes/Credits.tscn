@@ -4,7 +4,7 @@
 [ext_resource path="res://Interface/Theme/ButtonPressed.tres" type="StyleBox" id=2]
 [ext_resource path="res://Interface/Theme/ButtonClick.tres" type="StyleBox" id=3]
 [ext_resource path="res://Interface/Theme/ButtonNormal.tres" type="StyleBox" id=4]
-[ext_resource path="res://Interface/Theme/Title.tres" type="Theme" id=5]
+[ext_resource path="res://Interface/Theme/VersionFont.tres" type="Theme" id=6]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Button
@@ -35,30 +35,29 @@ __meta__ = {
 }
 
 [node name="Credits" type="Label" parent="."]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -95.5
-margin_right = 95.5
-margin_bottom = 107.0
-theme = ExtResource( 5 )
+anchor_right = 1.0
+margin_bottom = 100.0
+theme = ExtResource( 6 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
 text = "Credits"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Entwickler" type="Label" parent="."]
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -210.5
-margin_right = 210.5
-margin_bottom = -300.0
-theme = ExtResource( 5 )
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -400.0
+margin_bottom = 111.0
+theme = ExtResource( 6 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
+custom_constants/line_spacing = 40
 custom_constants/shadow_offset_y = 5
 text = "Entwickler:
 Dominik Wontke
@@ -74,7 +73,7 @@ anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -440.0
-margin_top = 415.0
+margin_top = 464.0
 margin_right = 440.0
 alignment = 1
 __meta__ = {
@@ -82,9 +81,9 @@ __meta__ = {
 }
 
 [node name="Zurueck" type="Button" parent="Button"]
-margin_top = 254.0
+margin_top = 229.0
 margin_right = 880.0
-margin_bottom = 411.0
+margin_bottom = 386.0
 theme = ExtResource( 1 )
 custom_styles/hover = ExtResource( 3 )
 custom_styles/pressed = ExtResource( 2 )
