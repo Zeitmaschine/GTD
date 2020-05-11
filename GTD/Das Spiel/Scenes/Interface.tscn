@@ -42,6 +42,9 @@ script/source = "extends Control
 
 var gameover = false
 
+func _ready():
+	set_as_toplevel(true)
+
 func _process(delta):
 	gameover = get_parent().get_parent().get_node(\"GameOverLayer/GameOver\").getGameOver()
 
@@ -103,6 +106,9 @@ script/source = "extends Control
 
 var health = 250
 var gameover = false
+
+func _ready():
+	set_as_toplevel(true)
 
 func getHealth():
 	return health
@@ -209,7 +215,7 @@ margin_top = 0.0
 margin_right = 4.0
 
 [node name="PauseLayer" type="CanvasLayer" parent="."]
-layer = 2
+layer = 3
 
 [node name="Pause" type="Control" parent="PauseLayer"]
 pause_mode = 2
@@ -319,7 +325,7 @@ __meta__ = {
 }
 
 [node name="GameOverLayer" type="CanvasLayer" parent="."]
-layer = 3
+layer = 4
 
 [node name="GameOver" type="Control" parent="GameOverLayer"]
 pause_mode = 2

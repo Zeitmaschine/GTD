@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Universität/Universität.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/UpgradeInterfaceUni.tscn" type="PackedScene" id=2]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends KinematicBody2D
@@ -36,6 +37,11 @@ func setUpgrade1(newstatus):
 func setUpgrade2(newstatus):
 	upgrade1 = newstatus
 	get_parent().upgrade2_unlock = newstatus
+
+
+func _on_Universitt_Area_input_event(viewport, event, shape_idx):
+	if(event.is_action_pressed(\"left_click\")):
+		 $UpgradeWindow/UniversitaetUpgrade.visible =  true
 "
 
 [sub_resource type="CircleShape2D" id=2]
@@ -61,5 +67,11 @@ collision_mask = 2
 
 [node name="CollisionUniversität" type="CollisionShape2D" parent="Universität_Area"]
 shape = SubResource( 3 )
+
+[node name="UpgradeWindow" type="CanvasLayer" parent="."]
+
+[node name="UniversitaetUpgrade" parent="UpgradeWindow" instance=ExtResource( 2 )]
+visible = false
+[connection signal="input_event" from="Universität_Area" to="." method="_on_Universitt_Area_input_event"]
 [connection signal="mouse_entered" from="Universität_Area" to="." method="_on_Universitt_Area_mouse_entered"]
 [connection signal="mouse_exited" from="Universität_Area" to="." method="_on_Universitt_Area_mouse_exited"]

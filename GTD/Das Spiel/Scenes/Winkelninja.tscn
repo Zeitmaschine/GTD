@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/Winkelninja/Winkelninja.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Mathematiker/Range.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/UpgradeInterfaceWinkelninja.tscn" type="PackedScene" id=3]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends KinematicBody2D 
@@ -123,6 +124,10 @@ func _on_WinkelNinja_Area_mouse_entered():
 func _on_WinkelNinja_Area_mouse_exited():
 	scale = Vector2(1.0,1.0)
 	$Range_Sprite.visible = false
+
+func _on_WinkelNinja_Area_input_event(viewport, event, shape_idx):
+	if(event.is_action_pressed(\"left_click\")):
+		 $UpgradeWindow/WinkelninjaUpgrade.visible =  true
 "
 
 [sub_resource type="CircleShape2D" id=2]
@@ -168,9 +173,17 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WinkelNinja_Area"]
 shape = SubResource( 4 )
+
+[node name="UpgradeWindow" type="CanvasLayer" parent="."]
+
+[node name="WinkelninjaUpgrade" parent="UpgradeWindow" instance=ExtResource( 3 )]
+visible = false
+margin_left = -0.513336
+margin_right = -0.513306
 [connection signal="mouse_entered" from="." to="." method="_on_Winkelninja_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_Winkelninja_mouse_exited"]
 [connection signal="body_entered" from="Range" to="." method="_on_Range_body_entered"]
 [connection signal="body_exited" from="Range" to="." method="_on_Range_body_exited"]
+[connection signal="input_event" from="WinkelNinja_Area" to="." method="_on_WinkelNinja_Area_input_event"]
 [connection signal="mouse_entered" from="WinkelNinja_Area" to="." method="_on_WinkelNinja_Area_mouse_entered"]
 [connection signal="mouse_exited" from="WinkelNinja_Area" to="." method="_on_WinkelNinja_Area_mouse_exited"]

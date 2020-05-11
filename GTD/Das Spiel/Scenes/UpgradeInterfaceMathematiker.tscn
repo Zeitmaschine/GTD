@@ -289,7 +289,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = -5.0
 theme = ExtResource( 5 )
-text = "350€"
+text = "350$"
 align = 1
 valign = 2
 
@@ -348,7 +348,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = -5.0
 theme = ExtResource( 5 )
-text = "500€"
+text = "500$"
 align = 1
 valign = 2
 
