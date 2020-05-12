@@ -373,34 +373,34 @@ func wave5():
 "
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
-points = PoolVector2Array( 128, 128, 0, 128, 0, 0, 128, 0 )
+points = PoolVector2Array( 128, 112.289, 0, 113.254, 0, 14.392, 128, 14.392 )
 
 [sub_resource type="ConvexPolygonShape2D" id=3]
-points = PoolVector2Array( 128, 128, 0, 128, 0, 0, 128, 0 )
+points = PoolVector2Array( 112.161, 128, 18.1221, 128, 18.1221, 0.127319, 111.679, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=4]
-points = PoolVector2Array( 128, 128, 0, 128, 0, 0, 128, 0 )
+points = PoolVector2Array( 128, 111.325, 0, 113.254, 0, 17.7678, 128, 16.321 )
 
 [sub_resource type="ConvexPolygonShape2D" id=5]
-points = PoolVector2Array( 128, 128, 0, 128, 0, 0, 128, 0 )
+points = PoolVector2Array( 112.923, 128, 16.4724, 128, 14.0612, 0, 111.958, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=6]
-points = PoolVector2Array( 128, 128, 0, 128, 0, 0, 128, 0 )
+points = PoolVector2Array( 128, 111.807, 0, 110.843, 0, 16.8032, 128, 14.8742 )
 
 [sub_resource type="ConvexPolygonShape2D" id=7]
-points = PoolVector2Array( 128, 128, 0, 128, 0, 0, 128, 0 )
+points = PoolVector2Array( 17.2842, 128, 14.8729, 88.8619, 17.2842, 45.9413, 26.9292, 34.8495, 45.7371, 21.8287, 126.273, 16.0417, 127.72, 107.188, 107.465, 111.528, 107.948, 126.96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=8]
-points = PoolVector2Array( 128, 128, 0, 128, 0, 0, 128, 0 )
+points = PoolVector2Array( 0.68457, 16.0417, 79.2919, 18.9352, 90.866, 22.311, 105.333, 48.8349, 108.227, 128, 18.0458, 127.924, 17.0812, 112.975, 9.36511, 107.67, 0.202393, 107.67 )
 
 [sub_resource type="ConvexPolygonShape2D" id=9]
-points = PoolVector2Array( 128, 128, 0, 128, 0, 0, 128, 0 )
+points = PoolVector2Array( 108.43, 0.888855, 112.288, 41.8804, 106.501, 85.2831, 87.6931, 100.233, 43.8081, 108.914, 0, 109.878, 0, 19.6968, 11.4971, 19.2145, 19.6954, 9.08716, 18.731, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=10]
-points = PoolVector2Array( 128, 128, 0, 128, 0, 0, 128, 0 )
+points = PoolVector2Array( 106.78, 0.406616, 108.709, 11.9807, 113.05, 16.321, 126.07, 16.321, 126.553, 109.878, 42.6406, 106.502, 30.1021, 91.5524, 23.8328, 73.7091, 19.4924, 38.0223, 19.4924, 0.888855 )
 
 [sub_resource type="ConvexPolygonShape2D" id=11]
-points = PoolVector2Array( 128, 128, 0, 128, 0, 0, 128, 0 )
+points = PoolVector2Array( 112.364, 128, 16.8783, 126.478, 16.8783, 0, 110.918, 0 )
 
 [sub_resource type="TileSet" id=12]
 0/name = "Tileset_grassland.png 0"
