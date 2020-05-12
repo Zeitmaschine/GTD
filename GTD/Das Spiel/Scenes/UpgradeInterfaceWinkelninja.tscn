@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Assets/Icons/Exit_Icon_pressed.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Icons/Exit_Icon.png" type="Texture" id=2]
@@ -14,12 +14,115 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends Control
 
+var money = 0
+var upgrade1 = false
+var upgrade2 = false
+
 func _ready():
 	set_as_toplevel(true)
 
 func _on_TextureButton_pressed():
 	visible = false
 
+func _process(delta):
+	check_status()
+
+func _on_SpecialUpgradeButton_pressed():
+	get_parent().get_parent().get_node(\".\").upgrade1 = true
+	get_parent().get_parent().get_parent().get_node(\".\").money -= 500
+	get_node(\"UpgradeBackround/SpecialUpgradeBackround/SpecialUpgradeButton/Cost\").text = \"Gekauft\"
+
+func _on_SpecialUpgradeButton2_pressed():
+	get_parent().get_parent().get_node(\".\").upgrade2 = true
+	get_parent().get_parent().get_parent().get_node(\".\").money -= 750
+	get_node(\"UpgradeBackround/SpecialUpgradeBackround2/SpecialUpgradeButton2/Cost2\").text = \"Gekauft\"
+
+
+func _on_DamageButton_pressed():
+	get_parent().get_parent().get_node(\".\").attackpowerlvl +=  1
+	get_parent().get_parent().get_parent().get_node(\".\").money -= 300
+	if(get_parent().get_parent().get_node(\".\").attackpowerlvl ==  5):
+		get_node(\"UpgradeBackround/StatUpgradeText/DamageText\").text = \"MAX\"
+
+func _on_FirerateButton_pressed():
+	get_parent().get_parent().get_node(\".\").fireratelvl +=  1
+	get_parent().get_parent().get_parent().get_node(\".\").money -= 300
+	if(get_parent().get_parent().get_node(\".\").fireratelvl ==  5):
+		get_node(\"UpgradeBackround/StatUpgradeText/FirerateText\").text = \"MAX\"
+
+
+func _on_RangeButton_pressed():
+	get_parent().get_parent().get_node(\".\").attackrangelvl +=  1
+	get_parent().get_parent().get_node(\".\").set_range()
+	get_parent().get_parent().get_parent().get_node(\".\").money -= 300
+	if(get_parent().get_parent().get_node(\".\").attackrangelvl ==  5):
+		get_node(\"UpgradeBackround/StatUpgradeText/RangeText\").text = \"MAX\"
+
+func check_status():
+	if(get_parent().get_parent().get_node(\".\").attackpowerlvl ==  5 || get_parent().get_parent().get_parent().get_node(\".\").money < 300):
+		get_node(\"UpgradeBackround/StatUpgradeContainer/DamageButton\").set_disabled(true)
+	if(get_parent().get_parent().get_parent().get_node(\".\").money >= 300 && get_parent().get_parent().get_node(\".\").attackpowerlvl <  5):
+		get_node(\"UpgradeBackround/StatUpgradeContainer/DamageButton\").set_disabled(false)
+	if(get_parent().get_parent().get_node(\".\").fireratelvl ==  5 || get_parent().get_parent().get_parent().get_node(\".\").money < 300):
+		get_node(\"UpgradeBackround/StatUpgradeContainer/FirerateButton\").set_disabled(true)
+	if(get_parent().get_parent().get_parent().get_node(\".\").money >= 300 && get_parent().get_parent().get_node(\".\").fireratelvl <  5):
+		get_node(\"UpgradeBackround/StatUpgradeContainer/FirerateButton\").set_disabled(false)
+	if(get_parent().get_parent().get_node(\".\").attackrangelvl ==  5 || get_parent().get_parent().get_parent().get_node(\".\").money < 300):
+		get_node(\"UpgradeBackround/StatUpgradeContainer/RangeButton\").set_disabled(true)
+	if(get_parent().get_parent().get_parent().get_node(\".\").money >= 300 && get_parent().get_parent().get_node(\".\").attackrangelvl <  5):
+		get_node(\"UpgradeBackround/StatUpgradeContainer/RangeButton\").set_disabled(false)
+"
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends VBoxContainer
+
+export var currentDamage = 1
+export var currentFirerate = 1
+export var currentRange = 1
+
+
+func _process(delta):
+	currentDamage = get_parent().get_parent().get_parent().get_parent().attackpowerlvl
+	currentFirerate = get_parent().get_parent().get_parent().get_parent().fireratelvl
+	currentRange = get_parent().get_parent().get_parent().get_parent().attackrangelvl
+	$CurrentDamage.text = str(currentDamage)
+	$CurrentFirerate.text = str(currentFirerate)
+	$CurrentRange.text = str(currentRange)
+"
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends Button
+
+var money = 0
+var upgrade1
+
+func _process(delta):
+	money = get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money
+	check_status()
+
+func check_status():
+	if (get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < 500 || get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade1 == true):
+		set_disabled(true)
+	if(get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= 500 && get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade1 == false):
+		set_disabled(false)
+"
+
+[sub_resource type="GDScript" id=4]
+script/source = "extends Button
+
+
+var money = 0
+var upgrade2
+
+func _process(delta):
+	money = get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money
+	check_status()
+
+func check_status():
+	if (get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < 750 || get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade2 == true):
+		set_disabled(true)
+	if(get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= 750 && get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade2 == false):
+		set_disabled(false)
 "
 
 [node name="WinkelninjaUpgrade" type="Control"]
@@ -42,11 +145,61 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Turmname" type="Label" parent="."]
+[node name="StatContainer" type="VBoxContainer" parent="UpgradeBackround"]
 margin_left = 20.0
-margin_top = 20.0
-margin_right = 900.0
-margin_bottom = 100.0
+margin_right = 284.0
+margin_bottom = 1040.0
+mouse_filter = 2
+custom_constants/separation = 265
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Damage" type="Label" parent="UpgradeBackround/StatContainer"]
+margin_right = 264.0
+margin_bottom = 149.0
+theme = ExtResource( 3 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 5
+text = "
+
+
+Schadenslevel:"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Firerate" type="Label" parent="UpgradeBackround/StatContainer"]
+margin_top = 414.0
+margin_right = 264.0
+margin_bottom = 449.0
+theme = ExtResource( 3 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 5
+text = "Feuerratenlevel:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Range" type="Label" parent="UpgradeBackround/StatContainer"]
+margin_top = 714.0
+margin_right = 264.0
+margin_bottom = 749.0
+theme = ExtResource( 3 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 5
+text = "Reichweitenlevel:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Turmname" type="Label" parent="UpgradeBackround"]
+margin_right = 880.0
+margin_bottom = 80.0
 theme = ExtResource( 3 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
@@ -58,107 +211,54 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="StatContainer" type="VBoxContainer" parent="."]
-margin_left = 40.0
-margin_top = 20.0
-margin_right = 212.0
-margin_bottom = 1060.0
+[node name="CurrentStatsContainer" type="VBoxContainer" parent="UpgradeBackround"]
+margin_left = 200.0
+margin_top = 113.0
+margin_right = 380.0
+margin_bottom = 748.0
 mouse_filter = 2
 custom_constants/separation = 265
+script = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Damage" type="Label" parent="StatContainer"]
-margin_right = 172.0
-margin_bottom = 149.0
-theme = ExtResource( 3 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 0
-custom_constants/shadow_offset_y = 5
-text = "
-
-
-Schaden:"
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Firerate" type="Label" parent="StatContainer"]
-margin_top = 414.0
-margin_right = 172.0
-margin_bottom = 449.0
-theme = ExtResource( 3 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 0
-custom_constants/shadow_offset_y = 5
-text = "Feuerrate:"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Range" type="Label" parent="StatContainer"]
-margin_top = 714.0
-margin_right = 172.0
-margin_bottom = 749.0
-theme = ExtResource( 3 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 0
-custom_constants/shadow_offset_y = 5
-text = "Reichweite:"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="CurrentStatsContainer" type="VBoxContainer" parent="."]
-margin_left = 220.0
-margin_top = 20.0
-margin_right = 400.0
-margin_bottom = 1034.0
-mouse_filter = 2
-custom_constants/separation = 265
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="CurrentDamage" type="Label" parent="CurrentStatsContainer"]
+[node name="CurrentDamage" type="Label" parent="UpgradeBackround/CurrentStatsContainer"]
 margin_right = 180.0
-margin_bottom = 149.0
+margin_bottom = 35.0
 theme = ExtResource( 3 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
-text = "
+text = "1"
+align = 1
 
-
-1"
-
-[node name="CurrentFirerate" type="Label" parent="CurrentStatsContainer"]
-margin_top = 414.0
+[node name="CurrentFirerate" type="Label" parent="UpgradeBackround/CurrentStatsContainer"]
+margin_top = 300.0
 margin_right = 180.0
-margin_bottom = 449.0
+margin_bottom = 335.0
 theme = ExtResource( 3 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
-text = "6"
+text = "1"
+align = 1
 
-[node name="CurrentRange" type="Label" parent="CurrentStatsContainer"]
-margin_top = 714.0
+[node name="CurrentRange" type="Label" parent="UpgradeBackround/CurrentStatsContainer"]
+margin_top = 600.0
 margin_right = 180.0
-margin_bottom = 749.0
+margin_bottom = 635.0
 theme = ExtResource( 3 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
-text = "8"
+text = " 1"
+align = 1
 
-[node name="StatUpgradeContainer" type="VBoxContainer" parent="."]
-margin_left = 40.0
-margin_top = 20.0
-margin_right = 150.0
-margin_bottom = 1060.0
+[node name="StatUpgradeContainer" type="VBoxContainer" parent="UpgradeBackround"]
+margin_left = 20.0
+margin_right = 130.0
+margin_bottom = 1040.0
 mouse_filter = 2
 custom_constants/separation = 200
 alignment = 1
@@ -166,32 +266,31 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DamageButton" type="Button" parent="StatUpgradeContainer"]
+[node name="DamageButton" type="Button" parent="UpgradeBackround/StatUpgradeContainer"]
 margin_top = 173.0
 margin_right = 110.0
 margin_bottom = 271.0
 theme = ExtResource( 5 )
 text = "+"
 
-[node name="FirerateButton" type="Button" parent="StatUpgradeContainer"]
+[node name="FirerateButton" type="Button" parent="UpgradeBackround/StatUpgradeContainer"]
 margin_top = 471.0
 margin_right = 110.0
 margin_bottom = 569.0
 theme = ExtResource( 5 )
 text = "+"
 
-[node name="RangeButton" type="Button" parent="StatUpgradeContainer"]
+[node name="RangeButton" type="Button" parent="UpgradeBackround/StatUpgradeContainer"]
 margin_top = 769.0
 margin_right = 110.0
 margin_bottom = 867.0
 theme = ExtResource( 5 )
 text = "+"
 
-[node name="StatUpgradeText" type="VBoxContainer" parent="."]
-margin_left = 170.0
-margin_top = 20.0
-margin_right = 493.0
-margin_bottom = 1060.0
+[node name="StatUpgradeText" type="VBoxContainer" parent="UpgradeBackround"]
+margin_left = 150.0
+margin_right = 553.0
+margin_bottom = 1040.0
 mouse_filter = 2
 custom_constants/separation = 265
 alignment = 1
@@ -199,7 +298,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DamageText" type="Label" parent="StatUpgradeText"]
+[node name="DamageText" type="Label" parent="UpgradeBackround/StatUpgradeText"]
 margin_top = 202.0
 margin_right = 403.0
 margin_bottom = 237.0
@@ -209,7 +308,7 @@ custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
 text = "Schaden erhöhen: 300$"
 
-[node name="FirerateText" type="Label" parent="StatUpgradeText"]
+[node name="FirerateText" type="Label" parent="UpgradeBackround/StatUpgradeText"]
 margin_top = 502.0
 margin_right = 403.0
 margin_bottom = 537.0
@@ -222,7 +321,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RangeText" type="Label" parent="StatUpgradeText"]
+[node name="RangeText" type="Label" parent="UpgradeBackround/StatUpgradeText"]
 margin_top = 802.0
 margin_right = 403.0
 margin_bottom = 837.0
@@ -232,38 +331,39 @@ custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
 text = "Reichweite erhöhen: 300$ "
 
-[node name="SpecialUpgradeOutline" type="ColorRect" parent="."]
-margin_left = 595.0
-margin_top = 95.0
-margin_right = 855.0
-margin_bottom = 490.0
+[node name="SpecialUpgradeOutline" type="ColorRect" parent="UpgradeBackround"]
+margin_left = 575.0
+margin_top = 75.0
+margin_right = 835.0
+margin_bottom = 470.0
 mouse_filter = 2
 color = Color( 0.129412, 0.129412, 0.129412, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SpecialUpgradeBackround" type="ColorRect" parent="."]
-margin_left = 600.0
-margin_top = 100.0
-margin_right = 850.0
-margin_bottom = 485.0
+[node name="SpecialUpgradeBackround" type="ColorRect" parent="UpgradeBackround"]
+margin_left = 580.0
+margin_top = 80.0
+margin_right = 830.0
+margin_bottom = 465.0
 color = Color( 0.156863, 0.156863, 0.156863, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SpecialUpgradeButton" type="Button" parent="SpecialUpgradeBackround"]
+[node name="SpecialUpgradeButton" type="Button" parent="UpgradeBackround/SpecialUpgradeBackround"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_styles/hover = ExtResource( 7 )
 custom_styles/pressed = ExtResource( 8 )
 custom_styles/normal = ExtResource( 6 )
+script = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="UpgradeDescription" type="Label" parent="SpecialUpgradeBackround/SpecialUpgradeButton"]
+[node name="UpgradeDescription" type="Label" parent="UpgradeBackround/SpecialUpgradeBackround/SpecialUpgradeButton"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 5.0
@@ -274,7 +374,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureUpgrade" type="TextureRect" parent="SpecialUpgradeBackround/SpecialUpgradeButton"]
+[node name="TextureUpgrade" type="TextureRect" parent="UpgradeBackround/SpecialUpgradeBackround/SpecialUpgradeButton"]
 margin_top = 40.0
 margin_right = 250.0
 margin_bottom = 340.0
@@ -282,7 +382,7 @@ texture = ExtResource( 9 )
 expand = true
 stretch_mode = 1
 
-[node name="Cost" type="Label" parent="SpecialUpgradeBackround/SpecialUpgradeButton"]
+[node name="Cost" type="Label" parent="UpgradeBackround/SpecialUpgradeBackround/SpecialUpgradeButton"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = -5.0
@@ -291,36 +391,38 @@ text = "500$"
 align = 1
 valign = 2
 
-[node name="SpecialUpgradeOutline2" type="ColorRect" parent="SpecialUpgradeBackround/SpecialUpgradeButton"]
-margin_left = -5.0
-margin_top = 485.0
-margin_right = 255.0
-margin_bottom = 895.0
+[node name="SpecialUpgradeOutline2" type="ColorRect" parent="UpgradeBackround"]
+margin_left = 575.0
+margin_top = 565.0
+margin_right = 835.0
+margin_bottom = 975.0
 color = Color( 0.129412, 0.129412, 0.129412, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SpecialUpgradeBackroundLeft2" type="ColorRect" parent="SpecialUpgradeBackround/SpecialUpgradeButton"]
-margin_top = 490.0
-margin_right = 250.0
-margin_bottom = 890.0
+[node name="SpecialUpgradeBackround2" type="ColorRect" parent="UpgradeBackround"]
+margin_left = 580.0
+margin_top = 570.0
+margin_right = 830.0
+margin_bottom = 970.0
 color = Color( 0.156863, 0.156863, 0.156863, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SpecialUpgradeButtonsLeft2" type="Button" parent="SpecialUpgradeBackround/SpecialUpgradeButton/SpecialUpgradeBackroundLeft2"]
+[node name="SpecialUpgradeButton2" type="Button" parent="UpgradeBackround/SpecialUpgradeBackround2"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_styles/hover = ExtResource( 7 )
 custom_styles/pressed = ExtResource( 8 )
 custom_styles/normal = ExtResource( 6 )
+script = SubResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="UpgradeDescription2" type="Label" parent="SpecialUpgradeBackround/SpecialUpgradeButton/SpecialUpgradeBackroundLeft2/SpecialUpgradeButtonsLeft2"]
+[node name="UpgradeDescription2" type="Label" parent="UpgradeBackround/SpecialUpgradeBackround2/SpecialUpgradeButton2"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 5.0
@@ -331,7 +433,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureUpgrade2" type="TextureRect" parent="SpecialUpgradeBackround/SpecialUpgradeButton/SpecialUpgradeBackroundLeft2/SpecialUpgradeButtonsLeft2"]
+[node name="TextureUpgrade2" type="TextureRect" parent="UpgradeBackround/SpecialUpgradeBackround2/SpecialUpgradeButton2"]
 margin_top = 40.0
 margin_right = 250.0
 margin_bottom = 360.0
@@ -341,24 +443,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Cost2" type="Label" parent="SpecialUpgradeBackround/SpecialUpgradeButton/SpecialUpgradeBackroundLeft2/SpecialUpgradeButtonsLeft2"]
+[node name="Cost2" type="Label" parent="UpgradeBackround/SpecialUpgradeBackround2/SpecialUpgradeButton2"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = -5.0
 theme = ExtResource( 4 )
-text = "650$"
+text = "750$"
 align = 1
 valign = 2
 
-[node name="TextureButton" type="TextureButton" parent="."]
-margin_left = 40.0
-margin_top = 40.0
-margin_right = 80.0
-margin_bottom = 80.0
+[node name="TextureButton" type="TextureButton" parent="UpgradeBackround"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 60.0
+margin_bottom = 60.0
 texture_normal = ExtResource( 2 )
 texture_pressed = ExtResource( 1 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="UpgradeBackround/StatUpgradeContainer/DamageButton" to="." method="_on_DamageButton_pressed"]
+[connection signal="pressed" from="UpgradeBackround/StatUpgradeContainer/FirerateButton" to="." method="_on_FirerateButton_pressed"]
+[connection signal="pressed" from="UpgradeBackround/StatUpgradeContainer/RangeButton" to="." method="_on_RangeButton_pressed"]
+[connection signal="pressed" from="UpgradeBackround/SpecialUpgradeBackround/SpecialUpgradeButton" to="." method="_on_SpecialUpgradeButton_pressed"]
+[connection signal="pressed" from="UpgradeBackround/SpecialUpgradeBackround2/SpecialUpgradeButton2" to="." method="_on_SpecialUpgradeButton2_pressed"]
+[connection signal="pressed" from="UpgradeBackround/TextureButton" to="." method="_on_TextureButton_pressed"]

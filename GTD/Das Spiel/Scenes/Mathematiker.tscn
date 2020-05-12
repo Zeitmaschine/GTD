@@ -168,7 +168,13 @@ func aim_and_shoot_upgrade_1_2():
 	yield(get_tree().create_timer(firerate - (fireratelvl * 0.15)), \"timeout\")
 	can_fire = true
 	
-	
+
+func setUpgrade1(upgrade11):
+	upgrade1 = upgrade11
+
+func setUpgrade2(upgrade22):
+	upgrade1 = upgrade22
+
 func set_range():
 	$Range/CollisionRange.scale = Vector2(0.9 + (0.1 * attackrangelvl) , 0.9 + (0.1 * attackrangelvl ))
 	$Range_Sprite.scale = Vector2(0.9 + (0.1 * attackrangelvl), 0.9 + (0.1 * attackrangelvl ))
