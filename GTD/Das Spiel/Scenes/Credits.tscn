@@ -68,6 +68,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ZurueckOutline" type="ColorRect" parent="."]
+margin_left = 515.0
+margin_top = 689.0
+margin_right = 1405.0
+margin_bottom = 856.0
+color = Color( 0.156863, 0.156863, 0.156863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Button" type="VBoxContainer" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5

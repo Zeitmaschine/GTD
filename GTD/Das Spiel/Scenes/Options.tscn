@@ -55,10 +55,40 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Backround" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.196078, 0.196078, 0.196078, 1 )
+
+[node name="SoundOutline" type="ColorRect" parent="."]
+margin_left = 515.0
+margin_top = 275.0
+margin_right = 1405.0
+margin_bottom = 442.0
+color = Color( 0.156863, 0.156863, 0.156863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CreditsOutline" type="ColorRect" parent="."]
+margin_left = 515.0
+margin_top = 482.0
+margin_right = 1405.0
+margin_bottom = 649.0
+color = Color( 0.156863, 0.156863, 0.156863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ZurueckOutline" type="ColorRect" parent="."]
+margin_left = 515.0
+margin_top = 689.0
+margin_right = 1405.0
+margin_bottom = 856.0
+color = Color( 0.156863, 0.156863, 0.156863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="Label" parent="."]
 anchor_right = 1.0

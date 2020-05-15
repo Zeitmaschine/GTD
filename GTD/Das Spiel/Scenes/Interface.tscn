@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Scenes/Moneybar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Healthbar.tscn" type="PackedScene" id=2]
@@ -16,6 +16,19 @@
 [ext_resource path="res://Assets/Icons/Play_Icon.png" type="Texture" id=14]
 [ext_resource path="res://Assets/Icons/Play_Icon_pressed.png" type="Texture" id=15]
 [ext_resource path="res://Assets/Icons/Play_Icon_disabled.png" type="Texture" id=16]
+[ext_resource path="res://Interface/Theme/VersionFont.tres" type="Theme" id=17]
+[ext_resource path="res://Interface/counter/label_bg.png" type="Texture" id=18]
+[ext_resource path="res://Interface/Theme/UpgradeText.tres" type="Theme" id=19]
+[ext_resource path="res://Assets/Icons/Exit_Icon.png" type="Texture" id=20]
+[ext_resource path="res://Assets/Icons/Exit_Icon_pressed.png" type="Texture" id=21]
+
+[sub_resource type="GDScript" id=5]
+script/source = "extends Control
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+"
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Label
@@ -35,6 +48,23 @@ func getWave():
 	
 func setWave(newWave):
 	wave = newWave
+"
+
+[sub_resource type="GDScript" id=6]
+script/source = "extends Control
+
+
+func _ready():
+	pass 
+
+
+func _on_ExitButton_pressed():
+	visible = false
+
+
+func _input(event):
+	if event.is_action_pressed(\"Shop\"):
+		visible = not visible
 "
 
 [sub_resource type="GDScript" id=2]
@@ -144,6 +174,7 @@ margin_top = 3.73053
 margin_right = 0.00012207
 margin_bottom = 3.73047
 mouse_filter = 2
+script = SubResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -218,29 +249,127 @@ margin_left = 4.0
 margin_top = 0.0
 margin_right = 4.0
 
+[node name="ShopLayer" type="CanvasLayer" parent="."]
+
+[node name="ShopMenu" type="Control" parent="ShopLayer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1.21094
+margin_right = -1.21094
+mouse_filter = 2
+script = SubResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShopBackround" type="ColorRect" parent="ShopLayer/ShopMenu"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -500.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+color = Color( 0.196078, 0.196078, 0.196078, 1 )
+
+[node name="ExitButton" type="TextureButton" parent="ShopLayer/ShopMenu/ShopBackround"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 50.0
+margin_bottom = 50.0
+texture_normal = ExtResource( 20 )
+texture_pressed = ExtResource( 21 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DescriptionBackround" type="TextureRect" parent="ShopLayer/ShopMenu/ShopBackround"]
+margin_left = 50.0
+margin_top = 20.0
+margin_right = 440.0
+margin_bottom = 122.0
+texture = ExtResource( 18 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TowerName" type="Label" parent="ShopLayer/ShopMenu/ShopBackround"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 40.0
+margin_top = 20.0
+margin_right = -40.0
+margin_bottom = -932.0
+theme = ExtResource( 19 )
+text = "Mathematiker
+"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="PauseLayer" type="CanvasLayer" parent="."]
 layer = 3
 
 [node name="Pause" type="Control" parent="PauseLayer"]
 pause_mode = 2
 visible = false
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -540.0
-margin_top = -310.0
-margin_right = 540.0
-margin_bottom = 310.5
+anchor_right = 1.0
+anchor_bottom = 1.0
 script = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Backround" type="ColorRect" parent="PauseLayer/Pause"]
-margin_right = 1080.0
-margin_bottom = 620.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 color = Color( 0, 0, 0, 0.352941 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="PauseLayer/Pause"]
+anchor_right = 1.0
+margin_bottom = 141.0
+theme = ExtResource( 17 )
+text = "Pause"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PauseFortsetzenOutline" type="ColorRect" parent="PauseLayer/Pause"]
+margin_left = 475.0
+margin_top = 480.0
+margin_right = 1445.0
+margin_bottom = 587.0
+color = Color( 0.156863, 0.156863, 0.156863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PauseNeustartOutline2" type="ColorRect" parent="PauseLayer/Pause"]
+margin_left = 475.0
+margin_top = 335.0
+margin_right = 1445.0
+margin_bottom = 442.0
+color = Color( 0.156863, 0.156863, 0.156863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PauseBeendenOutline3" type="ColorRect" parent="PauseLayer/Pause"]
+margin_left = 475.0
+margin_top = 626.0
+margin_right = 1445.0
+margin_bottom = 733.0
+color = Color( 0.156863, 0.156863, 0.156863, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -265,9 +394,9 @@ custom_constants/separation = 50
 alignment = 1
 
 [node name="PauseFortsetzen" type="Button" parent="PauseLayer/Pause/Space/ButtonContainer"]
-margin_top = 94.0
+margin_top = 119.0
 margin_right = 960.0
-margin_bottom = 191.0
+margin_bottom = 216.0
 theme = ExtResource( 3 )
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 4 )
@@ -275,9 +404,9 @@ custom_styles/normal = ExtResource( 5 )
 text = "Spiel fortsetzen"
 
 [node name="PauseNeustart" type="Button" parent="PauseLayer/Pause/Space/ButtonContainer"]
-margin_top = 241.0
+margin_top = 266.0
 margin_right = 960.0
-margin_bottom = 338.0
+margin_bottom = 363.0
 theme = ExtResource( 3 )
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 4 )
@@ -285,22 +414,14 @@ custom_styles/normal = ExtResource( 5 )
 text = "Spiel neustarten"
 
 [node name="PauseBeenden" type="Button" parent="PauseLayer/Pause/Space/ButtonContainer"]
-margin_top = 388.0
+margin_top = 413.0
 margin_right = 960.0
-margin_bottom = 485.0
+margin_bottom = 510.0
 theme = ExtResource( 3 )
 custom_styles/hover = ExtResource( 7 )
 custom_styles/pressed = ExtResource( 8 )
 custom_styles/normal = ExtResource( 5 )
 text = "Zurück zum Hauptmenu"
-
-[node name="MarginContainer" type="MarginContainer" parent="PauseLayer/Pause/Space/ButtonContainer"]
-margin_top = 535.0
-margin_right = 960.0
-margin_bottom = 535.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="PauseIcon" type="TextureButton" parent="."]
 margin_left = 20.0
@@ -336,10 +457,6 @@ pause_mode = 2
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 420.0
-margin_top = 230.0
-margin_right = -420.0
-margin_bottom = -230.0
 script = SubResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -353,27 +470,47 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="GameOverNeutstartOutline" type="ColorRect" parent="GameOverLayer/GameOver/BackroundGameOver"]
+margin_left = 395.0
+margin_top = 436.0
+margin_right = 1525.0
+margin_bottom = 542.0
+color = Color( 0.156863, 0.156863, 0.156863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameOverMenüOutline" type="ColorRect" parent="GameOverLayer/GameOver/BackroundGameOver"]
+margin_left = 395.0
+margin_top = 580.0
+margin_right = 1525.0
+margin_bottom = 688.0
+color = Color( 0.156863, 0.156863, 0.156863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="SpaceGameOver" type="MarginContainer" parent="GameOverLayer/GameOver/BackroundGameOver"]
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = 100.0
+margin_left = 400.0
 margin_top = -100.0
-margin_right = -100.0
-margin_bottom = 10.0
+margin_right = -400.0
+margin_bottom = 144.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ButtonContainerGameOver" type="VBoxContainer" parent="GameOverLayer/GameOver/BackroundGameOver/SpaceGameOver"]
-margin_right = 880.0
+margin_right = 1120.0
 margin_bottom = 244.0
 theme = ExtResource( 3 )
 custom_constants/separation = 50
 alignment = 1
 
 [node name="GameOverNeutstart" type="Button" parent="GameOverLayer/GameOver/BackroundGameOver/SpaceGameOver/ButtonContainerGameOver"]
-margin_right = 880.0
+margin_right = 1120.0
 margin_bottom = 97.0
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 4 )
@@ -383,7 +520,7 @@ text = "Spiel Neustarten"
 
 [node name="GameOverMenü" type="Button" parent="GameOverLayer/GameOver/BackroundGameOver/SpaceGameOver/ButtonContainerGameOver"]
 margin_top = 147.0
-margin_right = 880.0
+margin_right = 1120.0
 margin_bottom = 244.0
 custom_styles/hover = ExtResource( 7 )
 custom_styles/pressed = ExtResource( 8 )
@@ -404,6 +541,7 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="pressed" from="ShopLayer/ShopMenu/ShopBackround/ExitButton" to="ShopLayer/ShopMenu" method="_on_ExitButton_pressed"]
 [connection signal="pressed" from="PauseLayer/Pause/Space/ButtonContainer/PauseFortsetzen" to="PauseLayer/Pause" method="_on_PauseFortsetzen_pressed"]
 [connection signal="pressed" from="PauseLayer/Pause/Space/ButtonContainer/PauseNeustart" to="PauseLayer/Pause" method="_on_PauseNeustart_pressed"]
 [connection signal="pressed" from="PauseLayer/Pause/Space/ButtonContainer/PauseBeenden" to="PauseLayer/Pause" method="_on_PauseBeenden_pressed"]

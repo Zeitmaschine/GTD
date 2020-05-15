@@ -160,6 +160,36 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="DamageOutline" type="ColorRect" parent="UpgradeBackround"]
+margin_left = 15.0
+margin_top = 168.0
+margin_right = 135.0
+margin_bottom = 276.0
+color = Color( 0.156863, 0.156863, 0.156863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FirerateOutline" type="ColorRect" parent="UpgradeBackround"]
+margin_left = 15.0
+margin_top = 466.0
+margin_right = 135.0
+margin_bottom = 574.0
+color = Color( 0.156863, 0.156863, 0.156863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RangeOutline" type="ColorRect" parent="UpgradeBackround"]
+margin_left = 15.0
+margin_top = 764.0
+margin_right = 135.0
+margin_bottom = 872.0
+color = Color( 0.156863, 0.156863, 0.156863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="StatContainer" type="VBoxContainer" parent="UpgradeBackround"]
 margin_left = 20.0
 margin_right = 192.0

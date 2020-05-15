@@ -90,6 +90,36 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="SpielstartOutline" type="ColorRect" parent="."]
+margin_left = 515.0
+margin_top = 275.0
+margin_right = 1405.0
+margin_bottom = 442.0
+color = Color( 0.156863, 0.156863, 0.156863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OptionenOutline" type="ColorRect" parent="."]
+margin_left = 515.0
+margin_top = 482.0
+margin_right = 1405.0
+margin_bottom = 649.0
+color = Color( 0.156863, 0.156863, 0.156863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SpielBeendenOutline" type="ColorRect" parent="."]
+margin_left = 515.0
+margin_top = 689.0
+margin_right = 1405.0
+margin_bottom = 856.0
+color = Color( 0.156863, 0.156863, 0.156863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Knöpfe" type="VBoxContainer" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
@@ -106,13 +136,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="Knöpfe"]
+[node name="ColorRect" type="ColorRect" parent="Knöpfe"]
 margin_top = 228.0
 margin_right = 880.0
 margin_bottom = 228.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+color = Color( 0.196078, 0.196078, 0.196078, 1 )
 
 [node name="Spielstart" parent="Knöpfe" instance=ExtResource( 5 )]
 margin_top = 278.0
