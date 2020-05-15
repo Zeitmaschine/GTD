@@ -1,30 +1,31 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Interface/Theme/Buttons.tres" type="Theme" id=1]
 [ext_resource path="res://Interface/Theme/ButtonHoverNormal.tres" type="StyleBox" id=2]
 [ext_resource path="res://Interface/Theme/MainMenTheme.tres" type="Theme" id=3]
 [ext_resource path="res://Interface/Theme/VersionFont.tres" type="Theme" id=4]
-[ext_resource path="res://Interface/Buttons.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Interface/Font/default_font.tres" type="DynamicFont" id=5]
 [ext_resource path="res://Interface/Theme/ButtonNormal.tres" type="StyleBox" id=6]
 [ext_resource path="res://Interface/Theme/ButtonPressedNormal.tres" type="StyleBox" id=7]
+
+[sub_resource type="GDScript" id=5]
+script/source = "extends Button
+
+func _ready():
+	pass # Replace with function body.
+
+func _on_Button_pressed():
+		get_tree().change_scene(\"res://Scenes/Map.tscn\")
+"
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Button
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = \"text\"
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass 
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _on_Optionen_pressed():
+	get_tree().change_scene(\"res://Scenes/Options.tscn\")
 "
 
 [sub_resource type="StyleBoxFlat" id=2]
@@ -136,19 +137,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect" type="ColorRect" parent="Knöpfe"]
+[node name="Placeholder" type="ColorRect" parent="Knöpfe"]
 margin_top = 228.0
 margin_right = 880.0
 margin_bottom = 228.0
 color = Color( 0.196078, 0.196078, 0.196078, 1 )
 
-[node name="Spielstart" parent="Knöpfe" instance=ExtResource( 5 )]
+[node name="Spiel Starten" type="Button" parent="Knöpfe"]
 margin_top = 278.0
 margin_right = 880.0
 margin_bottom = 435.0
 custom_styles/hover = ExtResource( 2 )
 custom_styles/pressed = ExtResource( 7 )
 custom_styles/normal = ExtResource( 6 )
+custom_fonts/font = ExtResource( 5 )
+text = "Spiel Starten"
+script = SubResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Optionen" type="Button" parent="Knöpfe"]
 margin_top = 485.0
@@ -171,5 +178,6 @@ custom_styles/pressed = SubResource( 3 )
 custom_styles/normal = ExtResource( 6 )
 text = "Spiel beenden"
 script = SubResource( 4 )
-[connection signal="pressed" from="Knöpfe/Optionen" to="Knöpfe/Spielstart" method="_on_Optionen_pressed"]
+[connection signal="pressed" from="Knöpfe/Spiel Starten" to="Knöpfe/Spiel Starten" method="_on_Button_pressed"]
+[connection signal="pressed" from="Knöpfe/Optionen" to="Knöpfe/Optionen" method="_on_Optionen_pressed"]
 [connection signal="pressed" from="Knöpfe/Spiel beenden" to="Knöpfe/Spiel beenden" method="_on_Spiel_beenden_pressed"]
