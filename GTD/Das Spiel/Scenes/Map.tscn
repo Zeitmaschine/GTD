@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Interface/Theme/VersionFont.tres" type="Theme" id=1]
 [ext_resource path="res://Interface/Theme/ButtonPressed.tres" type="StyleBox" id=2]
@@ -9,29 +9,7 @@
 [ext_resource path="res://Interface/Font/Special_Upgrade_font.tres" type="DynamicFont" id=7]
 [ext_resource path="res://Interface/Theme/ButtonHoverNormal.tres" type="StyleBox" id=8]
 [ext_resource path="res://Interface/Theme/ButtonPressedNormal.tres" type="StyleBox" id=9]
-
-[sub_resource type="GDScript" id=1]
-script/source = "extends Button
-
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = \"text\"
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-
-func _on_Zurueck_pressed():
-	get_tree().change_scene(\"res://Scenes/MainMenu.tscn\")
-"
+[ext_resource path="res://Assets/Tilesets/Grassland/Grasland Preview.png" type="Texture" id=10]
 
 [sub_resource type="GDScript" id=2]
 script/source = "extends Button
@@ -54,6 +32,29 @@ func _ready():
 
 func _on_Grasland_pressed():
 	get_tree().change_scene(\"res://Scenes/SimpleLevel.tscn\")
+"
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Button
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+
+
+func _on_Zurueck_pressed():
+	get_tree().change_scene(\"res://Scenes/MainMenu.tscn\")
 "
 
 [node name="Map" type="Control"]
@@ -81,29 +82,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="."]
-anchor_right = 1.0
-margin_top = 10.0
-margin_bottom = 170.0
-theme = ExtResource( 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 0
-custom_constants/shadow_offset_y = 5
-text = "Map auswählen"
-align = 1
-valign = 1
-
-[node name="Zurueck" type="Button" parent="."]
-margin_left = 520.0
-margin_top = 694.0
-margin_right = 1400.0
-margin_bottom = 851.0
-custom_styles/hover = ExtResource( 5 )
-custom_styles/pressed = ExtResource( 2 )
-custom_styles/normal = ExtResource( 3 )
-custom_fonts/font = ExtResource( 4 )
-text = "Zurück"
-script = SubResource( 1 )
+[node name="GraslandOutline" type="ColorRect" parent="."]
+margin_left = 279.0
+margin_top = 135.0
+margin_right = 865.0
+margin_bottom = 645.0
+color = Color( 0.156863, 0.156863, 0.156863, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -131,8 +115,10 @@ text = "                                                                        
 script = SubResource( 2 )
 
 [node name="GraslandBild" type="TextureRect" parent="MapContainer/Grasland"]
-margin_right = 588.0
+margin_right = 576.0
 margin_bottom = 448.0
+texture = ExtResource( 10 )
+expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -149,7 +135,7 @@ custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
 text = "Grasland"
 align = 1
-valign = 1
+valign = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -187,5 +173,43 @@ mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="pressed" from="Zurueck" to="Zurueck" method="_on_Zurueck_pressed"]
+
+[node name="Label" type="Label" parent="."]
+anchor_right = 1.0
+margin_top = 10.0
+margin_bottom = 170.0
+theme = ExtResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 5
+text = "Map auswählen"
+align = 1
+valign = 1
+
+[node name="GraslandTextOutline" type="ColorRect" parent="."]
+margin_left = 279.0
+margin_top = 587.0
+margin_right = 860.0
+margin_bottom = 589.0
+mouse_filter = 2
+color = Color( 0.156863, 0.156863, 0.156863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Zurueck" type="Button" parent="."]
+margin_left = 520.0
+margin_top = 694.0
+margin_right = 1400.0
+margin_bottom = 851.0
+custom_styles/hover = ExtResource( 5 )
+custom_styles/pressed = ExtResource( 2 )
+custom_styles/normal = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
+text = "Zurück"
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="MapContainer/Grasland" to="MapContainer/Grasland" method="_on_Grasland_pressed"]
+[connection signal="pressed" from="Zurueck" to="Zurueck" method="_on_Zurueck_pressed"]
