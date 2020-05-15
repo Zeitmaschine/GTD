@@ -53,7 +53,7 @@ func remove_health(ammount):
 func _ready():
 	moneyinterface = get_node(\"InterfaceLayer/Interface/StatsMenu/HBoxContainer/Moneybar/MarginContainer/Backround/Count\")
 	healthinterface = get_node(\"InterfaceLayer/Interface/StatsMenu/HBoxContainer/Healthbar/MarginContainer/Backround/Health\")
-	waveinterface = get_node(\"InterfaceLayer/Interface/NinePatchRect/Rundenzahl\")
+	waveinterface = get_node(\"InterfaceLayer/Interface/RundenContainer/Rundenzahl\")
 	healthdeath = get_node(\"InterfaceLayer/Interface/GameOverLayer/GameOver\")
 
 func _process(delta):
