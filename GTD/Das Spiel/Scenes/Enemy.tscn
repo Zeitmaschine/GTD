@@ -23,8 +23,11 @@ func _process(delta):
 	switch_sprite();
 	
 func hit(damage):
-	hp = hp - damage;
-	colorchange_hit()
+	if hp > 0:
+		hp = hp - damage;
+	if hp > 0:
+		colorchange_hit()
+	
 	$Hitsound.play()
 	if hp <= 0:
 		get_parent().get_parent().get_parent().add_money(hp + damage, true) 

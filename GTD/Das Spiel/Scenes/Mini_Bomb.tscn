@@ -4,7 +4,7 @@
 [ext_resource path="res://Audio/Explosion.wav" type="AudioStream" id=2]
 [ext_resource path="res://Assets/Mathematiker/Range.png" type="Texture" id=3]
 
-[sub_resource type="GDScript" id=12]
+[sub_resource type="GDScript" id=1]
 script/source = "extends RigidBody2D
 
 export var damage = 2
@@ -15,17 +15,17 @@ func _ready():
 	$Explosion_particle.emitting = false
 	scale = Vector2(0.5,0.5)
 	
-func _process(delta):
-	yield(get_tree().create_timer(0.4), \"timeout\")
+func _process(_delta):
 	if already_exploded == false:
-		explode()
 		already_exploded = true
+		yield(get_tree().create_timer(0.4), \"timeout\")
+		explode()
 
-func _on_Bomb_body_entered(body):
+func _on_Bomb_body_entered(_body):
 	if already_exploded == false:
+		already_exploded = true
 		yield( get_tree(), \"idle_frame\" )
 		explode()
-	already_exploded = true
 	
 func setDamage(newDamage):
 	damage = newDamage
@@ -104,7 +104,7 @@ func _ready():
 collision_layer = 4
 contacts_reported = 1
 contact_monitor = true
-script = SubResource( 12 )
+script = SubResource( 1 )
 
 [node name="Bomb_sprite" type="Sprite" parent="."]
 scale = Vector2( 2, 2 )
