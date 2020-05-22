@@ -24,6 +24,8 @@ var healthinterface
 var healthdeath
 var waveinterface
 var max_universitaet = false
+var unigekauft
+var unitext
 
 var mathematiker = preload(\"res://Scenes/Mathematiker.tscn\")
 var informatiker = preload(\"res://Scenes/Informatiker.tscn\")
@@ -55,6 +57,8 @@ func _ready():
 	healthinterface = get_node(\"InterfaceLayer/Interface/StatsMenu/HBoxContainer/Healthbar/MarginContainer/Backround/Health\")
 	waveinterface = get_node(\"InterfaceLayer/Interface/RundenContainer/Rundenzahl\")
 	healthdeath = get_node(\"InterfaceLayer/Interface/GameOverLayer/GameOver\")
+	unigekauft = get_node(\"InterfaceLayer/Interface/ShopLayer/ShopMenu\")
+	unitext = get_node(\"InterfaceLayer/Interface/ShopLayer/ShopMenu/ShopBackround/UniversitaetText\")
 
 func _process(delta):
 	moneyinterface.setCoins(money)
@@ -72,34 +76,36 @@ func _process(delta):
 		checkWave()
 	else:
 		$Path2D/Timer.stop()
-		
+
 	if Input.is_action_just_pressed(\"Hotkey1\"):
 		if money >= 100:
 			add_mathematiker()
 		else:
 			$Buy_failed.play()
-	
+
 	if Input.is_action_just_pressed(\"Hotkey2\"):
 		if money >= 300:
 			add_informatiker()
 		else:
 			$Buy_failed.play()
 			
-	
+
 	if Input.is_action_just_pressed(\"Hotkey3\"):
 		if money >= 500:
 			add_mathebombenturm()
 		else:
 			$Buy_failed.play()
-	
+
 	if Input.is_action_just_pressed(\"Hotkey4\"):
 		if money >= 450:
 			add_winkelninja()
 		else:
 			$Buy_failed.play()
-			
+
 	if Input.is_action_just_pressed(\"Hotkey5\"):
 		if money >= 800  && max_universitaet == false:
+			unigekauft.unigekauft = true
+			unitext.text = \"Gekauft\"
 			add_universitaet()
 		else:
 			$Buy_failed.play()
@@ -263,6 +269,8 @@ func add_universitaet():
 				$Buy_failed.play()
 			
 			if Input.is_action_just_pressed(\"right_click\"):
+				unigekauft.unigekauft = false
+				unitext.text = \"Universität: 800$\"
 				$Buy_failed.play()
 				universitaet_instance.queue_free()
 				break

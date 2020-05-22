@@ -119,10 +119,13 @@ func check_status():
 		get_node(\"ShopBackround/WinkelninjaButton\").set_disabled(true)
 	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= 450):
 		get_node(\"ShopBackround/WinkelninjaButton\").set_disabled(false)
+	if(unigekauft == true):
+		get_node(\"ShopBackround/UniversitaetButton\").set_disabled(true)
 	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < 800):
 		get_node(\"ShopBackround/UniversitaetButton\").set_disabled(true)
 	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= 800 && unigekauft == false):
 		get_node(\"ShopBackround/UniversitaetButton\").set_disabled(false)
+		
 "
 
 [sub_resource type="GDScript" id=4]
