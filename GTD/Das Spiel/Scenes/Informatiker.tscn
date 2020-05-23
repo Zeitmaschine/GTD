@@ -60,6 +60,7 @@ func find_closest_target():
 				closest = unit.get_parent()
 				target = closest.position
 				target_enemy = closest
+				print (closest)
 	else:
 			target = null
 func hit(damage):
@@ -121,7 +122,7 @@ func _on_Informatiker_Area_input_event(viewport, event, shape_idx):
 radius = 43.5791
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 3689.82
+radius = 2269.88
 
 [node name="Informatiker" type="KinematicBody2D"]
 collision_layer = 2
@@ -162,7 +163,6 @@ collision_mask = 10
 shape = SubResource( 2 )
 
 [node name="Range" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 
 [node name="CollisionRange" type="CollisionShape2D" parent="Range"]

@@ -11,7 +11,7 @@
 [ext_resource path="res://Interface/Theme/ButtonPressedNormal.tres" type="StyleBox" id=9]
 [ext_resource path="res://Assets/Tilesets/Grassland/Grasland Preview.png" type="Texture" id=10]
 
-[sub_resource type="GDScript" id=2]
+[sub_resource type="GDScript" id=1]
 script/source = "extends Button
 
 
@@ -31,10 +31,10 @@ func _ready():
 
 
 func _on_Grasland_pressed():
-	get_tree().change_scene(\"res://Scenes/SimpleLevel.tscn\")
+	get_tree().change_scene(\"res://Scenes/Grasland.tscn\")
 "
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id=2]
 script/source = "extends Button
 
 
@@ -112,7 +112,7 @@ custom_styles/hover = ExtResource( 8 )
 custom_styles/pressed = ExtResource( 9 )
 custom_styles/normal = ExtResource( 3 )
 text = "                                                                                                                                                "
-script = SubResource( 2 )
+script = SubResource( 1 )
 
 [node name="GraslandBild" type="TextureRect" parent="MapContainer/Grasland"]
 margin_right = 576.0
@@ -207,7 +207,7 @@ custom_styles/pressed = ExtResource( 2 )
 custom_styles/normal = ExtResource( 3 )
 custom_fonts/font = ExtResource( 4 )
 text = "Zurück"
-script = SubResource( 1 )
+script = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
