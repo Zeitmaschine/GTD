@@ -102,6 +102,7 @@ visible = false
 
 [node name="Money_gain_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
+volume_db = -20.0
 [connection signal="input_event" from="Universität_Area" to="." method="_on_Universitt_Area_input_event"]
 [connection signal="mouse_entered" from="Universität_Area" to="." method="_on_Universitt_Area_mouse_entered"]
 [connection signal="mouse_exited" from="Universität_Area" to="." method="_on_Universitt_Area_mouse_exited"]

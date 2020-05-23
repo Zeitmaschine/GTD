@@ -71,7 +71,7 @@ func check_status():
 		set_disabled(false)
 "
 
-[sub_resource type="GDScript" id=4]
+[sub_resource type="GDScript" id=3]
 script/source = "extends Button
 
 
@@ -82,13 +82,13 @@ func _process(delta):
 	check_status()
 
 func check_status():
-	if (get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < 6000 || get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade2unlock == true):
+	if (get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < 6000):
 		set_disabled(true)
-	if(get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= 6000 && get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade2unlock == false):
+	if(get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= 6000 && get_parent().get_parent().get_node(\".\").getUpgrade3() == false):
 		set_disabled(false)
 "
 
-[sub_resource type="GDScript" id=3]
+[sub_resource type="GDScript" id=4]
 script/source = "extends Button
 
 
@@ -230,7 +230,7 @@ custom_styles/hover = ExtResource( 7 )
 custom_styles/pressed = ExtResource( 8 )
 custom_styles/disabled = ExtResource( 11 )
 custom_styles/normal = ExtResource( 6 )
-script = SubResource( 4 )
+script = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -296,7 +296,7 @@ custom_styles/hover = ExtResource( 7 )
 custom_styles/pressed = ExtResource( 8 )
 custom_styles/disabled = ExtResource( 11 )
 custom_styles/normal = ExtResource( 6 )
-script = SubResource( 3 )
+script = SubResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
