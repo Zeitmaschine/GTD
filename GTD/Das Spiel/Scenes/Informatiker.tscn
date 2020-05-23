@@ -60,23 +60,23 @@ func find_closest_target():
 				closest = unit.get_parent()
 				target = closest.position
 				target_enemy = closest
-				print (closest)
 	else:
 			target = null
 func hit(damage):
 	pass
 
 func aim_and_shoot():
-	rotation = (target - position).angle() - PI/2
-	var projectile_instance = projectile.instance()
-	projectile_instance.position = $Firepoint.get_global_position()
-	projectile_instance.rotation_degrees = rotation_degrees
-	projectile_instance.apply_impulse(Vector2(), Vector2(0, projectilespeed +(200 * attackspeedlvl)).rotated(rotation))
-	projectile_instance.setDamage(attackpowerlvl + 4)
-	get_tree().get_root().add_child(projectile_instance)
-	can_fire = false
-	yield(get_tree().create_timer(firerate - (fireratelvl * 0.7)), \"timeout\")
-	can_fire = true
+	if target != null:
+		rotation = (target - position).angle() - PI/2
+		var projectile_instance = projectile.instance()
+		projectile_instance.position = $Firepoint.get_global_position()
+		projectile_instance.rotation_degrees = rotation_degrees
+		projectile_instance.apply_impulse(Vector2(), Vector2(0, projectilespeed +(200 * attackspeedlvl)).rotated(rotation))
+		projectile_instance.setDamage(attackpowerlvl + 4)
+		get_tree().get_root().add_child(projectile_instance)
+		can_fire = false
+		yield(get_tree().create_timer(firerate - (fireratelvl * 0.7)), \"timeout\")
+		can_fire = true
 	
 func aim_and_shoot_upgrade2():
 	$Hack_sound.playing = true

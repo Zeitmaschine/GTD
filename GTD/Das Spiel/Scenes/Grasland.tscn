@@ -280,11 +280,17 @@ func add_universitaet():
 		universitaet_instance.placed = true
 		placemode = false
 
+func setUpgrade1Unlock(upgrade11unlock):
+	upgrade1unlock = upgrade11unlock
 
+func getUpgrade1Unlock():
+	return upgrade1unlock
 
+func setUpgrade2Unlock(upgrade22unlock):
+	upgrade2unlock = upgrade22unlock
 
-
-
+func getUpgrade2Unlock():
+	return upgrade2unlock
 
 #Wellen-Festlegung
 
@@ -305,6 +311,37 @@ func checkWave():
 			wave4()
 		if wave == 5:
 			wave5()
+		if wave == 6:
+			wave6()
+		if wave == 7:
+			wave7()
+		if wave == 8:
+			wave8()
+		if wave == 9:
+			wave9()
+		if wave == 10:
+			wave10()
+		if wave == 11:
+			wave11()
+		if wave == 12:
+			wave12()
+		if wave == 13:
+			wave13()
+		if wave == 14:
+			wave14()
+		if wave == 15:
+			wave15()
+		if wave == 16:
+			wave16()
+		if wave == 17:
+			wave17()
+		if wave == 18:
+			wave18()
+		if wave == 19:
+			wave19()
+		if wave == 20:
+			wave20()
+
 
 
 
@@ -381,17 +418,259 @@ func wave5():
 		triggeronce = false
 		triggeronce2 = false
 
-func setUpgrade1Unlock(upgrade11unlock):
-	upgrade1unlock = upgrade11unlock
+func wave6():
+	if triggeronce2 == false:
+		triggeronce2 = true
+		
+		$Path2D.setEnemySpawnHp(2)
+		$Path2D/Timer.start(1.7)
+		yield(get_tree().create_timer(14), \"timeout\")
+		$Path2D.setEnemySpawnHp(3)
+		yield(get_tree().create_timer(10), \"timeout\")
+		
+		wave_round_end_money()
+		waverunning = false
+		wave = 7
+		triggeronce = false
+		triggeronce2 = false
 
-func getUpgrade1Unlock():
-	return upgrade1unlock
+func wave7():
+	if triggeronce2 == false:
+		triggeronce2 = true
+		
+		$Path2D.setEnemySpawnHp(4)
+		$Path2D/Timer.start(3)
+		yield(get_tree().create_timer(5), \"timeout\")
+		$Path2D/Timer.start(1.8)
+		$Path2D.setEnemySpawnHp(3)
+		yield(get_tree().create_timer(16), \"timeout\")
+		
+		wave_round_end_money()
+		waverunning = false
+		wave = 8
+		triggeronce = false
+		triggeronce2 = false
 
-func setUpgrade2Unlock(upgrade22unlock):
-	upgrade2unlock = upgrade22unlock
+func wave8():
+	if triggeronce2 == false:
+		triggeronce2 = true
+		
+		$Path2D.setEnemySpawnHp(2)
+		$Path2D/Timer.start(1.6)
+		yield(get_tree().create_timer(30), \"timeout\")
+		
+		wave_round_end_money()
+		waverunning = false
+		wave = 9
+		triggeronce = false
+		triggeronce2 = false
+		
+func wave9():
+	if triggeronce2 == false:
+		triggeronce2 = true
+		
+		$Path2D.setEnemySpawnHp(4)
+		$Path2D/Timer.start(2.4)
+		yield(get_tree().create_timer(15), \"timeout\")
+		$Path2D.setEnemySpawnHp(3.3)
+		yield(get_tree().create_timer(8), \"timeout\")
+		
+		wave_round_end_money()
+		waverunning = false
+		wave = 10
+		triggeronce = false
+		triggeronce2 = false
+		
+func wave10():
+	if triggeronce2 == false:
+		triggeronce2 = true
+		
+		$Path2D.setEnemySpawnHp(1)
+		$Path2D/Timer.start(0.5)
+		yield(get_tree().create_timer(10), \"timeout\")
+		$Path2D.setEnemySpawnHp(2)
+		$Path2D/Timer.start(0.9)
+		yield(get_tree().create_timer(10), \"timeout\")
+		$Path2D.setEnemySpawnHp(3)
+		$Path2D/Timer.start(1.6)
+		yield(get_tree().create_timer(5), \"timeout\")
+		
+		wave_round_end_money()
+		waverunning = false
+		wave = 11
+		triggeronce = false
+		triggeronce2 = false
+		
+func wave11():
+	if triggeronce2 == false:
+		triggeronce2 = true
+		
+		$Path2D.setEnemySpawnHp(3)
+		$Path2D/Timer.start(1.1)
+		yield(get_tree().create_timer(17), \"timeout\")
 
-func getUpgrade2Unlock():
-	return upgrade2unlock
+		wave_round_end_money()
+		waverunning = false
+		wave = 12
+		triggeronce = false
+		triggeronce2 = false
+		
+func wave12():
+	if triggeronce2 == false:
+		triggeronce2 = true
+		
+		$Path2D.setEnemySpawnHp(4)
+		$Path2D/Timer.start(0.4)
+		yield(get_tree().create_timer(4), \"timeout\")
+
+		wave_round_end_money()
+		waverunning = false
+		wave = 13
+		triggeronce = false
+		triggeronce2 = false
+		
+func wave13():
+	if triggeronce2 == false:
+		triggeronce2 = true
+		
+		$Path2D.setEnemySpawnHp(3)
+		$Path2D/Timer.start(1)
+		yield(get_tree().create_timer(10), \"timeout\")
+		$Path2D.setEnemySpawnHp(4)
+		$Path2D/Timer.start(1.3)
+		yield(get_tree().create_timer(7), \"timeout\")
+
+		wave_round_end_money()
+		waverunning = false
+		wave = 14
+		triggeronce = false
+		triggeronce2 = false
+		
+func wave14():
+	if triggeronce2 == false:
+		triggeronce2 = true
+		
+		$Path2D.setEnemySpawnHp(5)
+		$Path2D/Timer.start(1)
+		yield(get_tree().create_timer(3), \"timeout\")
+		$Path2D.setEnemySpawnHp(4)
+		$Path2D/Timer.start(1.4)
+		yield(get_tree().create_timer(5), \"timeout\")
+
+		wave_round_end_money()
+		waverunning = false
+		wave = 15
+		triggeronce = false
+		triggeronce2 = false
+		
+func wave15():
+	if triggeronce2 == false:
+		triggeronce2 = true
+		
+		$Path2D.setEnemySpawnHp(4)
+		$Path2D/Timer.start(0.8)
+		yield(get_tree().create_timer(7), \"timeout\")
+		$Path2D.setEnemySpawnHp(1)
+		$Path2D/Timer.start(0.2)
+		yield(get_tree().create_timer(3), \"timeout\")
+
+		wave_round_end_money()
+		waverunning = false
+		wave = 16
+		triggeronce = false
+		triggeronce2 = false
+		
+func wave16():
+	if triggeronce2 == false:
+		triggeronce2 = true
+		
+		$Path2D.setEnemySpawnHp(4)
+		$Path2D/Timer.start(0.6)
+		yield(get_tree().create_timer(10), \"timeout\")
+		$Path2D.setEnemySpawnHp(2)
+		$Path2D/Timer.start(0.4)
+		yield(get_tree().create_timer(7), \"timeout\")
+
+		wave_round_end_money()
+		waverunning = false
+		wave = 17
+		triggeronce = false
+		triggeronce2 = false
+		
+func wave17():
+	if triggeronce2 == false:
+		triggeronce2 = true
+		
+		$Path2D.setEnemySpawnHp(2)
+		$Path2D/Timer.start(0.4)
+		yield(get_tree().create_timer(4), \"timeout\")
+		$Path2D.setEnemySpawnHp(3)
+		$Path2D/Timer.start(0.7)
+		yield(get_tree().create_timer(7), \"timeout\")
+		$Path2D.setEnemySpawnHp(1)
+		$Path2D/Timer.start(0.1)
+		yield(get_tree().create_timer(2), \"timeout\")
+		$Path2D.setEnemySpawnHp(4)
+		$Path2D/Timer.start(0.9)
+		yield(get_tree().create_timer(8), \"timeout\")
+
+		wave_round_end_money()
+		waverunning = false
+		wave = 18
+		triggeronce = false
+		triggeronce2 = false
+		
+func wave18():
+	if triggeronce2 == false:
+		triggeronce2 = true
+		
+		$Path2D.setEnemySpawnHp(5)
+		$Path2D/Timer.start(2)
+		yield(get_tree().create_timer(10), \"timeout\")
+		$Path2D.setEnemySpawnHp(4)
+		$Path2D/Timer.start(0.7)
+		yield(get_tree().create_timer(8), \"timeout\")
+
+		wave_round_end_money()
+		waverunning = false
+		wave = 19
+		triggeronce = false
+		triggeronce2 = false
+		
+func wave19():
+	if triggeronce2 == false:
+		triggeronce2 = true
+		
+		$Path2D.setEnemySpawnHp(4)
+		$Path2D/Timer.start(0.6)
+		yield(get_tree().create_timer(5), \"timeout\")
+		$Path2D.setEnemySpawnHp(5)
+		$Path2D/Timer.start(0.7)
+		yield(get_tree().create_timer(5), \"timeout\")
+
+		wave_round_end_money()
+		waverunning = false
+		wave = 20
+		triggeronce = false
+		triggeronce2 = false
+		
+func wave20():
+	if triggeronce2 == false:
+		triggeronce2 = true
+		
+		$Path2D.setEnemySpawnHp(2)
+		$Path2D/Timer.start(0.3)
+		yield(get_tree().create_timer(10), \"timeout\")
+
+		wave_round_end_money()
+		waverunning = false
+		wave = 21
+		triggeronce = false
+		triggeronce2 = false
+	
+	
+
+
 "
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
