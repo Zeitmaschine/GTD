@@ -24,8 +24,8 @@ script/source = "extends Button
 func _ready():
 	pass 
 
-func _on_Optionen_pressed():
-	get_tree().change_scene(\"res://Scenes/Options.tscn\")
+func _on_Credits_pressed():
+	get_tree().change_scene(\"res://Scenes/Credits.tscn\")
 "
 
 [sub_resource type="StyleBoxFlat" id=3]
@@ -157,7 +157,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Optionen" type="Button" parent="Knöpfe"]
+[node name="Credits" type="Button" parent="Knöpfe"]
 margin_top = 485.0
 margin_right = 880.0
 margin_bottom = 642.0
@@ -165,7 +165,7 @@ theme = ExtResource( 1 )
 custom_styles/hover = ExtResource( 2 )
 custom_styles/pressed = ExtResource( 7 )
 custom_styles/normal = ExtResource( 6 )
-text = "Optionen"
+text = "Credits"
 script = SubResource( 2 )
 
 [node name="Spiel beenden" type="Button" parent="Knöpfe"]
@@ -179,5 +179,5 @@ custom_styles/normal = ExtResource( 6 )
 text = "Spiel beenden"
 script = SubResource( 5 )
 [connection signal="pressed" from="Knöpfe/Spiel Starten" to="Knöpfe/Spiel Starten" method="_on_Button_pressed"]
-[connection signal="pressed" from="Knöpfe/Optionen" to="Knöpfe/Optionen" method="_on_Optionen_pressed"]
+[connection signal="pressed" from="Knöpfe/Credits" to="Knöpfe/Credits" method="_on_Credits_pressed"]
 [connection signal="pressed" from="Knöpfe/Spiel beenden" to="Knöpfe/Spiel beenden" method="_on_Spiel_beenden_pressed"]

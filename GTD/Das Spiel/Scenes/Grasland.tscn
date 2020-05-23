@@ -12,8 +12,8 @@
 script/source = "extends Node2D
 
 export var upgradelvl = false
-export var upgrade1_unlock = false
-export var upgrade2_unlock = false
+export var upgrade1unlock = false
+export var upgrade2unlock = false
 
 export var waverunning = false
 export var wave = 1
@@ -43,11 +43,14 @@ func add_money(ammount, death):
 	money += ammount
 	if death == true:
 		$Die.play()
-		
-func add_extramoney(ammount, death):
+
+func add_extramoney(ammount):
 	if waverunning == true:
 		money += ammount
-	
+
+func add_extrahealth(ammount):
+	healthy += ammount
+
 func remove_health(ammount):
 	healthy -= ammount
 	$Life_Lost.play()
@@ -67,7 +70,7 @@ func _process(delta):
 	waveinterface.setWave(wave)
 	
 	if Input.is_action_just_pressed(\"Hotkey0\"):
-		money += 100
+		money += 1000
 	
 	if Input.is_action_just_pressed(\"spacebar\") && waverunning == false:
 		waverunning = true
@@ -377,7 +380,18 @@ func wave5():
 		wave = 6
 		triggeronce = false
 		triggeronce2 = false
-		
+
+func setUpgrade1Unlock(upgrade11unlock):
+	upgrade1unlock = upgrade11unlock
+
+func getUpgrade1Unlock():
+	return upgrade1unlock
+
+func setUpgrade2Unlock(upgrade22unlock):
+	upgrade2unlock = upgrade22unlock
+
+func getUpgrade2Unlock():
+	return upgrade2unlock
 "
 
 [sub_resource type="ConvexPolygonShape2D" id=2]

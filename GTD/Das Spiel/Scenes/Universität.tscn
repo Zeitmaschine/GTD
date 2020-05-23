@@ -1,14 +1,18 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets/Universität/Universität.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/UpgradeInterfaceUni.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Audio/Money_gain_extra.wav" type="AudioStream" id=3]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends KinematicBody2D
 
 export var upgradelvl = 1
+var can_make_money = true
+var can_make_health = true
 export var upgrade1 = false
 export var upgrade2 = false
+export var upgrade3 = false
 var placed = false
 
 
@@ -17,7 +21,10 @@ func _ready():
 
 
 func _process(delta):
-	pass
+	upgrade3 = get_node(\"UpgradeWindow/UniversitaetUpgrade\").getUpgrade3()
+	if upgrade3 == true:
+		earn_money_upgrade()
+		earn_health_upgrade()
 
 
 func _on_Universitt_Area_mouse_entered():
@@ -36,9 +43,28 @@ func setUpgrade1(newstatus):
 	get_parent().upgrade1_unlock = newstatus
 	
 func setUpgrade2(newstatus):
-	upgrade1 = newstatus
+	upgrade2 = newstatus
 	get_parent().upgrade2_unlock = newstatus
 
+func setUpgrade3(newstatus):
+	upgrade3 = newstatus
+	get_parent().upgrade3_unlock = newstatus
+
+func earn_money_upgrade():
+	yield(get_tree().create_timer(10.0), \"timeout\")
+	if can_make_money == true && get_parent().waverunning == true:
+		$Money_gain_sound.playing = true
+		get_parent().add_extramoney(200)
+		can_make_money = false
+		yield(get_tree().create_timer(10.0), \"timeout\")
+		can_make_money = true
+
+func earn_health_upgrade():
+	if(get_parent().waverunning == false && can_make_health == true):
+		get_parent().add_extrahealth(5)
+		can_make_health = false
+	if(get_parent().waverunning == true):
+		can_make_health = true
 
 func _on_Universitt_Area_input_event(viewport, event, shape_idx):
 	if(event.is_action_pressed(\"left_click\") and placed == true):
@@ -73,6 +99,9 @@ shape = SubResource( 3 )
 
 [node name="UniversitaetUpgrade" parent="UpgradeWindow" instance=ExtResource( 2 )]
 visible = false
+
+[node name="Money_gain_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
 [connection signal="input_event" from="Universität_Area" to="." method="_on_Universitt_Area_input_event"]
 [connection signal="mouse_entered" from="Universität_Area" to="." method="_on_Universitt_Area_mouse_entered"]
 [connection signal="mouse_exited" from="Universität_Area" to="." method="_on_Universitt_Area_mouse_exited"]

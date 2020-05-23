@@ -101,12 +101,18 @@ var upgrade1
 
 func _process(delta):
 	money = get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money
+	upgrade1 = get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\")
 	check_status()
 
 func check_status():
+	if(upgrade1.getUpgrade1Unlock() == false):
+		set_disabled(true)
+		get_node(\"Cost\").text = \"Gesperrt\"
+	if(upgrade1.getUpgrade1Unlock() == true && get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade1 == false):
+		get_node(\"Cost\").text = \"350$\"
 	if (get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < 350 || get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade1 == true):
 		set_disabled(true)
-	if(get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= 350 && get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade1 == false):
+	if(get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= 350 && get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade1 == false && upgrade1.getUpgrade1Unlock() == true):
 		set_disabled(false)
 "
 
@@ -118,12 +124,18 @@ var upgrade2
 
 func _process(delta):
 	money = get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money
+	upgrade2 = get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\")
 	check_status()
 
 func check_status():
+	if(upgrade2.getUpgrade2Unlock() == false):
+		set_disabled(true)
+		get_node(\"Cost2\").text = \"Gesperrt\"
+	if(upgrade2.getUpgrade2Unlock() == true && get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade2 == false):
+		get_node(\"Cost2\").text = \"500$\"
 	if (get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < 500 || get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade2 == true):
 		set_disabled(true)
-	if(get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= 500 && get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade2 == false):
+	if(get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= 500 && get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade2 == false && upgrade2.getUpgrade2Unlock() == true):
 		set_disabled(false)
 "
 

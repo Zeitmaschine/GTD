@@ -15,7 +15,7 @@ func _ready():
 
 
 func _on_Zurueck_pressed():
-	get_tree().change_scene(\"res://Scenes/Options.tscn\")
+	get_tree().change_scene(\"res://Scenes/MainMenu.tscn\")
 	pass 
 "
 
