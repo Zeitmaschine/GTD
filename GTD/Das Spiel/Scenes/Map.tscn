@@ -120,6 +120,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="DesertOutline" type="ColorRect" parent="."]
+margin_left = 1055.0
+margin_top = 135.0
+margin_right = 1640.0
+margin_bottom = 645.0
+color = Color( 0.156863, 0.156863, 0.156863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="MapContainer" type="HBoxContainer" parent="."]
 anchor_top = 0.5
 anchor_right = 1.0
@@ -179,12 +189,11 @@ text = "                                                                        
 script = SubResource( 2 )
 
 [node name="DesertBild" type="TextureRect" parent="MapContainer/Desert"]
-margin_left = 1.29858
-margin_top = 2.24826
-margin_right = 2181.3
-margin_bottom = 1066.25
+margin_right = 2193.0
+margin_bottom = 1070.0
 rect_scale = Vector2( 0.262576, 0.415283 )
 texture = ExtResource( 11 )
+expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -225,7 +234,18 @@ valign = 1
 margin_left = 279.0
 margin_top = 587.0
 margin_right = 860.0
-margin_bottom = 589.0
+margin_bottom = 590.0
+mouse_filter = 2
+color = Color( 0.156863, 0.156863, 0.156863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GraslandTextOutline2" type="ColorRect" parent="."]
+margin_left = 1060.0
+margin_top = 584.0
+margin_right = 1637.0
+margin_bottom = 586.0
 mouse_filter = 2
 color = Color( 0.156863, 0.156863, 0.156863, 1 )
 __meta__ = {

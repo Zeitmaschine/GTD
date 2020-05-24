@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Assets/Icons/Exit_Icon_pressed.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Icons/Exit_Icon.png" type="Texture" id=2]
@@ -11,11 +11,15 @@
 [ext_resource path="res://Assets/Upgrade_Icons/Mathebombenturm_Upgrade_2.png" type="Texture" id=9]
 [ext_resource path="res://Assets/Upgrade_Icons/Mathebombenturm_Upgrade_1.png" type="Texture" id=10]
 [ext_resource path="res://Interface/Theme/ButtonDisabled.tres" type="StyleBox" id=11]
+[ext_resource path="res://Interface/Theme/ButtonPressed.tres" type="StyleBox" id=12]
+[ext_resource path="res://Interface/Theme/ButtonClick.tres" type="StyleBox" id=13]
+[ext_resource path="res://Interface/counter/label_bg.png" type="Texture" id=14]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Control
 
 var money = 0
+var sell = 500
 var upgrade1 = false
 var upgrade2 = false
 
@@ -31,23 +35,27 @@ func _process(delta):
 func _on_SpecialUpgradeButton_pressed():
 	get_parent().get_parent().get_node(\".\").upgrade1 = true
 	get_parent().get_parent().get_parent().get_node(\".\").money -= 600
+	sell += 600
 	get_node(\"UpgradeBackround/SpecialUpgradeBackround/SpecialUpgradeButton/Cost\").text = \"Gekauft\"
 
 func _on_SpecialUpgradeButton2_pressed():
 	get_parent().get_parent().get_node(\".\").upgrade2 = true
 	get_parent().get_parent().get_parent().get_node(\".\").money -= 1200
+	sell += 1200
 	get_node(\"UpgradeBackround/SpecialUpgradeBackround2/SpecialUpgradeButton2/Cost2\").text = \"Gekauft\"
 
 
 func _on_DamageButton_pressed():
 	get_parent().get_parent().get_node(\".\").attackpowerlvl +=  1
 	get_parent().get_parent().get_parent().get_node(\".\").money -= 350
+	sell += 350
 	if(get_parent().get_parent().get_node(\".\").attackpowerlvl ==  5):
 		get_node(\"UpgradeBackround/StatUpgradeText/DamageText\").text = \"MAX\"
 
 func _on_FirerateButton_pressed():
 	get_parent().get_parent().get_node(\".\").fireratelvl +=  1
 	get_parent().get_parent().get_parent().get_node(\".\").money -= 350
+	sell += 350
 	if(get_parent().get_parent().get_node(\".\").fireratelvl ==  5):
 		get_node(\"UpgradeBackround/StatUpgradeText/FirerateText\").text = \"MAX\"
 
@@ -56,6 +64,7 @@ func _on_RangeButton_pressed():
 	get_parent().get_parent().get_node(\".\").attackrangelvl +=  1
 	get_parent().get_parent().get_node(\".\").set_range()
 	get_parent().get_parent().get_parent().get_node(\".\").money -= 350
+	sell += 350
 	if(get_parent().get_parent().get_node(\".\").attackrangelvl ==  5):
 		get_node(\"UpgradeBackround/StatUpgradeText/RangeText\").text = \"MAX\"
 
@@ -72,6 +81,11 @@ func check_status():
 		get_node(\"UpgradeBackround/StatUpgradeContainer/RangeButton\").set_disabled(true)
 	if(get_parent().get_parent().get_parent().get_node(\".\").money >= 350 && get_parent().get_parent().get_node(\".\").attackrangelvl <  5):
 		get_node(\"UpgradeBackround/StatUpgradeContainer/RangeButton\").set_disabled(false)
+
+
+func _on_Button_pressed():
+	get_parent().get_parent().get_parent().get_node(\".\").money += int(sell * 0.75)
+	get_parent().get_parent().queue_free()
 "
 
 [sub_resource type="GDScript" id=2]
@@ -135,6 +149,14 @@ func check_status():
 		set_disabled(true)
 	if(get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= 1200 && get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade2 == false && upgrade2.getUpgrade2Unlock() == true):
 		set_disabled(false)
+"
+
+[sub_resource type="GDScript" id=5]
+script/source = "extends Label
+
+
+func _process(delta):
+	text = str(int(get_parent().get_parent().sell * 0.75)) + \"$\"
 "
 
 [node name="BombenturmUpgrade" type="Control"]
@@ -518,9 +540,63 @@ expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="SellOutline" type="ColorRect" parent="."]
+margin_left = 25.0
+margin_top = 975.0
+margin_right = 275.0
+margin_bottom = 1045.0
+color = Color( 0.156863, 0.156863, 0.156863, 1 )
+
+[node name="SellButton" type="Button" parent="."]
+margin_left = 30.0
+margin_top = 980.0
+margin_right = 270.0
+margin_bottom = 1040.0
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 12 )
+custom_styles/normal = ExtResource( 6 )
+
+[node name="Sell" type="Label" parent="SellButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 3 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 5
+text = "Verkaufen"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SellBox" type="TextureRect" parent="."]
+margin_left = 300.0
+margin_top = 980.0
+margin_right = 500.0
+margin_bottom = 1040.0
+texture = ExtResource( 14 )
+expand = true
+
+[node name="SellPrice" type="Label" parent="SellBox"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 3 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 5
+text = "500$"
+align = 1
+valign = 1
+script = SubResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="UpgradeBackround/StatUpgradeContainer/DamageButton" to="." method="_on_DamageButton_pressed"]
 [connection signal="pressed" from="UpgradeBackround/StatUpgradeContainer/FirerateButton" to="." method="_on_FirerateButton_pressed"]
 [connection signal="pressed" from="UpgradeBackround/StatUpgradeContainer/RangeButton" to="." method="_on_RangeButton_pressed"]
 [connection signal="pressed" from="UpgradeBackround/SpecialUpgradeBackround/SpecialUpgradeButton" to="." method="_on_SpecialUpgradeButton_pressed"]
 [connection signal="pressed" from="UpgradeBackround/SpecialUpgradeBackround2/SpecialUpgradeButton2" to="." method="_on_SpecialUpgradeButton2_pressed"]
 [connection signal="pressed" from="UpgradeBackround/TextureButton" to="." method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="SellButton" to="." method="_on_Button_pressed"]
