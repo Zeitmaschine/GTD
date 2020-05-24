@@ -13,6 +13,13 @@ var enemy_sprite2 = preload(\"res://Assets/Enemy/Vierreck.png\")
 var enemy_sprite3 = preload(\"res://Assets/Enemy/Fünfeck.png\")
 var enemy_sprite4 = preload(\"res://Assets/Enemy/Sechseck.png\")
 var enemy_sprite5 = preload(\"res://Assets/Enemy/Siebeneck.png\")
+var enemy_sprite6 = preload(\"res://Assets/Enemy/Achteck.png\")
+var enemy_sprite7 = preload(\"res://Assets/Enemy/Neuneck.png\")
+var enemy_sprite8 = preload(\"res://Assets/Enemy/Zehneck.png\")
+var enemy_sprite9 = preload(\"res://Assets/Enemy/Elfeck.png\")
+var enemy_sprite10 = preload(\"res://Assets/Enemy/Zwölfeck.png\")
+var enemy_sprite11 = preload(\"res://Assets/Enemy/Dreizehneck.png\")
+var enemy_sprite12 = preload(\"res://Assets/Enemy/Kreis.png\")
 onready var enemy_sprite = get_node(\"Dreieck\")
 var origin_modulate = modulate
 
@@ -49,6 +56,20 @@ func switch_sprite():
 		enemy_sprite.set_texture(enemy_sprite4)
 	if hp == 5:
 		enemy_sprite.set_texture(enemy_sprite5)
+	if hp == 6:
+		enemy_sprite.set_texture(enemy_sprite6)
+	if hp == 7:
+		enemy_sprite.set_texture(enemy_sprite7)
+	if hp == 8:
+		enemy_sprite.set_texture(enemy_sprite8)
+	if hp == 9:
+		enemy_sprite.set_texture(enemy_sprite9)
+	if hp == 10:
+		enemy_sprite.set_texture(enemy_sprite10)
+	if hp == 11:
+		enemy_sprite.set_texture(enemy_sprite11)
+	if hp >= 12:
+		enemy_sprite.set_texture(enemy_sprite12)
 		
 func getSpeed():
 	return speed;

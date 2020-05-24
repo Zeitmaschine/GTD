@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Interface/Theme/VersionFont.tres" type="Theme" id=1]
 [ext_resource path="res://Interface/Theme/ButtonPressed.tres" type="StyleBox" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Interface/Theme/ButtonHoverNormal.tres" type="StyleBox" id=8]
 [ext_resource path="res://Interface/Theme/ButtonPressedNormal.tres" type="StyleBox" id=9]
 [ext_resource path="res://Assets/Tilesets/Grassland/Grasland Preview.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Tilesets/Desert/Preview.JPG" type="Texture" id=11]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Button
@@ -53,6 +54,31 @@ func _ready():
 #	pass
 
 
+
+
+func _on_Desert_pressed():
+	get_tree().change_scene(\"res://Scenes/Desert.tscn\")
+"
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends Button
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+
+
 func _on_Zurueck_pressed():
 	get_tree().change_scene(\"res://Scenes/MainMenu.tscn\")
 "
@@ -67,6 +93,8 @@ __meta__ = {
 [node name="backround" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -0.418152
+margin_right = -0.418213
 color = Color( 0.196078, 0.196078, 0.196078, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -140,7 +168,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Map2" type="Button" parent="MapContainer"]
+[node name="Desert" type="Button" parent="MapContainer"]
 margin_left = 1060.0
 margin_right = 1636.0
 margin_bottom = 500.0
@@ -148,28 +176,35 @@ custom_styles/hover = ExtResource( 8 )
 custom_styles/pressed = ExtResource( 9 )
 custom_styles/normal = ExtResource( 3 )
 text = "                                                                                                                                                "
+script = SubResource( 2 )
 
-[node name="Map2Text" type="Label" parent="MapContainer/Map2"]
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = -60.0
-margin_bottom = -10.0
-custom_fonts/font = ExtResource( 7 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 0
-custom_constants/shadow_offset_y = 5
-text = "Map2"
-align = 1
-valign = 1
+[node name="DesertBild" type="TextureRect" parent="MapContainer/Desert"]
+margin_left = 1.29858
+margin_top = 2.24826
+margin_right = 2181.3
+margin_bottom = 1066.25
+rect_scale = Vector2( 0.262576, 0.415283 )
+texture = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureButton" type="TextureButton" parent="MapContainer/Map2"]
-margin_right = 576.0
-margin_bottom = 451.0
-mouse_filter = 2
+[node name="Map2Text" type="Label" parent="MapContainer/Desert"]
+anchor_left = 0.00182745
+anchor_top = 1.0
+anchor_right = 1.00183
+anchor_bottom = 1.0
+margin_left = -17.561
+margin_top = -52.0557
+margin_right = 38.439
+margin_bottom = -2.05566
+custom_fonts/font = ExtResource( 7 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 5
+text = "Desert"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -207,9 +242,10 @@ custom_styles/pressed = ExtResource( 2 )
 custom_styles/normal = ExtResource( 3 )
 custom_fonts/font = ExtResource( 4 )
 text = "Zurück"
-script = SubResource( 2 )
+script = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 [connection signal="pressed" from="MapContainer/Grasland" to="MapContainer/Grasland" method="_on_Grasland_pressed"]
+[connection signal="pressed" from="MapContainer/Desert" to="MapContainer/Desert" method="_on_Desert_pressed"]
 [connection signal="pressed" from="Zurueck" to="Zurueck" method="_on_Zurueck_pressed"]

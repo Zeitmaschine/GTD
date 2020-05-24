@@ -79,13 +79,14 @@ func aim_and_shoot():
 		can_fire = true
 	
 func aim_and_shoot_upgrade2():
-	$Hack_sound.playing = true
-	$Hack_particle.emitting = true
 	var hack_particle_instance = hack_particle.instance()
 	hack_particle_instance.position = target
 	hack_particle_instance.emitting = true
 	get_tree().get_root().add_child(hack_particle_instance)
+	find_closest_target()
 	target_enemy.hit(attackpowerlvl + 2)
+	$Hack_sound.playing = true
+	$Hack_particle.emitting = true
 	can_fire2 = false
 	yield(get_tree().create_timer(( 2 + firerate) - (fireratelvl * 0.9)), \"timeout\")
 	can_fire2 = true
@@ -96,7 +97,7 @@ func earn_money_upgrade_1():
 	if can_make_money == true && get_parent().waverunning == true:
 		$Money_hack.emitting = true
 		$Money_gain_sound.playing = true
-		get_parent().add_extramoney(50,false)
+		get_parent().add_extramoney(150)
 		can_make_money = false
 		yield(get_tree().create_timer(5.0), \"timeout\")
 		can_make_money = true

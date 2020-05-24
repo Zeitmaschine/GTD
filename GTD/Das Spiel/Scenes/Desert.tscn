@@ -1,14 +1,14 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=19 format=2]
 
-[ext_resource path="res://Audio/Life_lost.wav" type="AudioStream" id=1]
-[ext_resource path="res://Audio/Die.wav" type="AudioStream" id=2]
-[ext_resource path="res://Audio/Buy_failed.wav" type="AudioStream" id=3]
-[ext_resource path="res://Assets/Tilesets/Grassland/Tileset_grassland.png" type="Texture" id=4]
-[ext_resource path="res://Audio/Buy.wav" type="AudioStream" id=5]
-[ext_resource path="res://Scenes/Interface.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Interface.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Audio/Buy_failed.wav" type="AudioStream" id=2]
+[ext_resource path="res://Audio/Die.wav" type="AudioStream" id=3]
+[ext_resource path="res://Audio/Buy.wav" type="AudioStream" id=4]
+[ext_resource path="res://Assets/Tilesets/Desert/Desert.png" type="Texture" id=5]
+[ext_resource path="res://Audio/Life_lost.wav" type="AudioStream" id=6]
 [ext_resource path="res://Scenes/Path2D.gd" type="Script" id=7]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id=23]
 script/source = "extends Node2D
 
 export var upgradelvl = false
@@ -1258,7 +1258,7 @@ func wave50():
 		wave = 51
 		triggeronce = false
 		triggeronce2 = false
-		
+
 
 
 
@@ -1266,39 +1266,30 @@ func wave50():
 
 "
 
-[sub_resource type="ConvexPolygonShape2D" id=2]
-points = PoolVector2Array( 128, 112.289, 0, 113.254, 0, 14.392, 128, 14.392 )
+[sub_resource type="ConvexPolygonShape2D" id=15]
+points = PoolVector2Array( 13.4771, 1.23383, 113.611, 1.23383, 108.253, 25.3464, 113.611, 71.8973, 115.286, 113.09, 113.277, 127.155, 14.1469, 126.151, 14.1469, 69.2181, 12.8073, 30.3699 )
 
-[sub_resource type="ConvexPolygonShape2D" id=3]
-points = PoolVector2Array( 112.161, 128, 18.1221, 128, 18.1221, 0.127319, 111.679, 0 )
+[sub_resource type="ConvexPolygonShape2D" id=16]
+points = PoolVector2Array( 0.775635, 14.4476, 128.372, 14.7825, 127.367, 114.582, 0.105835, 115.587 )
 
-[sub_resource type="ConvexPolygonShape2D" id=4]
-points = PoolVector2Array( 128, 111.325, 0, 113.254, 0, 17.7678, 128, 16.321 )
+[sub_resource type="ConvexPolygonShape2D" id=17]
+points = PoolVector2Array( 0.888916, 14.7825, 62.5101, 21.8153, 97.6744, 30.5226, 107.052, 46.9326, 110.735, 91.809, 113.08, 126.973, 14.9547, 126.973, 12.9453, 116.591, 5.24261, 111.903, 0.219116, 112.238 )
 
-[sub_resource type="ConvexPolygonShape2D" id=5]
-points = PoolVector2Array( 112.923, 128, 16.4724, 128, 14.0612, 0, 111.958, 0 )
+[sub_resource type="ConvexPolygonShape2D" id=18]
+points = PoolVector2Array( 112.075, 0.229126, 113.415, 6.92706, 118.103, 12.9553, 127.48, 14.9646, 127.815, 112.755, 67.5336, 107.396, 36.0532, 99.6938, 23.3271, 84.9583, 18.3036, 72.5671, 17.6338, 31.3746, 15.2896, -0.440674 )
 
-[sub_resource type="ConvexPolygonShape2D" id=6]
-points = PoolVector2Array( 128, 111.807, 0, 110.843, 0, 16.8032, 128, 14.8742 )
+[sub_resource type="ConvexPolygonShape2D" id=19]
+points = PoolVector2Array( 15.2205, 125.634, 20.244, 69.3708, 28.9514, 32.1971, 45.6962, 20.8106, 84.2095, 17.4616, 127.076, 16.122, 128.081, 113.242, 118.704, 114.917, 113.011, 122.285, 113.346, 127.978 )
 
-[sub_resource type="ConvexPolygonShape2D" id=7]
-points = PoolVector2Array( 17.2842, 128, 14.8729, 88.8619, 17.2842, 45.9413, 26.9292, 34.8495, 45.7371, 21.8287, 126.273, 16.0417, 127.72, 107.188, 107.465, 111.528, 107.948, 126.96 )
+[sub_resource type="ConvexPolygonShape2D" id=20]
+points = PoolVector2Array( 0.150146, 15.2995, 9.52728, 12.9553, 15.2205, 8.60156, 15.2205, 0.229126, 113.011, 0.898926, 109.662, 39.4122, 102.964, 75.916, 99.6148, 93.6656, 81.5303, 107.062, 52.3942, 110.745, 15.5554, 111.75, 0.150146, 111.75 )
 
-[sub_resource type="ConvexPolygonShape2D" id=8]
-points = PoolVector2Array( 0.68457, 16.0417, 79.2919, 18.9352, 90.866, 22.311, 105.333, 48.8349, 108.227, 128, 18.0458, 127.924, 17.0812, 112.975, 9.36511, 107.67, 0.202393, 107.67 )
+[sub_resource type="ConvexPolygonShape2D" id=21]
+points = PoolVector2Array( 0.0811157, 14.7825, 7.44885, 14.4476, 14.8167, 8.7543, 14.8167, -0.287964, 112.607, -0.287964, 112.942, 7.7496, 118.635, 13.4429, 128.347, 15.1173, 128.012, 112.908, 121.314, 113.912, 116.96, 119.271, 114.951, 127.643, 13.1422, 127.978, 14.1469, 121.615, 7.78375, 113.912, 0.0811157, 112.908 )
 
-[sub_resource type="ConvexPolygonShape2D" id=9]
-points = PoolVector2Array( 108.43, 0.888855, 112.288, 41.8804, 106.501, 85.2831, 87.6931, 100.233, 43.8081, 108.914, 0, 109.878, 0, 19.6968, 11.4971, 19.2145, 19.6954, 9.08716, 18.731, 0 )
-
-[sub_resource type="ConvexPolygonShape2D" id=10]
-points = PoolVector2Array( 106.78, 0.406616, 108.709, 11.9807, 113.05, 16.321, 126.07, 16.321, 126.553, 109.878, 42.6406, 106.502, 30.1021, 91.5524, 23.8328, 73.7091, 19.4924, 38.0223, 19.4924, 0.888855 )
-
-[sub_resource type="ConvexPolygonShape2D" id=11]
-points = PoolVector2Array( 112.364, 128, 16.8783, 126.478, 16.8783, 0, 110.918, 0 )
-
-[sub_resource type="TileSet" id=12]
-0/name = "Tileset_grassland.png 0"
-0/texture = ExtResource( 4 )
+[sub_resource type="TileSet" id=22]
+0/name = "Desert.png 0"
+0/texture = ExtResource( 5 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 128, 128 )
@@ -1307,8 +1298,8 @@ points = PoolVector2Array( 112.364, 128, 16.8783, 126.478, 16.8783, 0, 110.918, 
 0/navigation_offset = Vector2( 0, 0 )
 0/shapes = [  ]
 0/z_index = 0
-1/name = "Tileset_grassland.png 1"
-1/texture = ExtResource( 4 )
+1/name = "Desert.png 1"
+1/texture = ExtResource( 5 )
 1/tex_offset = Vector2( 0, 0 )
 1/modulate = Color( 1, 1, 1, 1 )
 1/region = Rect2( 128, 0, 128, 128 )
@@ -1317,8 +1308,8 @@ points = PoolVector2Array( 112.364, 128, 16.8783, 126.478, 16.8783, 0, 110.918, 
 1/navigation_offset = Vector2( 0, 0 )
 1/shapes = [  ]
 1/z_index = 0
-2/name = "Tileset_grassland.png 2"
-2/texture = ExtResource( 4 )
+2/name = "Desert.png 2"
+2/texture = ExtResource( 5 )
 2/tex_offset = Vector2( 0, 0 )
 2/modulate = Color( 1, 1, 1, 1 )
 2/region = Rect2( 256, 0, 128, 128 )
@@ -1327,8 +1318,8 @@ points = PoolVector2Array( 112.364, 128, 16.8783, 126.478, 16.8783, 0, 110.918, 
 2/navigation_offset = Vector2( 0, 0 )
 2/shapes = [  ]
 2/z_index = 0
-3/name = "Tileset_grassland.png 3"
-3/texture = ExtResource( 4 )
+3/name = "Desert.png 3"
+3/texture = ExtResource( 5 )
 3/tex_offset = Vector2( 0, 0 )
 3/modulate = Color( 1, 1, 1, 1 )
 3/region = Rect2( 384, 0, 128, 128 )
@@ -1337,21 +1328,27 @@ points = PoolVector2Array( 112.364, 128, 16.8783, 126.478, 16.8783, 0, 110.918, 
 3/navigation_offset = Vector2( 0, 0 )
 3/shapes = [  ]
 3/z_index = 0
-4/name = "Tileset_grassland.png 4"
-4/texture = ExtResource( 4 )
+4/name = "Desert.png 4"
+4/texture = ExtResource( 5 )
 4/tex_offset = Vector2( 0, 0 )
 4/modulate = Color( 1, 1, 1, 1 )
 4/region = Rect2( 512, 0, 128, 128 )
 4/tile_mode = 0
 4/occluder_offset = Vector2( 0, 0 )
 4/navigation_offset = Vector2( 0, 0 )
-4/shapes = [  ]
+4/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 16 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 4/z_index = 0
-5/name = "Tileset_grassland.png 5"
-5/texture = ExtResource( 4 )
+5/name = "Desert.png 5"
+5/texture = ExtResource( 5 )
 5/tex_offset = Vector2( 0, 0 )
 5/modulate = Color( 1, 1, 1, 1 )
-5/region = Rect2( 1280, 0, 128, 128 )
+5/region = Rect2( 640, 0, 128, 128 )
 5/tile_mode = 0
 5/occluder_offset = Vector2( 0, 0 )
 5/navigation_offset = Vector2( 0, 0 )
@@ -1359,15 +1356,15 @@ points = PoolVector2Array( 112.364, 128, 16.8783, 126.478, 16.8783, 0, 110.918, 
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 7 ),
+"shape": SubResource( 17 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 5/z_index = 0
-6/name = "Tileset_grassland.png 6"
-6/texture = ExtResource( 4 )
+6/name = "Desert.png 6"
+6/texture = ExtResource( 5 )
 6/tex_offset = Vector2( 0, 0 )
 6/modulate = Color( 1, 1, 1, 1 )
-6/region = Rect2( 1408, 0, 128, 128 )
+6/region = Rect2( 640, 128, 128, 128 )
 6/tile_mode = 0
 6/occluder_offset = Vector2( 0, 0 )
 6/navigation_offset = Vector2( 0, 0 )
@@ -1375,15 +1372,15 @@ points = PoolVector2Array( 112.364, 128, 16.8783, 126.478, 16.8783, 0, 110.918, 
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 8 ),
+"shape": SubResource( 18 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 6/z_index = 0
-7/name = "Tileset_grassland.png 7"
-7/texture = ExtResource( 4 )
+7/name = "Desert.png 7"
+7/texture = ExtResource( 5 )
 7/tex_offset = Vector2( 0, 0 )
 7/modulate = Color( 1, 1, 1, 1 )
-7/region = Rect2( 1280, 128, 128, 128 )
+7/region = Rect2( 768, 0, 128, 128 )
 7/tile_mode = 0
 7/occluder_offset = Vector2( 0, 0 )
 7/navigation_offset = Vector2( 0, 0 )
@@ -1391,15 +1388,15 @@ points = PoolVector2Array( 112.364, 128, 16.8783, 126.478, 16.8783, 0, 110.918, 
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 9 ),
+"shape": SubResource( 19 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 7/z_index = 0
-8/name = "Tileset_grassland.png 8"
-8/texture = ExtResource( 4 )
+8/name = "Desert.png 8"
+8/texture = ExtResource( 5 )
 8/tex_offset = Vector2( 0, 0 )
 8/modulate = Color( 1, 1, 1, 1 )
-8/region = Rect2( 1408, 128, 128, 128 )
+8/region = Rect2( 768, 128, 128, 128 )
 8/tile_mode = 0
 8/occluder_offset = Vector2( 0, 0 )
 8/navigation_offset = Vector2( 0, 0 )
@@ -1407,15 +1404,15 @@ points = PoolVector2Array( 112.364, 128, 16.8783, 126.478, 16.8783, 0, 110.918, 
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 10 ),
+"shape": SubResource( 20 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 8/z_index = 0
-9/name = "Tileset_grassland.png 9"
-9/texture = ExtResource( 4 )
+9/name = "Desert.png 9"
+9/texture = ExtResource( 5 )
 9/tex_offset = Vector2( 0, 0 )
 9/modulate = Color( 1, 1, 1, 1 )
-9/region = Rect2( 1536, 0, 128, 128 )
+9/region = Rect2( 896, 0, 128, 128 )
 9/tile_mode = 0
 9/occluder_offset = Vector2( 0, 0 )
 9/navigation_offset = Vector2( 0, 0 )
@@ -1423,15 +1420,15 @@ points = PoolVector2Array( 112.364, 128, 16.8783, 126.478, 16.8783, 0, 110.918, 
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 11 ),
+"shape": SubResource( 21 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 9/z_index = 0
-10/name = "Tileset_grassland.png 10"
-10/texture = ExtResource( 4 )
+10/name = "Desert.png 10"
+10/texture = ExtResource( 5 )
 10/tex_offset = Vector2( 0, 0 )
 10/modulate = Color( 1, 1, 1, 1 )
-10/region = Rect2( 1536, 128, 128, 128 )
+10/region = Rect2( 896, 128, 128, 128 )
 10/tile_mode = 0
 10/occluder_offset = Vector2( 0, 0 )
 10/navigation_offset = Vector2( 0, 0 )
@@ -1439,95 +1436,39 @@ points = PoolVector2Array( 112.364, 128, 16.8783, 126.478, 16.8783, 0, 110.918, 
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 2 ),
+"shape": SubResource( 15 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 10/z_index = 0
-11/name = "Tileset_grassland.png 11"
-11/texture = ExtResource( 4 )
-11/tex_offset = Vector2( 0, 0 )
-11/modulate = Color( 1, 1, 1, 1 )
-11/region = Rect2( 1664, 0, 128, 128 )
-11/tile_mode = 0
-11/occluder_offset = Vector2( 0, 0 )
-11/navigation_offset = Vector2( 0, 0 )
-11/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 3 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
-11/z_index = 0
-12/name = "Tileset_grassland.png 12"
-12/texture = ExtResource( 4 )
-12/tex_offset = Vector2( 0, 0 )
-12/modulate = Color( 1, 1, 1, 1 )
-12/region = Rect2( 1664, 128, 128, 128 )
-12/tile_mode = 0
-12/occluder_offset = Vector2( 0, 0 )
-12/navigation_offset = Vector2( 0, 0 )
-12/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 4 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
-12/z_index = 0
-13/name = "Tileset_grassland.png 13"
-13/texture = ExtResource( 4 )
-13/tex_offset = Vector2( 0, 0 )
-13/modulate = Color( 1, 1, 1, 1 )
-13/region = Rect2( 1792, 0, 128, 128 )
-13/tile_mode = 0
-13/occluder_offset = Vector2( 0, 0 )
-13/navigation_offset = Vector2( 0, 0 )
-13/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 5 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
-13/z_index = 0
-14/name = "Tileset_grassland.png 14"
-14/texture = ExtResource( 4 )
-14/tex_offset = Vector2( 0, 0 )
-14/modulate = Color( 1, 1, 1, 1 )
-14/region = Rect2( 1792, 128, 128, 128 )
-14/tile_mode = 0
-14/occluder_offset = Vector2( 0, 0 )
-14/navigation_offset = Vector2( 0, 0 )
-14/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 6 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
-14/z_index = 0
 
-[sub_resource type="Curve2D" id=13]
+[sub_resource type="Curve2D" id=24]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 717.12, -31.7899, 0, 0, 0, 0, 716.138, 318.15, 0, 0, 0, 0, 66.0068, 320.78, 0, 0, 0, 0, 66.3378, 577.5, 0, 0, 0, 0, 970.738, 573.7, 0, 0, 0, 0, 963.446, 197.32, 0, 0, 0, 0, 1350.28, 190.331, 0, 0, 0, 0, 1351.79, 709.498, 0, 0, 0, 0, 970.605, 712.83, 0, 0, 0, 0, 968.923, 967.253, 0, 0, 0, 0, 1600.67, 964.857, 0, 0, 0, 0, 1600.67, 711.398, 0, 0, 0, 0, 1849.84, 712.83, 0, 0, 0, 0, 1848.4, 314.741, 0, 0, 0, 0, 1741.01, 313.31, 0, 0, 0, 0, 1742.06, -37.9226 )
+"points": PoolVector2Array( 0, 0, 0, 0, -2.1111, 705.002, 0, 0, 0, 0, 584.89, 700.002, 0, 0, 0, 0, 587.89, 196.001, 0, 0, 0, 0, 329.89, 197.001, 0, 0, 0, 0, 332.442, 450.025, 0, 0, 0, 0, 1613.11, 451.915, 0, 0, 0, 0, 1613.89, 710.002, 0, 0, 0, 0, 1234.89, 707.002, 0, 0, 0, 0, 1236.89, -22.9995 )
 }
 
-[node name="Grassland" type="Node2D"]
+[sub_resource type="GDScript" id=14]
+script/source = "extends Control
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+"
+
+[node name="Desert" type="Node2D"]
 light_mask = 0
-script = SubResource( 1 )
+script = SubResource( 23 )
 
 [node name="TileMap" type="TileMap" parent="."]
-tile_set = SubResource( 12 )
+tile_set = SubResource( 22 )
 cell_size = Vector2( 128, 128 )
 collision_layer = 8
 collision_mask = 0
 format = 1
-tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 13, 0, 6, 0, 0, 7, 0, 0, 8, 2, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 4, 0, 13, 13, 0, 14, 0, 0, 15, 0, 0, 16, 0, 0, 65536, 0, 0, 65537, 0, 0, 65538, 0, 0, 65539, 0, 0, 65540, 1, 0, 65541, 13, 0, 65542, 0, 0, 65543, 5, 0, 65544, 12, 0, 65545, 12, 0, 65546, 6, 0, 65547, 0, 0, 65548, 0, 0, 65549, 13, 0, 65550, 0, 0, 65551, 0, 0, 65552, 2, 0, 131072, 5, 0, 131073, 10, 0, 131074, 14, 0, 131075, 12, 0, 131076, 12, 0, 131077, 7, 0, 131078, 0, 0, 131079, 11, 0, 131080, 0, 0, 131081, 0, 0, 131082, 13, 0, 131083, 0, 0, 131084, 0, 0, 131085, 8, 0, 131086, 6, 0, 131087, 0, 0, 131088, 0, 0, 196608, 13, 0, 196609, 0, 0, 196610, 4, 0, 196611, 4, 0, 196612, 0, 0, 196613, 0, 0, 196614, 3, 0, 196615, 13, 0, 196616, 0, 0, 196617, 1, 0, 196618, 13, 0, 196619, 2, 0, 196620, 0, 0, 196621, 0, 0, 196622, 13, 0, 196623, 0, 0, 196624, 0, 0, 262144, 8, 0, 262145, 12, 0, 262146, 12, 0, 262147, 12, 0, 262148, 12, 0, 262149, 12, 0, 262150, 12, 0, 262151, 7, 0, 262152, 0, 0, 262153, 0, 0, 262154, 13, 0, 262155, 0, 0, 262156, 0, 0, 262157, 0, 0, 262158, 11, 0, 262159, 0, 0, 262160, 0, 0, 327680, 0, 0, 327681, 0, 0, 327682, 0, 0, 327683, 0, 0, 327684, 1, 0, 327685, 0, 0, 327686, 0, 0, 327687, 5, 0, 327688, 14, 0, 327689, 14, 0, 327690, 7, 0, 327691, 0, 0, 327692, 5, 0, 327693, 12, 0, 327694, 7, 0, 327695, 0, 0, 327696, 1, 0, 393216, 0, 0, 393217, 0, 0, 393218, 0, 0, 393219, 0, 0, 393220, 0, 0, 393221, 0, 0, 393222, 0, 0, 393223, 13, 0, 393224, 0, 0, 393225, 0, 0, 393226, 0, 0, 393227, 0, 0, 393228, 13, 0, 393229, 2, 0, 393230, 0, 0, 393231, 0, 0, 393232, 0, 0, 458752, 0, 0, 458753, 0, 0, 458754, 2, 0, 458755, 0, 0, 458756, 0, 0, 458757, 0, 0, 458758, 0, 0, 458759, 8, 0, 458760, 12, 0, 458761, 14, 0, 458762, 10, 0, 458763, 12, 0, 458764, 7, 0, 458765, 0, 0, 458766, 0, 0, 458767, 0, 0, 458768, 0, 0, 524288, 0, 0, 524289, 0, 0, 524290, 0, 0, 524291, 0, 0, 524292, 0, 0, 524293, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 0, 0, 524297, 0, 0, 524298, 0, 0, 524299, 0, 0, 524300, 0, 0, 524301, 0, 0, 524302, 0, 0, 524303, 2, 0, 524304, 0, 0, 589824, 0, 0, 589825, 0, 0, 589826, 0, 0, 589827, 0, 0, 589828, 0, 0, 589829, 0, 0, 589830, 0, 0, 589831, 0, 0, 589832, 0, 0, 589833, 4, 0, 589834, 4, 0, 589835, 4, 0, 589836, 0, 0, 589837, 0, 0, 589838, 0, 0, 589839, 0, 0, 589840, 0, 0 )
+tile_data = PoolIntArray( 0, 2, 0, 1, 2, 0, 2, 2, 0, 3, 2, 0, 4, 2, 0, 5, 2, 0, 6, 2, 0, 7, 2, 0, 8, 2, 0, 9, 10, 0, 10, 2, 0, 11, 2, 0, 12, 1, 0, 13, 2, 0, 14, 2, 0, 65536, 0, 0, 65537, 1, 0, 65538, 7, 0, 65539, 4, 0, 65540, 5, 0, 65541, 2, 0, 65542, 1, 0, 65543, 2, 0, 65544, 2, 0, 65545, 10, 0, 65546, 2, 0, 65547, 0, 0, 65548, 2, 0, 65549, 3, 0, 65550, 2, 0, 131072, 1, 0, 131073, 0, 0, 131074, 10, 0, 131075, 3, 0, 131076, 10, 0, 131077, 2, 0, 131078, 2, 0, 131079, 2, 0, 131080, 2, 0, 131081, 10, 0, 131082, 2, 0, 131083, 2, 0, 131084, 2, 0, 131085, 2, 0, 131086, 2, 0, 196608, 2, 0, 196609, 2, 0, 196610, 6, 0, 196611, 4, 0, 196612, 9, 0, 196613, 4, 0, 196614, 4, 0, 196615, 4, 0, 196616, 4, 0, 196617, 9, 0, 196618, 4, 0, 196619, 4, 0, 196620, 5, 0, 196621, 2, 0, 196622, 2, 0, 262144, 2, 0, 262145, 0, 0, 262146, 2, 0, 262147, 2, 0, 262148, 10, 0, 262149, 2, 0, 262150, 2, 0, 262151, 2, 0, 262152, 2, 0, 262153, 10, 0, 262154, 0, 0, 262155, 1, 0, 262156, 10, 0, 262157, 1, 0, 262158, 2, 0, 327680, 4, 0, 327681, 4, 0, 327682, 4, 0, 327683, 4, 0, 327684, 8, 0, 327685, 2, 0, 327686, 1, 0, 327687, 2, 0, 327688, 2, 0, 327689, 6, 0, 327690, 4, 0, 327691, 4, 0, 327692, 8, 0, 327693, 2, 0, 327694, 2, 0, 393216, 2, 0, 393217, 2, 0, 393218, 2, 0, 393219, 2, 0, 393220, 2, 0, 393221, 2, 0, 393222, 2, 0, 393223, 2, 0, 393224, 2, 0, 393225, 2, 0, 393226, 2, 0, 393227, 2, 0, 393228, 2, 0, 393229, 0, 0, 393230, 2, 0, 458752, 3, 0, 458753, 2, 0, 458754, 0, 0, 458755, 2, 0, 458756, 2, 0, 458757, 3, 0, 458758, 2, 0, 458759, 1, 0, 458760, 2, 0, 458761, 2, 0, 458762, 2, 0, 458763, 2, 0, 458764, 3, 0, 458765, 2, 0, 458766, 2, 0, 524288, 2, 0, 524289, 2, 0, 524290, 2, 0, 524291, 2, 0, 524292, 2, 0, 524293, 2, 0, 524294, 2, 0, 524295, 2, 0, 524296, 2, 0, 524297, 2, 0, 524298, 0, 0, 524299, 2, 0, 524300, 2, 0, 524301, 2, 0, 524302, 2, 0 )
 
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2( -12.8878, 0 )
-curve = SubResource( 13 )
+curve = SubResource( 24 )
 script = ExtResource( 7 )
 
 [node name="Timer" type="Timer" parent="Path2D"]
@@ -1537,25 +1478,26 @@ autostart = true
 [node name="InterfaceLayer" type="CanvasLayer" parent="."]
 layer = 0
 
-[node name="Interface" parent="InterfaceLayer" instance=ExtResource( 6 )]
+[node name="Interface" parent="InterfaceLayer" instance=ExtResource( 1 )]
 margin_left = 7.75623
 margin_top = 2.6225
 margin_right = -1853.24
 margin_bottom = -1031.11
+script = SubResource( 14 )
 
 [node name="Die" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 2 )
+stream = ExtResource( 3 )
 volume_db = -26.288
 
 [node name="Life_Lost" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 1 )
+stream = ExtResource( 6 )
 volume_db = -10.089
 
 [node name="Buy" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 5 )
+stream = ExtResource( 4 )
 volume_db = -23.223
 
 [node name="Buy_failed" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 3 )
+stream = ExtResource( 2 )
 volume_db = -23.223
 [connection signal="timeout" from="Path2D/Timer" to="Path2D" method="_on_Timer_timeout"]
