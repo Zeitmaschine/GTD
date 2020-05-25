@@ -64,6 +64,8 @@ func getUpgrade3():
 
 func _on_SellButton_pressed():
 	get_parent().get_parent().get_parent().get_node(\".\").money += int(sell * 0.75)
+	get_parent().get_parent().get_parent().get_node(\".\").upgrade1unlock = false
+	get_parent().get_parent().get_parent().get_node(\".\").upgrade2unlock = false
 	get_parent().get_parent().queue_free()
 "
 

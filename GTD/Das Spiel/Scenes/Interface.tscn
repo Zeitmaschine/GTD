@@ -151,7 +151,10 @@ func _on_PauseFortsetzen_pressed():
 func _on_PauseNeustart_pressed():
 	get_tree().paused = not get_tree().paused
 	visible = not visible
-	get_tree().change_scene(\"res://Scenes/Grasland.tscn\")
+	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").map == 1):
+		get_tree().change_scene(\"res://Scenes/Grasland.tscn\")
+	else:
+		get_tree().change_scene(\"res://Scenes/Desert.tscn\")
 
 func _on_PauseBeenden_pressed():
 	get_tree().paused = not get_tree().paused
@@ -225,7 +228,10 @@ func _on_GameOverNeutstart_pressed():
 	gameover = false
 	get_tree().paused = not get_tree().paused
 	visible = not visible
-	get_tree().change_scene(\"res://Scenes/Grasland.tscn\")
+	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").map == 1):
+		get_tree().change_scene(\"res://Scenes/Grasland.tscn\")
+	else:
+		get_tree().change_scene(\"res://Scenes/Desert.tscn\")
 "
 
 [node name="Interface" type="Control"]
