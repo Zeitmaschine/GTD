@@ -30,6 +30,11 @@ var waveinterface
 var max_universitaet = false
 var unigekauft
 var unitext
+var upgradeMathematiker = false
+var upgradeInformatiker = false
+var upgradeBombenturm = false
+var upgradeWinkelninja = false
+var upgradeUni = false
 
 #Preloading
 var mathematiker = preload(\"res://Scenes/Mathematiker.tscn\")

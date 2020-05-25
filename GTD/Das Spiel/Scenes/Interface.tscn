@@ -79,6 +79,8 @@ func _on_ExitButton_pressed():
 func _input(event):
 	if event.is_action_pressed(\"Shop\"):
 		visible = not visible
+	if(event.is_action_pressed(\"ui_cancel\")):
+		visible = false
 
 
 func _on_ShopButton_pressed():
@@ -147,7 +149,7 @@ func _process(delta):
 	gameover = get_parent().get_parent().get_node(\"GameOverLayer/GameOver\").getGameOver()
 
 func _input(event):
-	if event.is_action_pressed(\"ui_cancel\") and (gameover == false):
+	if event.is_action_pressed(\"ui_cancel\") && (gameover == false) && get_parent().get_parent().get_node(\"ShopLayer/ShopMenu\").visible != true && get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgradeMathematiker != true && get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgradeInformatiker != true && get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgradeBombenturm != true && get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgradeWinkelninja != true && get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgradeUni != true:
 		get_tree().paused = not get_tree().paused
 		visible = not visible
 

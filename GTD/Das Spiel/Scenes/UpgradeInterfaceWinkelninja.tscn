@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Assets/Icons/Exit_Icon_pressed.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Icons/Exit_Icon.png" type="Texture" id=2]
@@ -14,6 +14,8 @@
 [ext_resource path="res://Interface/Theme/ButtonPressed.tres" type="StyleBox" id=12]
 [ext_resource path="res://Interface/Theme/ButtonClick.tres" type="StyleBox" id=13]
 [ext_resource path="res://Interface/counter/label_bg.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Icons/Info.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Icons/Info_Pressed.png" type="Texture" id=16]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Control
@@ -22,6 +24,8 @@ var money = 0
 var sell = 1
 var upgrade1 = false
 var upgrade2 = false
+var infopopupmenu
+var infopopupmenu2
 
 #Schadenslevel
 export var price1 = 600
@@ -40,9 +44,13 @@ func _ready():
 	get_node(\"UpgradeBackround/StatUpgradeText/DamageText\").text = str(price1) + \"$\"
 	get_node(\"UpgradeBackround/StatUpgradeText/FirerateText\").text = str(price2) + \"$\"
 	get_node(\"UpgradeBackround/StatUpgradeText/RangeText\").text = str(price3) + \"$\"
-	
+	infopopupmenu = get_node(\"InfoBoxOutline\")
+	infopopupmenu2 = get_node(\"InfoBoxOutline2\")
+
 func _on_TextureButton_pressed():
 	visible = false
+	infopopupmenu.visible = false
+	infopopupmenu2.visible = false
 
 func _process(delta):
 	check_status()
@@ -96,11 +104,36 @@ func check_status():
 		get_node(\"UpgradeBackround/StatUpgradeContainer/RangeButton\").set_disabled(true)
 	if(get_parent().get_parent().get_parent().get_node(\".\").money >= price3 && get_parent().get_parent().get_node(\".\").attackrangelvl <  5):
 		get_node(\"UpgradeBackround/StatUpgradeContainer/RangeButton\").set_disabled(false)
+	if(visible == false):
+		get_parent().get_parent().get_parent().get_node(\".\").upgradeWinkelninja = false
+	if(visible == true):
+		get_parent().get_parent().get_parent().get_node(\".\").upgradeWinkelninja = true
 
 
 func _on_SellButton_pressed():
 	get_parent().get_parent().get_parent().get_node(\".\").money += int(sell * 0.75)
 	get_parent().get_parent().queue_free()
+
+
+func _on_InfoButton_pressed():
+	infopopupmenu2.visible = false
+	if(infopopupmenu.visible == false):
+		infopopupmenu.visible = true
+	else:
+		infopopupmenu.visible = false
+
+
+func _on_InfoButton2_pressed():
+	infopopupmenu.visible = false
+	if(infopopupmenu2.visible == false):
+		infopopupmenu2.visible = true
+	else:
+		infopopupmenu2.visible = false
+
+
+func _input(event):
+	if event.is_action_pressed(\"ui_cancel\"):
+		visible = false
 "
 
 [sub_resource type="GDScript" id=2]
@@ -184,11 +217,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="UpdateBackroundOutline" type="ColorRect" parent="."]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 904.0
+margin_bottom = 1072.0
+color = Color( 0.156863, 0.156863, 0.156863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="UpgradeBackround" type="ColorRect" parent="."]
-margin_left = 20.0
-margin_top = 20.0
+margin_left = 12.0
+margin_top = 12.0
 margin_right = 900.0
-margin_bottom = 1060.0
+margin_bottom = 1068.0
 mouse_filter = 2
 color = Color( 0.196078, 0.196078, 0.196078, 1 )
 __meta__ = {
@@ -484,11 +527,23 @@ text = "500$"
 align = 1
 valign = 2
 
+[node name="InfoButton" type="TextureButton" parent="UpgradeBackround"]
+margin_left = 810.0
+margin_top = 60.0
+margin_right = 845.0
+margin_bottom = 95.0
+texture_normal = ExtResource( 15 )
+texture_pressed = ExtResource( 16 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="SpecialUpgradeOutline2" type="ColorRect" parent="UpgradeBackround"]
 margin_left = 575.0
 margin_top = 565.0
 margin_right = 835.0
-margin_bottom = 975.0
+margin_bottom = 963.0
 color = Color( 0.129412, 0.129412, 0.129412, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -498,7 +553,7 @@ __meta__ = {
 margin_left = 580.0
 margin_top = 570.0
 margin_right = 830.0
-margin_bottom = 970.0
+margin_bottom = 958.0
 color = Color( 0.156863, 0.156863, 0.156863, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -530,7 +585,7 @@ __meta__ = {
 [node name="TextureUpgrade2" type="TextureRect" parent="UpgradeBackround/SpecialUpgradeBackround2/SpecialUpgradeButton2"]
 margin_top = 40.0
 margin_right = 250.0
-margin_bottom = 360.0
+margin_bottom = 340.0
 texture = ExtResource( 10 )
 expand = true
 __meta__ = {
@@ -545,6 +600,18 @@ theme = ExtResource( 4 )
 text = "750$"
 align = 1
 valign = 2
+
+[node name="InfoButton2" type="TextureButton" parent="UpgradeBackround"]
+margin_left = 810.0
+margin_top = 549.0
+margin_right = 845.0
+margin_bottom = 584.0
+texture_normal = ExtResource( 15 )
+texture_pressed = ExtResource( 16 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TextureButton" type="TextureButton" parent="UpgradeBackround"]
 margin_left = 20.0
@@ -607,10 +674,72 @@ text = "450$"
 align = 1
 valign = 1
 script = SubResource( 5 )
+
+[node name="InfoBoxOutline" type="ColorRect" parent="."]
+visible = false
+margin_left = 904.0
+margin_top = 97.0
+margin_right = 1208.0
+margin_bottom = 432.0
+color = Color( 0.156863, 0.156863, 0.156863, 1 )
+
+[node name="InfoBox" type="ColorRect" parent="InfoBoxOutline"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = -5.0
+margin_bottom = -5.0
+color = Color( 0.196078, 0.196078, 0.196078, 1 )
+
+[node name="Description" type="Label" parent="InfoBoxOutline/InfoBox"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 5.0
+theme = ExtResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 5
+text = "Schießt mehr 
+Projektile pro
+Umdrehung."
+
+[node name="InfoBoxOutline2" type="ColorRect" parent="."]
+visible = false
+margin_left = 904.0
+margin_top = 587.0
+margin_right = 1208.0
+margin_bottom = 922.0
+color = Color( 0.156863, 0.156863, 0.156863, 1 )
+
+[node name="InfoBox2" type="ColorRect" parent="InfoBoxOutline2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = -5.0
+margin_bottom = -5.0
+color = Color( 0.196078, 0.196078, 0.196078, 1 )
+
+[node name="Description2" type="Label" parent="InfoBoxOutline2/InfoBox2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 5.0
+theme = ExtResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 5
+text = "Der Winkelninja
+dreht sich viel
+schneller!"
 [connection signal="pressed" from="UpgradeBackround/StatUpgradeContainer/DamageButton" to="." method="_on_DamageButton_pressed"]
 [connection signal="pressed" from="UpgradeBackround/StatUpgradeContainer/FirerateButton" to="." method="_on_FirerateButton_pressed"]
 [connection signal="pressed" from="UpgradeBackround/StatUpgradeContainer/RangeButton" to="." method="_on_RangeButton_pressed"]
 [connection signal="pressed" from="UpgradeBackround/SpecialUpgradeBackround/SpecialUpgradeButton" to="." method="_on_SpecialUpgradeButton_pressed"]
+[connection signal="pressed" from="UpgradeBackround/InfoButton" to="." method="_on_InfoButton_pressed"]
 [connection signal="pressed" from="UpgradeBackround/SpecialUpgradeBackround2/SpecialUpgradeButton2" to="." method="_on_SpecialUpgradeButton2_pressed"]
+[connection signal="pressed" from="UpgradeBackround/InfoButton2" to="." method="_on_InfoButton2_pressed"]
 [connection signal="pressed" from="UpgradeBackround/TextureButton" to="." method="_on_TextureButton_pressed"]
 [connection signal="pressed" from="SellButton" to="." method="_on_SellButton_pressed"]
