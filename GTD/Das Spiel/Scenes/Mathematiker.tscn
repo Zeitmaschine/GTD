@@ -7,6 +7,7 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends KinematicBody2D 
 
+#Grundwerte
 var projectilespeed = 1000 
 var firerate = 2.0
 var can_fire = true
@@ -14,18 +15,20 @@ var projectile = preload (\"res://Scenes/Projectile.tscn\")
 var enemyinrange = 0
 var target = null
 var placed = false
+export var priority = 0
 
-
+#Verbesserungswerte
 export var upgrade1 = false
 export var upgrade2 = false
 export var attackpowerlvl = 1
 export var fireratelvl = 1
 export var attackrangelvl = 1
 
+#Reichweite wird zu Beginn festgelegt
 func _ready():
 	set_range()
 
-
+#Findung des Ziels und das Ausführen der Aktionen
 func _process(delta):
 	if placed == true:
 		find_closest_target()
@@ -42,23 +45,59 @@ func _process(delta):
 		if can_fire == true && enemyinrange > 0 && target.position != Vector2(0,0):
 			aim_and_shoot()
 
+#Bestimmung, ob überhaupt Gegner anwesend sind
 func _on_Range_body_entered(body):
 		enemyinrange += 1
 
 func _on_Range_body_exited(body):
 		enemyinrange -= 1
 
+#Zielfindung
 func find_closest_target():
+	var maxHealth = 1
+	var minHealth = 11
 	var units = $Range.get_overlapping_bodies()
 	if units.size() > 0:
 		var closest = units[0].get_parent()
+		
+		#Suche nach dem meisten Leben
 		for unit in units:
-			if position.distance_to(unit.global_position) < position.distance_to(closest.global_position):
-				closest = unit.get_parent()
-			target = closest
+			if unit.hp > maxHealth:
+				maxHealth = unit.hp
+				
+		#Suche nach dem wenigsten Leben
+		for unit in units:
+			if unit.hp < minHealth:
+				minHealth = unit.hp
+		
+		
+		#Suche einfach nach dem nächsten Gegner
+		if priority == 0:
+			for unit in units:
+				if position.distance_to(unit.global_position) < position.distance_to(closest.global_position):
+					closest = unit.get_parent()
+				target = closest
+
+	
+		
+		#Suche nach dem nächsten Gegner mit dem meisten Leben
+		if priority == 1:
+			for unit in units:
+				if position.distance_to(unit.global_position) < position.distance_to(closest.global_position) && unit.hp == maxHealth:
+					closest = unit.get_parent()
+				target = closest
+
+		
+		#Suche nach dem nächsten Gegner mit dem wenigsten Leben
+		if priority == 2:
+			for unit in units:
+				if position.distance_to(unit.global_position) < position.distance_to(closest.global_position) && unit.hp == minHealth:
+					closest = unit.get_parent()
+				target = closest
+			
 	else:
 			target = null
-			
+#Vorbeugung vor Abstürzen
 func hit(damage):
 	pass
 
@@ -72,6 +111,7 @@ func _on_Mathematiker_Area_mouse_exited():
 	scale = Vector2(1,1)
 	$Range_Sprite.visible = false
 
+#Rotation in Richtung Gegner und das Schießen
 func aim_and_shoot():
 	rotation = (target.global_position - position).angle() - PI/2
 	var projectile_instance = projectile.instance()
@@ -84,6 +124,7 @@ func aim_and_shoot():
 	yield(get_tree().create_timer(firerate - (fireratelvl * 0.15)), \"timeout\")
 	can_fire = true
 	
+#Rotation in Richtung Gegner und das Schießen mit Salven
 func aim_and_shoot_upgrade_1():
 	var i = 0
 	rotation = (target.global_position - position).angle() - PI/2
@@ -104,6 +145,7 @@ func aim_and_shoot_upgrade_1():
 	yield(get_tree().create_timer(firerate - (fireratelvl * 0.15)), \"timeout\")
 	can_fire = true
 		
+#Rotation in Richtung Gegner und das Schießen mit Streuschuss
 func aim_and_shoot_upgrade_2():
 	rotation = (target.global_position - position).angle() - PI/2
 	var projectile_instance1 = projectile.instance()
@@ -128,6 +170,7 @@ func aim_and_shoot_upgrade_2():
 	projectile_instance3.setDamage(attackpowerlvl)
 	get_tree().get_root().add_child(projectile_instance3)
 	
+#Rotation in Richtung Gegner und das Schießen mit Salven und Streuschuss
 func aim_and_shoot_upgrade_1_2():
 	var i = 0
 	rotation = (target.global_position - position).angle() - PI/2
@@ -165,20 +208,23 @@ func aim_and_shoot_upgrade_1_2():
 		can_fire = true
 	
 	can_fire = false
-	yield(get_tree().create_timer(firerate - (fireratelvl * 0.15)), \"timeout\")
+	yield(get_tree().create_timer(firerate - (fireratelvl * 0.25)), \"timeout\")
 	can_fire = true
 	
 
+#Setter für die Upgrades
 func setUpgrade1(upgrade11):
 	upgrade1 = upgrade11
 
 func setUpgrade2(upgrade22):
 	upgrade1 = upgrade22
 
+#Anzeige der Reichweite
 func set_range():
-	$Range/CollisionRange.scale = Vector2(0.9 + (0.1 * attackrangelvl) , 0.9 + (0.1 * attackrangelvl ))
-	$Range_Sprite.scale = Vector2(0.9 + (0.1 * attackrangelvl), 0.9 + (0.1 * attackrangelvl ))
+	$Range/CollisionRange.scale = Vector2(0.9 + (0.3 * attackrangelvl) , 0.9 + (0.3 * attackrangelvl ))
+	$Range_Sprite.scale = Vector2(0.9 + (0.3 * attackrangelvl), 0.9 + (0.3 * attackrangelvl ))
 	
+#Öffnen des Upgrade-Menüs
 func _on_Mathematiker_Area_input_event(viewport, event, shape_idx):
 	if(event.is_action_pressed(\"left_click\") and placed == true):
 		$UpgradeWindow/MathematikerUpgrade.visible =  true

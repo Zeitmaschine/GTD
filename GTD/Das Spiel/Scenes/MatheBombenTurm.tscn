@@ -7,6 +7,7 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends KinematicBody2D 
 
+#Grundwerte
 var projectilespeed = 600
 var firerate = 3.0
 var can_fire = true
@@ -14,38 +15,77 @@ var projectile = preload (\"res://Scenes/Bomb.tscn\")
 var enemyinrange = 0
 var target = null
 var placed = false
+export var priority = 0
 
-
+#Verbesserungswerte
 export var upgrade1 = false
 export var upgrade2 = false
 export var attackpowerlvl = 1
 export var fireratelvl = 1
 export var attackrangelvl = 1
 
+#Reichweite wird zu Beginn festgelegt
 func _ready():
 	set_range()
 
-
+#Findung des Ziels und das Ausführen der Aktionen
 func _process(delta):
 	if placed == true:
 		find_closest_target()
 		if can_fire == true && enemyinrange > 0 && target.position != Vector2(0,0):
 			aim_and_shoot()
 
+#Zielfindung
 func find_closest_target():
+	var maxHealth = 1
+	var minHealth = 11
 	var units = $Range.get_overlapping_bodies()
 	if units.size() > 0:
 		var closest = units[0].get_parent()
+		
+		#Suche nach dem meisten Leben
 		for unit in units:
-			if position.distance_to(unit.global_position) < position.distance_to(closest.global_position):
-				closest = unit.get_parent()
-			target = closest
+			if unit.hp > maxHealth:
+				maxHealth = unit.hp
+				
+		#Suche nach dem wenigsten Leben
+		for unit in units:
+			if unit.hp < minHealth:
+				minHealth = unit.hp
+		
+		
+		#Suche einfach nach dem nächsten Gegner
+		if priority == 0:
+			for unit in units:
+				if position.distance_to(unit.global_position) < position.distance_to(closest.global_position):
+					closest = unit.get_parent()
+				target = closest
+
+	
+		
+		#Suche nach dem nächsten Gegner mit dem meisten Leben
+		if priority == 1:
+			for unit in units:
+				if position.distance_to(unit.global_position) < position.distance_to(closest.global_position) && unit.hp == maxHealth:
+					closest = unit.get_parent()
+				target = closest
+
+		
+		#Suche nach dem nächsten Gegner mit dem wenigsten Leben
+		if priority == 2:
+			for unit in units:
+				if position.distance_to(unit.global_position) < position.distance_to(closest.global_position) && unit.hp == minHealth:
+					closest = unit.get_parent()
+				target = closest
+			
 	else:
 			target = null
-			
+
+#Vorbeugung vor Abstürzen
 func hit(damage):
 	pass
 
+#Schießt eine Bombe
 func aim_and_shoot():
 	rotation = (target.global_position - position).angle() - PI/2
 	var projectile_instance = projectile.instance()
@@ -57,30 +97,32 @@ func aim_and_shoot():
 	projectile_instance.upgrade2 = upgrade2
 	get_tree().get_root().add_child(projectile_instance)
 	can_fire = false
-	yield(get_tree().create_timer(firerate - (fireratelvl * 0.3)), \"timeout\")
+	yield(get_tree().create_timer(firerate - (fireratelvl * 0.5)), \"timeout\")
 	can_fire = true
 	
+#Reichweite wird festgelegt
 func set_range():
-	$Range/CollisionRange.scale = Vector2(0.9 + (0.2 * attackrangelvl) , 0.9 + (0.2 * attackrangelvl ))
-	$Range_Sprite.scale = Vector2(0.9 + (0.2 * attackrangelvl), 0.9 + (0.2 * attackrangelvl ))
+	$Range/CollisionRange.scale = Vector2(0.9 + (0.3 * attackrangelvl) , 0.9 + (0.3 * attackrangelvl ))
+	$Range_Sprite.scale = Vector2(0.9 + (0.3 * attackrangelvl), 0.9 + (0.3 * attackrangelvl ))
 
-
+#Reichweite wird angezeigt
 func _on_MatheBombenTurm_Area_mouse_entered():
 	$Sprite_MatheBombenTurm.scale = Vector2(1.2,1.2)
 	$Range_Sprite.visible = true
-
 
 func _on_MatheBombenTurm_Area_mouse_exited():
 	$Sprite_MatheBombenTurm.scale = Vector2(1,1)
 	$Range_Sprite.visible = false
 
+
+#Bestimmung, ob überhaupt Gegner anwesend sind
 func _on_Range_body_entered(body):
 	enemyinrange += 1
 
 func _on_Range_body_exited(body):
 	enemyinrange -= 1
 
-
+#Aufrufung des Upgrade-Menüs
 func _on_MatheBombenTurm_Area_input_event(viewport, event, shape_idx):
 	if(event.is_action_pressed(\"left_click\") and placed == true):
 		 $UpgradeWindow/BombenturmUpgrade.visible =  true

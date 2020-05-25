@@ -11,6 +11,7 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends KinematicBody2D 
 
+#Grundwerte
 var projectilespeed = 1000
 var firerate = 5.0
 var can_fire = true
@@ -22,7 +23,9 @@ var target = null
 var can_make_money = true
 var target_enemy = null
 var placed = false
+export var priority = 1
 
+#Verbesserungswerte
 
 export var upgrade1 = false
 export var upgrade2 = false
@@ -32,6 +35,8 @@ export var attackspeedlvl = 1
 
 func _ready():
 	pass
+
+#Findung des Ziels und das Ausführen der Aktionen
 
 func _process(delta):
 	if placed == true:
@@ -45,26 +50,69 @@ func _process(delta):
 		if upgrade1 == true:
 			earn_money_upgrade_1()
 
+#Bestimmung, ob überhaupt Gegner anwesend sind
+
 func _on_Range_body_entered(body):
 		enemyinrange += 1
 
 func _on_Range_body_exited(body):
 		enemyinrange -= 1
 
+
+#Zielfindung
 func find_closest_target():
+	var maxHealth = 1
+	var minHealth = 11
 	var units = $Range.get_overlapping_bodies()
 	if units.size() > 0:
 		var closest = units[0].get_parent()
+		
+		#Suche nach dem meisten Leben
 		for unit in units:
-			if position.distance_to(unit.global_position) < position.distance_to(closest.global_position):
-				closest = unit.get_parent()
+			if unit.hp > maxHealth:
+				maxHealth = unit.hp
+				
+		#Suche nach dem wenigsten Leben
+		for unit in units:
+			if unit.hp < minHealth:
+				minHealth = unit.hp
+		
+		
+		#Suche einfach nach dem nächsten Gegner
+		if priority == 0:
+			for unit in units:
+				if position.distance_to(unit.global_position) < position.distance_to(closest.global_position):
+					closest = unit.get_parent()
 				target = closest.position
 				target_enemy = closest
+
+	
+		
+		#Suche nach dem nächsten Gegner mit dem meisten Leben
+		if priority == 1:
+			for unit in units:
+				if position.distance_to(unit.global_position) < position.distance_to(closest.global_position) && unit.hp == maxHealth:
+					closest = unit.get_parent()
+				target = closest.position
+				target_enemy = closest
+
+		
+		#Suche nach dem nächsten Gegner mit dem wenigsten Leben
+		if priority == 2:
+			for unit in units:
+				if position.distance_to(unit.global_position) < position.distance_to(closest.global_position) && unit.hp == minHealth:
+					closest = unit.get_parent()
+				target = closest.position
+				target_enemy = closest
+			
 	else:
 			target = null
+
+#Vorbeugung vor Abstürzen
 func hit(damage):
 	pass
 
+#Rotation in Richtung Gegner und das Schießen
 func aim_and_shoot():
 	if target != null:
 		rotation = (target - position).angle() - PI/2
@@ -75,9 +123,10 @@ func aim_and_shoot():
 		projectile_instance.setDamage(attackpowerlvl + 4)
 		get_tree().get_root().add_child(projectile_instance)
 		can_fire = false
-		yield(get_tree().create_timer(firerate - (fireratelvl * 0.7)), \"timeout\")
+		yield(get_tree().create_timer(firerate - (fireratelvl * 0.9)), \"timeout\")
 		can_fire = true
 	
+#Ausgeführter Damage-Hack auf den Gegner
 func aim_and_shoot_upgrade2():
 	var hack_particle_instance = hack_particle.instance()
 	hack_particle_instance.position = target
@@ -88,10 +137,11 @@ func aim_and_shoot_upgrade2():
 	$Hack_sound.playing = true
 	$Hack_particle.emitting = true
 	can_fire2 = false
-	yield(get_tree().create_timer(( 2 + firerate) - (fireratelvl * 0.9)), \"timeout\")
+	yield(get_tree().create_timer(( 2 + firerate) - (fireratelvl * 1.0)), \"timeout\")
 	can_fire2 = true
 
 	
+#Generierung von Geld
 func earn_money_upgrade_1():
 	yield(get_tree().create_timer(5.0), \"timeout\")
 	if can_make_money == true && get_parent().waverunning == true:
@@ -103,17 +153,18 @@ func earn_money_upgrade_1():
 		can_make_money = true
 		
 
+
+#Anzeige der Reichweite
 func _on_Informatiker_Area_mouse_entered():
 	scale = Vector2(1.2,1.2)
 	$Range_Sprite.visible = true
-
-
 
 func _on_Informatiker_Area_mouse_exited():
 	scale = Vector2(1,1)
 	$Range_Sprite.visible = false
 
 
+#Öffnen des Upgrade-Menüs
 func _on_Informatiker_Area_input_event(viewport, event, shape_idx):
 	if(event.is_action_pressed(\"left_click\") and placed == true):
 		 $UpgradeWindow/InformatikerUpgrade.visible =  true

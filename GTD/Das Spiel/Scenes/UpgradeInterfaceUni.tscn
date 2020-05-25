@@ -21,13 +21,23 @@ script/source = "extends Control
 var upgrade1 = false
 var upgrade2 = false
 var upgrade3 = false
-var sell = 800
+var sell = 1
 var upgradeunlock
 
+#Upgrade1_unlock
+export var price1 = 2000
+#Upgrade2_unlock
+export var price2 = 2000
+#Upgrade3_unlock
+export var price3 = 5000
 
 func _ready():
 	set_as_toplevel(true)
 	upgradeunlock = get_parent().get_parent().get_parent().get_node(\".\")
+	get_node(\"SpecialUpgradeBackround/Cost\").text = str(price1) + \"$\"
+	get_node(\"SpecialUpgradeBackround3/Cost3\").text = str(price2) + \"$\"
+	get_node(\"SpecialUpgradeBackround2/Cost2\").text = str(price3) + \"$\"
+	sell = get_parent().get_parent().get_parent().uniPrice
 
 func _on_TextureButton_pressed():
 	visible = false
@@ -36,8 +46,8 @@ func _on_TextureButton_pressed():
 func _on_SpecialUpgradeButton_pressed():
 	upgrade1 = true
 	upgradeunlock.setUpgrade1Unlock(upgrade1)
-	get_parent().get_parent().get_parent().get_node(\".\").money -= 2500
-	sell += 2500
+	get_parent().get_parent().get_parent().get_node(\".\").money -= price1
+	sell += price1
 	get_node(\"SpecialUpgradeBackround/SpecialUpgradeButton\").set_disabled(true)
 	get_node(\"SpecialUpgradeBackround/Cost\").text = \"Gekauft\"
 
@@ -45,16 +55,16 @@ func _on_SpecialUpgradeButton_pressed():
 func _on_SpecialUpgradeButton3_pressed():
 	upgrade2 = true
 	upgradeunlock.setUpgrade2Unlock(upgrade2)
-	get_parent().get_parent().get_parent().get_node(\".\").money -= 2500
-	sell += 2500
+	get_parent().get_parent().get_parent().get_node(\".\").money -= price2
+	sell += price2
 	get_node(\"SpecialUpgradeBackround3/SpecialUpgradeButton3\").set_disabled(true)
 	get_node(\"SpecialUpgradeBackround3/Cost3\").text = \"Gekauft\"
 
 
 func _on_SpecialUpgradeButton2_pressed():
 	upgrade3 = true
-	get_parent().get_parent().get_parent().get_node(\".\").money -= 6000
-	sell += 6000
+	get_parent().get_parent().get_parent().get_node(\".\").money -= price3
+	sell += price3
 	get_node(\"SpecialUpgradeBackround2/SpecialUpgradeButton2\").set_disabled(true)
 	get_node(\"SpecialUpgradeBackround2/Cost2\").text = \"Gekauft\"
 
@@ -79,9 +89,9 @@ func _process(delta):
 	check_status()
 
 func check_status():
-	if (get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < 2500 || get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade1unlock == true):
+	if (get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < get_parent().get_parent().price1 || get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade1unlock == true):
 		set_disabled(true)
-	if(get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= 2500 && get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade1unlock == false):
+	if(get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= get_parent().get_parent().price1  && get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade1unlock == false):
 		set_disabled(false)
 "
 
@@ -96,9 +106,9 @@ func _process(delta):
 	check_status()
 
 func check_status():
-	if (get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < 6000):
+	if (get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < get_parent().get_parent().price3):
 		set_disabled(true)
-	if(get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= 6000 && get_parent().get_parent().get_node(\".\").getUpgrade3() == false):
+	if(get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= get_parent().get_parent().price3 && get_parent().get_parent().get_node(\".\").getUpgrade3() == false):
 		set_disabled(false)
 "
 
@@ -113,9 +123,9 @@ func _process(delta):
 	check_status()
 
 func check_status():
-	if (get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < 2500 || get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade2unlock == true):
+	if (get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < get_parent().get_parent().price2 || get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade2unlock == true):
 		set_disabled(true)
-	if(get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= 2500 && get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade2unlock == false):
+	if(get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= get_parent().get_parent().price2 && get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade2unlock == false):
 		set_disabled(false)
 "
 

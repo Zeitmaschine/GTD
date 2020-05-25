@@ -20,13 +20,27 @@
 script/source = "extends Control
 
 var money = 0
-var sell = 100
+var sell = 1
 var upgrade1 = false
 var upgrade2 = false
 
+#Schadenslevel
+export var price1 = 200
+#Feurratenlevel
+export var price2 = 150
+#Reichweitenlevel
+export var price3 = 100
+#Salvenschuss
+export var price4 = 600
+#Streuschuss
+export var price5 = 650
+
 func _ready():
 	set_as_toplevel(true)
-
+	get_node(\"UpgradeBackround/StatUpgradeText/DamageText\").text = str(price1) +\"$\"
+	get_node(\"UpgradeBackround/StatUpgradeText/FirerateText\").text = str(price2) +\"$\"
+	get_node(\"UpgradeBackround/StatUpgradeText/RangeText\").text = str(price3) +\"$\"
+	sell = get_parent().get_parent().get_parent().mathematikerPrice
 func _process(delta):
 	check_status()
 
@@ -35,27 +49,27 @@ func _on_TextureButton_pressed():
 
 func _on_SpecialUpgradeButton_pressed():
 	get_parent().get_parent().get_node(\".\").upgrade1 = true
-	get_parent().get_parent().get_parent().get_node(\".\").money -= 350
+	get_parent().get_parent().get_parent().get_node(\".\").money -= price4
 	sell += 350
 	get_node(\"UpgradeBackround/SpecialUpgradeBackround/SpecialUpgradeButton/Cost\").text = \"Gekauft\"
 
 func _on_SpecialUpgradeButton2_pressed():
 	get_parent().get_parent().get_node(\".\").upgrade2 = true
-	get_parent().get_parent().get_parent().get_node(\".\").money -= 500
+	get_parent().get_parent().get_parent().get_node(\".\").money -= price5
 	sell += 500
 	get_node(\"UpgradeBackround/SpecialUpgradeBackround2/SpecialUpgradeButton2/Cost2\").text = \"Gekauft\"
 
 
 func _on_DamageButton_pressed():
 	get_parent().get_parent().get_node(\".\").attackpowerlvl +=  1
-	get_parent().get_parent().get_parent().get_node(\".\").money -= 250
+	get_parent().get_parent().get_parent().get_node(\".\").money -= 200
 	sell += 250
 	if(get_parent().get_parent().get_node(\".\").attackpowerlvl ==  5):
 		get_node(\"UpgradeBackround/StatUpgradeText/DamageText\").text = \"MAX\"
 
 func _on_FirerateButton_pressed():
 	get_parent().get_parent().get_node(\".\").fireratelvl +=  1
-	get_parent().get_parent().get_parent().get_node(\".\").money -= 250
+	get_parent().get_parent().get_parent().get_node(\".\").money -= 150
 	sell += 250
 	if(get_parent().get_parent().get_node(\".\").fireratelvl ==  5):
 		get_node(\"UpgradeBackround/StatUpgradeText/FirerateText\").text = \"MAX\"
@@ -64,23 +78,23 @@ func _on_FirerateButton_pressed():
 func _on_RangeButton_pressed():
 	get_parent().get_parent().get_node(\".\").attackrangelvl +=  1
 	get_parent().get_parent().get_node(\".\").set_range()
-	get_parent().get_parent().get_parent().get_node(\".\").money -= 250
+	get_parent().get_parent().get_parent().get_node(\".\").money -= 100
 	sell += 250
 	if(get_parent().get_parent().get_node(\".\").attackrangelvl ==  5):
 		get_node(\"UpgradeBackround/StatUpgradeText/RangeText\").text = \"MAX\"
 
 func check_status():
-	if(get_parent().get_parent().get_node(\".\").attackpowerlvl ==  5 || get_parent().get_parent().get_parent().get_node(\".\").money < 250):
+	if(get_parent().get_parent().get_node(\".\").attackpowerlvl ==  5 || get_parent().get_parent().get_parent().get_node(\".\").money < price1):
 		get_node(\"UpgradeBackround/StatUpgradeContainer/DamageButton\").set_disabled(true)
-	if(get_parent().get_parent().get_parent().get_node(\".\").money >= 250 && get_parent().get_parent().get_node(\".\").attackpowerlvl <  5):
+	if(get_parent().get_parent().get_parent().get_node(\".\").money >= price1 && get_parent().get_parent().get_node(\".\").attackpowerlvl <  5):
 		get_node(\"UpgradeBackround/StatUpgradeContainer/DamageButton\").set_disabled(false)
-	if(get_parent().get_parent().get_node(\".\").fireratelvl ==  5 || get_parent().get_parent().get_parent().get_node(\".\").money < 250):
+	if(get_parent().get_parent().get_node(\".\").fireratelvl ==  5 || get_parent().get_parent().get_parent().get_node(\".\").money < price2):
 		get_node(\"UpgradeBackround/StatUpgradeContainer/FirerateButton\").set_disabled(true)
-	if(get_parent().get_parent().get_parent().get_node(\".\").money >= 250 && get_parent().get_parent().get_node(\".\").fireratelvl <  5):
+	if(get_parent().get_parent().get_parent().get_node(\".\").money >= price2 && get_parent().get_parent().get_node(\".\").fireratelvl <  5):
 		get_node(\"UpgradeBackround/StatUpgradeContainer/FirerateButton\").set_disabled(false)
-	if(get_parent().get_parent().get_node(\".\").attackrangelvl ==  5 || get_parent().get_parent().get_parent().get_node(\".\").money < 250):
+	if(get_parent().get_parent().get_node(\".\").attackrangelvl ==  5 || get_parent().get_parent().get_parent().get_node(\".\").money < price3):
 		get_node(\"UpgradeBackround/StatUpgradeContainer/RangeButton\").set_disabled(true)
-	if(get_parent().get_parent().get_parent().get_node(\".\").money >= 250 && get_parent().get_parent().get_node(\".\").attackrangelvl <  5):
+	if(get_parent().get_parent().get_parent().get_node(\".\").money >= price3 && get_parent().get_parent().get_node(\".\").attackrangelvl <  5):
 		get_node(\"UpgradeBackround/StatUpgradeContainer/RangeButton\").set_disabled(false)
 
 

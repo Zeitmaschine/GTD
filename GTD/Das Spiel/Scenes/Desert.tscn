@@ -11,14 +11,17 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
 
-export var upgradelvl = false
+#Uni-Variablen
 export var upgrade1unlock = false
 export var upgrade2unlock = false
+
+#Derzeitige Karte
 var map = 2
 
+#Status
 export var waverunning = false
 export var wave = 1
-export var money = 150
+export var money = 750
 export var healthy = 100
 var moneyinterface
 var healthinterface
@@ -28,34 +31,48 @@ var max_universitaet = false
 var unigekauft
 var unitext
 
+#Preloading
 var mathematiker = preload(\"res://Scenes/Mathematiker.tscn\")
 var informatiker = preload(\"res://Scenes/Informatiker.tscn\")
 var mathebombenturm = preload(\"res://Scenes/MatheBombenTurm.tscn\")
 var winkelninja = preload(\"res://Scenes/Winkelninja.tscn\")
 var universitaet = preload(\"res://Scenes/Universität.tscn\")
 
+#Preise der Türme
+export var mathematikerPrice = 500
+export var informatikerPrice = 700
+export var bombenturmPrice = 900
+export var winkelninjaPrice = 880
+export var uniPrice = 500
+
+#Platzierung
 var placemode = false
 
 var triggeronce = false
 var triggeronce2 = false
 
 
+#Verdienen von Geld
 func add_money(ammount, death):
 	money += ammount
 	if death == true:
 		$Die.play()
 
+#Geld durch Verbesserungen
 func add_extramoney(ammount):
 	if waverunning == true:
 		money += ammount
 
+#Leben durch die Mensa
 func add_extrahealth(ammount):
 	healthy += ammount
 
+#Lebensabzug
 func remove_health(ammount):
 	healthy -= ammount
 	$Life_Lost.play()
 
+#Implementierung der Interfaces
 func _ready():
 	moneyinterface = get_node(\"InterfaceLayer/Interface/StatsMenu/HBoxContainer/Moneybar/MarginContainer/Backround/Count\")
 	healthinterface = get_node(\"InterfaceLayer/Interface/StatsMenu/HBoxContainer/Healthbar/MarginContainer/Backround/Health\")
@@ -64,12 +81,14 @@ func _ready():
 	unigekauft = get_node(\"InterfaceLayer/Interface/ShopLayer/ShopMenu\")
 	unitext = get_node(\"InterfaceLayer/Interface/ShopLayer/ShopMenu/ShopBackround/UniversitaetText\")
 
+#Hochzählen der Werte + Überprüfung von Input
 func _process(delta):
 	moneyinterface.setCoins(money)
 	healthinterface.setHealth(healthy)
 	healthdeath.setHealth(healthy)
 	waveinterface.setWave(wave)
 	
+	#Debug-Knopf
 	if Input.is_action_just_pressed(\"Hotkey0\"):
 		money += 1000
 	
@@ -82,43 +101,42 @@ func _process(delta):
 		$Path2D/Timer.stop()
 
 	if Input.is_action_just_pressed(\"Hotkey1\"):
-		if money >= 100:
+		if money >= mathematikerPrice:
 			add_mathematiker()
 		else:
 			$Buy_failed.play()
 
 	if Input.is_action_just_pressed(\"Hotkey2\"):
-		if money >= 300:
+		if money >= informatikerPrice:
 			add_informatiker()
 		else:
 			$Buy_failed.play()
 			
 
 	if Input.is_action_just_pressed(\"Hotkey3\"):
-		if money >= 500:
+		if money >= bombenturmPrice:
 			add_mathebombenturm()
 		else:
 			$Buy_failed.play()
 
 	if Input.is_action_just_pressed(\"Hotkey4\"):
-		if money >= 450:
+		if money >= winkelninjaPrice:
 			add_winkelninja()
 		else:
 			$Buy_failed.play()
 
 	if Input.is_action_just_pressed(\"Hotkey5\"):
-		if money >= 800  && max_universitaet == false:
+		if money >= uniPrice  && max_universitaet == false:
 			unigekauft.unigekauft = true
 			unitext.text = \"Gekauft\"
 			add_universitaet()
 		else:
 			$Buy_failed.play()
 			
-			
-	#debug-Knopf
 	
 
 
+#Mathermatiker platzieren
 func add_mathematiker():
 	if placemode == false:
 		placemode = true
@@ -137,7 +155,7 @@ func add_mathematiker():
 				mathematiker_instance.get_node(\"Range_Sprite\").modulate = originalcolor
 			
 			if Input.is_action_just_pressed(\"left_click\") && mathematiker_instance.get_node(\"Mathematiker_Area\").get_overlapping_bodies().size() == 1:
-				money = money - 100
+				money = money - mathematikerPrice
 				$Buy.play()
 				break
 			
@@ -151,6 +169,7 @@ func add_mathematiker():
 		mathematiker_instance.placed = true
 		placemode = false
 
+#Informatiker platzieren
 func add_informatiker():
 	if placemode == false:
 		placemode = true
@@ -169,7 +188,7 @@ func add_informatiker():
 				informatiker_instance.get_node(\"Range_Sprite\").modulate = originalcolor
 			
 			if Input.is_action_just_pressed(\"left_click\") && informatiker_instance.get_node(\"Informatiker_Area\").get_overlapping_bodies().size() == 1:
-				money = money - 300
+				money = money - informatikerPrice
 				$Buy.play()
 				break
 			
@@ -184,6 +203,7 @@ func add_informatiker():
 		placemode = false
 		
 
+#Bombenturm platzieren
 func add_mathebombenturm():
 	if placemode == false:
 		placemode = true
@@ -202,7 +222,7 @@ func add_mathebombenturm():
 				mathebombenturm_instance.get_node(\"Range_Sprite\").modulate = originalcolor
 			
 			if Input.is_action_just_pressed(\"left_click\") && mathebombenturm_instance.get_node(\"MatheBombenTurm_Area\").get_overlapping_bodies().size() == 1:
-				money = money - 500
+				money = money - bombenturmPrice
 				$Buy.play()
 				break
 			
@@ -215,7 +235,8 @@ func add_mathebombenturm():
 				break
 		mathebombenturm_instance.placed = true
 		placemode = false
-		
+	
+#Winkelninja platzieren
 func add_winkelninja():
 	if placemode == false:
 		placemode = true
@@ -234,7 +255,7 @@ func add_winkelninja():
 				winkelninja_instance.get_node(\"Range_Sprite\").modulate = originalcolor
 			
 			if Input.is_action_just_pressed(\"left_click\") && winkelninja_instance.get_node(\"Winkelninja_Area\").get_overlapping_bodies().size() == 1:
-				money = money - 450
+				money = money - winkelninjaPrice
 				$Buy.play()
 				break
 			
@@ -247,7 +268,8 @@ func add_winkelninja():
 				break
 		winkelninja_instance.placed = true
 		placemode = false
-		
+	
+#Uni platzieren
 func add_universitaet():
 	if placemode == false:
 		placemode = true
@@ -264,7 +286,7 @@ func add_universitaet():
 				universitaet_instance.get_node(\"Universitäts-Sprite\").modulate = originalcolor
 			
 			if Input.is_action_just_pressed(\"left_click\") && universitaet_instance.get_node(\"Universität_Area\").get_overlapping_bodies().size() == 1:
-				money = money - 800
+				money = money - uniPrice
 				$Buy.play()
 				max_universitaet = true
 				break
@@ -281,24 +303,27 @@ func add_universitaet():
 		universitaet_instance.placed = true
 		placemode = false
 
+#Freischaltung des Upgrades 1
 func setUpgrade1Unlock(upgrade11unlock):
 	upgrade1unlock = upgrade11unlock
 
+#Überprüfung des Upgrades 1
 func getUpgrade1Unlock():
 	return upgrade1unlock
 
+#Freischaltung des Upgrades 2
 func setUpgrade2Unlock(upgrade22unlock):
 	upgrade2unlock = upgrade22unlock
 
+#Überprüfung des Upgrades 2
 func getUpgrade2Unlock():
 	return upgrade2unlock
 
-#Wellen-Festlegung
-
+#Endgeld für die Runden
 func wave_round_end_money():
 	add_money(50 + (10 * wave), false)
 
-
+#Wellen-Festlegung
 func checkWave():
 	if triggeronce == false:
 		triggeronce == true
@@ -595,10 +620,10 @@ func wave13():
 		triggeronce2 = true
 		
 		$Path2D.setEnemySpawnHp(3)
-		$Path2D/Timer.start(1)
+		$Path2D/Timer.start(0.7)
 		yield(get_tree().create_timer(10), \"timeout\")
 		$Path2D.setEnemySpawnHp(4)
-		$Path2D/Timer.start(1.3)
+		$Path2D/Timer.start(0.9)
 		yield(get_tree().create_timer(7), \"timeout\")
 
 		wave_round_end_money()
@@ -862,10 +887,10 @@ func wave28():
 		triggeronce2 = true
 		
 		$Path2D.setEnemySpawnHp(1)
-		$Path2D/Timer.start(0.2)
+		$Path2D/Timer.start(0.3)
 		yield(get_tree().create_timer(15), \"timeout\")
 		$Path2D.setEnemySpawnHp(5)
-		$Path2D/Timer.start(0.2)
+		$Path2D/Timer.start(0.7)
 		yield(get_tree().create_timer(5), \"timeout\")
 
 		wave_round_end_money()
@@ -1109,8 +1134,8 @@ func wave41():
 		triggeronce2 = true
 		
 		$Path2D.setEnemySpawnHp(10)
-		$Path2D/Timer.start(1)
-		yield(get_tree().create_timer(5), \"timeout\")
+		$Path2D/Timer.start(0.6)
+		yield(get_tree().create_timer(20), \"timeout\")
 		
 		wave_round_end_money()
 		waverunning = false
@@ -1124,7 +1149,7 @@ func wave42():
 		
 		$Path2D.setEnemySpawnHp(11)
 		$Path2D/Timer.start(1)
-		yield(get_tree().create_timer(7), \"timeout\")
+		yield(get_tree().create_timer(17), \"timeout\")
 		
 		wave_round_end_money()
 		waverunning = false
@@ -1138,7 +1163,10 @@ func wave43():
 		
 		$Path2D.setEnemySpawnHp(9)
 		$Path2D/Timer.start(0.5)
-		yield(get_tree().create_timer(15), \"timeout\")
+		yield(get_tree().create_timer(10), \"timeout\")
+		$Path2D.setEnemySpawnHp(10)
+		$Path2D/Timer.start(0.8)
+		yield(get_tree().create_timer(10), \"timeout\")
 		
 		wave_round_end_money()
 		waverunning = false
@@ -1155,7 +1183,7 @@ func wave44():
 		yield(get_tree().create_timer(5), \"timeout\")
 		
 		$Path2D.setEnemySpawnHp(10)
-		$Path2D/Timer.start(0.8)
+		$Path2D/Timer.start(0.7)
 		yield(get_tree().create_timer(5), \"timeout\")
 		
 		wave_round_end_money()
@@ -1169,11 +1197,11 @@ func wave45():
 		triggeronce2 = true
 		
 		$Path2D.setEnemySpawnHp(10)
-		$Path2D/Timer.start(1)
+		$Path2D/Timer.start(0.8)
 		yield(get_tree().create_timer(6), \"timeout\")
 		
 		$Path2D.setEnemySpawnHp(11)
-		$Path2D/Timer.start(1.2)
+		$Path2D/Timer.start(1)
 		yield(get_tree().create_timer(10), \"timeout\")
 		
 		wave_round_end_money()
@@ -1187,7 +1215,7 @@ func wave46():
 		triggeronce2 = true
 		
 		$Path2D.setEnemySpawnHp(11)
-		$Path2D/Timer.start(0.8)
+		$Path2D/Timer.start(0.6)
 		yield(get_tree().create_timer(13), \"timeout\")
 		
 		wave_round_end_money()
@@ -1201,10 +1229,10 @@ func wave47():
 		triggeronce2 = true
 		
 		$Path2D.setEnemySpawnHp(5)
-		$Path2D/Timer.start(0.2)
+		$Path2D/Timer.start(0.16)
 		yield(get_tree().create_timer(14), \"timeout\")
 		$Path2D.setEnemySpawnHp(4)
-		$Path2D/Timer.start(0.16)
+		$Path2D/Timer.start(0.13)
 		yield(get_tree().create_timer(18), \"timeout\")
 		
 		wave_round_end_money()
@@ -1218,10 +1246,10 @@ func wave48():
 		triggeronce2 = true
 		
 		$Path2D.setEnemySpawnHp(10)
-		$Path2D/Timer.start(0.5)
+		$Path2D/Timer.start(0.4)
 		yield(get_tree().create_timer(10), \"timeout\")
 		$Path2D.setEnemySpawnHp(11)
-		$Path2D/Timer.start(0.8)
+		$Path2D/Timer.start(0.6)
 		yield(get_tree().create_timer(10), \"timeout\")
 		
 		wave_round_end_money()
@@ -1235,7 +1263,7 @@ func wave49():
 		triggeronce2 = true
 		
 		$Path2D.setEnemySpawnHp(11)
-		$Path2D/Timer.start(0.6)
+		$Path2D/Timer.start(0.4)
 		yield(get_tree().create_timer(20), \"timeout\")
 
 		
@@ -1249,7 +1277,7 @@ func wave50():
 	if triggeronce2 == false:
 		triggeronce2 = true
 		
-		$Path2D.setEnemySpawnHp(25)
+		$Path2D.setEnemySpawnHp(30)
 		$Path2D/Timer.start(0.5)
 		yield(get_tree().create_timer(0.7), \"timeout\")
 
@@ -1259,10 +1287,7 @@ func wave50():
 		wave = 51
 		triggeronce = false
 		triggeronce2 = false
-
-
-
-
+		
 
 
 "
@@ -1297,10 +1322,6 @@ points = PoolVector2Array( 0.0811157, 14.7825, 7.44885, 14.4476, 14.8167, 8.7543
 0/tile_mode = 0
 0/occluder_offset = Vector2( 0, 0 )
 0/navigation_offset = Vector2( 0, 0 )
-0/shape_offset = Vector2( 0, 0 )
-0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape_one_way = false
-0/shape_one_way_margin = 0.0
 0/shapes = [  ]
 0/z_index = 0
 1/name = "Desert.png 1"
@@ -1311,10 +1332,6 @@ points = PoolVector2Array( 0.0811157, 14.7825, 7.44885, 14.4476, 14.8167, 8.7543
 1/tile_mode = 0
 1/occluder_offset = Vector2( 0, 0 )
 1/navigation_offset = Vector2( 0, 0 )
-1/shape_offset = Vector2( 0, 0 )
-1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-1/shape_one_way = false
-1/shape_one_way_margin = 0.0
 1/shapes = [  ]
 1/z_index = 0
 2/name = "Desert.png 2"
@@ -1325,10 +1342,6 @@ points = PoolVector2Array( 0.0811157, 14.7825, 7.44885, 14.4476, 14.8167, 8.7543
 2/tile_mode = 0
 2/occluder_offset = Vector2( 0, 0 )
 2/navigation_offset = Vector2( 0, 0 )
-2/shape_offset = Vector2( 0, 0 )
-2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-2/shape_one_way = false
-2/shape_one_way_margin = 0.0
 2/shapes = [  ]
 2/z_index = 0
 3/name = "Desert.png 3"
@@ -1339,10 +1352,6 @@ points = PoolVector2Array( 0.0811157, 14.7825, 7.44885, 14.4476, 14.8167, 8.7543
 3/tile_mode = 0
 3/occluder_offset = Vector2( 0, 0 )
 3/navigation_offset = Vector2( 0, 0 )
-3/shape_offset = Vector2( 0, 0 )
-3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-3/shape_one_way = false
-3/shape_one_way_margin = 0.0
 3/shapes = [  ]
 3/z_index = 0
 4/name = "Desert.png 4"
@@ -1353,11 +1362,6 @@ points = PoolVector2Array( 0.0811157, 14.7825, 7.44885, 14.4476, 14.8167, 8.7543
 4/tile_mode = 0
 4/occluder_offset = Vector2( 0, 0 )
 4/navigation_offset = Vector2( 0, 0 )
-4/shape_offset = Vector2( 0, 0 )
-4/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-4/shape = SubResource( 3 )
-4/shape_one_way = false
-4/shape_one_way_margin = 1.0
 4/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
@@ -1374,11 +1378,6 @@ points = PoolVector2Array( 0.0811157, 14.7825, 7.44885, 14.4476, 14.8167, 8.7543
 5/tile_mode = 0
 5/occluder_offset = Vector2( 0, 0 )
 5/navigation_offset = Vector2( 0, 0 )
-5/shape_offset = Vector2( 0, 0 )
-5/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-5/shape = SubResource( 4 )
-5/shape_one_way = false
-5/shape_one_way_margin = 1.0
 5/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
@@ -1395,11 +1394,6 @@ points = PoolVector2Array( 0.0811157, 14.7825, 7.44885, 14.4476, 14.8167, 8.7543
 6/tile_mode = 0
 6/occluder_offset = Vector2( 0, 0 )
 6/navigation_offset = Vector2( 0, 0 )
-6/shape_offset = Vector2( 0, 0 )
-6/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-6/shape = SubResource( 5 )
-6/shape_one_way = false
-6/shape_one_way_margin = 1.0
 6/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
@@ -1416,11 +1410,6 @@ points = PoolVector2Array( 0.0811157, 14.7825, 7.44885, 14.4476, 14.8167, 8.7543
 7/tile_mode = 0
 7/occluder_offset = Vector2( 0, 0 )
 7/navigation_offset = Vector2( 0, 0 )
-7/shape_offset = Vector2( 0, 0 )
-7/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-7/shape = SubResource( 6 )
-7/shape_one_way = false
-7/shape_one_way_margin = 1.0
 7/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
@@ -1437,11 +1426,6 @@ points = PoolVector2Array( 0.0811157, 14.7825, 7.44885, 14.4476, 14.8167, 8.7543
 8/tile_mode = 0
 8/occluder_offset = Vector2( 0, 0 )
 8/navigation_offset = Vector2( 0, 0 )
-8/shape_offset = Vector2( 0, 0 )
-8/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-8/shape = SubResource( 7 )
-8/shape_one_way = false
-8/shape_one_way_margin = 1.0
 8/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
@@ -1458,11 +1442,6 @@ points = PoolVector2Array( 0.0811157, 14.7825, 7.44885, 14.4476, 14.8167, 8.7543
 9/tile_mode = 0
 9/occluder_offset = Vector2( 0, 0 )
 9/navigation_offset = Vector2( 0, 0 )
-9/shape_offset = Vector2( 0, 0 )
-9/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-9/shape = SubResource( 8 )
-9/shape_one_way = false
-9/shape_one_way_margin = 1.0
 9/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
@@ -1479,11 +1458,6 @@ points = PoolVector2Array( 0.0811157, 14.7825, 7.44885, 14.4476, 14.8167, 8.7543
 10/tile_mode = 0
 10/occluder_offset = Vector2( 0, 0 )
 10/navigation_offset = Vector2( 0, 0 )
-10/shape_offset = Vector2( 0, 0 )
-10/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-10/shape = SubResource( 2 )
-10/shape_one_way = false
-10/shape_one_way_margin = 1.0
 10/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,

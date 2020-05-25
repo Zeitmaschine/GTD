@@ -7,6 +7,7 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends KinematicBody2D 
 
+#Grundwerte
 var projectilespeed = 1000 
 var firerate = 1
 var can_fire = true
@@ -15,16 +16,18 @@ var enemyinrange = 0
 var target = null
 var placed = false
 
-
+#Verbesserungswerte
 export var upgrade1 = false
 export var upgrade2 = false
 export var attackpowerlvl = 1
 export var fireratelvl = 1
 export var attackrangelvl = 1
 
+#Reichweite wird zu Beginn festgelegt
 func _ready():
 	set_range()
 
+#Findung des Ziels und das Ausführen der Aktionen
 func _process(delta):
 	if placed == true:
 		if can_fire == true && enemyinrange > 0 && upgrade1 == true && upgrade2 == true:
@@ -39,15 +42,18 @@ func _process(delta):
 		if can_fire == true && enemyinrange > 0:
 			shoot()
 
+#Bestimmung, ob überhaupt Gegner anwesend sind
 func _on_Range_body_entered(body):
 		enemyinrange += 1
 
 func _on_Range_body_exited(body):
 		enemyinrange -= 1
 
+#Vorbeugung vor Abstürzen
 func hit(damage):
 	pass
 
+#Schießt
 func shoot():
 	var i = 0
 	while i < 8:
@@ -64,6 +70,7 @@ func shoot():
 	yield(get_tree().create_timer(firerate - (fireratelvl * 0.2)), \"timeout\")
 	can_fire = true
 	
+#Schießt mit mehr Projektilen
 func shoot_upgrade_1():
 	var i = 0
 	while i < 16:
@@ -79,7 +86,8 @@ func shoot_upgrade_1():
 		i += 1
 	yield(get_tree().create_timer(firerate - (fireratelvl * 0.2)), \"timeout\")
 	can_fire = true
-	
+
+#Schießt mit schneller Drehung
 func shoot_upgrade_2():
 	var i = 0
 	while i < 8:
@@ -96,7 +104,7 @@ func shoot_upgrade_2():
 	yield(get_tree().create_timer(firerate - (fireratelvl * 0.2)), \"timeout\")
 	can_fire = true
 	
-
+#Schießt mit schneller Drehung und mehr Projektilen
 func shoot_upgrade_1_2():
 	var i = 0
 	while i < 16:
@@ -112,11 +120,13 @@ func shoot_upgrade_1_2():
 		i += 1
 	yield(get_tree().create_timer(firerate - (fireratelvl * 0.2)), \"timeout\")
 	can_fire = true
-	
+
+#Festlegung der Reichweite
 func set_range():
 	$Range/CollisionRange.scale = Vector2(0.9 + (0.1 * attackrangelvl) , 0.9 + (0.1 * attackrangelvl ))
 	$Range_Sprite.scale = Vector2(0.9 + (0.1 * attackrangelvl), 0.9 + (0.1 * attackrangelvl ))
 
+#Reichweite einsehen
 func _on_WinkelNinja_Area_mouse_entered():
 	scale = Vector2(1.2,1.2)
 	$Range_Sprite.visible = true
@@ -126,6 +136,7 @@ func _on_WinkelNinja_Area_mouse_exited():
 	scale = Vector2(1.0,1.0)
 	$Range_Sprite.visible = false
 
+#Upgrade-Menü öffnen
 func _on_WinkelNinja_Area_input_event(viewport, event, shape_idx):
 	if(event.is_action_pressed(\"left_click\") and placed == true):
 		 $UpgradeWindow/WinkelninjaUpgrade.visible =  true

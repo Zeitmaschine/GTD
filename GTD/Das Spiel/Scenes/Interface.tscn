@@ -62,6 +62,13 @@ script/source = "extends Control
 
 var unigekauft = false
 
+func _ready():
+	get_node(\"ShopBackround/MathematikerText\").text = \"Mathermatiker: \" + str(get_parent().get_parent().get_parent().get_parent().mathematikerPrice) +\"$\"
+	get_node(\"ShopBackround/InformatikerText\").text = \"Informatiker: \" + str(get_parent().get_parent().get_parent().get_parent().informatikerPrice) +\"$\"
+	get_node(\"ShopBackround/BombenturmText\").text = \"Bombenturm: \" + str(get_parent().get_parent().get_parent().get_parent().bombenturmPrice) +\"$\"
+	get_node(\"ShopBackround/WinkelninjaText\").text = \"Winkelninja: \" + str(get_parent().get_parent().get_parent().get_parent().winkelninjaPrice) +\"$\"
+	get_node(\"ShopBackround/UniversitaetText\").text = \"Universität: \" + str(get_parent().get_parent().get_parent().get_parent().uniPrice) +\"$\"
+	
 func _process(delta):
 	check_status()
 
@@ -103,27 +110,27 @@ func _on_UniversitaetButton_pressed():
 	get_parent().get_parent().get_parent().get_parent().add_universitaet()
 
 func check_status():
-	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < 100):
+	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < get_parent().get_parent().get_parent().get_parent().mathematikerPrice):
 		get_node(\"ShopBackround/MathematikerButton\").set_disabled(true)
-	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= 100):
+	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= get_parent().get_parent().get_parent().get_parent().mathematikerPrice):
 		get_node(\"ShopBackround/MathematikerButton\").set_disabled(false)
-	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < 300):
+	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < get_parent().get_parent().get_parent().get_parent().informatikerPrice):
 		get_node(\"ShopBackround/InformatikerButton\").set_disabled(true)
-	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= 300):
+	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= get_parent().get_parent().get_parent().get_parent().informatikerPrice):
 		get_node(\"ShopBackround/InformatikerButton\").set_disabled(false)
-	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < 500):
+	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < get_parent().get_parent().get_parent().get_parent().bombenturmPrice):
 		get_node(\"ShopBackround/MathebombenturmButton\").set_disabled(true)
-	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= 500):
+	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= get_parent().get_parent().get_parent().get_parent().bombenturmPrice):
 		get_node(\"ShopBackround/MathebombenturmButton\").set_disabled(false)
-	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < 450):
+	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < get_parent().get_parent().get_parent().get_parent().winkelninjaPrice):
 		get_node(\"ShopBackround/WinkelninjaButton\").set_disabled(true)
-	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= 450):
+	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= get_parent().get_parent().get_parent().get_parent().winkelninjaPrice):
 		get_node(\"ShopBackround/WinkelninjaButton\").set_disabled(false)
 	if(unigekauft == true):
 		get_node(\"ShopBackround/UniversitaetButton\").set_disabled(true)
-	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < 800):
+	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < get_parent().get_parent().get_parent().get_parent().uniPrice):
 		get_node(\"ShopBackround/UniversitaetButton\").set_disabled(true)
-	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= 800 && unigekauft == false):
+	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= get_parent().get_parent().get_parent().get_parent().uniPrice && unigekauft == false):
 		get_node(\"ShopBackround/UniversitaetButton\").set_disabled(false)
 		
 "
