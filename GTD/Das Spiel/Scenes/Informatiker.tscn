@@ -21,7 +21,6 @@ var hack_particle = preload (\"res://Scenes/Hack_particle.tscn\")
 var enemyinrange = 0
 var target = null
 var can_make_money = true
-var target_enemy = null
 var placed = false
 export var priority = 1
 
@@ -40,11 +39,10 @@ func _ready():
 
 func _process(delta):
 	if placed == true:
-		find_closest_target()
-		if can_fire2 == true && enemyinrange > 0 && target != Vector2(0,0) && upgrade2 == true:
+		if can_fire2 == true && enemyinrange > 0  && upgrade2 == true:
 			aim_and_shoot_upgrade2()
 	
-		if can_fire == true && enemyinrange > 0 && target != Vector2(0,0):
+		if can_fire == true && enemyinrange > 0:
 			aim_and_shoot()
 	
 		if upgrade1 == true:
@@ -60,6 +58,7 @@ func _on_Range_body_exited(body):
 
 
 #Zielfindung
+
 func find_closest_target():
 	var maxHealth = 1
 	var minHealth = 11
@@ -81,32 +80,24 @@ func find_closest_target():
 		#Suche einfach nach dem nächsten Gegner
 		if priority == 0:
 			for unit in units:
-				if position.distance_to(unit.global_position) < position.distance_to(closest.global_position):
+				if position.distance_to(unit.global_position) < position.distance_to(closest.global_position) + 100:
 					closest = unit.get_parent()
-				target = closest.position
-				target_enemy = closest
+			target = closest
 
-	
-		
 		#Suche nach dem nächsten Gegner mit dem meisten Leben
 		if priority == 1:
 			for unit in units:
-				if position.distance_to(unit.global_position) < position.distance_to(closest.global_position) && unit.hp == maxHealth:
+				if position.distance_to(unit.global_position) < position.distance_to(closest.global_position) + 100 && unit.hp == maxHealth:
 					closest = unit.get_parent()
-				target = closest.position
-				target_enemy = closest
+			target = closest
 
 		
 		#Suche nach dem nächsten Gegner mit dem wenigsten Leben
 		if priority == 2:
 			for unit in units:
-				if position.distance_to(unit.global_position) < position.distance_to(closest.global_position) && unit.hp == minHealth:
+				if position.distance_to(unit.global_position) < position.distance_to(closest.global_position) + 100 && unit.hp == minHealth:
 					closest = unit.get_parent()
-				target = closest.position
-				target_enemy = closest
-			
-	else:
-			target = null
+			target = closest
 
 #Vorbeugung vor Abstürzen
 func hit(damage):
@@ -114,8 +105,9 @@ func hit(damage):
 
 #Rotation in Richtung Gegner und das Schießen
 func aim_and_shoot():
+	find_closest_target()
 	if target != null:
-		rotation = (target - position).angle() - PI/2
+		rotation = (target.position - position).angle() - PI/2
 		var projectile_instance = projectile.instance()
 		projectile_instance.position = $Firepoint.get_global_position()
 		projectile_instance.rotation_degrees = rotation_degrees
@@ -128,12 +120,13 @@ func aim_and_shoot():
 	
 #Ausgeführter Damage-Hack auf den Gegner
 func aim_and_shoot_upgrade2():
+	find_closest_target()
 	var hack_particle_instance = hack_particle.instance()
-	hack_particle_instance.position = target
+	hack_particle_instance.position = target.position
 	hack_particle_instance.emitting = true
 	get_tree().get_root().add_child(hack_particle_instance)
 	find_closest_target()
-	target_enemy.hit(attackpowerlvl + 2)
+	target.hit(attackpowerlvl + 2)
 	$Hack_sound.playing = true
 	$Hack_particle.emitting = true
 	can_fire2 = false

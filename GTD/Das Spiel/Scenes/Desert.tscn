@@ -36,6 +36,7 @@ var upgradeBombenturm = false
 var upgradeWinkelninja = false
 var upgradeUni = false
 
+
 #Preloading
 var mathematiker = preload(\"res://Scenes/Mathematiker.tscn\")
 var informatiker = preload(\"res://Scenes/Informatiker.tscn\")
@@ -326,7 +327,7 @@ func getUpgrade2Unlock():
 
 #Endgeld für die Runden
 func wave_round_end_money():
-	add_money(50 + (10 * wave), false)
+	add_money(50 + (5 * wave), false)
 
 #Wellen-Festlegung
 func checkWave():
@@ -547,7 +548,7 @@ func wave8():
 		triggeronce2 = true
 		
 		$Path2D.setEnemySpawnHp(2)
-		$Path2D/Timer.start(1.6)
+		$Path2D/Timer.start(1)
 		yield(get_tree().create_timer(30), \"timeout\")
 		
 		wave_round_end_money()
@@ -625,10 +626,10 @@ func wave13():
 		triggeronce2 = true
 		
 		$Path2D.setEnemySpawnHp(3)
-		$Path2D/Timer.start(0.7)
+		$Path2D/Timer.start(1)
 		yield(get_tree().create_timer(10), \"timeout\")
 		$Path2D.setEnemySpawnHp(4)
-		$Path2D/Timer.start(0.9)
+		$Path2D/Timer.start(1.3)
 		yield(get_tree().create_timer(7), \"timeout\")
 
 		wave_round_end_money()
@@ -642,11 +643,11 @@ func wave14():
 		triggeronce2 = true
 		
 		$Path2D.setEnemySpawnHp(5)
-		$Path2D/Timer.start(1)
-		yield(get_tree().create_timer(3), \"timeout\")
+		$Path2D/Timer.start(0.5)
+		yield(get_tree().create_timer(6), \"timeout\")
 		$Path2D.setEnemySpawnHp(4)
-		$Path2D/Timer.start(1.4)
-		yield(get_tree().create_timer(5), \"timeout\")
+		$Path2D/Timer.start(0.7)
+		yield(get_tree().create_timer(10), \"timeout\")
 
 		wave_round_end_money()
 		waverunning = false
@@ -733,11 +734,11 @@ func wave19():
 		triggeronce2 = true
 		
 		$Path2D.setEnemySpawnHp(4)
-		$Path2D/Timer.start(0.6)
-		yield(get_tree().create_timer(5), \"timeout\")
+		$Path2D/Timer.start(0.5)
+		yield(get_tree().create_timer(10), \"timeout\")
 		$Path2D.setEnemySpawnHp(5)
-		$Path2D/Timer.start(0.7)
-		yield(get_tree().create_timer(5), \"timeout\")
+		$Path2D/Timer.start(0.6)
+		yield(get_tree().create_timer(10), \"timeout\")
 
 		wave_round_end_money()
 		waverunning = false
@@ -763,13 +764,13 @@ func wave21():
 		triggeronce2 = true
 		
 		$Path2D.setEnemySpawnHp(4)
-		$Path2D/Timer.start(0.8)
+		$Path2D/Timer.start(0.6)
 		yield(get_tree().create_timer(4), \"timeout\")
 		$Path2D.setEnemySpawnHp(5)
-		$Path2D/Timer.start(0.9)
+		$Path2D/Timer.start(0.7)
 		yield(get_tree().create_timer(7), \"timeout\")
 		$Path2D.setEnemySpawnHp(3)
-		$Path2D/Timer.start(0.7)
+		$Path2D/Timer.start(0.5)
 		yield(get_tree().create_timer(2), \"timeout\")
 		$Path2D.setEnemySpawnHp(4)
 		yield(get_tree().create_timer(8), \"timeout\")
@@ -815,19 +816,19 @@ func wave24():
 		triggeronce2 = true
 		
 		$Path2D.setEnemySpawnHp(4)
-		$Path2D/Timer.start(0.8)
+		$Path2D/Timer.start(0.6)
 		yield(get_tree().create_timer(2), \"timeout\")
 		$Path2D.setEnemySpawnHp(5)
-		$Path2D/Timer.start(0.5)
+		$Path2D/Timer.start(0.4)
 		yield(get_tree().create_timer(2), \"timeout\")
 		$Path2D.setEnemySpawnHp(1)
-		$Path2D/Timer.start(1)
+		$Path2D/Timer.start(0.1)
 		yield(get_tree().create_timer(2), \"timeout\")
 		$Path2D.setEnemySpawnHp(4)
-		$Path2D/Timer.start(0.7)
+		$Path2D/Timer.start(0.5)
 		yield(get_tree().create_timer(2), \"timeout\")
 		$Path2D.setEnemySpawnHp(3)
-		$Path2D/Timer.start(0.7)
+		$Path2D/Timer.start(0.5)
 		yield(get_tree().create_timer(2), \"timeout\")
 
 		wave_round_end_money()
@@ -841,8 +842,8 @@ func wave25():
 		triggeronce2 = true
 		
 		$Path2D.setEnemySpawnHp(6)
-		$Path2D/Timer.start(1)
-		yield(get_tree().create_timer(10), \"timeout\")
+		$Path2D/Timer.start(0.7)
+		yield(get_tree().create_timer(14), \"timeout\")
 
 		wave_round_end_money()
 		waverunning = false
@@ -858,7 +859,7 @@ func wave26():
 		$Path2D/Timer.start(0.6)
 		yield(get_tree().create_timer(6), \"timeout\")
 		$Path2D.setEnemySpawnHp(4)
-		$Path2D/Timer.start(0.3)
+		$Path2D/Timer.start(0.5)
 		yield(get_tree().create_timer(5), \"timeout\")
 		$Path2D.setEnemySpawnHp(6)
 		$Path2D/Timer.start(0.9)
@@ -909,10 +910,10 @@ func wave29():
 		triggeronce2 = true
 		
 		$Path2D.setEnemySpawnHp(3)
-		$Path2D/Timer.start(0.5)
+		$Path2D/Timer.start(0.4)
 		yield(get_tree().create_timer(15), \"timeout\")
 		$Path2D.setEnemySpawnHp(8)
-		$Path2D/Timer.start(2)
+		$Path2D/Timer.start(1.7)
 		yield(get_tree().create_timer(5), \"timeout\")
 
 		wave_round_end_money()
@@ -926,11 +927,11 @@ func wave30():
 		triggeronce2 = true
 		
 		$Path2D.setEnemySpawnHp(6)
-		$Path2D/Timer.start(0.8)
-		yield(get_tree().create_timer(6), \"timeout\")
+		$Path2D/Timer.start(0.7)
+		yield(get_tree().create_timer(9), \"timeout\")
 		$Path2D.setEnemySpawnHp(8)
-		$Path2D/Timer.start(2)
-		yield(get_tree().create_timer(7), \"timeout\")
+		$Path2D/Timer.start(1.5)
+		yield(get_tree().create_timer(13), \"timeout\")
 
 		wave_round_end_money()
 		waverunning = false

@@ -31,8 +31,7 @@ func _ready():
 #Findung des Ziels und das Ausführen der Aktionen
 func _process(delta):
 	if placed == true:
-		find_closest_target()
-		if can_fire == true && enemyinrange > 0 && target.position != Vector2(0,0):
+		if can_fire == true && enemyinrange > 0:
 			aim_and_shoot()
 
 #Zielfindung
@@ -57,29 +56,24 @@ func find_closest_target():
 		#Suche einfach nach dem nächsten Gegner
 		if priority == 0:
 			for unit in units:
-				if position.distance_to(unit.global_position) < position.distance_to(closest.global_position):
+				if position.distance_to(unit.global_position) < position.distance_to(closest.global_position) + 100:
 					closest = unit.get_parent()
-				target = closest
+			target = closest
 
-	
-		
 		#Suche nach dem nächsten Gegner mit dem meisten Leben
 		if priority == 1:
 			for unit in units:
-				if position.distance_to(unit.global_position) < position.distance_to(closest.global_position) && unit.hp == maxHealth:
+				if position.distance_to(unit.global_position) < position.distance_to(closest.global_position) + 100 && unit.hp == maxHealth:
 					closest = unit.get_parent()
-				target = closest
+			target = closest
 
 		
 		#Suche nach dem nächsten Gegner mit dem wenigsten Leben
 		if priority == 2:
 			for unit in units:
-				if position.distance_to(unit.global_position) < position.distance_to(closest.global_position) && unit.hp == minHealth:
+				if position.distance_to(unit.global_position) < position.distance_to(closest.global_position) + 100 && unit.hp == minHealth:
 					closest = unit.get_parent()
-				target = closest
-			
-	else:
-			target = null
+			target = closest
 
 #Vorbeugung vor Abstürzen
 func hit(damage):
@@ -87,6 +81,7 @@ func hit(damage):
 
 #Schießt eine Bombe
 func aim_and_shoot():
+	find_closest_target()
 	rotation = (target.global_position - position).angle() - PI/2
 	var projectile_instance = projectile.instance()
 	projectile_instance.position = $Firepoint.get_global_position()
@@ -97,7 +92,7 @@ func aim_and_shoot():
 	projectile_instance.upgrade2 = upgrade2
 	get_tree().get_root().add_child(projectile_instance)
 	can_fire = false
-	yield(get_tree().create_timer(firerate - (fireratelvl * 0.5)), \"timeout\")
+	yield(get_tree().create_timer(firerate - (fireratelvl * 0.35)), \"timeout\")
 	can_fire = true
 	
 #Reichweite wird festgelegt
