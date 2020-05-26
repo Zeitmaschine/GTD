@@ -39,6 +39,7 @@ export var price4 = 600
 #Streuschuss
 export var price5 = 650
 
+#Variablen und Preise werden festgelegt
 func _ready():
 	set_as_toplevel(true)
 	get_node(\"UpgradeBackround/StatUpgradeText/DamageText\").text = str(price1) +\"$\"
@@ -51,6 +52,7 @@ func _ready():
 func _process(delta):
 	check_status()
 
+#Knopfdruck-Methoden
 func _on_TextureButton_pressed():
 	visible = false
 	infopopupmenu.visible = false
@@ -92,29 +94,13 @@ func _on_RangeButton_pressed():
 	if(get_parent().get_parent().get_node(\".\").attackrangelvl ==  5):
 		get_node(\"UpgradeBackround/StatUpgradeText/RangeText\").text = \"MAX\"
 
-func check_status():
-	if(get_parent().get_parent().get_node(\".\").attackpowerlvl ==  5 || get_parent().get_parent().get_parent().get_node(\".\").money < price1):
-		get_node(\"UpgradeBackround/StatUpgradeContainer/DamageButton\").set_disabled(true)
-	if(get_parent().get_parent().get_parent().get_node(\".\").money >= price1 && get_parent().get_parent().get_node(\".\").attackpowerlvl <  5):
-		get_node(\"UpgradeBackround/StatUpgradeContainer/DamageButton\").set_disabled(false)
-	if(get_parent().get_parent().get_node(\".\").fireratelvl ==  5 || get_parent().get_parent().get_parent().get_node(\".\").money < price2):
-		get_node(\"UpgradeBackround/StatUpgradeContainer/FirerateButton\").set_disabled(true)
-	if(get_parent().get_parent().get_parent().get_node(\".\").money >= price2 && get_parent().get_parent().get_node(\".\").fireratelvl <  5):
-		get_node(\"UpgradeBackround/StatUpgradeContainer/FirerateButton\").set_disabled(false)
-	if(get_parent().get_parent().get_node(\".\").attackrangelvl ==  5 || get_parent().get_parent().get_parent().get_node(\".\").money < price3):
-		get_node(\"UpgradeBackround/StatUpgradeContainer/RangeButton\").set_disabled(true)
-	if(get_parent().get_parent().get_parent().get_node(\".\").money >= price3 && get_parent().get_parent().get_node(\".\").attackrangelvl <  5):
-		get_node(\"UpgradeBackround/StatUpgradeContainer/RangeButton\").set_disabled(false)
-	if(visible == false):
-		get_parent().get_parent().get_parent().get_node(\".\").upgradeMathematiker = false
-	if(visible == true):
-		get_parent().get_parent().get_parent().get_node(\".\").upgradeMathematiker = true
-
-
-
 
 func _on_SellButton_pressed():
 	get_parent().get_parent().get_parent().get_node(\".\").money += int(sell * 0.75)
+	get_parent().get_parent().get_parent().get_node(\".\").upgradeMathematiker = false
+	infopopupmenu.visible = false
+	infopopupmenu2.visible = false
+	visible = false
 	get_parent().get_parent().queue_free()
 
 
@@ -149,6 +135,31 @@ func _on_InfoButton2_pressed():
 func _input(event):
 	if event.is_action_pressed(\"ui_cancel\"):
 		visible = false
+		infopopupmenu.visible = false
+		infopopupmenu2.visible = false
+
+#Überprüfung, ob man genug Geld für die Upgrades hat und wann die Hotkeys funktionieren sollen
+func check_status():
+	#Schaden
+	if(get_parent().get_parent().get_node(\".\").attackpowerlvl ==  5 || get_parent().get_parent().get_parent().get_node(\".\").money < price1):
+		get_node(\"UpgradeBackround/StatUpgradeContainer/DamageButton\").set_disabled(true)
+	if(get_parent().get_parent().get_parent().get_node(\".\").money >= price1 && get_parent().get_parent().get_node(\".\").attackpowerlvl <  5):
+		get_node(\"UpgradeBackround/StatUpgradeContainer/DamageButton\").set_disabled(false)
+	#Feuerrate
+	if(get_parent().get_parent().get_node(\".\").fireratelvl ==  5 || get_parent().get_parent().get_parent().get_node(\".\").money < price2):
+		get_node(\"UpgradeBackround/StatUpgradeContainer/FirerateButton\").set_disabled(true)
+	if(get_parent().get_parent().get_parent().get_node(\".\").money >= price2 && get_parent().get_parent().get_node(\".\").fireratelvl <  5):
+		get_node(\"UpgradeBackround/StatUpgradeContainer/FirerateButton\").set_disabled(false)
+	#Reichweite
+	if(get_parent().get_parent().get_node(\".\").attackrangelvl ==  5 || get_parent().get_parent().get_parent().get_node(\".\").money < price3):
+		get_node(\"UpgradeBackround/StatUpgradeContainer/RangeButton\").set_disabled(true)
+	if(get_parent().get_parent().get_parent().get_node(\".\").money >= price3 && get_parent().get_parent().get_node(\".\").attackrangelvl <  5):
+		get_node(\"UpgradeBackround/StatUpgradeContainer/RangeButton\").set_disabled(false)
+	#Hotkey
+	if(visible == false):
+		get_parent().get_parent().get_parent().get_node(\".\").upgradeMathematiker = false
+	if(visible == true):
+		get_parent().get_parent().get_parent().get_node(\".\").upgradeMathematiker = true
 "
 
 [sub_resource type="GDScript" id=2]
@@ -159,6 +170,7 @@ export var currentFirerate = 1
 export var currentRange = 1
 
 
+#Es wird geprüft, wie viel Schaden, Feuerrate und Reichweite ein einzelner Turm hat
 func _process(delta):
 	currentDamage = get_parent().get_parent().get_parent().get_parent().attackpowerlvl
 	currentFirerate = get_parent().get_parent().get_parent().get_parent().fireratelvl
@@ -173,21 +185,25 @@ script/source = "extends Button
 
 var money = 0
 var upgrade1
+var price
 
+#Variablen werden festgelegt
 func _process(delta):
+	price = get_parent().get_parent().get_parent().get_node(\".\").price4
 	money = get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money
 	upgrade1 = get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\")
 	check_status()
 
+#Es wird geprüft, wann man das Upgrade kaufen darf
 func check_status():
 	if(upgrade1.getUpgrade1Unlock() == false):
 		set_disabled(true)
 		get_node(\"Cost\").text = \"Gesperrt\"
 	if(upgrade1.getUpgrade1Unlock() == true && get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade1 == false):
-		get_node(\"Cost\").text = \"350$\"
-	if (get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < 350 || get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade1 == true):
+		get_node(\"Cost\").text = str(price) + \"$\"
+	if (get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < price || get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade1 == true):
 		set_disabled(true)
-	if(get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= 350 && get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade1 == false && upgrade1.getUpgrade1Unlock() == true):
+	if(get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= price && get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade1 == false && upgrade1.getUpgrade1Unlock() == true):
 		set_disabled(false)
 "
 
@@ -196,28 +212,32 @@ script/source = "extends Button
 
 var money = 0
 var upgrade2
+var price
 
+#Variablen werden festgelegt
 func _process(delta):
+	price = get_parent().get_parent().get_parent().get_node(\".\").price5
 	money = get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money
 	upgrade2 = get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\")
 	check_status()
 
+#Es wird geprüft, wann man das Upgrades kaufen darf
 func check_status():
 	if(upgrade2.getUpgrade2Unlock() == false):
 		set_disabled(true)
 		get_node(\"Cost2\").text = \"Gesperrt\"
 	if(upgrade2.getUpgrade2Unlock() == true && get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade2 == false):
-		get_node(\"Cost2\").text = \"500$\"
-	if (get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < 500 || get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade2 == true):
+		get_node(\"Cost2\").text = str(price) + \"$\"
+	if (get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < price || get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade2 == true):
 		set_disabled(true)
-	if(get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= 500 && get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade2 == false && upgrade2.getUpgrade2Unlock() == true):
+	if(get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= price && get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade2 == false && upgrade2.getUpgrade2Unlock() == true):
 		set_disabled(false)
 "
 
 [sub_resource type="GDScript" id=5]
 script/source = "extends Label
 
-
+#Der Verkaufswert wird festgelegt
 func _process(delta):
 	text = str(int(get_parent().get_parent().sell * 0.75)) + \"$\"
 "

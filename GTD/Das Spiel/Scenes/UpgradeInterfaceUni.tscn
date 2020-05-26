@@ -36,6 +36,7 @@ export var price2 = 2000
 #Upgrade3_unlock
 export var price3 = 5000
 
+#Variablen und Preise werden festgelegt
 func _ready():
 	set_as_toplevel(true)
 	upgradeunlock = get_parent().get_parent().get_parent().get_node(\".\")
@@ -50,6 +51,7 @@ func _ready():
 func _process(delta):
 	checkstatus()
 
+#Knopfdruck-Methoden
 func _on_TextureButton_pressed():
 	visible = false
 	infopopupmenu.visible = false
@@ -85,18 +87,21 @@ func _on_SpecialUpgradeButton2_pressed():
 func getUpgrade3():
 	return upgrade3
 
-
+#Der Verkaufspreis wird zurückgegeben und die Uni-Variablen in der Global zurückgesetzt.
 func _on_SellButton_pressed():
 	get_parent().get_parent().get_parent().get_node(\".\").money += int(sell * 0.75)
 	get_parent().get_parent().get_parent().get_node(\".\").upgrade1unlock = false
 	get_parent().get_parent().get_parent().get_node(\".\").upgrade2unlock = false
+	get_parent().get_parent().get_parent().get_node(\".\").upgradeUni = false
+	get_parent().get_parent().get_parent().get_node(\".\").max_universitaet = false
+	get_parent().get_parent().get_parent().get_node(\"InterfaceLayer/Interface/ShopLayer/ShopMenu\").unigekauft = false
+	get_parent().get_parent().get_parent().get_node(\"InterfaceLayer/Interface/ShopLayer/ShopMenu/ShopBackround/UniversitaetText\").text = \"Universität: \" + str(get_parent().get_parent().get_parent().get_node(\".\").uniPrice) + \"$\"
+	# Damit die Hotkeys funktionieren
+	infopopupmenu.visible = false
+	infopopupmenu2.visible = false
+	infopopupmenu3.visible = false
+	visible = false
 	get_parent().get_parent().queue_free()
-
-func checkstatus():
-	if(visible == false):
-		get_parent().get_parent().get_parent().get_node(\".\").upgradeUni = false
-	if(visible == true):
-		get_parent().get_parent().get_parent().get_node(\".\").upgradeUni = true
 
 func _on_InfoButton_pressed():
 	infopopupmenu2.visible = false
@@ -128,62 +133,82 @@ func _on_InfoButton3_pressed():
 func _input(event):
 	if event.is_action_pressed(\"ui_cancel\"):
 		visible = false
+		infopopupmenu.visible = false
+		infopopupmenu2.visible = false
+		infopopupmenu3.visible = false
+
+#Hotkey-Überprüfung
+func checkstatus():
+	if(visible == false):
+		get_parent().get_parent().get_parent().get_node(\".\").upgradeUni = false
+	if(visible == true):
+		get_parent().get_parent().get_parent().get_node(\".\").upgradeUni = true
 "
 
 [sub_resource type="GDScript" id=2]
 script/source = "extends Button
 
 var money = 0
+var price
 
+#Variablen werden festgelegt
 func _process(delta):
+	price = get_parent().get_parent().get_node(\".\").price1
 	money = get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money
 	check_status()
 
+#Überprüfung, ob man das Upgrade überhaupt kaufen darf
 func check_status():
-	if (get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < get_parent().get_parent().price1 || get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade1unlock == true):
+	if (get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < price || get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade1unlock == true):
 		set_disabled(true)
-	if(get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= get_parent().get_parent().price1  && get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade1unlock == false):
+	if(get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= price && get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade1unlock == false):
 		set_disabled(false)
 "
 
 [sub_resource type="GDScript" id=3]
 script/source = "extends Button
 
-
 var money = 0
+var price
 
+#Variablen werden festgelegt
 func _process(delta):
+	price = get_parent().get_parent().price3
 	money = get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money
 	check_status()
 
+#Überprüfung, ob man das Upgrade überhaupt kaufen darf
 func check_status():
-	if (get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < get_parent().get_parent().price3):
+	if (get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < price):
 		set_disabled(true)
-	if(get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= get_parent().get_parent().price3 && get_parent().get_parent().get_node(\".\").getUpgrade3() == false):
+	if(get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= price && get_parent().get_parent().get_node(\".\").getUpgrade3() == false):
 		set_disabled(false)
 "
 
 [sub_resource type="GDScript" id=4]
 script/source = "extends Button
 
-
 var money = 0
+var price
 
+#Variablen werden festgelegt
 func _process(delta):
+	price = get_parent().get_parent().price2
 	money = get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money
 	check_status()
 
+#Überprüfung, ob man das Upgrade überhaupt kaufen darf
 func check_status():
-	if (get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < get_parent().get_parent().price2 || get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade2unlock == true):
+	if (get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < price || get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade2unlock == true):
 		set_disabled(true)
-	if(get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= get_parent().get_parent().price2 && get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade2unlock == false):
+	if(get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= price && get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgrade2unlock == false):
 		set_disabled(false)
 "
 
 [sub_resource type="GDScript" id=5]
 script/source = "extends Label
 
-
+#Verkaufswert wird festgelegt
 func _process(delta):
 	text = str(int(get_parent().get_parent().sell * 0.75)) + \"$\"
 "

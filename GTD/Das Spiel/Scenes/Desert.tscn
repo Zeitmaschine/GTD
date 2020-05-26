@@ -301,7 +301,7 @@ func add_universitaet():
 			
 			if Input.is_action_just_pressed(\"right_click\"):
 				unigekauft.unigekauft = false
-				unitext.text = \"Universität: 800$\"
+				unitext.text = \"Universität: 500$\"
 				$Buy_failed.play()
 				universitaet_instance.queue_free()
 				break

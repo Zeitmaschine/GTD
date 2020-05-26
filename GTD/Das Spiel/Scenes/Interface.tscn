@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://Scenes/Moneybar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Healthbar.tscn" type="PackedScene" id=2]
@@ -30,26 +30,20 @@
 [ext_resource path="res://Assets/Universität/Universität.png" type="Texture" id=28]
 
 [sub_resource type="GDScript" id=1]
-script/source = "extends Control
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-"
-
-[sub_resource type="GDScript" id=2]
 script/source = "extends Label
 
 export var wave = 1
 
 func _ready():
 	text = str(wave)
-	
+
+#Festlegung der Wellen
 func _process(delta):
 	text = str(wave)
 	if (wave < 0):
 		text = str(0)
 
+#OOP-Methoden
 func getWave():
 	return wave
 	
@@ -57,17 +51,19 @@ func setWave(newWave):
 	wave = newWave
 "
 
-[sub_resource type="GDScript" id=3]
+[sub_resource type="GDScript" id=2]
 script/source = "extends Control
 
-var unigekauft = false
+var unigekauft
 
 func _ready():
+	#Preise und Variablen werden festgelegt
 	get_node(\"ShopBackround/MathematikerText\").text = \"Mathermatiker: \" + str(get_parent().get_parent().get_parent().get_parent().mathematikerPrice) +\"$\"
 	get_node(\"ShopBackround/InformatikerText\").text = \"Informatiker: \" + str(get_parent().get_parent().get_parent().get_parent().informatikerPrice) +\"$\"
 	get_node(\"ShopBackround/BombenturmText\").text = \"Bombenturm: \" + str(get_parent().get_parent().get_parent().get_parent().bombenturmPrice) +\"$\"
 	get_node(\"ShopBackround/WinkelninjaText\").text = \"Winkelninja: \" + str(get_parent().get_parent().get_parent().get_parent().winkelninjaPrice) +\"$\"
 	get_node(\"ShopBackround/UniversitaetText\").text = \"Universität: \" + str(get_parent().get_parent().get_parent().get_parent().uniPrice) +\"$\"
+	unigekauft = get_parent().get_parent().get_parent().get_parent().get_node(\".\").unigekauft
 	
 func _process(delta):
 	check_status()
@@ -75,7 +71,7 @@ func _process(delta):
 func _on_ExitButton_pressed():
 	visible = false
 
-
+	#Hotkey-Steuerung
 func _input(event):
 	if event.is_action_pressed(\"Shop\"):
 		visible = not visible
@@ -86,11 +82,10 @@ func _input(event):
 func _on_ShopButton_pressed():
 	visible = true
 
-
+	#Turmplatzierungen
 func _on_MathematikerButton_pressed():
 	visible = false
 	get_parent().get_parent().get_parent().get_parent().add_mathematiker()
-
 
 func _on_InformatikerButton_pressed():
 	visible = false
@@ -104,30 +99,35 @@ func _on_WinkelninjaButton_pressed():
 	visible = false
 	get_parent().get_parent().get_parent().get_parent().add_winkelninja()
 
-
 func _on_UniversitaetButton_pressed():
 	visible = false
 	unigekauft = true
 	get_node(\"ShopBackround/UniversitaetText\").text = \"Gekauft\"
 	get_parent().get_parent().get_parent().get_parent().add_universitaet()
 
+	#Überprüfung, ob die Türme überhaupt gekauft werden dürfen
 func check_status():
+	#Mathematiker
 	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < get_parent().get_parent().get_parent().get_parent().mathematikerPrice):
 		get_node(\"ShopBackround/MathematikerButton\").set_disabled(true)
 	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= get_parent().get_parent().get_parent().get_parent().mathematikerPrice):
 		get_node(\"ShopBackround/MathematikerButton\").set_disabled(false)
+	#Informatiker
 	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < get_parent().get_parent().get_parent().get_parent().informatikerPrice):
 		get_node(\"ShopBackround/InformatikerButton\").set_disabled(true)
 	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= get_parent().get_parent().get_parent().get_parent().informatikerPrice):
 		get_node(\"ShopBackround/InformatikerButton\").set_disabled(false)
+	#Mathebombenturm
 	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < get_parent().get_parent().get_parent().get_parent().bombenturmPrice):
 		get_node(\"ShopBackround/MathebombenturmButton\").set_disabled(true)
 	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= get_parent().get_parent().get_parent().get_parent().bombenturmPrice):
 		get_node(\"ShopBackround/MathebombenturmButton\").set_disabled(false)
+	#Winkelninja
 	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < get_parent().get_parent().get_parent().get_parent().winkelninjaPrice):
 		get_node(\"ShopBackround/WinkelninjaButton\").set_disabled(true)
 	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= get_parent().get_parent().get_parent().get_parent().winkelninjaPrice):
 		get_node(\"ShopBackround/WinkelninjaButton\").set_disabled(false)
+	#Universität
 	if(unigekauft == true):
 		get_node(\"ShopBackround/UniversitaetButton\").set_disabled(true)
 	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < get_parent().get_parent().get_parent().get_parent().uniPrice):
@@ -137,7 +137,7 @@ func check_status():
 		
 "
 
-[sub_resource type="GDScript" id=4]
+[sub_resource type="GDScript" id=3]
 script/source = "extends Control
 
 var gameover = false
@@ -145,14 +145,17 @@ var gameover = false
 func _ready():
 	set_as_toplevel(true)
 
+#Variablen festlegen
 func _process(delta):
 	gameover = get_parent().get_parent().get_node(\"GameOverLayer/GameOver\").getGameOver()
 
+#Hotkey-Steuerung
 func _input(event):
 	if event.is_action_pressed(\"ui_cancel\") && (gameover == false) && get_parent().get_parent().get_node(\"ShopLayer/ShopMenu\").visible != true && get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgradeMathematiker != true && get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgradeInformatiker != true && get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgradeBombenturm != true && get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgradeWinkelninja != true && get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgradeUni != true:
 		get_tree().paused = not get_tree().paused
 		visible = not visible
 
+#Knopfdruck-Methoden
 func _on_PauseFortsetzen_pressed():
 	get_tree().paused = not get_tree().paused
 	visible = not visible
@@ -175,7 +178,7 @@ func _on_PauseIcon_pressed():
 	visible = not visible
 "
 
-[sub_resource type="GDScript" id=5]
+[sub_resource type="GDScript" id=4]
 script/source = "extends TextureButton
 
 
@@ -192,10 +195,12 @@ func _ready():
 func _process(delta):
 	check_status()
 
+#Knopfdruck-Methoden
 func _on_PlayButton_pressed():
 	if get_parent().get_parent().get_parent().waverunning == false:
 		get_parent().get_parent().get_parent().waverunning = true
-		
+
+#Überprüfung, ob man auf den Knopf drücken darf 
 func check_status():
 	if get_parent().get_parent().get_parent().waverunning == false:
 		set_disabled(false)
@@ -204,7 +209,7 @@ func check_status():
 
 "
 
-[sub_resource type="GDScript" id=6]
+[sub_resource type="GDScript" id=5]
 script/source = "extends Control
 
 var health = 250
@@ -213,6 +218,7 @@ var gameover = false
 func _ready():
 	set_as_toplevel(true)
 
+#Überprüfungen und OOP-Methoden, wann der Screen angezeigt wird
 func getHealth():
 	return health
 
@@ -226,6 +232,7 @@ func setHealth(healthy):
 func getGameOver():
 	return gameover
 
+#Knopfdruck-Methoden
 func _on_GameOverMen_pressed():
 	gameover = false
 	get_tree().paused = not get_tree().paused
@@ -250,7 +257,6 @@ margin_top = 3.73053
 margin_right = 0.00012207
 margin_bottom = 3.73047
 mouse_filter = 2
-script = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -293,7 +299,7 @@ custom_constants/shadow_offset_y = 5
 text = "100"
 align = 2
 valign = 1
-script = SubResource( 2 )
+script = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -331,7 +337,20 @@ anchor_bottom = 1.0
 margin_left = -1.21094
 margin_right = -1.21094
 mouse_filter = 2
-script = SubResource( 3 )
+script = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShopBackroundOutline" type="ColorRect" parent="ShopLayer/ShopMenu"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -504.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -8.0
+color = Color( 0.156863, 0.156863, 0.156863, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -341,9 +360,9 @@ anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -500.0
-margin_top = 10.0
-margin_right = -10.0
-margin_bottom = -10.0
+margin_top = 12.0
+margin_right = -12.0
+margin_bottom = -12.0
 color = Color( 0.196078, 0.196078, 0.196078, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -607,7 +626,7 @@ pause_mode = 2
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = SubResource( 4 )
+script = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -731,7 +750,7 @@ texture_normal = ExtResource( 14 )
 texture_pressed = ExtResource( 15 )
 texture_disabled = ExtResource( 16 )
 expand = true
-script = SubResource( 5 )
+script = SubResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -756,7 +775,7 @@ pause_mode = 2
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = SubResource( 6 )
+script = SubResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

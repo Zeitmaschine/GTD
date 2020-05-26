@@ -26,7 +26,6 @@ func _process(delta):
 		earn_money_upgrade()
 		earn_health_upgrade()
 
-
 func _on_Universitt_Area_mouse_entered():
 	scale = Vector2(1.2,1.2)
 
@@ -69,6 +68,7 @@ func earn_health_upgrade():
 func _on_Universitt_Area_input_event(viewport, event, shape_idx):
 	if(event.is_action_pressed(\"left_click\") and placed == true):
 		 $UpgradeWindow/UniversitaetUpgrade.visible =  true
+
 "
 
 [sub_resource type="CircleShape2D" id=2]
