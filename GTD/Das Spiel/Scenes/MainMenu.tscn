@@ -25,7 +25,7 @@ func _ready():
 	pass 
 
 func _on_Credits_pressed():
-	get_tree().change_scene(\"res://Scenes/Credits.tscn\")
+	get_tree().change_scene(\"res://Scenes/Settings.tscn\")
 "
 
 [sub_resource type="StyleBoxFlat" id=3]
@@ -93,9 +93,9 @@ __meta__ = {
 
 [node name="SpielstartOutline" type="ColorRect" parent="."]
 margin_left = 515.0
-margin_top = 275.0
+margin_top = 276.0
 margin_right = 1405.0
-margin_bottom = 442.0
+margin_bottom = 443.0
 color = Color( 0.156863, 0.156863, 0.156863, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -103,9 +103,9 @@ __meta__ = {
 
 [node name="OptionenOutline" type="ColorRect" parent="."]
 margin_left = 515.0
-margin_top = 482.0
+margin_top = 483.0
 margin_right = 1405.0
-margin_bottom = 649.0
+margin_bottom = 648.0
 color = Color( 0.156863, 0.156863, 0.156863, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -113,9 +113,9 @@ __meta__ = {
 
 [node name="SpielBeendenOutline" type="ColorRect" parent="."]
 margin_left = 515.0
-margin_top = 689.0
+margin_top = 690.0
 margin_right = 1405.0
-margin_bottom = 856.0
+margin_bottom = 855.0
 color = Color( 0.156863, 0.156863, 0.156863, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -157,7 +157,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Credits" type="Button" parent="Knöpfe"]
+[node name="Settings" type="Button" parent="Knöpfe"]
 margin_top = 485.0
 margin_right = 880.0
 margin_bottom = 642.0
@@ -165,7 +165,7 @@ theme = ExtResource( 1 )
 custom_styles/hover = ExtResource( 2 )
 custom_styles/pressed = ExtResource( 7 )
 custom_styles/normal = ExtResource( 6 )
-text = "Credits"
+text = "Einstellungen"
 script = SubResource( 2 )
 
 [node name="Spiel beenden" type="Button" parent="Knöpfe"]
@@ -179,5 +179,5 @@ custom_styles/normal = ExtResource( 6 )
 text = "Spiel beenden"
 script = SubResource( 5 )
 [connection signal="pressed" from="Knöpfe/Spiel Starten" to="Knöpfe/Spiel Starten" method="_on_Button_pressed"]
-[connection signal="pressed" from="Knöpfe/Credits" to="Knöpfe/Credits" method="_on_Credits_pressed"]
+[connection signal="pressed" from="Knöpfe/Settings" to="Knöpfe/Settings" method="_on_Credits_pressed"]
 [connection signal="pressed" from="Knöpfe/Spiel beenden" to="Knöpfe/Spiel beenden" method="_on_Spiel_beenden_pressed"]

@@ -132,9 +132,10 @@ func check_status():
 		get_node(\"ShopBackround/UniversitaetButton\").set_disabled(true)
 	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < get_parent().get_parent().get_parent().get_parent().uniPrice):
 		get_node(\"ShopBackround/UniversitaetButton\").set_disabled(true)
-	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= get_parent().get_parent().get_parent().get_parent().uniPrice && unigekauft == false):
+	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= get_parent().get_parent().get_parent().get_parent().uniPrice): #&& unigekauft == false):
 		get_node(\"ShopBackround/UniversitaetButton\").set_disabled(false)
-		
+	if(unigekauft == false):
+		get_node(\"ShopBackround/UniversitaetButton\").set_disabled(false)
 "
 
 [sub_resource type="GDScript" id=3]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Interface/Theme/Buttons.tres" type="Theme" id=1]
 [ext_resource path="res://Interface/Theme/ButtonPressed.tres" type="StyleBox" id=2]
@@ -7,6 +7,15 @@
 [ext_resource path="res://Interface/Theme/VersionFont.tres" type="Theme" id=6]
 
 [sub_resource type="GDScript" id=1]
+script/source = "extends Control
+
+
+func _input(event):
+	if event.is_action_pressed(\"ui_cancel\"):
+		get_tree().change_scene(\"res://Scenes/Settings.tscn\")
+"
+
+[sub_resource type="GDScript" id=2]
 script/source = "extends Button
 
 
@@ -15,13 +24,14 @@ func _ready():
 
 
 func _on_Zurueck_pressed():
-	get_tree().change_scene(\"res://Scenes/MainMenu.tscn\")
+	get_tree().change_scene(\"res://Scenes/Settings.tscn\")
 	pass 
 "
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -70,9 +80,9 @@ __meta__ = {
 
 [node name="ZurueckOutline" type="ColorRect" parent="."]
 margin_left = 515.0
-margin_top = 689.0
+margin_top = 690.0
 margin_right = 1405.0
-margin_bottom = 856.0
+margin_bottom = 855.0
 color = Color( 0.156863, 0.156863, 0.156863, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -99,5 +109,5 @@ custom_styles/hover = ExtResource( 3 )
 custom_styles/pressed = ExtResource( 2 )
 custom_styles/normal = ExtResource( 4 )
 text = "Zurück"
-script = SubResource( 1 )
+script = SubResource( 2 )
 [connection signal="pressed" from="Button/Zurueck" to="Button/Zurueck" method="_on_Zurueck_pressed"]
