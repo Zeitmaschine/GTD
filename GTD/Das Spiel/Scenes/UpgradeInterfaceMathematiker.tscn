@@ -29,15 +29,15 @@ var infopopupmenu
 var infopopupmenu2
 
 #Schadenslevel
-export var price1 = 200
+export var price1 = 180
 #Feurratenlevel
-export var price2 = 150
+export var price2 = 130
 #Reichweitenlevel
-export var price3 = 100
+export var price3 = 80
 #Salvenschuss
-export var price4 = 600
+export var price4 = 580
 #Streuschuss
-export var price5 = 650
+export var price5 = 630
 
 #Variablen und Preise werden festgelegt
 func _ready():

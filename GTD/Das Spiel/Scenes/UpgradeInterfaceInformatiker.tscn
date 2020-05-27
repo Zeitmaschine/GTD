@@ -28,15 +28,15 @@ var infopopupmenu
 var infopopupmenu2
 
 #Schadenslevel
-export var price1 = 500
+export var price1 = 400
 #Feurratenlevel
-export var price2 = 400
+export var price2 = 300
 #Projektilgeschwindigkeitslevel
-export var price3 = 150
+export var price3 = 130
 #Money_Hack
-export var price4 = 3000
+export var price4 = 2100
 #Damage_Hack
-export var price5 = 1200
+export var price5 = 1100
 
 #Variablen und Preise werden festgelegt
 func _ready():
@@ -769,7 +769,7 @@ custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
 text = "Generiert alle 5
-Sekunden 150$."
+sekunden 150$."
 
 [node name="InfoBoxOutline2" type="ColorRect" parent="."]
 visible = false

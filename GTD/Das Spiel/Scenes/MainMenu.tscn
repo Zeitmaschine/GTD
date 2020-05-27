@@ -157,7 +157,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Infos" type="Button" parent="Knöpfe"]
+[node name="Settings" type="Button" parent="Knöpfe"]
 margin_top = 485.0
 margin_right = 880.0
 margin_bottom = 642.0
@@ -165,7 +165,7 @@ theme = ExtResource( 1 )
 custom_styles/hover = ExtResource( 2 )
 custom_styles/pressed = ExtResource( 7 )
 custom_styles/normal = ExtResource( 6 )
-text = "Infos"
+text = "Einstellungen"
 script = SubResource( 2 )
 
 [node name="Spiel beenden" type="Button" parent="Knöpfe"]
@@ -179,5 +179,5 @@ custom_styles/normal = ExtResource( 6 )
 text = "Spiel beenden"
 script = SubResource( 5 )
 [connection signal="pressed" from="Knöpfe/Spiel Starten" to="Knöpfe/Spiel Starten" method="_on_Button_pressed"]
-[connection signal="pressed" from="Knöpfe/Infos" to="Knöpfe/Infos" method="_on_Credits_pressed"]
+[connection signal="pressed" from="Knöpfe/Settings" to="Knöpfe/Settings" method="_on_Credits_pressed"]
 [connection signal="pressed" from="Knöpfe/Spiel beenden" to="Knöpfe/Spiel beenden" method="_on_Spiel_beenden_pressed"]

@@ -28,15 +28,15 @@ var infopopupmenu
 var infopopupmenu2
 
 #Schadenslevel
-export var price1 = 600
+export var price1 = 400
 #Feurratenlevel
-export var price2 = 500
+export var price2 = 300
 #Reichweitenlevel
-export var price3 = 270
-#Größere Bomben
-export var price4 = 1500
-#Splitterbomben
-export var price5 = 1500
+export var price3 = 170
+#Mehr Projektile
+export var price4 = 1300
+#Schnellere Drehung
+export var price5 = 1300
 
 #Variablen werden festgelegt
 func _ready():

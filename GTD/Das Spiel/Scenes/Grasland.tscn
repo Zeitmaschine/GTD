@@ -45,10 +45,10 @@ var winkelninja = preload(\"res://Scenes/Winkelninja.tscn\")
 var universitaet = preload(\"res://Scenes/Universität.tscn\")
 
 #Preise der Türme
-export var mathematikerPrice = 500
-export var informatikerPrice = 700
-export var bombenturmPrice = 900
-export var winkelninjaPrice = 880
+export var mathematikerPrice = 450
+export var informatikerPrice = 650
+export var bombenturmPrice = 850
+export var winkelninjaPrice = 800
 export var uniPrice = 500
 
 #Platzierung
@@ -327,7 +327,7 @@ func getUpgrade2Unlock():
 
 #Endgeld für die Runden
 func wave_round_end_money():
-	add_money(50 + (5 * wave), false)
+	add_money(50 + (7 * wave), false)
 
 #Wellen-Festlegung
 func checkWave():
