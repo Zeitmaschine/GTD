@@ -97,8 +97,8 @@ func aim_and_shoot():
 	
 #Reichweite wird festgelegt
 func set_range():
-	$Range/CollisionRange.scale = Vector2(0.9 + (0.3 * attackrangelvl) , 0.9 + (0.3 * attackrangelvl ))
-	$Range_Sprite.scale = Vector2(0.9 + (0.3 * attackrangelvl), 0.9 + (0.3 * attackrangelvl ))
+	$Range/CollisionRange.scale = Vector2(0.7 + (0.3 * attackrangelvl) , 0.7 + (0.3 * attackrangelvl ))
+	$Range_Sprite.scale = Vector2(0.7 + (0.3 * attackrangelvl), 0.7 + (0.3 * attackrangelvl ))
 
 #Reichweite wird angezeigt
 func _on_MatheBombenTurm_Area_mouse_entered():

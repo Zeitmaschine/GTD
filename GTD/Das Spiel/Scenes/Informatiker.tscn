@@ -112,10 +112,10 @@ func aim_and_shoot():
 		projectile_instance.position = $Firepoint.get_global_position()
 		projectile_instance.rotation_degrees = rotation_degrees
 		projectile_instance.apply_impulse(Vector2(), Vector2(0, projectilespeed +(200 * attackspeedlvl)).rotated(rotation))
-		projectile_instance.setDamage(attackpowerlvl + 4)
+		projectile_instance.setDamage(attackpowerlvl + 5)
 		get_tree().get_root().add_child(projectile_instance)
 		can_fire = false
-		yield(get_tree().create_timer(firerate - (fireratelvl * 0.9)), \"timeout\")
+		yield(get_tree().create_timer(firerate - (fireratelvl * 0.8)), \"timeout\")
 		can_fire = true
 	
 #Ausgeführter Damage-Hack auf den Gegner

@@ -182,18 +182,18 @@ func _process(delta):
 	$CurrentSpeed.text = str(currentSpeed)
 "
 
-[sub_resource type="GDScript" id=6]
+[sub_resource type="GDScript" id=3]
 script/source = "extends VBoxContainer
 
 
 func _process(delta):
-	$RealDamage.text = \"Schaden: \"
-	$RealFirerate.text = \"Feuerrate: \"
-	$RealSpeed.text = \"Projektilgeschwindigkeit: \"
+	get_node(\"RealDamage\").text = \"Schaden: \" +  str(get_parent().get_parent().get_parent().get_parent().attackpowerlvl + 6)
+	get_node(\"RealFirerate\").text = \"Feuerrate: \" +  str(stepify(1 / (get_parent().get_parent().get_parent().get_parent().firerate - (get_parent().get_parent().get_parent().get_parent().fireratelvl  * 0.8)),0.01) ) + \" Schüsse/s\"
+	get_node(\"RealSpeed\").text = \"Projektilgeschwindigkeit: \" +  str(((get_parent().get_parent().get_parent().get_parent().attackspeedlvl * 20) + 80)) + \" %\"
 
 "
 
-[sub_resource type="GDScript" id=3]
+[sub_resource type="GDScript" id=4]
 script/source = "extends Button
 
 var money = 0
@@ -221,7 +221,7 @@ func check_status():
 		set_disabled(false)
 "
 
-[sub_resource type="GDScript" id=4]
+[sub_resource type="GDScript" id=5]
 script/source = "extends Button
 
 var money = 0
@@ -249,7 +249,7 @@ func check_status():
 		set_disabled(false)
 "
 
-[sub_resource type="GDScript" id=5]
+[sub_resource type="GDScript" id=6]
 script/source = "extends Label
 
 #Der Verkaufswert wird festgelegt
@@ -436,7 +436,7 @@ margin_top = 296.0
 margin_right = 500.0
 theme = ExtResource( 3 )
 custom_constants/separation = 263
-script = SubResource( 6 )
+script = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -580,7 +580,7 @@ custom_styles/hover = ExtResource( 7 )
 custom_styles/pressed = ExtResource( 8 )
 custom_styles/disabled = ExtResource( 11 )
 custom_styles/normal = ExtResource( 6 )
-script = SubResource( 3 )
+script = SubResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -652,7 +652,7 @@ custom_styles/hover = ExtResource( 7 )
 custom_styles/pressed = ExtResource( 8 )
 custom_styles/disabled = ExtResource( 11 )
 custom_styles/normal = ExtResource( 6 )
-script = SubResource( 4 )
+script = SubResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -763,7 +763,7 @@ custom_constants/shadow_offset_y = 5
 text = "300$"
 align = 1
 valign = 1
-script = SubResource( 5 )
+script = SubResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -225,8 +225,8 @@ func setUpgrade2(upgrade22):
 
 #Anzeige der Reichweite
 func set_range():
-	$Range/CollisionRange.scale = Vector2(0.9 + (0.3 * attackrangelvl) , 0.9 + (0.3 * attackrangelvl ))
-	$Range_Sprite.scale = Vector2(0.9 + (0.3 * attackrangelvl), 0.9 + (0.3 * attackrangelvl ))
+	$Range/CollisionRange.scale = Vector2(0.7 + (0.3 * attackrangelvl) , 0.7 + (0.3 * attackrangelvl ))
+	$Range_Sprite.scale = Vector2(0.7 + (0.3 * attackrangelvl), 0.7 + (0.3 * attackrangelvl ))
 	
 #Öffnen des Upgrade-Menüs
 func _on_Mathematiker_Area_input_event(viewport, event, shape_idx):

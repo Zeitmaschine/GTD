@@ -19,6 +19,7 @@ func hit(amount):
 	get_child(0).hit(amount)
 
 func damage():
+	get_parent().get_parent().enemycount -= 1
 	queue_free()
 	
 func checkSpeed():
