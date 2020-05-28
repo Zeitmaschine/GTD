@@ -97,7 +97,7 @@ func _on_RangeButton_pressed():
 
 func _on_Button_pressed():
 	get_parent().get_parent().get_parent().get_node(\".\").money += int(sell * 0.75)
-	get_parent().get_parent().get_parent().get_node(\".\").upgradeBombenturm = false
+	get_parent().get_parent().get_parent().get_node(\".\").pauseAllowed = 0
 	infopopupmenu.visible = false
 	infopopupmenu2.visible = false
 	visible = false

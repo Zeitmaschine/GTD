@@ -102,6 +102,7 @@ func _on_WinkelninjaButton_pressed():
 func _on_UniversitaetButton_pressed():
 	visible = false
 	unigekauft = true
+	get_parent().get_parent().get_parent().get_parent().get_node(\".\").max_universitaet = true
 	get_node(\"ShopBackround/UniversitaetText\").text = \"Gekauft\"
 	get_parent().get_parent().get_parent().get_parent().add_universitaet()
 
@@ -132,7 +133,7 @@ func check_status():
 		get_node(\"ShopBackround/UniversitaetButton\").set_disabled(true)
 	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < get_parent().get_parent().get_parent().get_parent().uniPrice):
 		get_node(\"ShopBackround/UniversitaetButton\").set_disabled(true)
-	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= get_parent().get_parent().get_parent().get_parent().uniPrice): #&& unigekauft == false):
+	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= get_parent().get_parent().get_parent().get_parent().uniPrice && unigekauft == false):
 		get_node(\"ShopBackround/UniversitaetButton\").set_disabled(false)
 	if(unigekauft == false):
 		get_node(\"ShopBackround/UniversitaetButton\").set_disabled(false)

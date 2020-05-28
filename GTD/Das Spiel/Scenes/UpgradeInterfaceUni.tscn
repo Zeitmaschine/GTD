@@ -92,7 +92,7 @@ func _on_SellButton_pressed():
 	get_parent().get_parent().get_parent().get_node(\".\").money += int(sell * 0.75)
 	get_parent().get_parent().get_parent().get_node(\".\").upgrade1unlock = false
 	get_parent().get_parent().get_parent().get_node(\".\").upgrade2unlock = false
-	get_parent().get_parent().get_parent().get_node(\".\").upgradeUni = false
+	get_parent().get_parent().get_parent().get_node(\".\").pauseAllowed = 0
 	get_parent().get_parent().get_parent().get_node(\".\").max_universitaet = false
 	get_parent().get_parent().get_parent().get_node(\"InterfaceLayer/Interface/ShopLayer/ShopMenu\").unigekauft = false
 	get_parent().get_parent().get_parent().get_node(\"InterfaceLayer/Interface/ShopLayer/ShopMenu/ShopBackround/UniversitaetText\").text = \"Universität: \" + str(get_parent().get_parent().get_parent().get_node(\".\").uniPrice) + \"$\"

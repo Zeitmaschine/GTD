@@ -30,7 +30,7 @@ var healthinterface
 var healthdeath
 var waveinterface
 var max_universitaet = false
-var unigekauft
+var unigekauft = false
 var unitext
 var pauseAllowed = 0
 
@@ -131,7 +131,8 @@ func _process(delta):
 
 	if Input.is_action_just_pressed(\"Hotkey5\"):
 		if money >= uniPrice  && max_universitaet == false:
-			unigekauft.unigekauft = true
+			get_node(\"InterfaceLayer/Interface/ShopLayer/ShopMenu\").unigekauft = true
+			max_universitaet = true
 			unitext.text = \"Gekauft\"
 			add_universitaet()
 		else:
@@ -291,6 +292,7 @@ func add_universitaet():
 			if Input.is_action_just_pressed(\"left_click\") && universitaet_instance.get_node(\"Universität_Area\").get_overlapping_bodies().size() == 1:
 				money = money - uniPrice
 				$Buy.play()
+				get_node(\"InterfaceLayer/Interface/ShopLayer/ShopMenu\").unigekauft = true
 				max_universitaet = true
 				break
 			
@@ -298,7 +300,8 @@ func add_universitaet():
 				$Buy_failed.play()
 			
 			if Input.is_action_just_pressed(\"right_click\"):
-				unigekauft.unigekauft = false
+				max_universitaet = false
+				get_node(\"InterfaceLayer/Interface/ShopLayer/ShopMenu\").unigekauft = false
 				unitext.text = \"Universität: 500$\"
 				$Buy_failed.play()
 				universitaet_instance.queue_free()
@@ -321,11 +324,6 @@ func setUpgrade2Unlock(upgrade22unlock):
 #Überprüfung des Upgrades 2
 func getUpgrade2Unlock():
 	return upgrade2unlock
-
-
-
-
-
 
 
 
