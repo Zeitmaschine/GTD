@@ -30,11 +30,7 @@ var waveinterface
 var max_universitaet = false
 var unigekauft
 var unitext
-var upgradeMathematiker = false
-var upgradeInformatiker = false
-var upgradeBombenturm = false
-var upgradeWinkelninja = false
-var upgradeUni = false
+var pauseAllowed = 0
 
 
 #Preloading

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Assets/Icons/Exit_Icon_pressed.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Icons/Exit_Icon.png" type="Texture" id=2]
@@ -28,15 +28,15 @@ var infopopupmenu
 var infopopupmenu2
 
 #Schadenslevel
-export var price1 = 400
+export var price1 = 500
 #Feurratenlevel
-export var price2 = 300
+export var price2 = 400
 #Projektilgeschwindigkeitslevel
-export var price3 = 130
+export var price3 = 150
 #Money_Hack
-export var price4 = 2100
+export var price4 = 3000
 #Damage_Hack
-export var price5 = 1100
+export var price5 = 1200
 
 #Variablen und Preise werden festgelegt
 func _ready():
@@ -135,6 +135,10 @@ func _input(event):
 		visible = false
 		infopopupmenu.visible = false
 		infopopupmenu2.visible = false
+	if event.is_action_pressed(\"Hotkey2\"):
+		visible = false
+		infopopupmenu.visible = false
+		infopopupmenu2.visible = false
 
 #Überprüfung, ob man genug Geld für die Upgrades hat und wann die Hotkeys funktionieren sollen
 func check_status():
@@ -155,9 +159,9 @@ func check_status():
 		get_node(\"UpgradeBackround/StatUpgradeContainer/SpeedButton\").set_disabled(false)
 	#Hotkey
 	if(visible == false):
-		get_parent().get_parent().get_parent().get_node(\".\").upgradeInformatiker = false
+		get_parent().get_parent().get_parent().get_node(\".\").pauseAllowed = 1
 	if(visible == true):
-		get_parent().get_parent().get_parent().get_node(\".\").upgradeInformatiker = true
+		get_parent().get_parent().get_parent().get_node(\".\").pauseAllowed = 0
 "
 
 [sub_resource type="GDScript" id=2]
@@ -176,6 +180,17 @@ func _process(delta):
 	$CurrentDamage.text = str(currentDamage)
 	$CurrentFirerate.text = str(currentFirerate)
 	$CurrentSpeed.text = str(currentSpeed)
+"
+
+[sub_resource type="GDScript" id=6]
+script/source = "extends VBoxContainer
+
+
+func _process(delta):
+	$RealDamage.text = \"Schaden: \"
+	$RealFirerate.text = \"Feuerrate: \"
+	$RealSpeed.text = \"Projektilgeschwindigkeit: \"
+
 "
 
 [sub_resource type="GDScript" id=3]
@@ -413,6 +428,44 @@ custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
 text = "1"
 align = 2
+
+[node name="RealStatsContainer" type="VBoxContainer" parent="UpgradeBackround"]
+anchor_bottom = 1.0
+margin_left = 15.0
+margin_top = 296.0
+margin_right = 500.0
+theme = ExtResource( 3 )
+custom_constants/separation = 263
+script = SubResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RealDamage" type="Label" parent="UpgradeBackround/RealStatsContainer"]
+margin_right = 485.0
+margin_bottom = 35.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 5
+text = "Schaden:"
+
+[node name="RealFirerate" type="Label" parent="UpgradeBackround/RealStatsContainer"]
+margin_top = 298.0
+margin_right = 485.0
+margin_bottom = 333.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 5
+text = "Feuerrate: "
+
+[node name="RealSpeed" type="Label" parent="UpgradeBackround/RealStatsContainer"]
+margin_top = 596.0
+margin_right = 485.0
+margin_bottom = 631.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 5
+text = "Projektilgeschwindigkeit:"
 
 [node name="StatUpgradeContainer" type="VBoxContainer" parent="UpgradeBackround"]
 margin_left = 20.0
@@ -769,7 +822,7 @@ custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
 text = "Generiert alle 5
-sekunden 150$."
+Sekunden 150$."
 
 [node name="InfoBoxOutline2" type="ColorRect" parent="."]
 visible = false

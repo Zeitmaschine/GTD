@@ -136,6 +136,11 @@ func check_status():
 		get_node(\"ShopBackround/UniversitaetButton\").set_disabled(false)
 	if(unigekauft == false):
 		get_node(\"ShopBackround/UniversitaetButton\").set_disabled(false)
+	#Hotkey
+	if(visible == true):
+		get_parent().get_parent().get_parent().get_parent().get_node(\".\").pauseAllowed = 0
+	if(visible == false):
+		get_parent().get_parent().get_parent().get_parent().get_node(\".\").pauseAllowed = 1
 "
 
 [sub_resource type="GDScript" id=3]
@@ -152,7 +157,7 @@ func _process(delta):
 
 #Hotkey-Steuerung
 func _input(event):
-	if event.is_action_pressed(\"ui_cancel\") && (gameover == false) && get_parent().get_parent().get_node(\"ShopLayer/ShopMenu\").visible != true && get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgradeMathematiker != true && get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgradeInformatiker != true && get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgradeBombenturm != true && get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgradeWinkelninja != true && get_parent().get_parent().get_parent().get_parent().get_node(\".\").upgradeUni != true:
+	if event.is_action_pressed(\"cancel\") && (gameover == false) && get_parent().get_parent().get_parent().get_parent().get_node(\".\").pauseAllowed == 1 && get_parent().get_parent().get_node(\"ShopLayer/ShopMenu\").visible == false && get_parent().get_parent().get_parent().get_parent().get_node(\".\").mathematiker.instance().get_node(\"UpgradeWindow/MathematikerUpgrade\").visible == false && get_parent().get_parent().get_parent().get_parent().get_node(\".\").informatiker.instance().get_node(\"UpgradeWindow/InformatikerUpgrade\").visible == false:
 		get_tree().paused = not get_tree().paused
 		visible = not visible
 
