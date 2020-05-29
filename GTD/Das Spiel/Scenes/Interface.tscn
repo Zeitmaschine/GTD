@@ -135,8 +135,6 @@ func check_status():
 		get_node(\"ShopBackround/UniversitaetButton\").set_disabled(true)
 	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= get_parent().get_parent().get_parent().get_parent().uniPrice && unigekauft == false):
 		get_node(\"ShopBackround/UniversitaetButton\").set_disabled(false)
-	if(unigekauft == false):
-		get_node(\"ShopBackround/UniversitaetButton\").set_disabled(false)
 	#Hotkey
 	if(visible == true):
 		get_parent().get_parent().get_parent().get_parent().get_node(\".\").pauseAllowed = 0
@@ -158,7 +156,7 @@ func _process(delta):
 
 #Hotkey-Steuerung
 func _input(event):
-	if event.is_action_pressed(\"cancel\") && (gameover == false) && get_parent().get_parent().get_parent().get_parent().get_node(\".\").pauseAllowed == 1 && get_parent().get_parent().get_node(\"ShopLayer/ShopMenu\").visible == false && get_parent().get_parent().get_parent().get_parent().get_node(\".\").mathematiker.instance().get_node(\"UpgradeWindow/MathematikerUpgrade\").visible == false && get_parent().get_parent().get_parent().get_parent().get_node(\".\").informatiker.instance().get_node(\"UpgradeWindow/InformatikerUpgrade\").visible == false:
+	if event.is_action_pressed(\"cancel\") && (gameover == false) && get_parent().get_parent().get_parent().get_parent().get_node(\".\").pauseAllowed == 1:
 		get_tree().paused = not get_tree().paused
 		visible = not visible
 

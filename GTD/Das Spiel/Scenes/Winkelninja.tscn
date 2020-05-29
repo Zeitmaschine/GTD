@@ -9,7 +9,7 @@ script/source = "extends KinematicBody2D
 
 #Grundwerte
 var projectilespeed = 1000 
-var firerate = 1
+var firerate = 1.3
 var can_fire = true
 var projectile = preload (\"res://Scenes/Projectile.tscn\")
 var enemyinrange = 0

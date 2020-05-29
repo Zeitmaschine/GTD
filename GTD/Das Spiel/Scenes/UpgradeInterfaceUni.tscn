@@ -48,9 +48,6 @@ func _ready():
 	infopopupmenu2 = get_node(\"InfoBoxOutline2\")
 	infopopupmenu3 = get_node(\"InfoBoxOutline3\")
 
-func _process(delta):
-	checkstatus()
-
 #Knopfdruck-Methoden
 func _on_TextureButton_pressed():
 	visible = false
@@ -92,7 +89,6 @@ func _on_SellButton_pressed():
 	get_parent().get_parent().get_parent().get_node(\".\").money += int(sell * 0.75)
 	get_parent().get_parent().get_parent().get_node(\".\").upgrade1unlock = false
 	get_parent().get_parent().get_parent().get_node(\".\").upgrade2unlock = false
-	get_parent().get_parent().get_parent().get_node(\".\").pauseAllowed = 0
 	get_parent().get_parent().get_parent().get_node(\".\").max_universitaet = false
 	get_parent().get_parent().get_parent().get_node(\"InterfaceLayer/Interface/ShopLayer/ShopMenu\").unigekauft = false
 	get_parent().get_parent().get_parent().get_node(\"InterfaceLayer/Interface/ShopLayer/ShopMenu/ShopBackround/UniversitaetText\").text = \"Universität: \" + str(get_parent().get_parent().get_parent().get_node(\".\").uniPrice) + \"$\"
@@ -140,13 +136,6 @@ func _input(event):
 		visible = false
 		infopopupmenu.visible = false
 		infopopupmenu2.visible = false
-
-#Hotkey-Überprüfung
-func checkstatus():
-	if(visible == false):
-		get_parent().get_parent().get_parent().get_node(\".\").pauseAllowed = 1
-	if(visible == true):
-		get_parent().get_parent().get_parent().get_node(\".\").pauseAllowed = 0
 "
 
 [sub_resource type="GDScript" id=2]
