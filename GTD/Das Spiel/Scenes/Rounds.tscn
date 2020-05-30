@@ -195,6 +195,37 @@ func checkWave():
 			wave84()
 		if wave == 85:
 			wave85()
+		if wave == 86:
+			wave86()
+		if wave == 87:
+			wave87()
+		if wave == 88:
+			wave88()
+		if wave == 89:
+			wave89()
+		if wave == 90:
+			wave90()
+		if wave == 91:
+			wave91()
+		if wave == 92:
+			wave92()
+		if wave == 93:
+			wave93()
+		if wave == 94:
+			wave94()
+		if wave == 95:
+			wave95()
+		if wave == 96:
+			wave96()
+		if wave == 97:
+			wave97()
+		if wave == 98:
+			wave98()
+		if wave == 99:
+			wave99()
+		if wave == 100:
+			wave100()
+
 #Wellen-Festlegung
 
 func wave1():
@@ -1615,7 +1646,7 @@ func wave79():
 		yield(get_tree().create_timer(6), \"timeout\")
 		wave_round_end_money()
 		waverunning = false
-		wave = 79
+		wave = 80
 		triggeronce = false
 		triggeronce2 = false
 func wave80():
@@ -1729,6 +1760,214 @@ func wave85():
 		wave = 86
 		triggeronce = false
 		triggeronce2 = false
+
+func wave86():
+	if triggeronce2 == false:
+		triggeronce2 = true
+		
+		get_parent().get_node(\"Path2D\").setEnemySpawnHp(45)
+		get_parent().get_node(\"Path2D/Timer\").start(1)
+		yield(get_tree().create_timer(6), \"timeout\")
+		get_parent().get_node(\"Path2D\").setEnemySpawnHp(35)
+		get_parent().get_node(\"Path2D/Timer\").start(0.4)
+		yield(get_tree().create_timer(4), \"timeout\")
+		get_parent().get_node(\"Path2D\").setEnemySpawnHp(45)
+		get_parent().get_node(\"Path2D/Timer\").start(1)
+		yield(get_tree().create_timer(6), \"timeout\")
+		get_parent().get_node(\"Path2D\").setEnemySpawnHp(35)
+		get_parent().get_node(\"Path2D/Timer\").start(0.3)
+		yield(get_tree().create_timer(6), \"timeout\")
+		get_parent().get_node(\"Path2D\").setEnemySpawnHp(45)
+		get_parent().get_node(\"Path2D/Timer\").start(1)
+		yield(get_tree().create_timer(10), \"timeout\")
+		wave_round_end_money()
+		waverunning = false
+		wave = 87
+		triggeronce = false
+		triggeronce2 = false
+		
+func wave87():
+	if triggeronce2 == false:
+		triggeronce2 = true
+		
+		get_parent().get_node(\"Path2D\").setEnemySpawnHp(50)
+		get_parent().get_node(\"Path2D/Timer\").start(0.3)
+		yield(get_tree().create_timer(20), \"timeout\")
+		wave_round_end_money()
+		waverunning = false
+		wave = 88
+		triggeronce = false
+		triggeronce2 = false
+		
+func wave88():
+	if triggeronce2 == false:
+		triggeronce2 = true
+		
+		get_parent().get_node(\"Path2D\").setEnemySpawnHp(55)
+		get_parent().get_node(\"Path2D/Timer\").start(0.3)
+		yield(get_tree().create_timer(15), \"timeout\")
+		wave_round_end_money()
+		waverunning = false
+		wave = 89
+		triggeronce = false
+		triggeronce2 = false
+		
+func wave89():
+	if triggeronce2 == false:
+		triggeronce2 = true
+		
+		get_parent().get_node(\"Path2D\").setEnemySpawnHp(60)
+		get_parent().get_node(\"Path2D/Timer\").start(0.25)
+		yield(get_tree().create_timer(20), \"timeout\")
+		wave_round_end_money()
+		waverunning = false
+		wave = 90
+		triggeronce = false
+		triggeronce2 = false
+		
+func wave90():
+	if triggeronce2 == false:
+		triggeronce2 = true
+		
+		get_parent().get_node(\"Path2D\").setEnemySpawnHp(11)
+		get_parent().get_node(\"Path2D/Timer\").start(0.03)
+		yield(get_tree().create_timer(15), \"timeout\")
+		wave_round_end_money()
+		waverunning = false
+		wave = 91
+		triggeronce = false
+		triggeronce2 = false
+		
+func wave91():
+	if triggeronce2 == false:
+		triggeronce2 = true
+		
+		get_parent().get_node(\"Path2D\").setEnemySpawnHp(65)
+		get_parent().get_node(\"Path2D/Timer\").start(0.3)
+		yield(get_tree().create_timer(23), \"timeout\")
+		wave_round_end_money()
+		waverunning = false
+		wave = 92
+		triggeronce = false
+		triggeronce2 = false
+		
+func wave92():
+	if triggeronce2 == false:
+		triggeronce2 = true
+		
+		get_parent().get_node(\"Path2D\").setEnemySpawnHp(68)
+		get_parent().get_node(\"Path2D/Timer\").start(0.26)
+		yield(get_tree().create_timer(17), \"timeout\")
+		wave_round_end_money()
+		waverunning = false
+		wave = 93
+		triggeronce = false
+		triggeronce2 = false
+		
+func wave93():
+	if triggeronce2 == false:
+		triggeronce2 = true
+		
+		get_parent().get_node(\"Path2D\").setEnemySpawnHp(70)
+		get_parent().get_node(\"Path2D/Timer\").start(0.3)
+		yield(get_tree().create_timer(19), \"timeout\")
+		wave_round_end_money()
+		waverunning = false
+		wave = 94
+		triggeronce = false
+		triggeronce2 = false
+		
+func wave94():
+	if triggeronce2 == false:
+		triggeronce2 = true
+		
+		get_parent().get_node(\"Path2D\").setEnemySpawnHp(73)
+		get_parent().get_node(\"Path2D/Timer\").start(0.25)
+		yield(get_tree().create_timer(21), \"timeout\")
+		wave_round_end_money()
+		waverunning = false
+		wave = 95
+		triggeronce = false
+		triggeronce2 = false
+		
+func wave95():
+	if triggeronce2 == false:
+		triggeronce2 = true
+		
+		get_parent().get_node(\"Path2D\").setEnemySpawnHp(77)
+		get_parent().get_node(\"Path2D/Timer\").start(0.28)
+		yield(get_tree().create_timer(18), \"timeout\")
+		wave_round_end_money()
+		waverunning = false
+		wave = 96
+		triggeronce = false
+		triggeronce2 = false
+		
+func wave96():
+	if triggeronce2 == false:
+		triggeronce2 = true
+		
+		get_parent().get_node(\"Path2D\").setEnemySpawnHp(80)
+		get_parent().get_node(\"Path2D/Timer\").start(0.32)
+		yield(get_tree().create_timer(24), \"timeout\")
+		wave_round_end_money()
+		waverunning = false
+		wave = 97
+		triggeronce = false
+		triggeronce2 = false
+		
+func wave97():
+	if triggeronce2 == false:
+		triggeronce2 = true
+		
+		get_parent().get_node(\"Path2D\").setEnemySpawnHp(83)
+		get_parent().get_node(\"Path2D/Timer\").start(0.3)
+		yield(get_tree().create_timer(22), \"timeout\")
+		wave_round_end_money()
+		waverunning = false
+		wave = 98
+		triggeronce = false
+		triggeronce2 = false
+		
+func wave98():
+	if triggeronce2 == false:
+		triggeronce2 = true
+		
+		get_parent().get_node(\"Path2D\").setEnemySpawnHp(87)
+		get_parent().get_node(\"Path2D/Timer\").start(0.28)
+		yield(get_tree().create_timer(24), \"timeout\")
+		wave_round_end_money()
+		waverunning = false
+		wave = 99
+		triggeronce = false
+		triggeronce2 = false
+		
+func wave99():
+	if triggeronce2 == false:
+		triggeronce2 = true
+		
+		get_parent().get_node(\"Path2D\").setEnemySpawnHp(93)
+		get_parent().get_node(\"Path2D/Timer\").start(0.2)
+		yield(get_tree().create_timer(27), \"timeout\")
+		wave_round_end_money()
+		waverunning = false
+		wave = 100
+		triggeronce = false
+		triggeronce2 = false
+		
+func wave100():
+	if triggeronce2 == false:
+		triggeronce2 = true
+		
+		get_parent().get_node(\"Path2D\").setEnemySpawnHp(100)
+		get_parent().get_node(\"Path2D/Timer\").start(0.5)
+		yield(get_tree().create_timer(100), \"timeout\")
+		wave_round_end_money()
+		waverunning = false
+		wave = 101
+		triggeronce = false
+		triggeronce2 = false
+
 "
 
 [node name="Rounds" type="Node2D"]

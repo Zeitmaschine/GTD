@@ -252,6 +252,7 @@ func _process(delta):
 "
 
 [node name="InformatikerUpgrade" type="Control"]
+modulate = Color( 1, 1, 1, 0.705882 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 0.377319

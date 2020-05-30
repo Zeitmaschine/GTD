@@ -16,6 +16,7 @@ var enemyinrange = 0
 var target = null
 var placed = false
 export var priority = 0
+var rangeVisible = false
 
 #Verbesserungswerte
 export var upgrade1 = false
@@ -43,6 +44,14 @@ func _process(delta):
 	
 		if can_fire == true && enemyinrange > 0:
 			aim_and_shoot()
+			
+		if get_node(\"UpgradeWindow/MathematikerUpgrade\").visible == true:
+			$Range_Sprite.visible = true
+			rangeVisible = true
+		
+		if get_node(\"UpgradeWindow/MathematikerUpgrade\").visible == false && rangeVisible == true:
+			$Range_Sprite.visible = false
+			rangeVisible = false
 
 #Bestimmung, ob überhaupt Gegner anwesend sind
 func _on_Range_body_entered(body):
@@ -98,12 +107,12 @@ func hit(damage):
 
 
 func _on_Mathematiker_Area_mouse_entered():
-	scale = Vector2(1.2,1.2)
+	$Sprite_Mathematiker.scale = Vector2(1.2,1.2)
 	$Range_Sprite.visible = true
 
 
 func _on_Mathematiker_Area_mouse_exited():
-	scale = Vector2(1,1)
+	$Sprite_Mathematiker.scale = Vector2(1,1)
 	$Range_Sprite.visible = false
 
 #Rotation in Richtung Gegner und das Schießen
@@ -223,7 +232,7 @@ func setUpgrade1(upgrade11):
 func setUpgrade2(upgrade22):
 	upgrade1 = upgrade22
 
-#Anzeige der Reichweite
+#Festlegung der Reichweite
 func set_range():
 	$Range/CollisionRange.scale = Vector2(0.7 + (0.3 * attackrangelvl) , 0.7 + (0.3 * attackrangelvl ))
 	$Range_Sprite.scale = Vector2(0.7 + (0.3 * attackrangelvl), 0.7 + (0.3 * attackrangelvl ))

@@ -15,6 +15,7 @@ var projectile = preload (\"res://Scenes/Projectile.tscn\")
 var enemyinrange = 0
 var target = null
 var placed = false
+var rangeVisible = false
 
 #Verbesserungswerte
 export var upgrade1 = false
@@ -41,6 +42,14 @@ func _process(delta):
 		
 		if can_fire == true && enemyinrange > 0:
 			shoot()
+			
+		if get_node(\"UpgradeWindow/WinkelninjaUpgrade\").visible == true:
+			$Range_Sprite.visible = true
+			rangeVisible = true
+		
+		if get_node(\"UpgradeWindow/WinkelninjaUpgrade\").visible == false && rangeVisible == true:
+			$Range_Sprite.visible = false
+			rangeVisible = false
 
 #Bestimmung, ob überhaupt Gegner anwesend sind
 func _on_Range_body_entered(body):
@@ -128,12 +137,12 @@ func set_range():
 
 #Reichweite einsehen
 func _on_WinkelNinja_Area_mouse_entered():
-	scale = Vector2(1.2,1.2)
+	$Sprite_Winkelninja.scale = Vector2(1.2,1.2)
 	$Range_Sprite.visible = true
 
 
 func _on_WinkelNinja_Area_mouse_exited():
-	scale = Vector2(1.0,1.0)
+	$Sprite_Winkelninja.scale = Vector2(1.0,1.0)
 	$Range_Sprite.visible = false
 
 #Upgrade-Menü öffnen

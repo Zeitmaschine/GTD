@@ -16,6 +16,7 @@ var enemyinrange = 0
 var target = null
 var placed = false
 export var priority = 0
+var rangeVisible = false
 
 #Verbesserungswerte
 export var upgrade1 = false
@@ -33,6 +34,14 @@ func _process(delta):
 	if placed == true:
 		if can_fire == true && enemyinrange > 0:
 			aim_and_shoot()
+		
+		if get_node(\"UpgradeWindow/BombenturmUpgrade\").visible == true:
+			$Range_Sprite.visible = true
+			rangeVisible = true
+		
+		if get_node(\"UpgradeWindow/BombenturmUpgrade\").visible == false && rangeVisible == true:
+			$Range_Sprite.visible = false
+			rangeVisible = false
 
 #Zielfindung
 func find_closest_target():

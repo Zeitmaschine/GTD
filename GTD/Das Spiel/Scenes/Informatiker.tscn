@@ -23,6 +23,7 @@ var target = null
 var can_make_money = true
 var placed = false
 export var priority = 1
+var rangeVisible = false
 
 #Verbesserungswerte
 
@@ -47,6 +48,14 @@ func _process(delta):
 	
 		if upgrade1 == true:
 			earn_money_upgrade_1()
+			
+		if get_node(\"UpgradeWindow/InformatikerUpgrade\").visible == true:
+			$Range_Sprite.visible = true
+			rangeVisible = true
+		
+		if get_node(\"UpgradeWindow/InformatikerUpgrade\").visible == false && rangeVisible == true:
+			$Range_Sprite.visible = false
+			rangeVisible = false
 
 #Bestimmung, ob überhaupt Gegner anwesend sind
 
@@ -149,11 +158,11 @@ func earn_money_upgrade_1():
 
 #Anzeige der Reichweite
 func _on_Informatiker_Area_mouse_entered():
-	scale = Vector2(1.2,1.2)
+	$Sprite_Informatiker.scale = Vector2(1.2,1.2)
 	$Range_Sprite.visible = true
 
 func _on_Informatiker_Area_mouse_exited():
-	scale = Vector2(1,1)
+	$Sprite_Informatiker.scale = Vector2(1,1)
 	$Range_Sprite.visible = false
 
 

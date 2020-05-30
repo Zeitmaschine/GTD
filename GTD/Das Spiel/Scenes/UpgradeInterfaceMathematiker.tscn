@@ -157,7 +157,8 @@ func check_status():
 	if(get_parent().get_parent().get_node(\".\").attackrangelvl ==  5 || get_parent().get_parent().get_parent().get_node(\".\").money < price3):
 		get_node(\"UpgradeBackround/StatUpgradeContainer/RangeButton\").set_disabled(true)
 	if(get_parent().get_parent().get_parent().get_node(\".\").money >= price3 && get_parent().get_parent().get_node(\".\").attackrangelvl <  5):
-		get_node(\"UpgradeBackround/StatUpgradeContainer/RangeButton\").set_disabled(false)"
+		get_node(\"UpgradeBackround/StatUpgradeContainer/RangeButton\").set_disabled(false)
+"
 
 [sub_resource type="GDScript" id=2]
 script/source = "extends VBoxContainer
@@ -250,6 +251,7 @@ func _process(delta):
 "
 
 [node name="MathematikerUpgrade" type="Control"]
+modulate = Color( 1, 1, 1, 0.705882 )
 margin_right = 40.0
 margin_bottom = 40.0
 mouse_filter = 2
