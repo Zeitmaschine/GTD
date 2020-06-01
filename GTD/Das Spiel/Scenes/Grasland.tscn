@@ -22,7 +22,7 @@ var map = 1
 
 #Status
 export var waverunning = false
-export var wave = 1
+export var wave = 50
 export var money = 1350 #Startgeld
 export var healthy = 100
 export var enemycount = 0 # Anzahl der Gegner auf dem Spiel (Grundlage, für Rundenenden, wo alle Gegner zerstört sein müssen.)

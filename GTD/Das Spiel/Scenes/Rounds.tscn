@@ -3,7 +3,7 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
 
-var wave = 1
+var wave = 100
 var triggeronce = false
 var triggeronce2 = false
 var waverunning
@@ -1083,7 +1083,8 @@ func wave50():
 		wave = 51
 		triggeronce = false
 		triggeronce2 = false
-		
+		yield(get_tree().create_timer(2), \"timeout\")
+		get_parent().get_node(\"InterfaceLayer/Interface/Winlayer/Win\").win()
 		
 func wave51():
 	if triggeronce2 == false:
@@ -1964,9 +1965,11 @@ func wave100():
 		yield(get_tree().create_timer(100), \"timeout\")
 		wave_round_end_money()
 		waverunning = false
-		wave = 101
+		wave = 100
 		triggeronce = false
 		triggeronce2 = false
+		yield(get_tree().create_timer(2), \"timeout\")
+		get_parent().get_node(\"InterfaceLayer/Interface/Winlayer2/Win2\").win2()
 
 "
 
