@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Scenes/Interface.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Audio/Buy_failed.wav" type="AudioStream" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Audio/Life_lost.wav" type="AudioStream" id=6]
 [ext_resource path="res://Scenes/Path2D.gd" type="Script" id=7]
 [ext_resource path="res://Scenes/Rounds.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Wegweiser.tscn" type="PackedScene" id=9]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
@@ -30,7 +31,7 @@ var healthinterface
 var healthdeath
 var waveinterface
 var max_universitaet = false
-var unigekauft
+var unigekauft = false
 var unitext
 var pauseAllowed = 0
 
@@ -131,7 +132,8 @@ func _process(delta):
 
 	if Input.is_action_just_pressed(\"Hotkey5\"):
 		if money >= uniPrice  && max_universitaet == false:
-			unigekauft.unigekauft = true
+			get_node(\"InterfaceLayer/Interface/ShopLayer/ShopMenu\").unigekauft = true
+			max_universitaet = true
 			unitext.text = \"Gekauft\"
 			add_universitaet()
 		else:
@@ -291,6 +293,7 @@ func add_universitaet():
 			if Input.is_action_just_pressed(\"left_click\") && universitaet_instance.get_node(\"Universität_Area\").get_overlapping_bodies().size() == 1:
 				money = money - uniPrice
 				$Buy.play()
+				get_node(\"InterfaceLayer/Interface/ShopLayer/ShopMenu\").unigekauft = true
 				max_universitaet = true
 				break
 			
@@ -298,7 +301,8 @@ func add_universitaet():
 				$Buy_failed.play()
 			
 			if Input.is_action_just_pressed(\"right_click\"):
-				unigekauft.unigekauft = false
+				max_universitaet = false
+				get_node(\"InterfaceLayer/Interface/ShopLayer/ShopMenu\").unigekauft = false
 				unitext.text = \"Universität: 500$\"
 				$Buy_failed.play()
 				universitaet_instance.queue_free()
@@ -321,9 +325,6 @@ func setUpgrade2Unlock(upgrade22unlock):
 #Überprüfung des Upgrades 2
 func getUpgrade2Unlock():
 	return upgrade2unlock
-
-
-
 
 
 
@@ -565,4 +566,14 @@ volume_db = -23.223
 [node name="Buy_failed" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
 volume_db = -23.223
+
+[node name="Wegweiser" parent="." instance=ExtResource( 9 )]
+position = Vector2( 275.002, 608.001 )
+
+[node name="Wegweiser2" parent="." instance=ExtResource( 9 )]
+position = Vector2( 985.523, 351.848 )
+
+[node name="Wegweiser3" parent="." instance=ExtResource( 9 )]
+position = Vector2( 1497.53, 609.888 )
+scale = Vector2( -1.04, 1 )
 [connection signal="timeout" from="Path2D/Timer" to="Path2D" method="_on_Timer_timeout"]

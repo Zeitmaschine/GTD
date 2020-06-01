@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Audio/Life_lost.wav" type="AudioStream" id=1]
 [ext_resource path="res://Audio/Die.wav" type="AudioStream" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Scenes/Interface.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Path2D.gd" type="Script" id=7]
 [ext_resource path="res://Scenes/Rounds.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Wegweiser.tscn" type="PackedScene" id=9]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
@@ -623,4 +624,19 @@ volume_db = -23.223
 [node name="Buy_failed" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 volume_db = -23.223
+
+[node name="Wegweiser" parent="." instance=ExtResource( 9 )]
+position = Vector2( 555.77, 225.137 )
+rotation = -3.14159
+scale = Vector2( 0.882965, -0.96969 )
+
+[node name="Wegweiser2" parent="." instance=ExtResource( 9 )]
+position = Vector2( 1141.34, 101.471 )
+rotation = -3.14159
+scale = Vector2( -1.11703, -0.96969 )
+
+[node name="Wegweiser3" parent="." instance=ExtResource( 9 )]
+position = Vector2( 1153.97, 610.483 )
+rotation = -3.14159
+scale = Vector2( 0.882965, -0.96969 )
 [connection signal="timeout" from="Path2D/Timer" to="Path2D" method="_on_Timer_timeout"]
