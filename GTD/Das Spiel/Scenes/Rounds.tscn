@@ -1083,9 +1083,11 @@ func wave50():
 		wave = 51
 		triggeronce = false
 		triggeronce2 = false
-		yield(get_tree().create_timer(2), \"timeout\")
-		get_parent().get_node(\"InterfaceLayer/Interface/Winlayer/Win\").win()
-		
+		if(get_parent().get_node(\".\").healthy > 0):
+			get_parent().get_node(\".\").victory = true
+			yield(get_tree().create_timer(2), \"timeout\")
+			get_parent().get_node(\"InterfaceLayer/Interface/Winlayer/Win\").win()
+
 func wave51():
 	if triggeronce2 == false:
 		triggeronce2 = true
@@ -1968,8 +1970,10 @@ func wave100():
 		wave = 100
 		triggeronce = false
 		triggeronce2 = false
-		yield(get_tree().create_timer(2), \"timeout\")
-		get_parent().get_node(\"InterfaceLayer/Interface/Winlayer2/Win2\").win2()
+		if(get_parent().get_node(\".\").healthy > 0):
+			get_parent().get_node(\".\").victory = true
+			yield(get_tree().create_timer(2), \"timeout\")
+			get_parent().get_node(\"InterfaceLayer/Interface/Winlayer2/Win2\").win2()
 
 "
 

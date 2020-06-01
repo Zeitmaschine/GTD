@@ -188,7 +188,7 @@ func _on_PauseIcon_pressed():
 	visible = not visible
 "
 
-[sub_resource type="GDScript" id=6]
+[sub_resource type="GDScript" id=4]
 script/source = "extends Control
 
 var wave
@@ -205,6 +205,7 @@ func win():
 		visible = not visible
 
 func _on_WinFortsetzen_pressed():
+	get_parent().get_parent().get_parent().get_parent().get_node(\".\").victory = false
 	win = false
 	get_tree().paused = not get_tree().paused
 	visible = not visible
@@ -212,12 +213,13 @@ func _on_WinFortsetzen_pressed():
 
 func _on_WinBeenden_pressed():
 	win = false
+	get_parent().get_parent().get_parent().get_parent().get_node(\".\").victory = false
 	get_tree().paused = not get_tree().paused
 	visible = not visible
 	get_tree().change_scene(\"res://Scenes/MainMenu.tscn\")
 "
 
-[sub_resource type="GDScript" id=7]
+[sub_resource type="GDScript" id=5]
 script/source = "extends Control
 
 var wave
@@ -238,6 +240,7 @@ func win2():
 func _on_WinNeustarten_pressed():
 	win2 = false
 	get_parent().get_parent().get_node(\"Winlayer/Win\").win = false
+	get_parent().get_parent().get_parent().get_parent().get_node(\".\").victory = false
 	get_tree().paused = not get_tree().paused
 	visible = not visible
 	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").map == 1):
@@ -249,12 +252,13 @@ func _on_WinNeustarten_pressed():
 func _on_WinBeenden_pressed():
 	win2 = false
 	get_parent().get_parent().get_node(\"Winlayer/Win\").win = false
+	get_parent().get_parent().get_parent().get_parent().get_node(\".\").victory = false
 	get_tree().paused = not get_tree().paused
 	visible = not visible
 	get_tree().change_scene(\"res://Scenes/MainMenu.tscn\")
 "
 
-[sub_resource type="GDScript" id=4]
+[sub_resource type="GDScript" id=6]
 script/source = "extends TextureButton
 
 
@@ -278,14 +282,14 @@ func _on_PlayButton_pressed():
 
 #Überprüfung, ob man auf den Knopf drücken darf 
 func check_status():
-	if get_parent().get_parent().get_parent().waverunning == false:
+	if get_parent().get_parent().get_parent().waverunning == false && get_parent().get_parent().get_parent().get_node(\".\").victory == false:
 		set_disabled(false)
 	if get_parent().get_parent().get_parent().waverunning == true:
 		set_disabled(true)
 
 "
 
-[sub_resource type="GDScript" id=5]
+[sub_resource type="GDScript" id=7]
 script/source = "extends Control
 
 var health = 250
@@ -813,7 +817,7 @@ pause_mode = 2
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = SubResource( 6 )
+script = SubResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -930,7 +934,7 @@ pause_mode = 2
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = SubResource( 7 )
+script = SubResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1042,7 +1046,7 @@ texture_normal = ExtResource( 14 )
 texture_pressed = ExtResource( 15 )
 texture_disabled = ExtResource( 16 )
 expand = true
-script = SubResource( 4 )
+script = SubResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1067,7 +1071,7 @@ pause_mode = 2
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = SubResource( 5 )
+script = SubResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

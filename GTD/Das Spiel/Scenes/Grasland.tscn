@@ -34,6 +34,7 @@ var max_universitaet = false
 var unigekauft = false
 var unitext
 var pauseAllowed = 0
+var victory = false
 
 
 
@@ -97,7 +98,7 @@ func _process(delta):
 	if Input.is_action_just_pressed(\"Hotkey0\"):
 		money += 1000
 	
-	if Input.is_action_just_pressed(\"spacebar\") && waverunning == false:
+	if Input.is_action_just_pressed(\"spacebar\") && waverunning == false && victory == false:
 		waverunning = true
 		
 	if waverunning == true:
