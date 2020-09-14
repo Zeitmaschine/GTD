@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Interface/Theme/Buttons.tres" type="Theme" id=1]
 [ext_resource path="res://Interface/Theme/ButtonHoverNormal.tres" type="StyleBox" id=2]
@@ -7,6 +7,10 @@
 [ext_resource path="res://Interface/Font/default_font.tres" type="DynamicFont" id=5]
 [ext_resource path="res://Interface/Theme/ButtonNormal.tres" type="StyleBox" id=6]
 [ext_resource path="res://Interface/Theme/ButtonPressedNormal.tres" type="StyleBox" id=7]
+[ext_resource path="res://Assets/Buttons/MainMenuButton_Normal.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Buttons/MainMenuButton_Pressed.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Buttons/MainMenuButton_Hover2.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Buttons/MainMenuButton_PressedExit.png" type="Texture" id=11]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Button
@@ -16,6 +20,10 @@ func _ready():
 
 func _on_Button_pressed():
 		get_tree().change_scene(\"res://Scenes/Map.tscn\")
+
+
+func _on_SpielStarten_pressed():
+	pass # Replace with function body.
 "
 
 [sub_resource type="GDScript" id=2]
@@ -43,6 +51,29 @@ func _ready():
 func _on_Spiel_beenden_pressed():
 	get_tree().quit( )
 	pass 
+"
+
+[sub_resource type="GDScript" id=6]
+script/source = "extends TextureButton
+
+func _on_SpielStarten_pressed():
+	get_tree().change_scene(\"res://Scenes/Map.tscn\")
+"
+
+[sub_resource type="GDScript" id=7]
+script/source = "extends TextureButton
+
+
+func _on_Infos_pressed():
+	get_tree().change_scene(\"res://Scenes/Settings.tscn\")
+"
+
+[sub_resource type="GDScript" id=8]
+script/source = "extends TextureButton
+
+
+func _on_SpielBeenden_pressed():
+	get_tree().quit( )
 "
 
 [node name="Control" type="Control"]
@@ -91,35 +122,47 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SpielstartOutline" type="ColorRect" parent="."]
-margin_left = 515.0
-margin_top = 276.0
-margin_right = 1405.0
-margin_bottom = 443.0
-color = Color( 0.156863, 0.156863, 0.156863, 1 )
+[node name="Spiel Starten" type="Button" parent="."]
+visible = false
+margin_left = 520.0
+margin_top = 280.0
+margin_right = 1400.0
+margin_bottom = 437.0
+custom_styles/hover = ExtResource( 2 )
+custom_styles/pressed = ExtResource( 7 )
+custom_styles/normal = ExtResource( 6 )
+custom_fonts/font = ExtResource( 5 )
+text = "Spiel Starten"
+script = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OptionenOutline" type="ColorRect" parent="."]
-margin_left = 515.0
-margin_top = 483.0
-margin_right = 1405.0
-margin_bottom = 648.0
-color = Color( 0.156863, 0.156863, 0.156863, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Infos" type="Button" parent="."]
+visible = false
+margin_left = 520.0
+margin_top = 669.0
+margin_right = 1400.0
+margin_bottom = 826.0
+theme = ExtResource( 1 )
+custom_styles/hover = ExtResource( 2 )
+custom_styles/pressed = ExtResource( 7 )
+custom_styles/normal = ExtResource( 6 )
+text = "Infos"
+script = SubResource( 2 )
 
-[node name="SpielBeendenOutline" type="ColorRect" parent="."]
-margin_left = 515.0
-margin_top = 690.0
-margin_right = 1405.0
-margin_bottom = 855.0
-color = Color( 0.156863, 0.156863, 0.156863, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Spiel beenden" type="Button" parent="."]
+visible = false
+margin_left = 520.0
+margin_top = 773.0
+margin_right = 1400.0
+margin_bottom = 930.0
+theme = ExtResource( 1 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/normal = ExtResource( 6 )
+text = "Spiel beenden"
+script = SubResource( 5 )
 
 [node name="Knöpfe" type="VBoxContainer" parent="."]
 anchor_left = 0.5
@@ -143,41 +186,80 @@ margin_right = 880.0
 margin_bottom = 228.0
 color = Color( 0.196078, 0.196078, 0.196078, 1 )
 
-[node name="Spiel Starten" type="Button" parent="Knöpfe"]
+[node name="SpielStarten" type="TextureButton" parent="Knöpfe"]
 margin_top = 278.0
 margin_right = 880.0
 margin_bottom = 435.0
-custom_styles/hover = ExtResource( 2 )
-custom_styles/pressed = ExtResource( 7 )
-custom_styles/normal = ExtResource( 6 )
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 9 )
+texture_hover = ExtResource( 10 )
+stretch_mode = 2
+script = SubResource( 6 )
+
+[node name="SpielStartenText" type="Label" parent="Knöpfe/SpielStarten"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 5
 text = "Spiel Starten"
-script = SubResource( 1 )
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Infos" type="Button" parent="Knöpfe"]
+[node name="Infos" type="TextureButton" parent="Knöpfe"]
 margin_top = 485.0
 margin_right = 880.0
 margin_bottom = 642.0
-theme = ExtResource( 1 )
-custom_styles/hover = ExtResource( 2 )
-custom_styles/pressed = ExtResource( 7 )
-custom_styles/normal = ExtResource( 6 )
-text = "Infos"
-script = SubResource( 2 )
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 9 )
+texture_hover = ExtResource( 10 )
+stretch_mode = 2
+script = SubResource( 7 )
 
-[node name="Spiel beenden" type="Button" parent="Knöpfe"]
+[node name="InfosText" type="Label" parent="Knöpfe/Infos"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 5
+text = "Infos"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SpielBeenden" type="TextureButton" parent="Knöpfe"]
 margin_top = 692.0
 margin_right = 880.0
 margin_bottom = 849.0
-theme = ExtResource( 1 )
-custom_styles/hover = SubResource( 3 )
-custom_styles/pressed = SubResource( 4 )
-custom_styles/normal = ExtResource( 6 )
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 11 )
+texture_hover = ExtResource( 10 )
+stretch_mode = 2
+script = SubResource( 8 )
+
+[node name="SpielBeendenText" type="Label" parent="Knöpfe/SpielBeenden"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 5
 text = "Spiel beenden"
-script = SubResource( 5 )
-[connection signal="pressed" from="Knöpfe/Spiel Starten" to="Knöpfe/Spiel Starten" method="_on_Button_pressed"]
-[connection signal="pressed" from="Knöpfe/Infos" to="Knöpfe/Infos" method="_on_Credits_pressed"]
-[connection signal="pressed" from="Knöpfe/Spiel beenden" to="Knöpfe/Spiel beenden" method="_on_Spiel_beenden_pressed"]
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Spiel Starten" to="Spiel Starten" method="_on_Button_pressed"]
+[connection signal="pressed" from="Infos" to="Infos" method="_on_Credits_pressed"]
+[connection signal="pressed" from="Spiel beenden" to="Spiel beenden" method="_on_Spiel_beenden_pressed"]
+[connection signal="pressed" from="Knöpfe/SpielStarten" to="Knöpfe/SpielStarten" method="_on_SpielStarten_pressed"]
+[connection signal="pressed" from="Knöpfe/Infos" to="Knöpfe/Infos" method="_on_Infos_pressed"]
+[connection signal="pressed" from="Knöpfe/SpielBeenden" to="Knöpfe/SpielBeenden" method="_on_SpielBeenden_pressed"]

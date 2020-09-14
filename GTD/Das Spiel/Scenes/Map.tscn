@@ -1,16 +1,17 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Interface/Theme/VersionFont.tres" type="Theme" id=1]
-[ext_resource path="res://Interface/Theme/ButtonPressed.tres" type="StyleBox" id=2]
+[ext_resource path="res://Assets/Buttons/MainMenuButton_PressedExit.png" type="Texture" id=2]
 [ext_resource path="res://Interface/Theme/ButtonNormal.tres" type="StyleBox" id=3]
-[ext_resource path="res://Interface/Font/MainMenuFont.tres" type="DynamicFont" id=4]
-[ext_resource path="res://Interface/Theme/ButtonClick.tres" type="StyleBox" id=5]
+[ext_resource path="res://Assets/Buttons/MainMenuButton_Hover2.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Buttons/MainMenuButton_Normal.png" type="Texture" id=5]
 [ext_resource path="res://Interface/Theme/SpecialUpgradeText.tres" type="Theme" id=6]
 [ext_resource path="res://Interface/Font/Special_Upgrade_font.tres" type="DynamicFont" id=7]
 [ext_resource path="res://Interface/Theme/ButtonHoverNormal.tres" type="StyleBox" id=8]
 [ext_resource path="res://Interface/Theme/ButtonPressedNormal.tres" type="StyleBox" id=9]
 [ext_resource path="res://Assets/Tilesets/Grassland/Grasland Preview.png" type="Texture" id=10]
 [ext_resource path="res://Assets/Tilesets/Desert/Preview.JPG" type="Texture" id=11]
+[ext_resource path="res://Interface/Font/default_font.tres" type="DynamicFont" id=12]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Control
@@ -70,7 +71,7 @@ func _on_Desert_pressed():
 "
 
 [sub_resource type="GDScript" id=4]
-script/source = "extends Button
+script/source = "extends TextureButton
 
 
 # Declare member variables here. Examples:
@@ -104,16 +105,6 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.196078, 0.196078, 0.196078, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ZurueckOutline" type="ColorRect" parent="."]
-margin_left = 515.0
-margin_top = 689.0
-margin_right = 1405.0
-margin_bottom = 856.0
-color = Color( 0.156863, 0.156863, 0.156863, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -260,20 +251,26 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Zurueck" type="Button" parent="."]
+[node name="Zurueck" type="TextureButton" parent="."]
 margin_left = 520.0
 margin_top = 694.0
 margin_right = 1400.0
 margin_bottom = 851.0
-custom_styles/hover = ExtResource( 5 )
-custom_styles/pressed = ExtResource( 2 )
-custom_styles/normal = ExtResource( 3 )
-custom_fonts/font = ExtResource( 4 )
-text = "Zurück"
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 2 )
+texture_hover = ExtResource( 4 )
 script = SubResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+
+[node name="ZurueckText" type="Label" parent="Zurueck"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 12 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 5
+text = "Zurück"
+align = 1
+valign = 1
 [connection signal="pressed" from="MapContainer/Grasland" to="MapContainer/Grasland" method="_on_Grasland_pressed"]
 [connection signal="pressed" from="MapContainer/Desert" to="MapContainer/Desert" method="_on_Desert_pressed"]
 [connection signal="pressed" from="Zurueck" to="Zurueck" method="_on_Zurueck_pressed"]

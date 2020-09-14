@@ -1,10 +1,14 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Interface/Theme/MainMenTheme.tres" type="Theme" id=1]
 [ext_resource path="res://Interface/Font/default_font.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Interface/Theme/ButtonPressedNormal.tres" type="StyleBox" id=3]
 [ext_resource path="res://Interface/Theme/ButtonHoverNormal.tres" type="StyleBox" id=4]
 [ext_resource path="res://Interface/Theme/ButtonNormal.tres" type="StyleBox" id=5]
+[ext_resource path="res://Assets/Buttons/MainMenuButton_Hover2.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Buttons/MainMenuButton_Pressed.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Buttons/MainMenuButton_Normal.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Buttons/MainMenuButton_PressedExit.png" type="Texture" id=9]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Control
@@ -64,35 +68,44 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SteuerungOutline" type="ColorRect" parent="."]
-margin_left = 515.0
-margin_top = 276.0
-margin_right = 1405.0
-margin_bottom = 443.0
-color = Color( 0.156863, 0.156863, 0.156863, 1 )
+[node name="Steuerung" type="Button" parent="."]
+visible = false
+margin_left = 520.0
+margin_top = 306.0
+margin_right = 1400.0
+margin_bottom = 463.0
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/normal = ExtResource( 5 )
+custom_fonts/font = ExtResource( 2 )
+text = "Hinweise"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CreditsOutline" type="ColorRect" parent="."]
-margin_left = 515.0
-margin_top = 483.0
-margin_right = 1405.0
-margin_bottom = 650.0
-color = Color( 0.156863, 0.156863, 0.156863, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Credits" type="Button" parent="."]
+visible = false
+margin_left = 520.0
+margin_top = 695.0
+margin_right = 1400.0
+margin_bottom = 852.0
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/normal = ExtResource( 5 )
+custom_fonts/font = ExtResource( 2 )
+text = "Credits"
 
-[node name="ZurueckOutline" type="ColorRect" parent="."]
-margin_left = 515.0
-margin_top = 690.0
-margin_right = 1405.0
-margin_bottom = 855.0
-color = Color( 0.156863, 0.156863, 0.156863, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Zurueck" type="Button" parent="."]
+visible = false
+margin_left = 520.0
+margin_top = 798.0
+margin_right = 1400.0
+margin_bottom = 955.0
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/normal = ExtResource( 5 )
+custom_fonts/font = ExtResource( 2 )
+text = "Zurück"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_left = 0.5
@@ -109,36 +122,84 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Steuerung" type="Button" parent="VBoxContainer"]
+[node name="Steuerung" type="TextureButton" parent="VBoxContainer"]
 margin_top = 228.0
 margin_right = 880.0
 margin_bottom = 385.0
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 3 )
-custom_styles/normal = ExtResource( 5 )
-custom_fonts/font = ExtResource( 2 )
-text = "Hinweise"
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 7 )
+texture_hover = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Credits" type="Button" parent="VBoxContainer"]
+[node name="SteuerungText" type="Label" parent="VBoxContainer/Steuerung"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 5
+text = "Steuerung"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Credits" type="TextureButton" parent="VBoxContainer"]
 margin_top = 435.0
 margin_right = 880.0
 margin_bottom = 592.0
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 3 )
-custom_styles/normal = ExtResource( 5 )
-custom_fonts/font = ExtResource( 2 )
-text = "Credits"
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 7 )
+texture_hover = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Zurueck" type="Button" parent="VBoxContainer"]
+[node name="CreditsText" type="Label" parent="VBoxContainer/Credits"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 5
+text = "Credits"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Zurueck" type="TextureButton" parent="VBoxContainer"]
 margin_top = 642.0
 margin_right = 880.0
 margin_bottom = 799.0
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 3 )
-custom_styles/normal = ExtResource( 5 )
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 9 )
+texture_hover = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ZurueckText" type="Label" parent="VBoxContainer/Zurueck"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 5
 text = "Zurück"
-[connection signal="gui_input" from="VBoxContainer/Steuerung" to="." method="_on_Steuerung_gui_input"]
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="gui_input" from="Steuerung" to="." method="_on_Steuerung_gui_input"]
+[connection signal="pressed" from="Steuerung" to="." method="_on_Steuerung_pressed"]
+[connection signal="pressed" from="Credits" to="." method="_on_Credits_pressed"]
+[connection signal="pressed" from="Zurueck" to="." method="_on_Zurueck_pressed"]
 [connection signal="pressed" from="VBoxContainer/Steuerung" to="." method="_on_Steuerung_pressed"]
 [connection signal="pressed" from="VBoxContainer/Credits" to="." method="_on_Credits_pressed"]
 [connection signal="pressed" from="VBoxContainer/Zurueck" to="." method="_on_Zurueck_pressed"]

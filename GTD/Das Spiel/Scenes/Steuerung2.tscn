@@ -1,9 +1,9 @@
 [gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Interface/Font/default_font.tres" type="DynamicFont" id=1]
-[ext_resource path="res://Interface/Theme/ButtonPressedNormal.tres" type="StyleBox" id=2]
-[ext_resource path="res://Interface/Theme/ButtonHoverNormal.tres" type="StyleBox" id=3]
-[ext_resource path="res://Interface/Theme/ButtonNormal.tres" type="StyleBox" id=4]
+[ext_resource path="res://Assets/Buttons/MainMenuButton_PressedExit.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Buttons/MainMenuButton_Normal.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Buttons/MainMenuButton_Hover2.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Icons/Click_Right_Icon.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Icons/Click_Right_Icon_Hover.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Icons/Click_Right_Icon_pressed.png" type="Texture" id=7]
@@ -64,21 +64,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ZurueckOutline" type="ColorRect" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -445.0
-margin_top = 150.0
-margin_right = 445.0
-margin_bottom = 315.0
-color = Color( 0.156863, 0.156863, 0.156863, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Zurueck" type="Button" parent="."]
+[node name="Zurueck" type="TextureButton" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -87,14 +73,20 @@ margin_left = -440.0
 margin_top = 154.0
 margin_right = 440.0
 margin_bottom = 310.0
-custom_styles/hover = ExtResource( 3 )
-custom_styles/pressed = ExtResource( 2 )
-custom_styles/normal = ExtResource( 4 )
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 2 )
+texture_hover = ExtResource( 4 )
+
+[node name="ZurueckText" type="Label" parent="Zurueck"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 5
 text = "Zurück"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+align = 1
+valign = 1
 
 [node name="VBoxContainer" type="HBoxContainer" parent="."]
 anchor_top = 0.5
@@ -136,6 +128,9 @@ margin_right = 500.0
 margin_bottom = -400.0
 texture = ExtResource( 11 )
 expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="Zurueck" to="." method="_on_Zurueck_pressed"]
 [connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_Back_pressed"]
 [connection signal="pressed" from="VBoxContainer/Forward" to="." method="_on_Forward_pressed"]
