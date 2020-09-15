@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://Scenes/Moneybar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Healthbar.tscn" type="PackedScene" id=2]
@@ -29,6 +29,12 @@
 [ext_resource path="res://Assets/Winkelninja/Winkelninja.png" type="Texture" id=27]
 [ext_resource path="res://Assets/Universität/Universität.png" type="Texture" id=28]
 [ext_resource path="res://Interface/Theme/WinTheme.tres" type="Theme" id=29]
+[ext_resource path="res://Assets/Frame/PauseText_Frame.png" type="Texture" id=30]
+[ext_resource path="res://Assets/Frame/PauseBox.png" type="Texture" id=31]
+[ext_resource path="res://Assets/Buttons/PauseButton_Normal.png" type="Texture" id=32]
+[ext_resource path="res://Interface/Font/pause_font.tres" type="DynamicFont" id=33]
+[ext_resource path="res://Assets/Buttons/PauseButton_Hover.png" type="Texture" id=34]
+[ext_resource path="res://Assets/Buttons/PauseButton_Press.png" type="Texture" id=35]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Label
@@ -50,6 +56,8 @@ func getWave():
 	
 func setWave(newWave):
 	wave = newWave
+
+
 "
 
 [sub_resource type="GDScript" id=2]
@@ -714,15 +722,30 @@ __meta__ = {
 [node name="Backround" type="ColorRect" parent="PauseLayer/Pause"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -1.29236
+margin_right = -1.29236
 color = Color( 0, 0, 0, 0.352941 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="PauseLayer/Pause"]
+[node name="PauseFrame" type="TextureRect" parent="PauseLayer/Pause"]
 anchor_right = 1.0
-margin_bottom = 141.0
+margin_left = 700.0
+margin_right = -700.0
+margin_bottom = 150.0
+texture = ExtResource( 30 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PauseText" type="Label" parent="PauseLayer/Pause/PauseFrame"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 theme = ExtResource( 17 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 5
 text = "Pause"
 align = 1
 valign = 1
@@ -730,84 +753,77 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PauseFortsetzenOutline" type="ColorRect" parent="PauseLayer/Pause"]
-margin_left = 475.0
-margin_top = 480.0
-margin_right = 1445.0
-margin_bottom = 587.0
-color = Color( 0.156863, 0.156863, 0.156863, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="PauseBox" type="TextureRect" parent="PauseLayer/Pause"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 500.0
+margin_top = 250.0
+margin_right = -500.0
+margin_bottom = -250.0
+texture = ExtResource( 31 )
 
-[node name="PauseNeustartOutline2" type="ColorRect" parent="PauseLayer/Pause"]
-margin_left = 475.0
-margin_top = 335.0
-margin_right = 1445.0
-margin_bottom = 442.0
-color = Color( 0.156863, 0.156863, 0.156863, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="PauseFortsetzen" type="TextureButton" parent="PauseLayer/Pause/PauseBox"]
+margin_left = 200.0
+margin_top = 60.0
+margin_right = 720.0
+margin_bottom = 180.0
+texture_normal = ExtResource( 32 )
+texture_pressed = ExtResource( 35 )
+texture_hover = ExtResource( 34 )
 
-[node name="PauseBeendenOutline3" type="ColorRect" parent="PauseLayer/Pause"]
-margin_left = 475.0
-margin_top = 626.0
-margin_right = 1445.0
-margin_bottom = 733.0
-color = Color( 0.156863, 0.156863, 0.156863, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Space" type="MarginContainer" parent="PauseLayer/Pause"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -480.0
-margin_top = -320.0
-margin_right = 480.0
-margin_bottom = 309.75
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ButtonContainer" type="VBoxContainer" parent="PauseLayer/Pause/Space"]
-margin_right = 960.0
-margin_bottom = 629.0
-custom_constants/separation = 50
-alignment = 1
-
-[node name="PauseFortsetzen" type="Button" parent="PauseLayer/Pause/Space/ButtonContainer"]
-margin_top = 119.0
-margin_right = 960.0
-margin_bottom = 216.0
-theme = ExtResource( 3 )
-custom_styles/hover = ExtResource( 6 )
-custom_styles/pressed = ExtResource( 4 )
-custom_styles/normal = ExtResource( 5 )
+[node name="PauseFortsetzenText" type="Label" parent="PauseLayer/Pause/PauseBox/PauseFortsetzen"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 33 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 5
 text = "Spiel fortsetzen"
+align = 1
+valign = 1
 
-[node name="PauseNeustart" type="Button" parent="PauseLayer/Pause/Space/ButtonContainer"]
-margin_top = 266.0
-margin_right = 960.0
-margin_bottom = 363.0
-theme = ExtResource( 3 )
-custom_styles/hover = ExtResource( 6 )
-custom_styles/pressed = ExtResource( 4 )
-custom_styles/normal = ExtResource( 5 )
+[node name="PauseNeustart" type="TextureButton" parent="PauseLayer/Pause/PauseBox"]
+margin_left = 200.0
+margin_top = 230.0
+margin_right = 720.0
+margin_bottom = 350.0
+texture_normal = ExtResource( 32 )
+texture_pressed = ExtResource( 35 )
+texture_hover = ExtResource( 34 )
+
+[node name="PauseNeustartText" type="Label" parent="PauseLayer/Pause/PauseBox/PauseNeustart"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 33 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 5
 text = "Spiel neustarten"
+align = 1
+valign = 1
 
-[node name="PauseBeenden" type="Button" parent="PauseLayer/Pause/Space/ButtonContainer"]
-margin_top = 413.0
-margin_right = 960.0
-margin_bottom = 510.0
-theme = ExtResource( 3 )
-custom_styles/hover = ExtResource( 7 )
-custom_styles/pressed = ExtResource( 8 )
-custom_styles/normal = ExtResource( 5 )
-text = "Zurück zum Hauptmenu"
+[node name="PauseBeenden" type="TextureButton" parent="PauseLayer/Pause/PauseBox"]
+margin_left = 200.0
+margin_top = 400.0
+margin_right = 720.0
+margin_bottom = 520.0
+texture_normal = ExtResource( 32 )
+texture_pressed = ExtResource( 35 )
+texture_hover = ExtResource( 34 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="PauseLayer/Pause/PauseBox/PauseBeenden"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 33 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 5
+text = "Spiel beenden"
+align = 1
+valign = 1
 
 [node name="Winlayer" type="CanvasLayer" parent="."]
 layer = 4
@@ -1161,9 +1177,9 @@ __meta__ = {
 [connection signal="pressed" from="ShopLayer/ShopMenu/ShopBackround/MathebombenturmButton" to="ShopLayer/ShopMenu" method="_on_MathebombenturmButton_pressed"]
 [connection signal="pressed" from="ShopLayer/ShopMenu/ShopBackround/WinkelninjaButton" to="ShopLayer/ShopMenu" method="_on_WinkelninjaButton_pressed"]
 [connection signal="pressed" from="ShopLayer/ShopMenu/ShopBackround/UniversitaetButton" to="ShopLayer/ShopMenu" method="_on_UniversitaetButton_pressed"]
-[connection signal="pressed" from="PauseLayer/Pause/Space/ButtonContainer/PauseFortsetzen" to="PauseLayer/Pause" method="_on_PauseFortsetzen_pressed"]
-[connection signal="pressed" from="PauseLayer/Pause/Space/ButtonContainer/PauseNeustart" to="PauseLayer/Pause" method="_on_PauseNeustart_pressed"]
-[connection signal="pressed" from="PauseLayer/Pause/Space/ButtonContainer/PauseBeenden" to="PauseLayer/Pause" method="_on_PauseBeenden_pressed"]
+[connection signal="pressed" from="PauseLayer/Pause/PauseBox/PauseFortsetzen" to="PauseLayer/Pause" method="_on_PauseFortsetzen_pressed"]
+[connection signal="pressed" from="PauseLayer/Pause/PauseBox/PauseNeustart" to="PauseLayer/Pause" method="_on_PauseNeustart_pressed"]
+[connection signal="pressed" from="PauseLayer/Pause/PauseBox/PauseBeenden" to="PauseLayer/Pause" method="_on_PauseBeenden_pressed"]
 [connection signal="pressed" from="Winlayer/Win/Space/ButtonContainer/WinFortsetzen" to="Winlayer/Win" method="_on_WinFortsetzen_pressed"]
 [connection signal="pressed" from="Winlayer/Win/Space/ButtonContainer/WinBeenden" to="Winlayer/Win" method="_on_WinBeenden_pressed"]
 [connection signal="pressed" from="Winlayer2/Win2/Space/ButtonContainer/WinNeustarten" to="Winlayer2/Win2" method="_on_WinNeustarten_pressed"]
