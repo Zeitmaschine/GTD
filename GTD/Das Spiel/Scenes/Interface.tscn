@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://Scenes/Moneybar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Healthbar.tscn" type="PackedScene" id=2]
@@ -9,7 +9,7 @@
 [ext_resource path="res://Interface/Theme/ButtonClick.tres" type="StyleBox" id=7]
 [ext_resource path="res://Interface/Theme/ButtonPressed.tres" type="StyleBox" id=8]
 [ext_resource path="res://Assets/Icons/Pause_Icon.png" type="Texture" id=9]
-[ext_resource path="res://Interface/Font/GameOver_font.tres" type="Theme" id=10]
+[ext_resource path="res://Interface/Font/GameOver_font.tres" type="DynamicFont" id=10]
 [ext_resource path="res://Assets/Icons/Pause_Icon_pressed.png" type="Texture" id=11]
 [ext_resource path="res://Interface/Theme/RoundText.tres" type="Theme" id=12]
 [ext_resource path="res://Assets/Icons/Buy_Icon.png" type="Texture" id=13]
@@ -35,6 +35,12 @@
 [ext_resource path="res://Interface/Font/pause_font.tres" type="DynamicFont" id=33]
 [ext_resource path="res://Assets/Buttons/PauseButton_Hover.png" type="Texture" id=34]
 [ext_resource path="res://Assets/Buttons/PauseButton_Press.png" type="Texture" id=35]
+[ext_resource path="res://Assets/Frame/GameoverText_Frame.png" type="Texture" id=36]
+[ext_resource path="res://Assets/Frame/GameoverBox.png" type="Texture" id=37]
+[ext_resource path="res://Assets/Buttons/GameoverButton_Hover.png" type="Texture" id=38]
+[ext_resource path="res://Assets/Buttons/GameoverButton_Pressed.png" type="Texture" id=39]
+[ext_resource path="res://Assets/Buttons/GameoverButton_Normal.png" type="Texture" id=40]
+[ext_resource path="res://Assets/Buttons/GameoverButton_PressedExit.png" type="Texture" id=41]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Label
@@ -923,7 +929,7 @@ custom_constants/separation = 50
 alignment = 1
 
 [node name="WinFortsetzen" type="Button" parent="Winlayer/Win/Space/ButtonContainer"]
-margin_top = 192.0
+margin_top = 203.0
 margin_right = 960.0
 margin_bottom = 289.0
 theme = ExtResource( 3 )
@@ -935,7 +941,7 @@ text = "Spiel fortsetzen"
 [node name="WinBeenden" type="Button" parent="Winlayer/Win/Space/ButtonContainer"]
 margin_top = 339.0
 margin_right = 960.0
-margin_bottom = 436.0
+margin_bottom = 425.0
 theme = ExtResource( 3 )
 custom_styles/hover = ExtResource( 7 )
 custom_styles/pressed = ExtResource( 8 )
@@ -1100,22 +1106,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GameOverNeutstartOutline" type="ColorRect" parent="GameOverLayer/GameOver/BackroundGameOver"]
-margin_left = 395.0
-margin_top = 436.0
-margin_right = 1525.0
-margin_bottom = 542.0
-color = Color( 0.156863, 0.156863, 0.156863, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="GameOverMenüOutline" type="ColorRect" parent="GameOverLayer/GameOver/BackroundGameOver"]
-margin_left = 395.0
-margin_top = 580.0
-margin_right = 1525.0
-margin_bottom = 688.0
-color = Color( 0.156863, 0.156863, 0.156863, 1 )
+[node name="GameoverTextframe" type="TextureRect" parent="GameOverLayer/GameOver/BackroundGameOver"]
+anchor_right = 1.0
+margin_left = 700.0
+margin_right = -700.0
+margin_bottom = 150.0
+texture = ExtResource( 36 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1133,39 +1129,81 @@ __meta__ = {
 }
 
 [node name="ButtonContainerGameOver" type="VBoxContainer" parent="GameOverLayer/GameOver/BackroundGameOver/SpaceGameOver"]
+visible = false
 margin_right = 1120.0
 margin_bottom = 244.0
 theme = ExtResource( 3 )
 custom_constants/separation = 50
 alignment = 1
 
-[node name="GameOverNeutstart" type="Button" parent="GameOverLayer/GameOver/BackroundGameOver/SpaceGameOver/ButtonContainerGameOver"]
-margin_right = 1120.0
-margin_bottom = 97.0
-custom_styles/hover = ExtResource( 6 )
-custom_styles/pressed = ExtResource( 4 )
-custom_styles/normal = ExtResource( 5 )
-custom_constants/hseparation = 50
-text = "Spiel Neustarten"
-
-[node name="GameOverMenü" type="Button" parent="GameOverLayer/GameOver/BackroundGameOver/SpaceGameOver/ButtonContainerGameOver"]
-margin_top = 147.0
-margin_right = 1120.0
-margin_bottom = 244.0
-custom_styles/hover = ExtResource( 7 )
-custom_styles/pressed = ExtResource( 8 )
-custom_styles/normal = ExtResource( 5 )
-text = "Zurück ins Hauptmenü"
-
 [node name="GameOverText" type="Label" parent="GameOverLayer/GameOver/BackroundGameOver"]
 anchor_right = 1.0
 margin_top = 20.0
 margin_bottom = 117.0
-theme = ExtResource( 10 )
+custom_fonts/font = ExtResource( 10 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
 text = "Game Over"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameoverBox" type="TextureRect" parent="GameOverLayer/GameOver"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 500.0
+margin_top = 300.0
+margin_right = -500.0
+margin_bottom = -200.0
+texture = ExtResource( 37 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameOverNeutstart" type="TextureButton" parent="GameOverLayer/GameOver/GameoverBox"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_top = 125.0
+margin_right = -100.0
+margin_bottom = -325.0
+texture_normal = ExtResource( 40 )
+texture_pressed = ExtResource( 39 )
+texture_hover = ExtResource( 38 )
+
+[node name="GameOverNeutstartText" type="Label" parent="GameOverLayer/GameOver/GameoverBox/GameOverNeutstart"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 10 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 5
+text = "Spiel neustarten"
+align = 1
+valign = 1
+
+[node name="GameOverMenü" type="TextureButton" parent="GameOverLayer/GameOver/GameoverBox"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_top = 325.0
+margin_right = -100.0
+margin_bottom = -125.0
+texture_normal = ExtResource( 40 )
+texture_pressed = ExtResource( 41 )
+texture_hover = ExtResource( 38 )
+
+[node name="GameOverMenüText" type="Label" parent="GameOverLayer/GameOver/GameoverBox/GameOverMenü"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 10 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 5
+text = "Zurück zum Hauptmenü"
 align = 1
 valign = 1
 __meta__ = {
@@ -1187,5 +1225,5 @@ __meta__ = {
 [connection signal="pressed" from="PauseIcon" to="PauseLayer/Pause" method="_on_PauseIcon_pressed"]
 [connection signal="pressed" from="PlayButton" to="PlayButton" method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="ShopButton" to="ShopLayer/ShopMenu" method="_on_ShopButton_pressed"]
-[connection signal="pressed" from="GameOverLayer/GameOver/BackroundGameOver/SpaceGameOver/ButtonContainerGameOver/GameOverNeutstart" to="GameOverLayer/GameOver" method="_on_GameOverNeutstart_pressed"]
-[connection signal="pressed" from="GameOverLayer/GameOver/BackroundGameOver/SpaceGameOver/ButtonContainerGameOver/GameOverMenü" to="GameOverLayer/GameOver" method="_on_GameOverMen_pressed"]
+[connection signal="pressed" from="GameOverLayer/GameOver/GameoverBox/GameOverNeutstart" to="GameOverLayer/GameOver" method="_on_GameOverNeutstart_pressed"]
+[connection signal="pressed" from="GameOverLayer/GameOver/GameoverBox/GameOverMenü" to="GameOverLayer/GameOver" method="_on_GameOverMen_pressed"]
