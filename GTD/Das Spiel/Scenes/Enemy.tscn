@@ -1,13 +1,15 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Enemy/Dreieck.png" type="Texture" id=1]
 [ext_resource path="res://Audio/Hit.wav" type="AudioStream" id=2]
+[ext_resource path="res://Assets/Projektil/clock.png" type="Texture" id=3]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends KinematicBody2D
 
-export var speed = 200
+export var speed = 1
 export var hp = 2
+export var stun = false
 var enemy_sprite1 = preload(\"res://Assets/Enemy/Dreieck.png\")
 var enemy_sprite2 = preload(\"res://Assets/Enemy/Vierreck.png\")
 var enemy_sprite3 = preload(\"res://Assets/Enemy/Fünfeck.png\")
@@ -22,28 +24,46 @@ var enemy_sprite11 = preload(\"res://Assets/Enemy/Dreizehneck.png\")
 var enemy_sprite12 = preload(\"res://Assets/Enemy/Kreis.png\")
 onready var enemy_sprite = get_node(\"Dreieck\")
 var origin_modulate = modulate
+var slowed = false
+
 
 func _ready():
 	pass 
 
 func _process(delta):
 	switch_sprite();
+	if slowed == true:
+		speed = 0.5
+		$Clock_Buff.visible = true
+	else:
+		speed = 1
+		$Clock_Buff.visible = false
 	
 func hit(damage):
 	if hp > 0:
 		hp = hp - damage;
-	if hp > 0:
 		colorchange_hit()
-	
+		
 	$Hitsound.play()
 	if hp <= 0:
-		get_parent().get_parent().get_parent().add_money(hp + damage, true) 
+		get_tree().get_current_scene().get_node(\"GameHandler\").add_money(hp + damage, true) 
 	else:
-		get_parent().get_parent().get_parent().add_money(damage, false) 
+		get_tree().get_current_scene().get_node(\"GameHandler\").add_money(damage, false) 
 	
 	if hp <= 0:
 		get_parent().damage()
 		queue_free();
+		
+func slow(damage, newstun):
+	slowed = true
+	stun = newstun
+	yield(get_tree().create_timer(2), \"timeout\")
+	stun = false
+	yield(get_tree().create_timer(3 + (2 * damage)), \"timeout\")
+	slowed = false
+	
+	
+	
 	
 func switch_sprite():
 	if hp == 1:
@@ -104,3 +124,8 @@ shape = SubResource( 2 )
 [node name="Hitsound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
 volume_db = -22.023
+
+[node name="Clock_Buff" type="Sprite" parent="."]
+position = Vector2( -16.541, -36.6517 )
+scale = Vector2( 0.646249, 0.670578 )
+texture = ExtResource( 3 )

@@ -15,12 +15,45 @@ export var upgrade2 = false
 export var upgrade3 = false
 var placed = false
 
+#Skins
+var skin_0 = preload(\"res://Assets/Universität/Universität.png\")
+var skin_1 = preload(\"res://Assets/Universität/Universität_1.png\")
+var skin_2 = preload(\"res://Assets/Universität/Universität_2.png\")
+var skin_3 = preload(\"res://Assets/Universität/Universität_3.png\")
+var skin_12 = preload(\"res://Assets/Universität/Universität_12.png\")
+var skin_13 = preload(\"res://Assets/Universität/Universität_13.png\")
+var skin_23 = preload(\"res://Assets/Universität/Universität_23.png\")
+var skin_123 = preload(\"res://Assets/Universität/Universität_123.png\")
+
+
 
 func _ready():
 	pass # Replace with function body.
 
 
 func _process(delta):
+	
+	if upgrade1 == true:
+		$Sprite_Universitaet.texture = skin_1
+	
+	if upgrade2 == true:
+		$Sprite_Universitaet.texture = skin_2
+	
+	if upgrade3 == true:
+		$Sprite_Universitaet.texture = skin_3
+	
+	if upgrade1 == true && upgrade2 == true:
+		$Sprite_Universitaet.texture = skin_12
+	
+	if upgrade1 == true && upgrade3 == true:
+		$Sprite_Universitaet.texture = skin_13
+	
+	if upgrade2 == true && upgrade3 == true:
+		$Sprite_Universitaet.texture = skin_23
+	
+	if upgrade1 == true && upgrade2 == true && upgrade3 == true:
+		$Sprite_Universitaet.texture = skin_123
+	
 	upgrade3 = get_node(\"UpgradeWindow/UniversitaetUpgrade\").getUpgrade3()
 	if upgrade3 == true:
 		earn_money_upgrade()
@@ -82,7 +115,7 @@ collision_layer = 2
 collision_mask = 2
 script = SubResource( 1 )
 
-[node name="Universitäts-Sprite" type="Sprite" parent="."]
+[node name="Sprite_Universitaet" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

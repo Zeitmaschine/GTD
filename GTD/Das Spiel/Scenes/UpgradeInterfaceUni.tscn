@@ -58,6 +58,7 @@ func _on_TextureButton_pressed():
 
 func _on_SpecialUpgradeButton_pressed():
 	upgrade1 = true
+	get_parent().get_parent().upgrade1 = true
 	upgradeunlock.setUpgrade1Unlock(upgrade1)
 	get_parent().get_parent().get_parent().get_node(\".\").money -= price1
 	sell += price1
@@ -67,6 +68,7 @@ func _on_SpecialUpgradeButton_pressed():
 
 func _on_SpecialUpgradeButton3_pressed():
 	upgrade2 = true
+	get_parent().get_parent().upgrade2 = true
 	upgradeunlock.setUpgrade2Unlock(upgrade2)
 	get_parent().get_parent().get_parent().get_node(\".\").money -= price2
 	sell += price2
@@ -76,6 +78,7 @@ func _on_SpecialUpgradeButton3_pressed():
 
 func _on_SpecialUpgradeButton2_pressed():
 	upgrade3 = true
+	get_parent().get_parent().upgrade3 = true
 	get_parent().get_parent().get_parent().get_node(\".\").money -= price3
 	sell += price3
 	get_node(\"SpecialUpgradeBackround2/SpecialUpgradeButton2\").set_disabled(true)
@@ -90,8 +93,8 @@ func _on_SellButton_pressed():
 	get_parent().get_parent().get_parent().get_node(\".\").upgrade1unlock = false
 	get_parent().get_parent().get_parent().get_node(\".\").upgrade2unlock = false
 	get_parent().get_parent().get_parent().get_node(\".\").max_universitaet = false
-	get_parent().get_parent().get_parent().get_node(\"InterfaceLayer/Interface/ShopLayer/ShopMenu\").unigekauft = false
-	get_parent().get_parent().get_parent().get_node(\"InterfaceLayer/Interface/ShopLayer/ShopMenu/ShopBackround/UniversitaetText\").text = \"Universität: \" + str(get_parent().get_parent().get_parent().get_node(\".\").uniPrice) + \"$\"
+	get_tree().get_current_scene().get_node(\"InterfaceLayer/Interface/ShopLayer/ShopMenu\").unigekauft = false
+	get_tree().get_current_scene().get_node(\"InterfaceLayer/Interface/ShopLayer/ShopMenu/ShopBackround/UniversitaetText\").text = \"Universität: \" + str(get_parent().get_parent().get_parent().get_node(\".\").uniPrice) + \"$\"
 	# Damit die Hotkeys funktionieren
 	infopopupmenu.visible = false
 	infopopupmenu2.visible = false

@@ -35,10 +35,24 @@ export var attackspeedlvl = 1
 
 func _ready():
 	pass
+	
+#Skins
+var skin_0 = preload(\"res://Assets/Informatiker/Informatiker.png\")
+var skin_1 = preload(\"res://Assets/Informatiker/Informatiker_1.png\")
+var skin_2 = preload(\"res://Assets/Informatiker/Informatiker_2.png\")
+var skin_12 = preload(\"res://Assets/Informatiker/Informatiker_12.png\")
 
 #Findung des Ziels und das Ausführen der Aktionen
 
 func _process(delta):
+	
+	if upgrade1 == true:
+		$Sprite_Informatiker.texture = skin_1
+	if upgrade2 == true:
+		$Sprite_Informatiker.texture = skin_2
+	if upgrade1 == true && upgrade2 == true:
+		$Sprite_Informatiker.texture = skin_12
+	
 	if placed == true:
 		if can_fire2 == true && enemyinrange > 0  && upgrade2 == true:
 			aim_and_shoot_upgrade2()

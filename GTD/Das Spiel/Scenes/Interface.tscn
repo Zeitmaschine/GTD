@@ -73,12 +73,12 @@ var unigekauft
 
 func _ready():
 	#Preise und Variablen werden festgelegt
-	get_node(\"ShopBackround/MathematikerText\").text = \"Mathermatiker: \" + str(get_parent().get_parent().get_parent().get_parent().mathematikerPrice) +\"$\"
-	get_node(\"ShopBackround/InformatikerText\").text = \"Informatiker: \" + str(get_parent().get_parent().get_parent().get_parent().informatikerPrice) +\"$\"
-	get_node(\"ShopBackround/BombenturmText\").text = \"Bombenturm: \" + str(get_parent().get_parent().get_parent().get_parent().bombenturmPrice) +\"$\"
-	get_node(\"ShopBackround/WinkelninjaText\").text = \"Winkelninja: \" + str(get_parent().get_parent().get_parent().get_parent().winkelninjaPrice) +\"$\"
-	get_node(\"ShopBackround/UniversitaetText\").text = \"Universität: \" + str(get_parent().get_parent().get_parent().get_parent().uniPrice) +\"$\"
-	unigekauft = get_parent().get_parent().get_parent().get_parent().get_node(\".\").unigekauft
+	get_node(\"ShopBackround/MathematikerText\").text = \"Mathermatiker: \" + str(get_tree().get_current_scene().get_node(\"GameHandler\").mathematikerPrice) +\"$\"
+	get_node(\"ShopBackround/InformatikerText\").text = \"Informatiker: \" + str(get_tree().get_current_scene().get_node(\"GameHandler\").informatikerPrice) +\"$\"
+	get_node(\"ShopBackround/BombenturmText\").text = \"Bombenturm: \" + str(get_tree().get_current_scene().get_node(\"GameHandler\").bombenturmPrice) +\"$\"
+	get_node(\"ShopBackround/WinkelninjaText\").text = \"Winkelninja: \" + str(get_tree().get_current_scene().get_node(\"GameHandler\").winkelninjaPrice) +\"$\"
+	get_node(\"ShopBackround/UniversitaetText\").text = \"Universität: \" + str(get_tree().get_current_scene().get_node(\"GameHandler\").uniPrice) +\"$\"
+	unigekauft = get_tree().get_current_scene().get_node(\"GameHandler\").unigekauft
 	
 func _process(delta):
 	check_status()
@@ -100,61 +100,61 @@ func _on_ShopButton_pressed():
 	#Turmplatzierungen
 func _on_MathematikerButton_pressed():
 	visible = false
-	get_parent().get_parent().get_parent().get_parent().add_mathematiker()
+	get_tree().get_current_scene().get_node(\"GameHandler\").add_mathematiker()
 
 func _on_InformatikerButton_pressed():
 	visible = false
-	get_parent().get_parent().get_parent().get_parent().add_informatiker()
+	get_tree().get_current_scene().get_node(\"GameHandler\").add_informatiker()
 
 func _on_MathebombenturmButton_pressed():
 	visible = false
-	get_parent().get_parent().get_parent().get_parent().add_mathebombenturm()
+	get_tree().get_current_scene().get_node(\"GameHandler\").add_mathebombenturm()
 
 func _on_WinkelninjaButton_pressed():
 	visible = false
-	get_parent().get_parent().get_parent().get_parent().add_winkelninja()
+	get_tree().get_current_scene().get_node(\"GameHandler\").add_winkelninja()
 
 func _on_UniversitaetButton_pressed():
 	visible = false
 	unigekauft = true
-	get_parent().get_parent().get_parent().get_parent().get_node(\".\").max_universitaet = true
+	get_tree().get_current_scene().get_node(\"GameHandler\").max_universitaet = true
 	get_node(\"ShopBackround/UniversitaetText\").text = \"Gekauft\"
-	get_parent().get_parent().get_parent().get_parent().add_universitaet()
+	get_tree().get_current_scene().get_node(\"GameHandler\").add_universitaet()
 
 	#Überprüfung, ob die Türme überhaupt gekauft werden dürfen
 func check_status():
 	#Mathematiker
-	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < get_parent().get_parent().get_parent().get_parent().mathematikerPrice):
+	if(get_tree().get_current_scene().get_node(\"GameHandler\").money < get_tree().get_current_scene().get_node(\"GameHandler\").mathematikerPrice):
 		get_node(\"ShopBackround/MathematikerButton\").set_disabled(true)
-	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= get_parent().get_parent().get_parent().get_parent().mathematikerPrice):
+	if(get_tree().get_current_scene().get_node(\"GameHandler\").money >= get_tree().get_current_scene().get_node(\"GameHandler\").mathematikerPrice):
 		get_node(\"ShopBackround/MathematikerButton\").set_disabled(false)
 	#Informatiker
-	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < get_parent().get_parent().get_parent().get_parent().informatikerPrice):
+	if(get_tree().get_current_scene().get_node(\"GameHandler\").money < get_tree().get_current_scene().get_node(\"GameHandler\").informatikerPrice):
 		get_node(\"ShopBackround/InformatikerButton\").set_disabled(true)
-	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= get_parent().get_parent().get_parent().get_parent().informatikerPrice):
+	if(get_tree().get_current_scene().get_node(\"GameHandler\").money >= get_tree().get_current_scene().get_node(\"GameHandler\").informatikerPrice):
 		get_node(\"ShopBackround/InformatikerButton\").set_disabled(false)
 	#Mathebombenturm
-	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < get_parent().get_parent().get_parent().get_parent().bombenturmPrice):
+	if(get_tree().get_current_scene().get_node(\"GameHandler\").money < get_tree().get_current_scene().get_node(\"GameHandler\").bombenturmPrice):
 		get_node(\"ShopBackround/MathebombenturmButton\").set_disabled(true)
-	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= get_parent().get_parent().get_parent().get_parent().bombenturmPrice):
+	if(get_tree().get_current_scene().get_node(\"GameHandler\").money >= get_tree().get_current_scene().get_node(\"GameHandler\").bombenturmPrice):
 		get_node(\"ShopBackround/MathebombenturmButton\").set_disabled(false)
 	#Winkelninja
-	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < get_parent().get_parent().get_parent().get_parent().winkelninjaPrice):
+	if(get_tree().get_current_scene().get_node(\"GameHandler\").money < get_tree().get_current_scene().get_node(\"GameHandler\").winkelninjaPrice):
 		get_node(\"ShopBackround/WinkelninjaButton\").set_disabled(true)
-	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= get_parent().get_parent().get_parent().get_parent().winkelninjaPrice):
+	if(get_tree().get_current_scene().get_node(\"GameHandler\").money >= get_tree().get_current_scene().get_node(\"GameHandler\").winkelninjaPrice):
 		get_node(\"ShopBackround/WinkelninjaButton\").set_disabled(false)
 	#Universität
 	if(unigekauft == true):
 		get_node(\"ShopBackround/UniversitaetButton\").set_disabled(true)
-	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money < get_parent().get_parent().get_parent().get_parent().uniPrice):
+	if(get_tree().get_current_scene().get_node(\"GameHandler\").money < get_tree().get_current_scene().get_node(\"GameHandler\").uniPrice):
 		get_node(\"ShopBackround/UniversitaetButton\").set_disabled(true)
-	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").money >= get_parent().get_parent().get_parent().get_parent().uniPrice && unigekauft == false):
+	if(get_tree().get_current_scene().get_node(\"GameHandler\").money >= get_tree().get_current_scene().get_node(\"GameHandler\").uniPrice && unigekauft == false):
 		get_node(\"ShopBackround/UniversitaetButton\").set_disabled(false)
 	#Hotkey
 	if(visible == true):
-		get_parent().get_parent().get_parent().get_parent().get_node(\".\").pauseAllowed = 0
+		get_tree().get_current_scene().get_node(\"GameHandler\").pauseAllowed = 0
 	if(visible == false):
-		get_parent().get_parent().get_parent().get_parent().get_node(\".\").pauseAllowed = 1
+		get_tree().get_current_scene().get_node(\"GameHandler\").pauseAllowed = 1
 "
 
 [sub_resource type="GDScript" id=3]
@@ -185,10 +185,7 @@ func _on_PauseNeustart_pressed():
 	visible = not visible
 	get_parent().get_parent().get_node(\"Winlayer/Win\").win = false
 	get_parent().get_parent().get_node(\"Winlayer2/Win2\").win2 = false
-	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").map == 1):
-		get_tree().change_scene(\"res://Scenes/Grasland.tscn\")
-	else:
-		get_tree().change_scene(\"res://Scenes/Desert.tscn\")
+	get_tree().reload_current_scene()
 
 func _on_PauseBeenden_pressed():
 	get_parent().get_parent().get_node(\"Winlayer/Win\").win = false
@@ -277,8 +274,14 @@ script/source = "extends TextureButton
 
 
 # Declare member variables here. Examples:
-# var a = 2
-# var b = \"text\"
+var running = false
+var faster = false
+var normalSpeedTexture = preload(\"res://Assets/Icons/Play_Icon_Normal.png\")
+var normalSpeedTexturePressed = preload(\"res://Assets/Icons/Play_Icon_Normal_pressed.png\")
+var fasterSpeedTexture = preload(\"res://Assets/Icons/Play_Icon_Faster.png\")
+var fasterSpeedTexturePressed = preload(\"res://Assets/Icons/Play_Icon_Faster_pressed.png\")
+var pausedSpeedTexture = preload(\"res://Assets/Icons/Play_Icon.png\")
+var pausedSpeedTexturePressed = preload(\"res://Assets/Icons/Play_Icon_pressed.png\")
 
 
 # Called when the node enters the scene tree for the first time.
@@ -291,15 +294,41 @@ func _process(delta):
 
 #Knopfdruck-Methoden
 func _on_PlayButton_pressed():
-	if get_parent().get_parent().get_parent().waverunning == false:
-		get_parent().get_parent().get_parent().waverunning = true
+	if get_tree().get_current_scene().get_node(\"GameHandler\").waverunning == false:
+		get_tree().get_current_scene().get_node(\"GameHandler\").waverunning = true
+		
+	if running == true:
+		if faster == true:
+			faster = false
+		
+		else:
+			faster = true
 
 #Überprüfung, ob man auf den Knopf drücken darf 
 func check_status():
-	if get_parent().get_parent().get_parent().waverunning == false && get_parent().get_parent().get_parent().get_node(\".\").victory == false:
-		set_disabled(false)
-	if get_parent().get_parent().get_parent().waverunning == true:
-		set_disabled(true)
+	if faster == true:
+		
+		texture_normal = fasterSpeedTexture
+		texture_pressed = fasterSpeedTexturePressed
+		Engine.time_scale = 2
+		get_tree().get_current_scene().get_node(\"GameHandler\").fasterTime = true
+		
+	else:
+		texture_normal = normalSpeedTexture
+		texture_pressed = normalSpeedTexturePressed
+		Engine.time_scale = 1
+		get_tree().get_current_scene().get_node(\"GameHandler\").fasterTime = false
+	
+	if get_tree().get_current_scene().get_node(\"GameHandler\").waverunning == false && get_tree().get_current_scene().get_node(\"GameHandler\").victory == false:
+		
+		texture_normal = pausedSpeedTexture
+		texture_pressed = pausedSpeedTexturePressed
+		running = false
+		faster = false
+	if get_tree().get_current_scene().get_node(\"GameHandler\").waverunning == true:
+		running = true
+	
+	
 
 "
 
@@ -338,10 +367,7 @@ func _on_GameOverNeutstart_pressed():
 	gameover = false
 	get_tree().paused = not get_tree().paused
 	visible = not visible
-	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").map == 1):
-		get_tree().change_scene(\"res://Scenes/Grasland.tscn\")
-	else:
-		get_tree().change_scene(\"res://Scenes/Desert.tscn\")
+	get_tree().reload_current_scene()
 "
 
 [node name="Interface" type="Control"]
@@ -1061,9 +1087,9 @@ __meta__ = {
 
 [node name="PlayButton" type="TextureButton" parent="."]
 margin_left = 140.922
-margin_top = 960.549
+margin_top = 959.814
 margin_right = 240.922
-margin_bottom = 1060.55
+margin_bottom = 1059.81
 texture_normal = ExtResource( 14 )
 texture_pressed = ExtResource( 15 )
 texture_disabled = ExtResource( 16 )

@@ -28,8 +28,22 @@ export var attackrangelvl = 1
 func _ready():
 	set_range()
 
+#Skins
+var skin_0 = preload(\"res://Assets/Winkelninja/Winkelninja.png\")
+var skin_1 = preload(\"res://Assets/Winkelninja/Winkelninja_1.png\")
+var skin_2 = preload(\"res://Assets/Winkelninja/Winkelninja_2.png\")
+var skin_12 = preload(\"res://Assets/Winkelninja/Winkelninja_12.png\")
+
 #Findung des Ziels und das Ausführen der Aktionen
 func _process(delta):
+	
+	if upgrade1 == true:
+		$Sprite_Winkelninja.texture = skin_1
+	if upgrade2 == true:
+		$Sprite_Winkelninja.texture = skin_2
+	if upgrade1 == true && upgrade2 == true:
+		$Sprite_Winkelninja.texture = skin_12
+		
 	if placed == true:
 		if can_fire == true && enemyinrange > 0 && upgrade1 == true && upgrade2 == true:
 			shoot_upgrade_1_2()

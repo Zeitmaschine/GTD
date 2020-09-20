@@ -12,18 +12,25 @@ func _physics_process(delta):
 	offset += speed * delta
 
 	if unit_offset >= 1:
-		get_parent().get_parent().remove_health(get_child(0).getHP())
+		get_tree().get_current_scene().get_node("GameHandler").remove_health(get_child(0).getHP())
 		queue_free()
 
 func hit(amount):
 	get_child(0).hit(amount)
 
 func damage():
-	get_parent().get_parent().enemycount -= 1
+	get_tree().get_current_scene().get_node("GameHandler").enemycount -= 1
 	queue_free()
 	
 func checkSpeed():
-	speed = 100 + (get_child(0).getHP() * 50)
+	if(get_child(0).stun):
+		speed = 0
+	
+	else:
+		if get_tree().get_current_scene().get_node("GameHandler").fasterTime == true:
+			speed = 2 * (30 + (get_child(0).getHP() * 50)) * get_child(0).speed
+		else:
+			speed = (30 + (get_child(0).getHP() * 50)) * get_child(0).speed
 
 func setHP(newHp):
 	hp = newHp

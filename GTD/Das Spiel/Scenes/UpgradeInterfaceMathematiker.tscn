@@ -334,7 +334,7 @@ __meta__ = {
 }
 
 [node name="Damage" type="Label" parent="UpgradeBackround/StatContainer"]
-margin_right = 526.0
+margin_right = 241.0
 margin_bottom = 137.0
 theme = ExtResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -351,7 +351,7 @@ __meta__ = {
 
 [node name="Firerate" type="Label" parent="UpgradeBackround/StatContainer"]
 margin_top = 402.0
-margin_right = 526.0
+margin_right = 241.0
 margin_bottom = 434.0
 theme = ExtResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -364,7 +364,7 @@ __meta__ = {
 
 [node name="Range" type="Label" parent="UpgradeBackround/StatContainer"]
 margin_top = 699.0
-margin_right = 526.0
+margin_right = 241.0
 margin_bottom = 731.0
 theme = ExtResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -502,7 +502,7 @@ __meta__ = {
 
 [node name="DamageText" type="Label" parent="UpgradeBackround/StatUpgradeText"]
 margin_top = 207.0
-margin_right = 803.0
+margin_right = 402.0
 margin_bottom = 239.0
 theme = ExtResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -512,7 +512,7 @@ text = "Schaden erhöhen: 250€"
 
 [node name="FirerateText" type="Label" parent="UpgradeBackround/StatUpgradeText"]
 margin_top = 504.0
-margin_right = 803.0
+margin_right = 402.0
 margin_bottom = 536.0
 theme = ExtResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -525,7 +525,7 @@ __meta__ = {
 
 [node name="RangeText" type="Label" parent="UpgradeBackround/StatUpgradeText"]
 margin_top = 801.0
-margin_right = 803.0
+margin_right = 402.0
 margin_bottom = 833.0
 theme = ExtResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )

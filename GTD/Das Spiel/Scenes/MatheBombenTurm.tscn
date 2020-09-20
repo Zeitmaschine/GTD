@@ -18,6 +18,12 @@ var placed = false
 export var priority = 0
 var rangeVisible = false
 
+#Skins
+var skin_0 = preload(\"res://Assets/MatheBombenTurm/MatheBombenTurm.png\")
+var skin_1 = preload(\"res://Assets/MatheBombenTurm/MatheBombenTurm_1.png\")
+var skin_2 = preload(\"res://Assets/MatheBombenTurm/MatheBombenTurm_2.png\")
+var skin_12 = preload(\"res://Assets/MatheBombenTurm/MatheBombenTurm_12.png\")
+
 #Verbesserungswerte
 export var upgrade1 = false
 export var upgrade2 = false
@@ -31,6 +37,14 @@ func _ready():
 
 #Findung des Ziels und das Ausführen der Aktionen
 func _process(delta):
+	
+	if upgrade1 == true:
+		$Sprite_MatheBombenTurm.texture = skin_1
+	if upgrade2 == true:
+		$Sprite_MatheBombenTurm.texture = skin_2
+	if upgrade1 == true && upgrade2 == true:
+		$Sprite_MatheBombenTurm.texture = skin_12
+		
 	if placed == true:
 		if can_fire == true && enemyinrange > 0:
 			aim_and_shoot()

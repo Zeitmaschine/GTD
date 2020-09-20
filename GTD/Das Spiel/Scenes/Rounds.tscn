@@ -13,13 +13,13 @@ func _ready():
 	var timer = get_parent().get_node(\"Path2D/Timer\")
 
 func _process(_delta):
-	 waverunning = get_parent().waverunning
+	 waverunning = get_tree().get_current_scene().get_node(\"GameHandler\").waverunning
 
 #Endgeld für die Runden
 	
 func wave_round_end_money():
-	get_parent().add_money(50 + (7 * wave), false)
-	get_parent().waverunning = false
+	get_tree().get_current_scene().get_node(\"GameHandler\").add_money(50 + (7 * wave), false)
+	get_tree().get_current_scene().get_node(\"GameHandler\").waverunning = false
 	
 #Überprüfung der Wellen
 func checkWave():
