@@ -1083,8 +1083,8 @@ func wave50():
 		wave = 51
 		triggeronce = false
 		triggeronce2 = false
-		if(get_parent().get_node(\".\").healthy > 0):
-			get_parent().get_node(\".\").victory = true
+		if(get_tree().get_current_scene().healthy > 0):
+			get_tree().get_current_scene().victory = true
 			yield(get_tree().create_timer(2), \"timeout\")
 			get_parent().get_node(\"InterfaceLayer/Interface/Winlayer/Win\").win()
 
