@@ -57,7 +57,7 @@ __meta__ = {
 
 [node name="Damage" type="Label" parent="StatContainer"]
 margin_right = 172.0
-margin_bottom = 149.0
+margin_bottom = 137.0
 theme = ExtResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
@@ -72,9 +72,9 @@ __meta__ = {
 }
 
 [node name="Firerate" type="Label" parent="StatContainer"]
-margin_top = 414.0
+margin_top = 402.0
 margin_right = 172.0
-margin_bottom = 449.0
+margin_bottom = 434.0
 theme = ExtResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
@@ -85,9 +85,9 @@ __meta__ = {
 }
 
 [node name="Range" type="Label" parent="StatContainer"]
-margin_top = 714.0
+margin_top = 699.0
 margin_right = 172.0
-margin_bottom = 749.0
+margin_bottom = 731.0
 theme = ExtResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
@@ -109,7 +109,7 @@ __meta__ = {
 
 [node name="CurrentDamage" type="Label" parent="CurrentStatsContainer"]
 margin_right = 180.0
-margin_bottom = 149.0
+margin_bottom = 137.0
 theme = ExtResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
@@ -120,18 +120,18 @@ text = "
 "
 
 [node name="CurrentFirerate" type="Label" parent="CurrentStatsContainer"]
-margin_top = 414.0
+margin_top = 402.0
 margin_right = 180.0
-margin_bottom = 449.0
+margin_bottom = 434.0
 theme = ExtResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
 
 [node name="CurrentRange" type="Label" parent="CurrentStatsContainer"]
-margin_top = 714.0
+margin_top = 699.0
 margin_right = 180.0
-margin_bottom = 749.0
+margin_bottom = 731.0
 theme = ExtResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
@@ -181,9 +181,9 @@ __meta__ = {
 }
 
 [node name="DamageText" type="Label" parent="StatUpgradeText"]
-margin_top = 202.0
+margin_top = 207.0
 margin_right = 323.0
-margin_bottom = 237.0
+margin_bottom = 239.0
 theme = ExtResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
@@ -191,9 +191,9 @@ custom_constants/shadow_offset_y = 5
 text = "Schaden erhöhen: "
 
 [node name="FirerateText" type="Label" parent="StatUpgradeText"]
-margin_top = 502.0
+margin_top = 504.0
 margin_right = 323.0
-margin_bottom = 537.0
+margin_bottom = 536.0
 theme = ExtResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
@@ -204,9 +204,9 @@ __meta__ = {
 }
 
 [node name="RangeText" type="Label" parent="StatUpgradeText"]
-margin_top = 802.0
+margin_top = 801.0
 margin_right = 323.0
-margin_bottom = 837.0
+margin_bottom = 833.0
 theme = ExtResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0

@@ -52,11 +52,13 @@ __meta__ = {
 }
 
 [node name="Count" type="Label" parent="MarginContainer/Backround"]
-margin_left = 12.3917
+margin_left = 12.0
 margin_top = 13.4439
 margin_right = 183.392
 margin_bottom = 87.4439
 theme = ExtResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
@@ -69,9 +71,9 @@ __meta__ = {
 }
 
 [node name="Münze" type="TextureRect" parent="MarginContainer/Backround"]
-margin_left = 168.773
+margin_left = 165.0
 margin_top = 14.0
-margin_right = 278.773
+margin_right = 275.0
 margin_bottom = 86.0
 texture = ExtResource( 1 )
 expand = true

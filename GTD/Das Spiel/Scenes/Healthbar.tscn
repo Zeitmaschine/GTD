@@ -12,8 +12,14 @@ margin_top = 0.0
 margin_right = 237.0
 margin_bottom = 92.0
 
+[node name="Health" parent="MarginContainer/Backround" index="0"]
+margin_left = 40.2916
+margin_top = -50.348
+margin_right = 118.292
+margin_bottom = 52.652
+
 [node name="Heart" parent="MarginContainer/Backround" index="1"]
-margin_left = 11.6159
-margin_top = 5.72769
-margin_right = 126.616
-margin_bottom = 71.7276
+margin_left = 120.647
+margin_top = 6.69829
+margin_right = 235.647
+margin_bottom = 72.6982

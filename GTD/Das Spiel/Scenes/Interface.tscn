@@ -6,8 +6,6 @@
 [ext_resource path="res://Interface/Theme/ButtonPressedNormal.tres" type="StyleBox" id=4]
 [ext_resource path="res://Interface/Theme/ButtonNormal.tres" type="StyleBox" id=5]
 [ext_resource path="res://Interface/Theme/ButtonHoverNormal.tres" type="StyleBox" id=6]
-[ext_resource path="res://Interface/Theme/ButtonClick.tres" type="StyleBox" id=7]
-[ext_resource path="res://Interface/Theme/ButtonPressed.tres" type="StyleBox" id=8]
 [ext_resource path="res://Assets/Icons/Pause_Icon.png" type="Texture" id=9]
 [ext_resource path="res://Interface/Font/GameOver_font.tres" type="DynamicFont" id=10]
 [ext_resource path="res://Assets/Icons/Pause_Icon_pressed.png" type="Texture" id=11]
@@ -41,6 +39,8 @@
 [ext_resource path="res://Assets/Buttons/GameoverButton_Pressed.png" type="Texture" id=39]
 [ext_resource path="res://Assets/Buttons/GameoverButton_Normal.png" type="Texture" id=40]
 [ext_resource path="res://Assets/Buttons/GameoverButton_PressedExit.png" type="Texture" id=41]
+[ext_resource path="res://Assets/Buttons/WinBox.png" type="Texture" id=42]
+[ext_resource path="res://Interface/Theme/WinFont2.tres" type="Theme" id=43]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Label
@@ -171,7 +171,7 @@ func _process(delta):
 
 #Hotkey-Steuerung
 func _input(event):
-	if event.is_action_pressed(\"cancel\") && (gameover == false) && get_parent().get_parent().get_parent().get_parent().get_node(\".\").pauseAllowed == 1 && get_parent().get_parent().get_node(\"Winlayer/Win\").visible == false && get_parent().get_parent().get_node(\"Winlayer2/Win2\").visible == false:
+	if event.is_action_pressed(\"cancel\") && (gameover == false) && get_tree().get_current_scene().get_node(\"GameHandler\").pauseAllowed == 1 && get_parent().get_parent().get_node(\"Winlayer/Win\").visible == false && get_parent().get_parent().get_node(\"Winlayer2/Win2\").visible == false:
 		get_tree().paused = not get_tree().paused
 		visible = not visible
 
@@ -216,7 +216,7 @@ func win():
 		visible = not visible
 
 func _on_WinFortsetzen_pressed():
-	get_parent().get_parent().get_parent().get_parent().get_node(\".\").victory = false
+	get_tree().get_current_scene().get_node(\"GameHandler\").victory = false
 	win = false
 	get_tree().paused = not get_tree().paused
 	visible = not visible
@@ -224,7 +224,7 @@ func _on_WinFortsetzen_pressed():
 
 func _on_WinBeenden_pressed():
 	win = false
-	get_parent().get_parent().get_parent().get_parent().get_node(\".\").victory = false
+	get_tree().get_current_scene().get_node(\"GameHandler\").victory = false
 	get_tree().paused = not get_tree().paused
 	visible = not visible
 	get_tree().change_scene(\"res://Scenes/MainMenu.tscn\")
@@ -251,19 +251,16 @@ func win2():
 func _on_WinNeustarten_pressed():
 	win2 = false
 	get_parent().get_parent().get_node(\"Winlayer/Win\").win = false
-	get_parent().get_parent().get_parent().get_parent().get_node(\".\").victory = false
+	get_tree().get_current_scene().get_node(\"GameHandler\").victory = false
 	get_tree().paused = not get_tree().paused
 	visible = not visible
-	if(get_parent().get_parent().get_parent().get_parent().get_node(\".\").map == 1):
-		get_tree().change_scene(\"res://Scenes/Grasland.tscn\")
-	else:
-		get_tree().change_scene(\"res://Scenes/Desert.tscn\")
+	get_tree().reload_current_scene()
 
 
 func _on_WinBeenden_pressed():
 	win2 = false
 	get_parent().get_parent().get_node(\"Winlayer/Win\").win = false
-	get_parent().get_parent().get_parent().get_parent().get_node(\".\").victory = false
+	get_tree().get_current_scene().get_node(\"GameHandler\").victory = false
 	get_tree().paused = not get_tree().paused
 	visible = not visible
 	get_tree().change_scene(\"res://Scenes/MainMenu.tscn\")
@@ -387,6 +384,10 @@ margin_top = 30.0
 margin_right = 1850.0
 margin_bottom = 114.0
 texture = ExtResource( 18 )
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -774,7 +775,7 @@ __meta__ = {
 [node name="PauseText" type="Label" parent="PauseLayer/Pause/PauseFrame"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 17 )
+theme = ExtResource( 43 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
@@ -846,7 +847,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="PauseLayer/Pause/PauseBox/PauseBeenden"]
+[node name="PauseBeendenText" type="Label" parent="PauseLayer/Pause/PauseBox/PauseBeenden"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_fonts/font = ExtResource( 33 )
@@ -878,11 +879,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Backround2" type="TextureRect" parent="Winlayer/Win"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 200.0
+margin_top = 120.0
+margin_right = -200.0
+margin_bottom = -120.0
+texture = ExtResource( 42 )
+
 [node name="WinText" type="Label" parent="Winlayer/Win"]
 anchor_right = 1.0
-margin_top = 130.0
+margin_top = 150.0
 margin_bottom = 401.0
-theme = ExtResource( 17 )
+theme = ExtResource( 43 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
@@ -898,7 +908,7 @@ __meta__ = {
 [node name="WinText2" type="Label" parent="Winlayer/Win"]
 anchor_right = 1.0
 margin_left = 350.0
-margin_top = 666.0
+margin_top = 680.0
 margin_right = -350.0
 margin_bottom = 1080.0
 theme = ExtResource( 29 )
@@ -915,64 +925,54 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="WinFortsetzenOutline2" type="ColorRect" parent="Winlayer/Win"]
-margin_left = 475.0
-margin_top = 407.0
-margin_right = 1445.0
-margin_bottom = 514.0
-color = Color( 0.156863, 0.156863, 0.156863, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="WinBeendenOutline3" type="ColorRect" parent="Winlayer/Win"]
-margin_left = 475.0
-margin_top = 554.0
-margin_right = 1445.0
-margin_bottom = 661.0
-color = Color( 0.156863, 0.156863, 0.156863, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Space" type="MarginContainer" parent="Winlayer/Win"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -480.0
-margin_top = -320.0
-margin_right = 480.0
-margin_bottom = 309.75
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ButtonContainer" type="VBoxContainer" parent="Winlayer/Win/Space"]
-margin_right = 960.0
-margin_bottom = 629.0
-custom_constants/separation = 50
-alignment = 1
-
-[node name="WinFortsetzen" type="Button" parent="Winlayer/Win/Space/ButtonContainer"]
-margin_top = 203.0
-margin_right = 960.0
-margin_bottom = 289.0
+[node name="WinFortsetzen" type="TextureButton" parent="Winlayer/Win"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 600.0
+margin_top = 390.0
+margin_right = -600.0
+margin_bottom = -560.0
 theme = ExtResource( 3 )
-custom_styles/hover = ExtResource( 6 )
-custom_styles/pressed = ExtResource( 4 )
-custom_styles/normal = ExtResource( 5 )
-text = "Spiel fortsetzen"
+texture_normal = ExtResource( 40 )
+texture_pressed = ExtResource( 39 )
+texture_hover = ExtResource( 38 )
 
-[node name="WinBeenden" type="Button" parent="Winlayer/Win/Space/ButtonContainer"]
-margin_top = 339.0
-margin_right = 960.0
-margin_bottom = 425.0
+[node name="WinFortsetzenText" type="Label" parent="Winlayer/Win/WinFortsetzen"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 33 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 5
+text = "Spiel Fortsetzen"
+align = 1
+valign = 1
+
+[node name="WinBeenden" type="TextureButton" parent="Winlayer/Win"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 600.0
+margin_top = 560.0
+margin_right = -600.0
+margin_bottom = -390.0
 theme = ExtResource( 3 )
-custom_styles/hover = ExtResource( 7 )
-custom_styles/pressed = ExtResource( 8 )
-custom_styles/normal = ExtResource( 5 )
-text = "Zurück zum Hauptmenu"
+texture_normal = ExtResource( 40 )
+texture_pressed = ExtResource( 39 )
+texture_hover = ExtResource( 38 )
+
+[node name="WinBeendenText" type="Label" parent="Winlayer/Win/WinBeenden"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 33 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 5
+text = "Zurück zum Hauptmenü"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Winlayer2" type="CanvasLayer" parent="."]
 layer = 4
@@ -995,83 +995,97 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="WinText" type="Label" parent="Winlayer2/Win2"]
+[node name="Backround2" type="TextureRect" parent="Winlayer2/Win2"]
 anchor_right = 1.0
-margin_top = 110.0
-margin_bottom = 407.0
+anchor_bottom = 1.0
+margin_left = 200.0
+margin_top = 120.0
+margin_right = -200.0
+margin_bottom = -120.0
+texture = ExtResource( 42 )
+
+[node name="WinText" type="Label" parent="Winlayer2/Win2/Backround2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 30.0
+margin_bottom = -670.0
 theme = ExtResource( 17 )
-custom_colors/font_color = Color( 1, 0.854902, 0.294118, 1 )
+custom_colors/font_color = Color( 1, 0.784314, 0.0235294, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
-text = "Herzlichen Glückwunsch!
-
-Sie sind ein wahrer GTD-Meister und haben 
-alle Runden absolviert!"
+text = "Herzlichen Glückwunsch!"
 align = 1
+valign = 1
 autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="WinFortsetzenOutline2" type="ColorRect" parent="Winlayer2/Win2"]
-margin_left = 475.0
-margin_top = 407.0
-margin_right = 1445.0
-margin_bottom = 514.0
-color = Color( 0.156863, 0.156863, 0.156863, 1 )
+[node name="WinText2" type="Label" parent="Winlayer2/Win2/Backround2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 590.0
+margin_bottom = -10.0
+theme = ExtResource( 43 )
+custom_colors/font_color = Color( 1, 0.784314, 0.0235294, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 5
+text = "Sie sind ein wahrer GTD-Meister und haben 
+alle Runden absolviert!"
+align = 1
+valign = 1
+autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="WinBeendenOutline3" type="ColorRect" parent="Winlayer2/Win2"]
-margin_left = 475.0
-margin_top = 554.0
-margin_right = 1445.0
-margin_bottom = 661.0
-color = Color( 0.156863, 0.156863, 0.156863, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Space" type="MarginContainer" parent="Winlayer2/Win2"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -480.0
-margin_top = -320.0
-margin_right = 480.0
-margin_bottom = 309.75
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ButtonContainer" type="VBoxContainer" parent="Winlayer2/Win2/Space"]
-margin_right = 960.0
-margin_bottom = 629.0
-custom_constants/separation = 50
-alignment = 1
-
-[node name="WinNeustarten" type="Button" parent="Winlayer2/Win2/Space/ButtonContainer"]
-margin_top = 192.0
-margin_right = 960.0
-margin_bottom = 289.0
+[node name="WinNeustarten" type="TextureButton" parent="Winlayer2/Win2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 600.0
+margin_top = 390.0
+margin_right = -600.0
+margin_bottom = -560.0
 theme = ExtResource( 3 )
-custom_styles/hover = ExtResource( 6 )
-custom_styles/pressed = ExtResource( 4 )
-custom_styles/normal = ExtResource( 5 )
-text = "Spiel neustarten"
+texture_normal = ExtResource( 40 )
+texture_pressed = ExtResource( 39 )
+texture_hover = ExtResource( 38 )
 
-[node name="WinBeenden" type="Button" parent="Winlayer2/Win2/Space/ButtonContainer"]
-margin_top = 339.0
-margin_right = 960.0
-margin_bottom = 436.0
+[node name="WinNeustartenText" type="Label" parent="Winlayer2/Win2/WinNeustarten"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 33 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 5
+text = "Spiel Neustarten"
+align = 1
+valign = 1
+
+[node name="WinBeenden" type="TextureButton" parent="Winlayer2/Win2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 600.0
+margin_top = 560.0
+margin_right = -600.0
+margin_bottom = -390.0
 theme = ExtResource( 3 )
-custom_styles/hover = ExtResource( 7 )
-custom_styles/pressed = ExtResource( 8 )
-custom_styles/normal = ExtResource( 5 )
-text = "Zurück zum Hauptmenu"
+texture_normal = ExtResource( 40 )
+texture_pressed = ExtResource( 39 )
+texture_hover = ExtResource( 38 )
+
+[node name="WinBeenden" type="Label" parent="Winlayer2/Win2/WinBeenden"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 33 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 5
+text = "Zurück zum Hauptmenü"
+align = 1
+valign = 1
 
 [node name="PauseIcon" type="TextureButton" parent="."]
 margin_left = 20.0
@@ -1244,10 +1258,10 @@ __meta__ = {
 [connection signal="pressed" from="PauseLayer/Pause/PauseBox/PauseFortsetzen" to="PauseLayer/Pause" method="_on_PauseFortsetzen_pressed"]
 [connection signal="pressed" from="PauseLayer/Pause/PauseBox/PauseNeustart" to="PauseLayer/Pause" method="_on_PauseNeustart_pressed"]
 [connection signal="pressed" from="PauseLayer/Pause/PauseBox/PauseBeenden" to="PauseLayer/Pause" method="_on_PauseBeenden_pressed"]
-[connection signal="pressed" from="Winlayer/Win/Space/ButtonContainer/WinFortsetzen" to="Winlayer/Win" method="_on_WinFortsetzen_pressed"]
-[connection signal="pressed" from="Winlayer/Win/Space/ButtonContainer/WinBeenden" to="Winlayer/Win" method="_on_WinBeenden_pressed"]
-[connection signal="pressed" from="Winlayer2/Win2/Space/ButtonContainer/WinNeustarten" to="Winlayer2/Win2" method="_on_WinNeustarten_pressed"]
-[connection signal="pressed" from="Winlayer2/Win2/Space/ButtonContainer/WinBeenden" to="Winlayer2/Win2" method="_on_WinBeenden_pressed"]
+[connection signal="pressed" from="Winlayer/Win/WinFortsetzen" to="Winlayer/Win" method="_on_WinFortsetzen_pressed"]
+[connection signal="pressed" from="Winlayer/Win/WinBeenden" to="Winlayer/Win" method="_on_WinBeenden_pressed"]
+[connection signal="pressed" from="Winlayer2/Win2/WinNeustarten" to="Winlayer2/Win2" method="_on_WinNeustarten_pressed"]
+[connection signal="pressed" from="Winlayer2/Win2/WinBeenden" to="Winlayer2/Win2" method="_on_WinBeenden_pressed"]
 [connection signal="pressed" from="PauseIcon" to="PauseLayer/Pause" method="_on_PauseIcon_pressed"]
 [connection signal="pressed" from="PlayButton" to="PlayButton" method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="ShopButton" to="ShopLayer/ShopMenu" method="_on_ShopButton_pressed"]
