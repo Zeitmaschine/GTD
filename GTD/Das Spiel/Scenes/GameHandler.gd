@@ -72,7 +72,7 @@ func _ready():
 	waveinterface = get_tree().get_current_scene().get_node("InterfaceLayer/Interface/RundenContainer/Rundenzahl")
 	healthdeath = get_tree().get_current_scene().get_node("InterfaceLayer/Interface/GameOverLayer/GameOver")
 	unigekauft = get_tree().get_current_scene().get_node("InterfaceLayer/Interface/ShopLayer/ShopMenu")
-	unitext = get_tree().get_current_scene().get_node("InterfaceLayer/Interface/ShopLayer/ShopMenu/ShopBackround/UniversitaetText")
+	unitext = get_tree().get_current_scene().get_node("InterfaceLayer/Interface/ShopLayer/ShopMenu/ShopBackround/UniversitaetButton/UniversitaetText")
 
 #Hochzählen der Werte + Überprüfung von Input
 func _process(delta):
@@ -299,7 +299,7 @@ func add_universitaet():
 			if Input.is_action_just_pressed("right_click"):
 				max_universitaet = false
 				get_tree().get_current_scene().get_node("InterfaceLayer/Interface/ShopLayer/ShopMenu").unigekauft = false
-				unitext.text = "Universität: 500$"
+				unitext.text = "500$"
 				get_tree().get_current_scene().get_node("Buy_failed").play()
 				universitaet_instance.queue_free()
 				break

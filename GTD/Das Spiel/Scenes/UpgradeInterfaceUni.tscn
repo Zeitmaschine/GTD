@@ -94,7 +94,7 @@ func _on_SellButton_pressed():
 	get_parent().get_parent().get_parent().get_node(\".\").upgrade2unlock = false
 	get_parent().get_parent().get_parent().get_node(\".\").max_universitaet = false
 	get_tree().get_current_scene().get_node(\"InterfaceLayer/Interface/ShopLayer/ShopMenu\").unigekauft = false
-	get_tree().get_current_scene().get_node(\"InterfaceLayer/Interface/ShopLayer/ShopMenu/ShopBackround/UniversitaetText\").text = \"Universität: \" + str(get_parent().get_parent().get_parent().get_node(\".\").uniPrice) + \"$\"
+	get_tree().get_current_scene().get_node(\"InterfaceLayer/Interface/ShopLayer/ShopMenu/ShopBackround/UniversitaetButton/UniversitaetText\").text = str(get_parent().get_parent().get_parent().get_node(\".\").uniPrice) + \"$\"
 	# Damit die Hotkeys funktionieren
 	infopopupmenu.visible = false
 	infopopupmenu2.visible = false
