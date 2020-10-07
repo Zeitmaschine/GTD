@@ -476,7 +476,6 @@ margin_right = 4.0
 [node name="ShopLayer" type="CanvasLayer" parent="."]
 
 [node name="ShopMenu" type="Control" parent="ShopLayer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -1.21094
@@ -577,6 +576,7 @@ margin_bottom = -700.0
 texture_normal = ExtResource( 19 )
 texture_pressed = ExtResource( 44 )
 texture_hover = ExtResource( 7 )
+texture_disabled = ExtResource( 23 )
 
 [node name="MathematikerText" type="Label" parent="ShopLayer/ShopMenu/ShopBackround/MathematikerButton"]
 anchor_right = 1.0
@@ -611,6 +611,7 @@ margin_bottom = -770.0
 texture_normal = ExtResource( 19 )
 texture_pressed = ExtResource( 44 )
 texture_hover = ExtResource( 7 )
+texture_disabled = ExtResource( 23 )
 
 [node name="InformatikerText" type="Label" parent="ShopLayer/ShopMenu/ShopBackround/InformatikerButton"]
 anchor_right = 1.0
@@ -649,6 +650,7 @@ margin_bottom = -490.0
 texture_normal = ExtResource( 19 )
 texture_pressed = ExtResource( 44 )
 texture_hover = ExtResource( 7 )
+texture_disabled = ExtResource( 23 )
 
 [node name="BombenturmText" type="Label" parent="ShopLayer/ShopMenu/ShopBackround/MathebombenturmButton"]
 anchor_right = 1.0
@@ -683,6 +685,7 @@ margin_bottom = -490.0
 texture_normal = ExtResource( 19 )
 texture_pressed = ExtResource( 44 )
 texture_hover = ExtResource( 7 )
+texture_disabled = ExtResource( 23 )
 
 [node name="WinkelninjaText" type="Label" parent="ShopLayer/ShopMenu/ShopBackround/WinkelninjaButton"]
 anchor_right = 1.0
@@ -756,6 +759,7 @@ margin_bottom = -280.0
 texture_normal = ExtResource( 19 )
 texture_pressed = ExtResource( 44 )
 texture_hover = ExtResource( 7 )
+texture_disabled = ExtResource( 23 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
