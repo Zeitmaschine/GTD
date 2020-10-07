@@ -476,6 +476,7 @@ margin_right = 4.0
 [node name="ShopLayer" type="CanvasLayer" parent="."]
 
 [node name="ShopMenu" type="Control" parent="ShopLayer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -1.21094
