@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Assets/Informatiker/Informatiker.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Mathematiker/Range.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Audio/Money_gain_extra.wav" type="AudioStream" id=5]
 [ext_resource path="res://Scenes/Money_hack.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/UpgradeInterfaceInformatiker.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/UpgradeInterfaceInformatikerRight.tscn" type="PackedScene" id=8]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends KinematicBody2D 
@@ -182,8 +183,12 @@ func _on_Informatiker_Area_mouse_exited():
 
 #Öffnen des Upgrade-Menüs
 func _on_Informatiker_Area_input_event(viewport, event, shape_idx):
-	if(event.is_action_pressed(\"left_click\") and placed == true):
-		 $UpgradeWindow/InformatikerUpgrade.visible =  true
+	if(event.is_action_pressed(\"left_click\") && placed == true && get_node(\".\").position >= Vector2(900, 0)):
+		$UpgradeWindow/InformatikerUpgrade2.visible =  false
+		$UpgradeWindow/InformatikerUpgrade.visible =  true
+	elif(event.is_action_pressed(\"left_click\") && placed == true && get_node(\".\").position <= Vector2(900, 0)):
+		$UpgradeWindow/InformatikerUpgrade.visible =  false
+		$UpgradeWindow/InformatikerUpgrade2.visible =  true
 "
 
 [sub_resource type="CircleShape2D" id=2]
@@ -239,6 +244,9 @@ shape = SubResource( 3 )
 [node name="UpgradeWindow" type="CanvasLayer" parent="."]
 
 [node name="InformatikerUpgrade" parent="UpgradeWindow" instance=ExtResource( 7 )]
+visible = false
+
+[node name="InformatikerUpgrade2" parent="UpgradeWindow" instance=ExtResource( 8 )]
 visible = false
 [connection signal="input_event" from="Informatiker_Area" to="." method="_on_Informatiker_Area_input_event"]
 [connection signal="mouse_entered" from="Informatiker_Area" to="." method="_on_Informatiker_Area_mouse_entered"]

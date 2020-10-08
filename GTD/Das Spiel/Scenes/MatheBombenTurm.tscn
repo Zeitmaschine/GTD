@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Assets/MatheBombenTurm/MatheBombenTurm.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Mathematiker/Range.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/UpgradeInterfaceBombenturm.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/UpgradeInterfaceBombenturmRight.tscn" type="PackedScene" id=4]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends KinematicBody2D 
@@ -142,8 +143,12 @@ func _on_Range_body_exited(body):
 
 #Aufrufung des Upgrade-Menüs
 func _on_MatheBombenTurm_Area_input_event(viewport, event, shape_idx):
-	if(event.is_action_pressed(\"left_click\") and placed == true):
-		 $UpgradeWindow/BombenturmUpgrade.visible =  true
+	if(event.is_action_pressed(\"left_click\") && placed == true && get_node(\".\").position >= Vector2(900, 0)):
+		$UpgradeWindow/BombenturmUpgrade2.visible =  false
+		$UpgradeWindow/BombenturmUpgrade.visible =  true
+	elif(event.is_action_pressed(\"left_click\") && placed == true && get_node(\".\").position <= Vector2(900, 0)):
+		$UpgradeWindow/BombenturmUpgrade.visible =  false
+		$UpgradeWindow/BombenturmUpgrade2.visible =  true
 "
 
 [sub_resource type="CircleShape2D" id=2]
@@ -191,6 +196,9 @@ shape = SubResource( 4 )
 
 [node name="BombenturmUpgrade" parent="UpgradeWindow" instance=ExtResource( 3 )]
 pause_mode = 0
+visible = false
+
+[node name="BombenturmUpgrade2" parent="UpgradeWindow" instance=ExtResource( 4 )]
 visible = false
 [connection signal="input_event" from="MatheBombenTurm_Area" to="." method="_on_MatheBombenTurm_Area_input_event"]
 [connection signal="mouse_entered" from="MatheBombenTurm_Area" to="." method="_on_MatheBombenTurm_Area_mouse_entered"]
