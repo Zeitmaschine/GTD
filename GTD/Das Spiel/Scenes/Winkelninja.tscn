@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Assets/Winkelninja/Winkelninja.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Mathematiker/Range.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/UpgradeInterfaceWinkelninja.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/UpgradeInterfaceWinkelninjaRight.tscn" type="PackedScene" id=4]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends KinematicBody2D 
@@ -161,8 +162,12 @@ func _on_WinkelNinja_Area_mouse_exited():
 
 #Upgrade-Menü öffnen
 func _on_WinkelNinja_Area_input_event(viewport, event, shape_idx):
-	if(event.is_action_pressed(\"left_click\") and placed == true):
-		 $UpgradeWindow/WinkelninjaUpgrade.visible =  true
+	if(event.is_action_pressed(\"left_click\") && placed == true && get_node(\".\").position >= Vector2(900, 0)):
+		$UpgradeWindow/WinkelninjaUpgrade2.visible =  false
+		$UpgradeWindow/WinkelninjaUpgrade.visible =  true
+	elif(event.is_action_pressed(\"left_click\") && placed == true && get_node(\".\").position <= Vector2(900, 0)):
+		$UpgradeWindow/WinkelninjaUpgrade.visible =  false
+		$UpgradeWindow/WinkelninjaUpgrade2.visible =  true
 "
 
 [sub_resource type="CircleShape2D" id=2]
@@ -214,6 +219,9 @@ shape = SubResource( 4 )
 visible = false
 margin_left = -0.513336
 margin_right = -0.513306
+
+[node name="WinkelninjaUpgrade2" parent="UpgradeWindow" instance=ExtResource( 4 )]
+visible = false
 [connection signal="mouse_entered" from="." to="." method="_on_Winkelninja_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_Winkelninja_mouse_exited"]
 [connection signal="body_entered" from="Range" to="." method="_on_Range_body_entered"]

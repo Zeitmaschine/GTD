@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Assets/Physiker/Physiker.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Mathematiker/Range.png" type="Texture" id=2]
-[ext_resource path="res://Scenes/UpgradeInterfaceMathematiker.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/UpgradeInterfacePhysiker.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Physiker/upgrade2_visible.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/UpgradeInterfacePhysikerRight.tscn" type="PackedScene" id=5]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends KinematicBody2D 
@@ -214,8 +215,12 @@ func set_range():
 	
 #Öffnen des Upgrade-Menüs
 func _on_Mathematiker_Area_input_event(viewport, event, shape_idx):
-	if(event.is_action_pressed(\"left_click\") and placed == true):
+	if(event.is_action_pressed(\"left_click\") and placed == true and placed == true && get_node(\".\").position >= Vector2(900, 0)):
+		$UpgradeWindow/PhysikerUpgrade2.visible =  false
 		$UpgradeWindow/PhysikerUpgrade.visible =  true
+	elif(event.is_action_pressed(\"left_click\") && placed == true && get_node(\".\").position <= Vector2(900, 0)):
+		$UpgradeWindow/PhysikerUpgrade.visible =  false
+		$UpgradeWindow/PhysikerUpgrade2.visible =  true
 
 "
 
@@ -261,6 +266,9 @@ shape = SubResource( 3 )
 [node name="UpgradeWindow" type="CanvasLayer" parent="."]
 
 [node name="PhysikerUpgrade" parent="UpgradeWindow" instance=ExtResource( 3 )]
+visible = false
+
+[node name="PhysikerUpgrade2" parent="UpgradeWindow" instance=ExtResource( 5 )]
 visible = false
 
 [node name="Upgrade_2_Circle" type="Sprite" parent="."]

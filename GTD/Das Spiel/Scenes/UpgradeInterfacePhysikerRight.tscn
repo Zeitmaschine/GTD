@@ -1,29 +1,33 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=35 format=2]
 
-[ext_resource path="res://Assets/Icons/Exit_Icon_pressed.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Icons/Exit_Icon.png" type="Texture" id=2]
-[ext_resource path="res://Interface/Theme/UpgradeText.tres" type="Theme" id=3]
-[ext_resource path="res://Interface/Theme/SpecialUpgradeText.tres" type="Theme" id=4]
-[ext_resource path="res://Interface/Theme/UpgradeButtons.tres" type="Theme" id=5]
-[ext_resource path="res://Assets/Buttons/SellButtonHover.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Buttons/SellButtonNormal.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Buttons/SellButtonPressed.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Upgrade_Icons/Winkelninja_Upgrade_1.png" type="Texture" id=9]
-[ext_resource path="res://Assets/Upgrade_Icons/Winkelninja_Upgrade_2.png" type="Texture" id=10]
-[ext_resource path="res://Assets/Frame/InfoBox.png" type="Texture" id=11]
-[ext_resource path="res://Interface/counter/label_bg.png" type="Texture" id=14]
-[ext_resource path="res://Assets/Icons/Info.png" type="Texture" id=15]
-[ext_resource path="res://Assets/Icons/Info_Pressed.png" type="Texture" id=16]
-[ext_resource path="res://Assets/Frame/UpgradeBox.png" type="Texture" id=17]
-[ext_resource path="res://Assets/Buttons/StatUpgradeButtonHover.png" type="Texture" id=18]
-[ext_resource path="res://Assets/Buttons/StatUpgradeButtonPressed.png" type="Texture" id=19]
-[ext_resource path="res://Assets/Buttons/StatUpgradeButtonDisabled.png" type="Texture" id=20]
-[ext_resource path="res://Assets/Buttons/StatUpgradeButtonNormal.png" type="Texture" id=21]
-[ext_resource path="res://Interface/Font/Upgrade_font.tres" type="DynamicFont" id=22]
-[ext_resource path="res://Assets/Buttons/SpecialUpgradeButtonPressed.png" type="Texture" id=23]
-[ext_resource path="res://Assets/Buttons/SpecialUpgradeButtonHover.png" type="Texture" id=24]
-[ext_resource path="res://Assets/Buttons/SpecialUpgradeButtonNormal.png" type="Texture" id=25]
-[ext_resource path="res://Assets/Buttons/SpecialUpgradeButtonDisabled.png" type="Texture" id=26]
+[ext_resource path="res://Assets/Upgrade_Icons/Physiker_Upgrade_2.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Upgrade_Icons/Physiker_Upgrade_1.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Frame/InfoBox.png" type="Texture" id=3]
+[ext_resource path="res://Interface/Theme/UpgradeText.tres" type="Theme" id=4]
+[ext_resource path="res://Interface/Theme/SpecialUpgradeText.tres" type="Theme" id=5]
+[ext_resource path="res://Interface/Theme/UpgradeButtons.tres" type="Theme" id=6]
+[ext_resource path="res://Assets/Icons/Exit_Icon_pressed.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Icons/Exit_Icon.png" type="Texture" id=11]
+[ext_resource path="res://Interface/Theme/SellText.tres" type="Theme" id=12]
+[ext_resource path="res://Assets/Buttons/SellButtonHover.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Buttons/SellButtonNormal.png" type="Texture" id=14]
+[ext_resource path="res://Interface/counter/label_bg.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Icons/Info.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Icons/Info_Pressed.png" type="Texture" id=17]
+[ext_resource path="res://Assets/Frame/UpgradeBox.png" type="Texture" id=18]
+[ext_resource path="res://Assets/Buttons/StatUpgradeButtonNormal.png" type="Texture" id=19]
+[ext_resource path="res://Interface/Font/Upgrade_font.tres" type="DynamicFont" id=20]
+[ext_resource path="res://Assets/Buttons/StatUpgradeButtonPressed.png" type="Texture" id=21]
+[ext_resource path="res://Assets/Buttons/StatUpgradeButtonHover.png" type="Texture" id=22]
+[ext_resource path="res://Assets/Buttons/StatUpgradeButtonDisabled.png" type="Texture" id=23]
+[ext_resource path="res://Assets/Buttons/SellButtonPressed.png" type="Texture" id=24]
+[ext_resource path="res://Assets/Buttons/PriorityButtonPressed.png" type="Texture" id=25]
+[ext_resource path="res://Assets/Buttons/PriorityButtonNormal.png" type="Texture" id=26]
+[ext_resource path="res://Assets/Buttons/PriorityButtonHover.png" type="Texture" id=27]
+[ext_resource path="res://Assets/Buttons/SpecialUpgradeButtonPressed.png" type="Texture" id=28]
+[ext_resource path="res://Assets/Buttons/SpecialUpgradeButtonHover.png" type="Texture" id=29]
+[ext_resource path="res://Assets/Buttons/SpecialUpgradeButtonNormal.png" type="Texture" id=30]
+[ext_resource path="res://Assets/Buttons/SpecialUpgradeButtonDisabled.png" type="Texture" id=31]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Control
@@ -36,25 +40,28 @@ var infopopupmenu
 var infopopupmenu2
 
 #Schadenslevel
-export var price1 = 600
+export var price1 = 200
 #Feurratenlevel
-export var price2 = 500
+export var price2 = 150
 #Reichweitenlevel
-export var price3 = 270
-#Größere Bomben
-export var price4 = 1500
-#Splitterbomben
-export var price5 = 1500
+export var price3 = 100
+#Salvenschuss
+export var price4 = 600
+#Streuschuss
+export var price5 = 650
 
-#Variablen werden festgelegt
+#Variablen und Preise werden festgelegt
 func _ready():
 	set_as_toplevel(true)
-	sell = get_parent().get_parent().get_parent().winkelninjaPrice
-	get_node(\"UpgradeBackround/StatUpgradeText/DamageText\").text = str(price1) + \"$\"
-	get_node(\"UpgradeBackround/StatUpgradeText/FirerateText\").text = str(price2) + \"$\"
-	get_node(\"UpgradeBackround/StatUpgradeText/RangeText\").text = str(price3) + \"$\"
+	get_node(\"UpgradeBackround/StatUpgradeText/DamageText\").text = str(price1) +\"$\"
+	get_node(\"UpgradeBackround/StatUpgradeText/FirerateText\").text = str(price2) +\"$\"
+	get_node(\"UpgradeBackround/StatUpgradeText/RangeText\").text = str(price3) +\"$\"
+	sell = get_parent().get_parent().get_parent().mathematikerPrice
 	infopopupmenu = get_node(\"InfoBox\")
 	infopopupmenu2 = get_node(\"InfoBox2\")
+
+func _process(delta):
+	check_status()
 
 #Knopfdruck-Methoden
 func _on_TextureButton_pressed():
@@ -62,33 +69,30 @@ func _on_TextureButton_pressed():
 	infopopupmenu.visible = false
 	infopopupmenu2.visible = false
 
-func _process(delta):
-	check_status()
-
 func _on_SpecialUpgradeButton_pressed():
 	get_parent().get_parent().get_node(\".\").upgrade1 = true
 	get_parent().get_parent().get_parent().get_node(\".\").money -= price4
-	sell += price4
+	sell += 350
 	get_node(\"UpgradeBackround/SpecialUpgradeButton/Cost\").text = \"Gekauft\"
 
 func _on_SpecialUpgradeButton2_pressed():
 	get_parent().get_parent().get_node(\".\").upgrade2 = true
 	get_parent().get_parent().get_parent().get_node(\".\").money -= price5
-	sell += price5
+	sell += 500
 	get_node(\"UpgradeBackround/SpecialUpgradeButton2/Cost2\").text = \"Gekauft\"
 
 
 func _on_DamageButton_pressed():
 	get_parent().get_parent().get_node(\".\").attackpowerlvl +=  1
-	get_parent().get_parent().get_parent().get_node(\".\").money -= price1
-	sell += price1
+	get_parent().get_parent().get_parent().get_node(\".\").money -= 200
+	sell += 250
 	if(get_parent().get_parent().get_node(\".\").attackpowerlvl ==  5):
 		get_node(\"UpgradeBackround/StatUpgradeText/DamageText\").text = \"MAX\"
 
 func _on_FirerateButton_pressed():
 	get_parent().get_parent().get_node(\".\").fireratelvl +=  1
-	get_parent().get_parent().get_parent().get_node(\".\").money -= price2
-	sell += price2
+	get_parent().get_parent().get_parent().get_node(\".\").money -= 150
+	sell += 250
 	if(get_parent().get_parent().get_node(\".\").fireratelvl ==  5):
 		get_node(\"UpgradeBackround/StatUpgradeText/FirerateText\").text = \"MAX\"
 
@@ -96,8 +100,8 @@ func _on_FirerateButton_pressed():
 func _on_RangeButton_pressed():
 	get_parent().get_parent().get_node(\".\").attackrangelvl +=  1
 	get_parent().get_parent().get_node(\".\").set_range()
-	get_parent().get_parent().get_parent().get_node(\".\").money -= price3
-	sell += price3
+	get_parent().get_parent().get_parent().get_node(\".\").money -= 100
+	sell += 250
 	if(get_parent().get_parent().get_node(\".\").attackrangelvl ==  5):
 		get_node(\"UpgradeBackround/StatUpgradeText/RangeText\").text = \"MAX\"
 
@@ -108,6 +112,18 @@ func _on_SellButton_pressed():
 	infopopupmenu2.visible = false
 	visible = false
 	get_parent().get_parent().queue_free()
+
+
+func _on_PriorityButton_pressed():
+	if(get_parent().get_parent().get_node(\".\").priority == 0):
+		get_parent().get_parent().get_node(\".\").priority = 1
+		get_node(\"PriorityButton/Priority\").text = \"Stärkster\"
+	elif(get_parent().get_parent().get_node(\".\").priority == 1):
+		get_parent().get_parent().get_node(\".\").priority = 2
+		get_node(\"PriorityButton/Priority\").text = \"Schwächster\"
+	elif(get_parent().get_parent().get_node(\".\").priority == 2):
+		get_parent().get_parent().get_node(\".\").priority = 0
+		get_node(\"PriorityButton/Priority\").text = \"Nächster\"
 
 
 func _on_InfoButton_pressed():
@@ -131,7 +147,7 @@ func _input(event):
 		visible = false
 		infopopupmenu.visible = false
 		infopopupmenu2.visible = false
-	if event.is_action_pressed(\"Hotkey4\"):
+	if event.is_action_pressed(\"Hotkey1\"):
 		visible = false
 		infopopupmenu.visible = false
 		infopopupmenu2.visible = false
@@ -162,6 +178,7 @@ export var currentDamage = 1
 export var currentFirerate = 1
 export var currentRange = 1
 
+
 #Es wird geprüft, wie viel Schaden, Feuerrate und Reichweite ein einzelner Turm hat
 func _process(delta):
 	currentDamage = get_parent().get_parent().get_parent().get_parent().attackpowerlvl
@@ -177,9 +194,9 @@ script/source = "extends VBoxContainer
 
 
 func _process(delta):
-	get_node(\"RealDamage\").text = \"Schaden: \" +  str(get_parent().get_parent().get_parent().get_parent().attackpowerlvl )
-	get_node(\"RealFirerate\").text = \"Feuerrate: \" +  str(stepify(1 / (get_parent().get_parent().get_parent().get_parent().firerate - get_parent().get_parent().get_parent().get_parent().fireratelvl  * 0.2), 0.01) ) + \" Schüsse/s\"
-	get_node(\"RealRange\").text = \"Reichweite: \" +  str(((get_parent().get_parent().get_parent().get_parent().attackrangelvl * 0.1) + 0.9) * 100) + \" %\"
+	get_node(\"RealDamage\").text = \"Schaden: \" +  str(get_parent().get_parent().get_parent().get_parent().attackpowerlvl)
+	get_node(\"RealFirerate\").text = \"Feuerrate: \" +  str(stepify(1 / (get_parent().get_parent().get_parent().get_parent().firerate - get_parent().get_parent().get_parent().get_parent().fireratelvl  * 0.25), 0.01) ) + \" Schüsse/s\"
+	get_node(\"RealRange\").text = \"Reichweite: \" +  str(((get_parent().get_parent().get_parent().get_parent().attackrangelvl * 0.3) + 0.7) * 100) + \" %\"
 "
 
 [sub_resource type="GDScript" id=4]
@@ -212,7 +229,6 @@ func check_status():
 [sub_resource type="GDScript" id=5]
 script/source = "extends TextureButton
 
-
 var money = 0
 var upgrade2
 var price
@@ -224,7 +240,7 @@ func _process(delta):
 	upgrade2 = get_parent().get_parent().get_parent().get_parent().get_parent().get_node(\".\")
 	check_status()
 
-#Es wird geprüft, wann man das Upgrade kaufen darf
+#Es wird geprüft, wann man das Upgrades kaufen darf
 func check_status():
 	if(upgrade2.getUpgrade2Unlock() == false):
 		set_disabled(true)
@@ -245,7 +261,7 @@ func _process(delta):
 	text = str(int(get_parent().get_parent().sell * 0.75)) + \"$\"
 "
 
-[node name="WinkelninjaUpgrade" type="Control"]
+[node name="PhysikerUpgrade" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -255,20 +271,19 @@ __meta__ = {
 }
 
 [node name="UpgradeBackround" type="TextureRect" parent="."]
-margin_left = 10.0
+margin_left = 1020.0
 margin_top = 10.0
-margin_right = 900.0
+margin_right = 1910.0
 margin_bottom = 1070.0
-mouse_filter = 2
-texture = ExtResource( 17 )
+texture = ExtResource( 18 )
 
-[node name="NinePatchRect" type="NinePatchRect" parent="UpgradeBackround"]
+[node name="TurmnameBox" type="NinePatchRect" parent="UpgradeBackround"]
 anchor_right = 1.0
 margin_left = 320.0
 margin_top = 10.0
 margin_right = -320.0
 margin_bottom = 70.0
-texture = ExtResource( 14 )
+texture = ExtResource( 15 )
 patch_margin_left = 8
 patch_margin_top = 8
 patch_margin_right = 8
@@ -277,67 +292,66 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Turmname" type="Label" parent="UpgradeBackround/NinePatchRect"]
+[node name="Turmname" type="Label" parent="UpgradeBackround/TurmnameBox"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 3 )
+theme = ExtResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
-text = "Winkelninja"
+text = "Physiker"
 align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CurrentStatsContainer" type="VBoxContainer" parent="UpgradeBackround"]
+[node name="CurrentStatsContainer2" type="VBoxContainer" parent="UpgradeBackround"]
 margin_left = 20.0
 margin_top = 115.0
 margin_right = 400.0
 margin_bottom = 1040.0
-mouse_filter = 2
 custom_constants/separation = 275
 script = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CurrentDamage" type="Label" parent="UpgradeBackround/CurrentStatsContainer"]
+[node name="CurrentDamage" type="Label" parent="UpgradeBackround/CurrentStatsContainer2"]
 margin_right = 380.0
 margin_bottom = 32.0
-theme = ExtResource( 3 )
+theme = ExtResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
 text = "1"
 
-[node name="CurrentFirerate" type="Label" parent="UpgradeBackround/CurrentStatsContainer"]
+[node name="CurrentFirerate" type="Label" parent="UpgradeBackround/CurrentStatsContainer2"]
 margin_top = 307.0
 margin_right = 380.0
 margin_bottom = 339.0
-theme = ExtResource( 3 )
+theme = ExtResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
 text = "1"
 
-[node name="CurrentRange" type="Label" parent="UpgradeBackround/CurrentStatsContainer"]
+[node name="CurrentRange" type="Label" parent="UpgradeBackround/CurrentStatsContainer2"]
 margin_top = 614.0
 margin_right = 380.0
 margin_bottom = 646.0
-theme = ExtResource( 3 )
+theme = ExtResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
-text = "  1"
+text = "1"
 
 [node name="RealStatsContainer" type="VBoxContainer" parent="UpgradeBackround"]
 anchor_bottom = 1.0
 margin_left = 20.0
 margin_top = 280.0
 margin_right = 300.0
-theme = ExtResource( 3 )
+theme = ExtResource( 4 )
 custom_constants/separation = 280
 script = SubResource( 3 )
 __meta__ = {
@@ -350,7 +364,7 @@ margin_bottom = 32.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
-text = "Schaden:"
+text = "Test:"
 
 [node name="RealFirerate" type="Label" parent="UpgradeBackround/RealStatsContainer"]
 margin_top = 312.0
@@ -359,7 +373,7 @@ margin_bottom = 344.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
-text = "Feuerrate:"
+text = "Test2"
 
 [node name="RealRange" type="Label" parent="UpgradeBackround/RealStatsContainer"]
 margin_top = 624.0
@@ -368,13 +382,12 @@ margin_bottom = 656.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
-text = "Reichweite:"
+text = "Test3"
 
 [node name="StatUpgradeContainer" type="VBoxContainer" parent="UpgradeBackround"]
 margin_left = 20.0
 margin_right = 130.0
 margin_bottom = 1040.0
-mouse_filter = 2
 custom_constants/separation = 200
 alignment = 1
 __meta__ = {
@@ -385,16 +398,16 @@ __meta__ = {
 margin_top = 155.0
 margin_right = 110.0
 margin_bottom = 265.0
-theme = ExtResource( 5 )
-texture_normal = ExtResource( 21 )
-texture_pressed = ExtResource( 19 )
-texture_hover = ExtResource( 18 )
-texture_disabled = ExtResource( 20 )
+theme = ExtResource( 6 )
+texture_normal = ExtResource( 19 )
+texture_pressed = ExtResource( 21 )
+texture_hover = ExtResource( 22 )
+texture_disabled = ExtResource( 23 )
 
-[node name="DamageButton" type="Label" parent="UpgradeBackround/StatUpgradeContainer/DamageButton"]
+[node name="DamageButtonText" type="Label" parent="UpgradeBackround/StatUpgradeContainer/DamageButton"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = ExtResource( 22 )
+custom_fonts/font = ExtResource( 20 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
@@ -409,16 +422,16 @@ __meta__ = {
 margin_top = 465.0
 margin_right = 110.0
 margin_bottom = 575.0
-theme = ExtResource( 5 )
-texture_normal = ExtResource( 21 )
-texture_pressed = ExtResource( 19 )
-texture_hover = ExtResource( 18 )
-texture_disabled = ExtResource( 20 )
+theme = ExtResource( 6 )
+texture_normal = ExtResource( 19 )
+texture_pressed = ExtResource( 21 )
+texture_hover = ExtResource( 22 )
+texture_disabled = ExtResource( 23 )
 
 [node name="FirerateButtonText" type="Label" parent="UpgradeBackround/StatUpgradeContainer/FirerateButton"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = ExtResource( 22 )
+custom_fonts/font = ExtResource( 20 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
@@ -433,16 +446,16 @@ __meta__ = {
 margin_top = 775.0
 margin_right = 110.0
 margin_bottom = 885.0
-theme = ExtResource( 5 )
-texture_normal = ExtResource( 21 )
-texture_pressed = ExtResource( 19 )
-texture_hover = ExtResource( 18 )
-texture_disabled = ExtResource( 20 )
+theme = ExtResource( 6 )
+texture_normal = ExtResource( 19 )
+texture_pressed = ExtResource( 21 )
+texture_hover = ExtResource( 22 )
+texture_disabled = ExtResource( 23 )
 
-[node name="RangeButtonText" type="Label" parent="UpgradeBackround/StatUpgradeContainer/RangeButton"]
+[node name="RangeButton" type="Label" parent="UpgradeBackround/StatUpgradeContainer/RangeButton"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = ExtResource( 22 )
+custom_fonts/font = ExtResource( 20 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
@@ -457,7 +470,6 @@ __meta__ = {
 margin_left = 150.0
 margin_right = 552.0
 margin_bottom = 1040.0
-mouse_filter = 2
 custom_constants/separation = 265
 alignment = 1
 __meta__ = {
@@ -468,21 +480,21 @@ __meta__ = {
 margin_top = 207.0
 margin_right = 402.0
 margin_bottom = 239.0
-theme = ExtResource( 3 )
+theme = ExtResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
-text = "Schaden erhöhen: 300$"
+text = "Schaden erhöhen: 250€"
 
 [node name="FirerateText" type="Label" parent="UpgradeBackround/StatUpgradeText"]
 margin_top = 504.0
 margin_right = 402.0
 margin_bottom = 536.0
-theme = ExtResource( 3 )
+theme = ExtResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
-text = "Feuerrate erhöhen: 300$"
+text = "Feuerrate erhöhen:250€"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -491,11 +503,11 @@ __meta__ = {
 margin_top = 801.0
 margin_right = 402.0
 margin_bottom = 833.0
-theme = ExtResource( 3 )
+theme = ExtResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
-text = "Reichweite erhöhen: 300$ "
+text = "Reichweite erhöhen: 250€"
 
 [node name="SpecialUpgradeButton" type="TextureButton" parent="UpgradeBackround"]
 anchor_right = 1.0
@@ -504,21 +516,25 @@ margin_left = 580.0
 margin_top = 80.0
 margin_right = -60.0
 margin_bottom = -595.0
-texture_normal = ExtResource( 25 )
-texture_pressed = ExtResource( 23 )
-texture_hover = ExtResource( 24 )
-texture_disabled = ExtResource( 26 )
+texture_normal = ExtResource( 30 )
+texture_pressed = ExtResource( 28 )
+texture_hover = ExtResource( 29 )
+texture_disabled = ExtResource( 31 )
 script = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="UpgradeDescription" type="Label" parent="UpgradeBackround/SpecialUpgradeButton"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_top = 1.0
 margin_bottom = -336.0
-theme = ExtResource( 4 )
+theme = ExtResource( 5 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
-text = "Mehr Projektile"
+text = "Salvenschuss"
 align = 1
 valign = 1
 __meta__ = {
@@ -526,33 +542,41 @@ __meta__ = {
 }
 
 [node name="TextureUpgrade" type="TextureRect" parent="UpgradeBackround/SpecialUpgradeButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 margin_left = 2.0
 margin_top = 51.0
-margin_right = 248.0
-margin_bottom = 334.0
-texture = ExtResource( 9 )
+margin_right = -2.0
+margin_bottom = -51.0
+mouse_filter = 2
+texture = ExtResource( 2 )
 expand = true
-stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Cost" type="Label" parent="UpgradeBackround/SpecialUpgradeButton"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 336.0
-theme = ExtResource( 4 )
+theme = ExtResource( 5 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
-text = "500$"
+text = "350$"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="InfoButton" type="TextureButton" parent="UpgradeBackround"]
 margin_left = 812.0
-margin_top = 65.0
+margin_top = 65.26
 margin_right = 847.0
-margin_bottom = 100.0
-texture_normal = ExtResource( 15 )
-texture_pressed = ExtResource( 16 )
+margin_bottom = 100.26
+texture_normal = ExtResource( 16 )
+texture_pressed = ExtResource( 17 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -565,21 +589,21 @@ margin_left = 580.0
 margin_top = 550.0
 margin_right = -60.0
 margin_bottom = -125.0
-texture_normal = ExtResource( 25 )
-texture_pressed = ExtResource( 23 )
-texture_hover = ExtResource( 24 )
-texture_disabled = ExtResource( 26 )
+texture_normal = ExtResource( 30 )
+texture_pressed = ExtResource( 28 )
+texture_hover = ExtResource( 29 )
+texture_disabled = ExtResource( 31 )
 script = SubResource( 5 )
 
 [node name="UpgradeDescription2" type="Label" parent="UpgradeBackround/SpecialUpgradeButton2"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = -336.0
-theme = ExtResource( 4 )
+theme = ExtResource( 5 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
-text = "Schnelldrehen"
+text = "Streuschuss"
 align = 1
 valign = 1
 __meta__ = {
@@ -591,7 +615,7 @@ margin_left = 2.0
 margin_top = 51.0
 margin_right = 248.0
 margin_bottom = 334.0
-texture = ExtResource( 10 )
+texture = ExtResource( 1 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -601,11 +625,11 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 336.0
-theme = ExtResource( 4 )
+theme = ExtResource( 5 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
-text = "750$"
+text = "500$"
 align = 1
 valign = 1
 
@@ -614,8 +638,8 @@ margin_left = 812.0
 margin_top = 535.0
 margin_right = 847.0
 margin_bottom = 570.0
-texture_normal = ExtResource( 15 )
-texture_pressed = ExtResource( 16 )
+texture_normal = ExtResource( 16 )
+texture_pressed = ExtResource( 17 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -626,39 +650,42 @@ margin_left = 20.0
 margin_top = 20.0
 margin_right = 60.0
 margin_bottom = 60.0
-texture_normal = ExtResource( 2 )
-texture_pressed = ExtResource( 1 )
+texture_normal = ExtResource( 11 )
+texture_pressed = ExtResource( 10 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="SellButton" type="TextureButton" parent="."]
-margin_left = 30.0
+margin_left = 1050.0
 margin_top = 990.0
-margin_right = 250.0
+margin_right = 1270.0
 margin_bottom = 1040.0
-texture_normal = ExtResource( 7 )
-texture_pressed = ExtResource( 8 )
-texture_hover = ExtResource( 6 )
+theme = ExtResource( 12 )
+texture_normal = ExtResource( 14 )
+texture_pressed = ExtResource( 24 )
+texture_hover = ExtResource( 13 )
 
 [node name="Sell" type="Label" parent="SellButton"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 3 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
 text = "Verkaufen"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="SellBox" type="NinePatchRect" parent="."]
-margin_left = 290.0
+margin_left = 1300.0
 margin_top = 990.0
-margin_right = 480.0
+margin_right = 1490.0
 margin_bottom = 1040.0
-texture = ExtResource( 14 )
+texture = ExtResource( 15 )
 patch_margin_left = 8
 patch_margin_top = 8
 patch_margin_right = 8
@@ -667,60 +694,87 @@ patch_margin_bottom = 8
 [node name="SellPrice" type="Label" parent="SellBox"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 3 )
+theme = ExtResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
-text = "450$"
+text = "250$"
 align = 1
 valign = 1
 script = SubResource( 6 )
+
+[node name="PriorityButton" type="TextureButton" parent="."]
+margin_left = 1645.0
+margin_top = 990.0
+margin_right = 1840.0
+margin_bottom = 1040.0
+texture_normal = ExtResource( 26 )
+texture_pressed = ExtResource( 25 )
+texture_hover = ExtResource( 27 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Priority" type="Label" parent="PriorityButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 12 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 5
+text = "Nächster"
+align = 1
+valign = 1
 
 [node name="InfoBox" type="TextureRect" parent="."]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 899.0
+margin_left = 716.0
 margin_top = 102.0
-margin_right = -716.0
+margin_right = -899.0
 margin_bottom = -643.0
-texture = ExtResource( 11 )
+texture = ExtResource( 3 )
+flip_h = true
 
 [node name="Description" type="Label" parent="InfoBox"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 5.0
 margin_top = 5.0
-theme = ExtResource( 4 )
+theme = ExtResource( 5 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
-text = "Schießt mehr 
-Projektile pro
-Umdrehung."
+text = "Schießt 3 Schüsse
+schnell 
+hintereinander
+ab."
 
 [node name="InfoBox2" type="TextureRect" parent="."]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 899.0
+margin_left = 716.0
 margin_top = 567.0
-margin_right = -716.0
+margin_right = -899.0
 margin_bottom = -178.0
-texture = ExtResource( 11 )
+texture = ExtResource( 3 )
+flip_h = true
 
 [node name="Description2" type="Label" parent="InfoBox2"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 5.0
 margin_top = 5.0
-theme = ExtResource( 4 )
+margin_right = -1600.0
+margin_bottom = -730.0
+theme = ExtResource( 5 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
-text = "Der Winkelninja
-dreht sich viel
-schneller!"
+text = "Schießt 3 Zahlen
+gleichzeitig ab."
 [connection signal="pressed" from="UpgradeBackround/StatUpgradeContainer/DamageButton" to="." method="_on_DamageButton_pressed"]
 [connection signal="pressed" from="UpgradeBackround/StatUpgradeContainer/FirerateButton" to="." method="_on_FirerateButton_pressed"]
 [connection signal="pressed" from="UpgradeBackround/StatUpgradeContainer/RangeButton" to="." method="_on_RangeButton_pressed"]
@@ -730,3 +784,4 @@ schneller!"
 [connection signal="pressed" from="UpgradeBackround/InfoButton2" to="." method="_on_InfoButton2_pressed"]
 [connection signal="pressed" from="UpgradeBackround/TextureButton" to="." method="_on_TextureButton_pressed"]
 [connection signal="pressed" from="SellButton" to="." method="_on_SellButton_pressed"]
+[connection signal="pressed" from="PriorityButton" to="." method="_on_PriorityButton_pressed"]

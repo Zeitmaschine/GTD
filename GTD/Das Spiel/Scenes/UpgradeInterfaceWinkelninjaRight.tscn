@@ -255,9 +255,9 @@ __meta__ = {
 }
 
 [node name="UpgradeBackround" type="TextureRect" parent="."]
-margin_left = 10.0
+margin_left = 1020.0
 margin_top = 10.0
-margin_right = 900.0
+margin_right = 1910.0
 margin_bottom = 1070.0
 mouse_filter = 2
 texture = ExtResource( 17 )
@@ -634,9 +634,9 @@ __meta__ = {
 }
 
 [node name="SellButton" type="TextureButton" parent="."]
-margin_left = 30.0
+margin_left = 1050.0
 margin_top = 990.0
-margin_right = 250.0
+margin_right = 1270.0
 margin_bottom = 1040.0
 texture_normal = ExtResource( 7 )
 texture_pressed = ExtResource( 8 )
@@ -654,9 +654,9 @@ align = 1
 valign = 1
 
 [node name="SellBox" type="NinePatchRect" parent="."]
-margin_left = 290.0
+margin_left = 1300.0
 margin_top = 990.0
-margin_right = 480.0
+margin_right = 1490.0
 margin_bottom = 1040.0
 texture = ExtResource( 14 )
 patch_margin_left = 8
@@ -680,11 +680,12 @@ script = SubResource( 6 )
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 899.0
+margin_left = 716.0
 margin_top = 102.0
-margin_right = -716.0
+margin_right = -899.0
 margin_bottom = -643.0
 texture = ExtResource( 11 )
+flip_h = true
 
 [node name="Description" type="Label" parent="InfoBox"]
 anchor_right = 1.0
@@ -703,11 +704,12 @@ Umdrehung."
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 899.0
+margin_left = 716.0
 margin_top = 567.0
-margin_right = -716.0
+margin_right = -899.0
 margin_bottom = -178.0
 texture = ExtResource( 11 )
+flip_h = true
 
 [node name="Description2" type="Label" parent="InfoBox2"]
 anchor_right = 1.0

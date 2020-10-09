@@ -223,9 +223,9 @@ __meta__ = {
 }
 
 [node name="UpgradeBackround" type="TextureRect" parent="."]
-margin_left = 10.0
+margin_left = 1020.0
 margin_top = 10.0
-margin_right = 900.0
+margin_right = 1910.0
 margin_bottom = 1070.0
 texture = ExtResource( 17 )
 
@@ -527,12 +527,13 @@ script = SubResource( 5 )
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 889.0
+margin_left = -304.0
 margin_top = 10.0
-margin_right = 304.0
+margin_right = -889.0
 margin_bottom = -745.0
 texture = ExtResource( 11 )
 expand = true
+flip_h = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -555,11 +556,12 @@ frei!"
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 890.0
+margin_left = -305.0
 margin_top = 365.0
-margin_right = 306.0
+margin_right = -890.0
 margin_bottom = -360.0
 texture = ExtResource( 12 )
+flip_h = true
 
 [node name="Description2" type="Label" parent="UpgradeBackround/InfoBox2"]
 anchor_right = 1.0
@@ -580,12 +582,13 @@ es bewirkt!"
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 889.0
+margin_left = -304.0
 margin_top = 745.0
-margin_right = 304.0
+margin_right = -889.0
 margin_bottom = -10.0
 texture = ExtResource( 11 )
 expand = true
+flip_h = true
 
 [node name="Description3" type="Label" parent="UpgradeBackround/InfoBox3"]
 anchor_right = 1.0
