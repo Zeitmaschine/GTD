@@ -14,6 +14,7 @@ var can_make_health = true
 export var upgrade1 = false
 export var upgrade2 = false
 export var upgrade3 = false
+export var upgrade3right = false
 var placed = false
 
 #Skins
@@ -56,7 +57,9 @@ func _process(delta):
 		$Sprite_Universitaet.texture = skin_123
 	
 	upgrade3 = get_node(\"UpgradeWindow/UniversitaetUpgrade\").getUpgrade3()
-	if upgrade3 == true:
+	upgrade3right = get_node(\"UpgradeWindow/UniversitaetUpgrade2\").getUpgrade3()
+	
+	if upgrade3 == true || upgrade3right == true:
 		earn_money_upgrade()
 		earn_health_upgrade()
 

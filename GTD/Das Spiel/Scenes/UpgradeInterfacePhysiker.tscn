@@ -56,7 +56,7 @@ func _ready():
 	get_node(\"UpgradeBackround/StatUpgradeText/DamageText\").text = str(price1) +\"$\"
 	get_node(\"UpgradeBackround/StatUpgradeText/FirerateText\").text = str(price2) +\"$\"
 	get_node(\"UpgradeBackround/StatUpgradeText/RangeText\").text = str(price3) +\"$\"
-	sell = get_parent().get_parent().get_parent().mathematikerPrice
+	sell = get_parent().get_parent().get_parent().physikerPrice
 	infopopupmenu = get_node(\"InfoBox\")
 	infopopupmenu2 = get_node(\"InfoBox2\")
 
@@ -184,7 +184,7 @@ func _process(delta):
 	currentDamage = get_parent().get_parent().get_parent().get_parent().attackpowerlvl
 	currentFirerate = get_parent().get_parent().get_parent().get_parent().fireratelvl
 	currentRange = get_parent().get_parent().get_parent().get_parent().attackrangelvl
-	$CurrentDamage.text = \"Schadenslevel: \" + str(currentDamage)
+	$CurrentDamage.text = \"Dauerlevel: \" + str(currentDamage)
 	$CurrentFirerate.text = \"Feuerratenlevel: \" + str(currentFirerate)
 	$CurrentRange.text = \"Reichweitenlevel: \" + str(currentRange)
 "
@@ -194,7 +194,7 @@ script/source = "extends VBoxContainer
 
 
 func _process(delta):
-	get_node(\"RealDamage\").text = \"Schaden: \" +  str(get_parent().get_parent().get_parent().get_parent().attackpowerlvl)
+	get_node(\"RealDamage\").text = \"Dauer: \" +  str(get_parent().get_parent().get_parent().get_parent().attackpowerlvl)
 	get_node(\"RealFirerate\").text = \"Feuerrate: \" +  str(stepify(1 / (get_parent().get_parent().get_parent().get_parent().firerate - get_parent().get_parent().get_parent().get_parent().fireratelvl  * 0.25), 0.01) ) + \" Schüsse/s\"
 	get_node(\"RealRange\").text = \"Reichweite: \" +  str(((get_parent().get_parent().get_parent().get_parent().attackrangelvl * 0.3) + 0.7) * 100) + \" %\"
 "
@@ -484,7 +484,7 @@ theme = ExtResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
-text = "Schaden erhöhen: 250€"
+text = "Dauer erhöhen: 250€"
 
 [node name="FirerateText" type="Label" parent="UpgradeBackround/StatUpgradeText"]
 margin_top = 504.0
@@ -534,7 +534,7 @@ theme = ExtResource( 5 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
-text = "Salvenschuss"
+text = "Zeitstopper"
 align = 1
 valign = 1
 __meta__ = {
@@ -603,7 +603,7 @@ theme = ExtResource( 5 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
-text = "Streuschuss"
+text = "Herr der Zeit"
 align = 1
 valign = 1
 __meta__ = {
@@ -741,14 +741,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 5.0
 margin_top = 5.0
+margin_right = -5.0
 theme = ExtResource( 5 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
-text = "Schießt 3 Schüsse
-schnell 
-hintereinander
-ab."
+text = "Der Physiker kann 
+die Bewegung der
+Gegner nun
+komplett stoppen!"
 
 [node name="InfoBox2" type="TextureRect" parent="."]
 visible = false
@@ -765,14 +766,19 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 5.0
 margin_top = 5.0
-margin_right = -1600.0
-margin_bottom = -730.0
+margin_right = -5.0
+margin_bottom = -5.0
 theme = ExtResource( 5 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 5
-text = "Schießt 3 Zahlen
-gleichzeitig ab."
+text = "Schießt einen Ring,
+der alle Gegner in
+seiner Umgebung
+verlangsamt."
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="UpgradeBackround/StatUpgradeContainer/DamageButton" to="." method="_on_DamageButton_pressed"]
 [connection signal="pressed" from="UpgradeBackround/StatUpgradeContainer/FirerateButton" to="." method="_on_FirerateButton_pressed"]
 [connection signal="pressed" from="UpgradeBackround/StatUpgradeContainer/RangeButton" to="." method="_on_RangeButton_pressed"]
